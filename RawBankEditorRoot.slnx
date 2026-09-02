@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="RawBankEditor/RawBankEditor.csproj" />
+  <Project Path="RawBankEditorTests/RawBankEditorTests.csproj" />
+</Solution>
