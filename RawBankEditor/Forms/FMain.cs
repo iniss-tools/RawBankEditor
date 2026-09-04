@@ -262,13 +262,18 @@ public partial class FMain : Form
             XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG), GlobData.Config);
         };
 
-        if (GlobData.Config.Startup == StartupType.LastProject)
+        AppRegistry.RegisterJumpList();
+
+        //cesta k projektu zadana ako argument ma prednost pred poslednym otvorenym projektom
+        var path = Utils.GetProjectPathFromArgs();
+        if (path is null && GlobData.Config.Startup == StartupType.LastProject)
+            path = AppRegistry.GetLastProject();
+
+        if (Directory.Exists(path))
         {
-            var lastPr = AppRegistry.GetLastProject();
-            if (Directory.Exists(lastPr))
-            {
-                PrepareGlobalData(lastPr);
-            }
+            PrepareGlobalData(path);
+            AppRegistry.SetUsageOfProject(path);
+            AppRegistry.SetLastProject(path);
         }
     }
 
