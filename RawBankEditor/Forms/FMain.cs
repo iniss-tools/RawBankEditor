@@ -77,29 +77,7 @@ public partial class FMain : Form
                 throw new ArgumentOutOfRangeException();
         }
 
-        var dirs = AppRegistry.GetOpenedProjects();
-
-        foreach (var recentDir in dirs)
-        {
-            ToolStripItem item1 = new ToolStripMenuItem(recentDir.Path);
-            ToolStripItem item2 = new ToolStripMenuItem(recentDir.Path);
-
-            item1.Click += RecentDirs_Click;
-            item2.Click += RecentDirs_Click;
-            tsmimRecent.DropDownItems.Add(item1);
-            tsbRecent.DropDownItems.Add(item2);
-        }
-
-        if (dirs.Length == 0 || dirs[0].Path == "")
-        {
-            tsmimRecent.Enabled = false;
-            tsbRecent.Enabled = false;
-        }
-        else
-        {
-            tsmimRecent.Enabled = true;
-            tsbRecent.Enabled = true;
-        }
+        SetRecentDirs();
 
         _error = new ShellIcon(ShellIconType.Error, ShellIconSize.Small);
         _warning = new ShellIcon(ShellIconType.Warning, ShellIconSize.Small);
@@ -270,11 +248,7 @@ public partial class FMain : Form
             path = AppRegistry.GetLastProject();
 
         if (Directory.Exists(path))
-        {
-            PrepareGlobalData(path);
-            AppRegistry.SetUsageOfProject(path);
-            AppRegistry.SetLastProject(path);
-        }
+            OpenProject(path);
     }
 
     private bool Saved
@@ -379,14 +353,50 @@ public partial class FMain : Form
         changeManager.Clear();
     }
 
+    /// <summary>
+    ///     Naplní menu naposledy otvorenými projektmi zoradenými od naposledy otvoreného.
+    /// </summary>
+    private void SetRecentDirs()
+    {
+        tsmimRecent.DropDownItems.Clear();
+        tsbRecent.DropDownItems.Clear();
+
+        var dirs = AppRegistry.GetOpenedProjects();
+
+        foreach (var recentDir in dirs)
+        {
+            ToolStripItem item1 = new ToolStripMenuItem(recentDir.Path);
+            ToolStripItem item2 = new ToolStripMenuItem(recentDir.Path);
+
+            item1.Click += RecentDirs_Click;
+            item2.Click += RecentDirs_Click;
+            item1.ApplyThemeAndFont();
+            item2.ApplyThemeAndFont();
+            tsmimRecent.DropDownItems.Add(item1);
+            tsbRecent.DropDownItems.Add(item2);
+        }
+
+        var enabled = dirs.Length != 0 && dirs[0].Path != "";
+        tsmimRecent.Enabled = enabled;
+        tsbRecent.Enabled = enabled;
+    }
+
+    /// <summary>
+    ///     Otvorí projekt a zapíše ho do zoznamu naposledy otvorených projektov.
+    /// </summary>
+    /// <param name="dirpath">Cesta k priečinku s projektom.</param>
+    private void OpenProject(string dirpath)
+    {
+        PrepareGlobalData(dirpath);
+        AppRegistry.SetUsageOfProject(dirpath);
+        AppRegistry.SetLastProject(dirpath);
+        SetRecentDirs();
+    }
+
     private void RecentDirs_Click(object sender, EventArgs e)
     {
         var menuItem = (ToolStripMenuItem)sender;
-        var menuText = menuItem.Text;
-        
-        PrepareGlobalData(menuText);
-        AppRegistry.SetUsageOfProject(menuText);
-        AppRegistry.SetLastProject(menuText);
+        OpenProject(menuItem.Text);
     }
 
     private void DoOpenDir(object sender, EventArgs e)
@@ -395,11 +405,7 @@ public partial class FMain : Form
         if (dialog.ShowDialog(this) == DialogResult.Cancel)
             return;
 
-        var selectedPath = dialog.SelectedPath;
-
-        PrepareGlobalData(selectedPath);
-        AppRegistry.SetUsageOfProject(selectedPath);
-        AppRegistry.SetLastProject(selectedPath);
+        OpenProject(dialog.SelectedPath);
     }
 
     private void bWorkerReadDat_DoWork(object sender, DoWorkEventArgs e)
