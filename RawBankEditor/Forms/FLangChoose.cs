@@ -10,14 +10,14 @@ public partial class FLangChoose : Form
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
-        cboxLanguages.DataSource = GlobData.OpenedProject.Languages;
+        cboxLanguages.DataSource = GlobData.OpenedProject!.Languages;
     }
 
-    public FyzLanguage Selected { get; private set; }
+    public FyzLanguage Selected { get; private set; } = null!;
 
     private void bOK_Click(object sender, EventArgs e)
     {
-        Selected = cboxLanguages.SelectedItem as FyzLanguage;
+        Selected = (FyzLanguage)cboxLanguages.SelectedItem!;
         DialogResult = DialogResult.OK;
     }
 }

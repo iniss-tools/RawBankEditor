@@ -1,4 +1,5 @@
-﻿using RawBankEditor.Entities;
+﻿using System.Globalization;
+using RawBankEditor.Entities;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -6,7 +7,7 @@ namespace RawBankEditor.Tools;
 
 internal static class RawBankExplorer
 {
-    public static DirectoryElement ExploreFileSystem() => new(GlobData.OpenedProject.AbsPathToBank);
+    public static DirectoryElement ExploreFileSystem() => new(GlobData.OpenedProject!.AbsPathToBank);
 
     public static void MergeFilesAndData(DirectoryElement root, FyzLanguage lang, Dictionary<FyzLanguage,List<IRawBankMessage>> dict, bool onlyCheck = false)
     {
@@ -18,8 +19,7 @@ internal static class RawBankExplorer
         }
         else
         {
-            if (dict.ContainsKey(lang))
-                dict.Remove(lang);
+            dict.Remove(lang);
 
             messages = new List<IRawBankMessage>();
             dict.Add(lang, messages);
@@ -62,7 +62,7 @@ internal static class RawBankExplorer
                         {
                             if (!RawBankParser.AdditionalPathIsEmpty(snd.AdditionalRelativePath))
                             {
-                                snd.File = new SoundFileElement(snd.GetAbsPath(GlobData.OpenedProject.AbsPathToBank)) { Sound = snd };
+                                snd.File = new SoundFileElement(snd.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank)) { Sound = snd };
                             }
                             else if (EqualsPathNames(sfe.Name, snd.FileName))
                             {
@@ -122,7 +122,7 @@ internal static class RawBankExplorer
     /// <summary>
     ///     Ak uz bol Dir element vytvoreny skor, nie je potrebne ho v metode GetElement() vytvarat znova (pretoze asi nebude kompletny).
     /// </summary>
-    public static DirectoryElement AddDirHandled { get; set; }
+    public static DirectoryElement? AddDirHandled { get; set; }
 
     /// <summary>
     /// 
@@ -131,12 +131,12 @@ internal static class RawBankExplorer
 
     public static bool MovingSoundIsHandled { get; set; }
 
-    public static FileSystemElement GetElement(string fullpath, DirectoryElement root, SearchOperation op = SearchOperation.None)
+    public static FileSystemElement? GetElement(string fullpath, DirectoryElement root, SearchOperation op = SearchOperation.None)
     {
         if (root is null)
             throw new ArgumentNullException(nameof(root));
 
-        var path = Utils.GetRelativePath(fullpath, GlobData.OpenedProject.AbsPathToBank);
+        var path = Utils.GetRelativePath(fullpath, GlobData.OpenedProject!.AbsPathToBank);
 
         var splitted = path.Split('\\');
         for (var i = 1; i < splitted.Length; i++)
@@ -149,20 +149,20 @@ internal static class RawBankExplorer
                 switch (elem)
                 {
                     case DirectoryElement dirElem:
-                        if (dirElem.Group is not null) 
-                            dirElem.Group.Directory = null;
+                        if (dirElem.Group is not null)
+                            dirElem.Group.Directory = null!;
                         break;
                     case SoundFileElement sfileElem:
                         if (sfileElem.Sound is not null)
                         {
                             sfileElem.Parent?.Children.Remove(sfileElem);
-                            sfileElem.Sound.FileName = null;
-                            sfileElem.Sound.File = null;
+                            sfileElem.Sound.FileName = null!;
+                            sfileElem.Sound.File = null!;
                         }
-                        sfileElem.FileInfo = null;
+                        sfileElem.FileInfo = null!;
                         break;
                     case FileElement fileElem:
-                        fileElem.FileInfo = null;
+                        fileElem.FileInfo = null!;
                         break;
                 }
                 return elem;
@@ -183,7 +183,7 @@ internal static class RawBankExplorer
                     else
                     {
                         FileElement newElement;
-                        if (Path.GetExtension(fullpath).ToUpper() is SoundFileElement.EWA_EXT or SoundFileElement.WAV_EXT)
+                        if (Path.GetExtension(fullpath).ToUpper(CultureInfo.CurrentCulture) is SoundFileElement.EWAExt or SoundFileElement.WAVExt)
                             newElement = new SoundFileElement(fullpath);
                         else
                             newElement = new OtherFileElement(fullpath);
@@ -206,7 +206,7 @@ internal static class RawBankExplorer
 
         return null;
 
-        static FileSystemElement GetElem(DirectoryElement de, string slice)
+        static FileSystemElement? GetElem(DirectoryElement de, string slice)
         {
             foreach (var child in de.Children)
             {

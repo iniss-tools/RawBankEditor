@@ -8,7 +8,7 @@ namespace RawBankEditor;
 
 internal static class Program
 {
-    public static FMain MainForm { get; private set; }
+    public static FMain MainForm { get; private set; } = null!;
 
     /// <summary>
     ///     Hlavní vstupní bod aplikace.

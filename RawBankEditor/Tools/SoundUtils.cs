@@ -60,7 +60,7 @@ public static class SoundUtils
     /// <param name="inpath">input file (.EWA)</param>
     /// <param name="outpath">output file (.WAV)</param>
     /// <param name="check">whether the format of .WAV file should be checked</param>
-    public static void ConvertEWAtoWAV(string inpath, string outpath = null, bool check = false)
+    public static void ConvertEWAtoWAV(string inpath, string? outpath = null, bool check = false)
     {
         if (string.IsNullOrWhiteSpace(inpath))
             throw new ArgumentNullException(nameof(inpath));
@@ -111,7 +111,7 @@ public static class SoundUtils
     /// <param name="inpath">input file (.WAV)</param>
     /// <param name="outpath">output file (.EWA)</param>
     /// <param name="check">whether the format of .WAV file should be checked</param>
-    public static void ConvertWAVtoEWA(string inpath, string outpath = null, bool check = false)
+    public static void ConvertWAVtoEWA(string inpath, string? outpath = null, bool check = false)
     {
         if (string.IsNullOrWhiteSpace(inpath))
             throw new ArgumentNullException(nameof(inpath));
@@ -272,7 +272,7 @@ public static class SoundUtils
         {
             Program.MainForm.Invoke(() =>
             {
-                GlobData.OpenedProject.Messages[Program.MainForm.CurrentLanguage].Add(new InvalidSoundFile(file));
+                GlobData.OpenedProject!.Messages[Program.MainForm.CurrentLanguage!].Add(new InvalidSoundFile(file));
             });
             
             return SOUND_ERROR;
@@ -307,7 +307,7 @@ public static class SoundUtils
         {
             if (sound.File is null || sound.File.FileInfo.Extension.EqualsIgnoreCase(ext) || !File.Exists(sound.File.FileInfo.FullName))
             {
-                bar.Owner.Invoke(() => bar.Increment(1));
+                bar.Owner!.Invoke(() => bar.Increment(1));
                 continue;
             }
 
@@ -320,7 +320,7 @@ public static class SoundUtils
             sound.File.FileInfo = new FileInfo(newPath);
             sound.FileName = sound.File.FileInfo.Name;
             sound.File.Name = sound.FileName;
-            bar.Owner.Invoke(() => bar.Increment(1));
+            bar.Owner!.Invoke(() => bar.Increment(1));
         }
     }
 

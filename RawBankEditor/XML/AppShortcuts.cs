@@ -332,7 +332,7 @@ public record AppShortcuts()
     public IList<CmdShortcut> GetValues()
     {
         var properties = ClassType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-        return properties.Select(prop => prop.GetValue(this) as CmdShortcut).ToList();
+        return properties.Select(prop => (CmdShortcut)prop.GetValue(this)!).ToList();
     }
 
     public void SetValues(IEnumerable<CmdShortcut> shortcuts)
@@ -347,7 +347,7 @@ public record AppShortcuts()
     {
         if (obj is null)
         {
-            InitShortcut(propname);
+            obj = InitShortcut(propname);
         }
         else
         {
@@ -356,6 +356,11 @@ public record AppShortcuts()
         }
     }
 
+    // Every property setter below unconditionally assigns its backing field before this constructor
+    // exits (see the "set" accessors above), but Roslyn's per-constructor flow analysis doesn't credit
+    // assignment performed indirectly through a property setter call - it only sees `this` escaping into
+    // a method call and forgets the field's null-state. All backing fields are genuinely never null here.
+#pragma warning disable CS8618
     protected AppShortcuts(AppShortcuts original)
     {
         Open = original.Open with { };
@@ -378,4 +383,5 @@ public record AppShortcuts()
         HighlightProblem = original.HighlightProblem with { };
         ResolveProblem = original.ResolveProblem with { };
     }
+#pragma warning restore CS8618
 }

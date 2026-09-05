@@ -9,10 +9,10 @@ namespace RawBankEditor;
 
 internal static class GlobData
 {
-    public static RawBankProject OpenedProject;
-    public static RawBankEditorConfig Config;
-    public static Styles<RawBankEditorStyle> Styles;
-    public static RawBankEditorStyle UsingStyle;
+    public static RawBankProject? OpenedProject;
+    public static RawBankEditorConfig Config = null!;
+    public static Styles<RawBankEditorStyle> Styles = null!;
+    public static RawBankEditorStyle UsingStyle = null!;
 
     public static void PrepareGlobalData(string pathToINISS)
     {

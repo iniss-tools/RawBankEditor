@@ -56,7 +56,7 @@ public partial class FSearch : Form
 
         var comparisonType = cboxIgnoreCase.Checked ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
 
-        foreach (var grp in Program.MainForm.CurrentLanguage.Groups)
+        foreach (var grp in Program.MainForm.CurrentLanguage!.Groups)
         {
             for (var i = 0; i < grp.Sounds.Count; i++)
             {

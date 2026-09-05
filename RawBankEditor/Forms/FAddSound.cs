@@ -7,10 +7,10 @@ public partial class FAddSound : Form
 {
     private bool _autoChangeNameAndPath = true;
 
-    public FyzSound Sound { get; private set; }
-    private SoundFileElement File { get; }
+    public FyzSound Sound { get; private set; } = null!;
+    private SoundFileElement? File { get; }
 
-    public FAddSound(SoundFileElement file = null)
+    public FAddSound(SoundFileElement? file = null)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
@@ -38,7 +38,7 @@ public partial class FAddSound : Form
             return;
         }
 
-        foreach (var grp in Program.MainForm.CurrentGroup.Sounds)
+        foreach (var grp in Program.MainForm.CurrentGroup!.Sounds)
         {
             if (grp.Key == key)
             {
