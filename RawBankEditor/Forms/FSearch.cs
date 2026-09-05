@@ -1,5 +1,4 @@
-﻿using ExControls;
-using ToolsCore.Entities;
+﻿using ToolsCore.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;

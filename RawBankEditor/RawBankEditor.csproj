@@ -12,6 +12,7 @@
 		<!-- WFO1000 (chýbajúci DesignerSerializationVisibility) je na net10.0-windows analyzer default=error
 		     (rovnaký prípad ako v ExControls) - dočasne potlačené, pozri MIGRATION_PROGRESS.md. -->
 		<NoWarn>$(NoWarn);WFO1000</NoWarn>
+		<LangVersion>default</LangVersion>
 	</PropertyGroup>
 	<!-- ClickOnce publish nastavenia (pôvodne pre .NET Framework) - zachované pre kontinuitu,
 	     ale `dotnet publish` ClickOnce flow pre SDK-style .NET treba pred použitím overiť samostatne. -->

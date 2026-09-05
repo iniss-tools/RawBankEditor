@@ -1,5 +1,4 @@
 ﻿using System.Media;
-using System.Threading.Tasks;
 using NAudio.Wave;
 using RawBankEditor.Entities;
 using ToolsCore.Entities;

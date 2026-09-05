@@ -1,6 +1,4 @@
-﻿using System.Drawing.Imaging;
-using System.Threading.Tasks;
-using ExControls;
+﻿using ExControls;
 using ExControls.Providers;
 using Microsoft.VisualBasic.FileIO;
 using RawBankEditor.Entities;
