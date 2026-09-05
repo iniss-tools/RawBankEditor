@@ -1,6 +1,8 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
+[assembly: SupportedOSPlatform("windows7.0")]
 [assembly: AssemblyTitle("RawBankEditorTests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]

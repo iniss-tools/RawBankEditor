@@ -1,308 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{35052861-9E45-4C84-BA36-1B482F2DA040}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>RawBankEditor</RootNamespace>
-    <AssemblyName>RawBankEditor</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-    <LangVersion>latest</LangVersion>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://endora.endora.cz/iniss.6f.sk/web/apps/RawBankEditor/</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://iniss.6f.sk/apps/RawBankEditor/</InstallUrl>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <PublishWizardCompleted>true</PublishWizardCompleted>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>raw.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>RawBankEditor.Program</StartupObject>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>false</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>B97ABAA6C3D241E476C79AE2D5335E05C1E4C140</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>iniss6f.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Microsoft.Win32.Registry, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Win32.Registry.5.0.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.2.1.0\lib\net472\NAudio.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Asio, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.Asio.2.1.0\lib\netstandard2.0\NAudio.Asio.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Core, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.Core.2.1.0\lib\netstandard2.0\NAudio.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Midi, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.Midi.2.1.0\lib\netstandard2.0\NAudio.Midi.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Wasapi, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.Wasapi.2.1.0\lib\netstandard2.0\NAudio.Wasapi.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.WinForms, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.WinForms.2.1.0\lib\net472\NAudio.WinForms.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.WinMM, Version=2.1.0.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NAudio.WinMM.2.1.0\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
-    </Reference>
-    <Reference Include="System">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.AccessControl.6.0.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.Security.Principal.Windows.5.0.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Controls\MinButton.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\MinButton.Designer.cs">
-      <DependentUpon>MinButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\BankMessages.cs" />
-    <Compile Include="Entities\RawBankProject.cs" />
-    <Compile Include="Forms\FAddEditLanguage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FAddEditLanguage.Designer.cs">
-      <DependentUpon>FAddEditLanguage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FAddSound.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FAddSound.Designer.cs">
-      <DependentUpon>FAddSound.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FAfterInsertSounds.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FAfterInsertSounds.Designer.cs">
-      <DependentUpon>FAfterInsertSounds.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FAppSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FAppSettings.Designer.cs">
-      <DependentUpon>FAppSettings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FMain.Actions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FSearch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FSearch.Designer.cs">
-      <DependentUpon>FSearch.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FSoundsMove.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FSoundsMove.Designer.cs">
-      <DependentUpon>FSoundsMove.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GlobUsings.cs" />
-    <Compile Include="Tools\SoundUtils.cs" />
-    <Compile Include="XML\AppShortcuts.cs" />
-    <Compile Include="FileConsts.cs" />
-    <Compile Include="Forms\FAddEditGroup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FAddEditGroup.Designer.cs">
-      <DependentUpon>FAddEditGroup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FLangChoose.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FLangChoose.Designer.cs">
-      <DependentUpon>FLangChoose.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\FMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\FMain.Designer.cs">
-      <DependentUpon>FMain.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GlobData.cs" />
-    <Compile Include="LinkConsts.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\RawBankExplorer.cs" />
-    <Compile Include="XML\RawBankEditorConfig.cs" />
-    <Compile Include="XML\DesktopColumns.cs" />
-    <Compile Include="XML\RawBankEditorStyle.cs" />
-    <None Include="..\..\ToolsCore\ToolsCore\GlobalResources.resx">
-      <Link>GlobalResources.resx</Link>
-      <Generator>None</Generator>
-      <CustomToolNamespace>ToolsCore</CustomToolNamespace>
-    </None>
-    <EmbeddedResource Include="Controls\MinButton.resx">
-      <DependentUpon>MinButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FAddEditLanguage.resx">
-      <DependentUpon>FAddEditLanguage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FAfterInsertSounds.resx">
-      <DependentUpon>FAfterInsertSounds.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FAppSettings.resx">
-      <DependentUpon>FAppSettings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FAddSound.resx">
-      <DependentUpon>FAddSound.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FAddEditGroup.resx">
-      <DependentUpon>FAddEditGroup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FLangChoose.resx">
-      <DependentUpon>FLangChoose.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FMain.resx">
-      <DependentUpon>FMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FSearch.resx">
-      <DependentUpon>FSearch.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FSoundsMove.resx">
-      <DependentUpon>FSoundsMove.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <None Include="app.manifest" />
-    <None Include="iniss6f.pfx" />
-    <None Include="packages.config" />
-    <None Include="Properties\DataSources\RawBankEdit.Entities.FyzSound.datasource" />
-    <None Include="Properties\DataSources\RawBankEditor.Entities.ExplorerElement.datasource" />
-    <None Include="Properties\DataSources\RawBankEditor.Entities.FileSystemElement.datasource" />
-    <None Include="Properties\DataSources\RawBankEditor.Entities.FyzSound.datasource" />
-    <None Include="Properties\DataSources\RawBankEditor.Entities.RawBankMessage.datasource" />
-    <None Include="Properties\DataSources\ToolsCore.Entities.FyzGroup.datasource" />
-    <None Include="Properties\DataSources\ToolsCore.Entities.FyzSound.datasource" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ExControls\ExControls\ExControls.csproj">
-      <Project>{e2064a91-6132-498f-9f22-8c3e7c5941bc}</Project>
-      <Name>ExControls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ToolsCore\ToolsCore\ToolsCore.csproj">
-      <Project>{15b32c49-7b00-4849-9685-2f7d7438db54}</Project>
-      <Name>ToolsCore</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="raw.ico" />
-    <None Include="Resources\convert.png" />
-    <None Include="Resources\refresh.png" />
-    <None Include="Resources\textbox.png" />
-    <None Include="Resources\wav.png" />
-    <None Include="Resources\ewa.png" />
-    <None Include="Resources\raw.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>cd $(OutDir)
-mkdir lib
-move *.dll ".\lib"
-move *.pdb ".\lib"
-move *.xml ".\lib"
-rmdir "lib\cs\" /s /q
-move cs ".\lib"</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-  </PropertyGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>RawBankEditor</RootNamespace>
+		<AssemblyName>RawBankEditor</AssemblyName>
+		<UseWindowsForms>true</UseWindowsForms>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<StartupObject>RawBankEditor.Program</StartupObject>
+		<ApplicationIcon>raw.ico</ApplicationIcon>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<!-- WFO1000 (chýbajúci DesignerSerializationVisibility) je na net10.0-windows analyzer default=error
+		     (rovnaký prípad ako v ExControls) - dočasne potlačené, pozri MIGRATION_PROGRESS.md. -->
+		<NoWarn>$(NoWarn);WFO1000</NoWarn>
+	</PropertyGroup>
+	<!-- ClickOnce publish nastavenia (pôvodne pre .NET Framework) - zachované pre kontinuitu,
+	     ale `dotnet publish` ClickOnce flow pre SDK-style .NET treba pred použitím overiť samostatne. -->
+	<PropertyGroup>
+		<PublishUrl>ftp://endora.endora.cz/iniss.6f.sk/web/apps/RawBankEditor/</PublishUrl>
+		<Install>true</Install>
+		<InstallFrom>Web</InstallFrom>
+		<UpdateEnabled>false</UpdateEnabled>
+		<UpdateMode>Foreground</UpdateMode>
+		<UpdateInterval>7</UpdateInterval>
+		<UpdateIntervalUnits>Days</UpdateIntervalUnits>
+		<UpdatePeriodically>false</UpdatePeriodically>
+		<UpdateRequired>false</UpdateRequired>
+		<MapFileExtensions>true</MapFileExtensions>
+		<InstallUrl>http://iniss.6f.sk/apps/RawBankEditor/</InstallUrl>
+		<ApplicationRevision>1</ApplicationRevision>
+		<ApplicationVersion>0.1.0.*</ApplicationVersion>
+		<UseApplicationTrust>false</UseApplicationTrust>
+		<ManifestCertificateThumbprint>B97ABAA6C3D241E476C79AE2D5335E05C1E4C140</ManifestCertificateThumbprint>
+		<ManifestKeyFile>iniss6f.pfx</ManifestKeyFile>
+		<!-- GenerateManifests/SignManifests vypnuté: úloha GenerateTrustInfo (ClickOnce) nie je podporovaná
+		     .NET Core MSBuildom (MSB4803), pozri MIGRATION_PROGRESS.md. -->
+		<GenerateManifests>false</GenerateManifests>
+		<SignManifests>false</SignManifests>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="NAudio" Version="2.2.1" />
+		<PackageReference Include="NAudio.WinForms" Version="2.2.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="raw.ico" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\ExControls\ExControls\ExControls.csproj" />
+		<ProjectReference Include="..\..\ToolsCore\ToolsCore\ToolsCore.csproj" />
+	</ItemGroup>
 </Project>

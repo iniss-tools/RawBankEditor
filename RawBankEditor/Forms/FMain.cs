@@ -401,7 +401,7 @@ public partial class FMain : Form
 
     private void DoOpenDir(object sender, EventArgs e)
     {
-        var dialog = new ExFolderBrowserDialog { Description = "Vyberte priečinok s INISS.exe" };
+        var dialog = new FolderBrowserDialog { Description = "Vyberte priečinok s INISS.exe" };
         if (dialog.ShowDialog(this) == DialogResult.Cancel)
             return;
 
@@ -884,7 +884,7 @@ public partial class FMain : Form
         form.ShowDialog();
     }
 
-    private void ShowUpdates(object sender, EventArgs e) => Process.Start(LinkConsts.UPDATE);
+    private void ShowUpdates(object sender, EventArgs e) => Utils.OpenShell(LinkConsts.UPDATE);
 
     private void RewriteModeChanged(object sender, EventArgs e)
     {
