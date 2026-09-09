@@ -196,9 +196,9 @@ partial class FMain
 
         private FyzSound Sound { get; }
 
-        public string OldValue { get; set; }
+        public string OldValue { get; set; } = null!;
 
-        public string NewValue { get; set; }
+        public string NewValue { get; set; } = null!;
 
         public PropertyType Type { get; set; }
 
@@ -311,7 +311,7 @@ partial class FMain
         /// <inheritdoc />
         public override void Undo()
         {
-            var pathTobank = GlobData.OpenedProject.AbsPathToBank;
+            var pathTobank = GlobData.OpenedProject!.AbsPathToBank;
             foreach (var sound in Sounds)
             {
                 NewLocation.Sounds.Remove(sound);
@@ -330,7 +330,7 @@ partial class FMain
         /// <inheritdoc />
         public override void Redo()
         {
-            var pathTobank = GlobData.OpenedProject.AbsPathToBank;
+            var pathTobank = GlobData.OpenedProject!.AbsPathToBank;
             foreach (var sound in Sounds)
             {
                 OldLocation.Sounds.Remove(sound);
@@ -533,13 +533,13 @@ partial class FMain
         /// <inheritdoc />
         public override void Undo()
         {
-            GlobData.OpenedProject.Languages.Remove(Language);
+            GlobData.OpenedProject!.Languages.Remove(Language);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
-            GlobData.OpenedProject.Languages.Add(Language);
+            GlobData.OpenedProject!.Languages.Add(Language);
         }
     }
 
@@ -603,7 +603,7 @@ partial class FMain
         /// <inheritdoc />
         public override void Undo()
         {
-            GlobData.OpenedProject.Languages.Add(Language);
+            GlobData.OpenedProject!.Languages.Add(Language);
             if (RemovedWithData && !Utils.TryRecoverFileOrDirFromBin(Language.Directory.DirInfo.FullName))
                 Utils.ShowError("Nepodarilo sa obnoviť priečinok so zvukmi jazyka z koša.\n\nPravdepodobne bol permanentne vymazaný.");
         }
@@ -611,7 +611,7 @@ partial class FMain
         /// <inheritdoc />
         public override void Redo()
         {
-            GlobData.OpenedProject.Languages.Remove(Language);
+            GlobData.OpenedProject!.Languages.Remove(Language);
             if (RemovedWithData) 
                 Utils.DeleteDirectoryToRecycleBin(Language.Directory.DirInfo.FullName, true);
         }

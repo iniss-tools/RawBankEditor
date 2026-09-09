@@ -128,7 +128,7 @@ public record DesktopColumns()
     public IList<DesktopColumn> GetValues()
     {
         var properties = ClassType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
-        var ordered = properties.Select(prop => prop.GetValue(this) as DesktopColumn).ToList();
+        var ordered = properties.Select(prop => (DesktopColumn)prop.GetValue(this)!).ToList();
         return ordered.OrderBy(i => i.Order).ToList();
     }
 
@@ -149,7 +149,7 @@ public record DesktopColumns()
     {
         if (obj is null)
         {
-            InitColumn(propname);
+            obj = InitColumn(propname);
         }
         else
         {
@@ -158,6 +158,11 @@ public record DesktopColumns()
         }
     }
     
+    // Every property setter below unconditionally assigns its backing field before this constructor
+    // exits (see the "set" accessors above), but Roslyn's per-constructor flow analysis doesn't credit
+    // assignment performed indirectly through a property setter call - it only sees `this` escaping into
+    // a method call and forgets the field's null-state. All backing fields are genuinely never null here.
+#pragma warning disable CS8618
     protected DesktopColumns(DesktopColumns original)
     {
         Key = original.Key with { };
@@ -167,4 +172,5 @@ public record DesktopColumns()
         Duration = original.Duration with { };
         Text = original.Text with { };
     }
+#pragma warning restore CS8618
 }

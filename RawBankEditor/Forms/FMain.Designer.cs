@@ -2326,7 +2326,7 @@ namespace RawBankEditor.Forms
         private ToolStripMenuItem tsmimSaveAll;
         private ToolStripButton tsbSaveAll;
         private ToolStripSeparator toolStripSeparator25;
-        private Timer timerToCheck;
+        private System.Windows.Forms.Timer timerToCheck;
         private ToolStripSeparator toolStripSeparator26;
         private ToolStripMenuItem tsmimRewriteMode;
         private ToolStripButton tsbRewriteMode;

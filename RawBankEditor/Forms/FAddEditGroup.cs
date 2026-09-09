@@ -8,7 +8,7 @@ public partial class FAddEditGroup : Form
 {
     private bool _autoChangeNameAndPath = true;
 
-    public FAddEditGroup(FyzGroup group = null)
+    public FAddEditGroup(FyzGroup? group = null)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
@@ -27,7 +27,7 @@ public partial class FAddEditGroup : Form
         }
     }
 
-    public FyzGroup Group { get; private set; }
+    public FyzGroup? Group { get; private set; }
 
     private void bOK_Click(object sender, EventArgs e)
     {
@@ -49,7 +49,7 @@ public partial class FAddEditGroup : Form
             return;
         }
 
-        foreach (var grp in Program.MainForm.CurrentLanguage.Groups)
+        foreach (var grp in Program.MainForm.CurrentLanguage!.Groups)
         {
             if (grp.Key == key)
             {
@@ -75,21 +75,20 @@ public partial class FAddEditGroup : Form
 
         if (Group != null)
         {
-            
             Program.MainForm.RegisterNewAction(
                 new FMain.EditGroupAction(Program.MainForm, Group, (Group.Key, key), (Group.Name,name), (Group.RelativePath, relative)));
-            var oldPath = Group.GetAbsPath(GlobData.OpenedProject.AbsPathToBank);
+            var oldPath = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
             Group.Key = key;
             Group.Name = name;
             Group.RelativePath = relative;
-            var newPath = Group.GetAbsPath(GlobData.OpenedProject.AbsPathToBank);
+            var newPath = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
             Directory.Move(oldPath, newPath);
         }
         else
         {
-            Group = new FyzGroup(Program.MainForm.CurrentLanguage, key, name, relative);
+            Group = new FyzGroup(Program.MainForm.CurrentLanguage!, key, name, relative);
             Program.MainForm.RegisterNewAction(new FMain.AddGroupAction(Program.MainForm, Group));
-            var path = Group.GetAbsPath(GlobData.OpenedProject.AbsPathToBank);
+            var path = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
             Directory.CreateDirectory(path);
             Group.Directory = new DirectoryElement(path) { Group = Group };
             RawBankExplorer.AddDirHandled = Group.Directory;

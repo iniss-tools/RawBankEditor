@@ -6,9 +6,9 @@ namespace RawBankEditor.Forms;
 public partial class FAddEditLanguage : Form
 {
     private bool _autoChangeNameAndPath = true;
-    public FyzLanguage Language { get; private set; }
+    public FyzLanguage? Language { get; private set; }
 
-    public FAddEditLanguage(FyzLanguage language = null)
+    public FAddEditLanguage(FyzLanguage? language = null)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
@@ -48,7 +48,7 @@ public partial class FAddEditLanguage : Form
             return;
         }
 
-        foreach (var grp in Program.MainForm.CurrentLanguage.Groups)
+        foreach (var grp in Program.MainForm.CurrentLanguage!.Groups)
         {
             if (grp.Key == key)
             {

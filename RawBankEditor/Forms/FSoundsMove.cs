@@ -5,7 +5,7 @@ namespace RawBankEditor.Forms;
 
 public partial class FSoundsMove : Form
 {
-    public FyzGroup NewGroup { get; private set; }
+    public FyzGroup NewGroup { get; private set; } = null!;
     private IList<FyzGroup> GroupsWithoutCurrent { get; }
 
     public FSoundsMove(IList<FyzGroup> allGroups, FyzGroup currentGroup)

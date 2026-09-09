@@ -14,7 +14,7 @@ public partial class FAfterInsertSounds : Form
         NewSounds = new ExBindingList<FyzSound> { sound };
     }
 
-    private static FAfterInsertSounds OpenedForm { get; set; }
+    private static FAfterInsertSounds? OpenedForm { get; set; }
 
     private ExBindingList<FyzSound> NewSounds { get; }
 
@@ -42,8 +42,8 @@ public partial class FAfterInsertSounds : Form
 
     private void DgvFilesSounds_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
     {
-        var sound = (FyzSound) e.Row.DataBoundItem;
-        sound.File.Sound = null;
+        var sound = (FyzSound)e.Row!.DataBoundItem!;
+        sound.File.Sound = null!;
     }
 
     private void BOK_Click(object sender, EventArgs e)

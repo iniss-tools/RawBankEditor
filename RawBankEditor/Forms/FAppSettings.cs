@@ -9,8 +9,8 @@ namespace RawBankEditor.Forms;
 
 public partial class FAppSettings : FAppSettingsBase
 {
-    public new RawBankEditorConfig Config => base.Config as RawBankEditorConfig;
-    public new Styles<RawBankEditorStyle> Styles => base.Styles as Styles<RawBankEditorStyle>;
+    public new RawBankEditorConfig Config => (RawBankEditorConfig)base.Config;
+    public new Styles<RawBankEditorStyle> Styles => (Styles<RawBankEditorStyle>)base.Styles;
 
     protected override IList<CmdShortcut> DefaultShortcuts => new AppShortcuts().GetValues();
     
@@ -52,16 +52,16 @@ public partial class FAppSettings : FAppSettingsBase
     protected override void SaveData()
     {
         GlobData.Config = Config;
-        GlobData.UsingStyle = UsingStyle as RawBankEditorStyle;
+        GlobData.UsingStyle = (RawBankEditorStyle)UsingStyle;
         GlobSettings.UsingStyle = UsingStyle;
         GlobData.Styles = Styles;
         
-        var configsDir = Utils.CombinePath(Application.StartupPath, ToolsCore.FileConsts.CONFIG_PATH);
+        var configsDir = Utils.CombinePath(Application.StartupPath, ToolsCore.FileConsts.CONFIG_PATH)!;
         if (!Directory.Exists(configsDir))
             Directory.CreateDirectory(configsDir);
-        
-        Styles<RawBankEditorStyle>.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES), GlobData.Styles);
-        XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG), GlobData.Config);
+
+        Styles<RawBankEditorStyle>.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES)!, GlobData.Styles);
+        XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
     }
 
     /// <inheritdoc />

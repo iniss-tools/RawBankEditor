@@ -8,7 +8,7 @@ public partial class MinButton : UserControl
     private Color iconColor;
     private Color iconHoverColor;
 
-    private string toolTipText;
+    private string toolTipText = "";
 
     public MinButton()
     {

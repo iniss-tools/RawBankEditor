@@ -59,8 +59,8 @@ public class LanguageDirMissing : IRawBankMessage
     {
         try
         {
-            Directory.CreateDirectory(Language.GetAbsPath(GlobData.OpenedProject.AbsPathToBank));
-            Language.Directory = new DirectoryElement(Language.GetAbsPath(GlobData.OpenedProject.AbsPathToBank));
+            Directory.CreateDirectory(Language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+            Language.Directory = new DirectoryElement(Language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
         }
         catch (Exception e)
         {
@@ -103,8 +103,8 @@ public class GroupDirMissing : IRawBankMessage
     {
         try
         {
-            Directory.CreateDirectory(Group.GetAbsPath(GlobData.OpenedProject.AbsPathToBank));
-            Group.Directory = new DirectoryElement(Group.GetAbsPath(GlobData.OpenedProject.AbsPathToBank));
+            Directory.CreateDirectory(Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+            Group.Directory = new DirectoryElement(Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
         }
         catch (Exception e)
         {
@@ -115,7 +115,7 @@ public class GroupDirMissing : IRawBankMessage
     /// <inheritdoc />
     public void Show()
     {
-        var index = Program.MainForm.CurrentLanguage.Groups.IndexOf(Group);
+        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(Group);
         if (index != -1)
         {
             Program.MainForm.dgvGroups.ClearSelection();
@@ -157,7 +157,7 @@ public class SoundFileMissing : IRawBankMessage
     /// <inheritdoc />
     public void Show()
     {
-        var index = Program.MainForm.CurrentLanguage.Groups.IndexOf(Sound.Group);
+        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(Sound.Group);
         if (index == -1) 
             return;
 
@@ -202,15 +202,15 @@ public class SoundDataMissing : IRawBankMessage
         if (form.ShowDialog() == DialogResult.OK)
         {
             Program.MainForm.RegisterNewAction(new FMain.AddSoundAction(Program.MainForm, form.Sound));
-            File.Parent.Group?.Sounds.Add(form.Sound);
+            File.Parent!.Group?.Sounds.Add(form.Sound);
         }
     }
 
     /// <inheritdoc />
     public void Show()
     {
-        var grp = File.Parent.Group;
-        var index = Program.MainForm.CurrentLanguage.Groups.IndexOf(grp);
+        var grp = File.Parent!.Group;
+        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(grp);
         if (index != -1)
         {
             Program.MainForm.dgvGroups.ClearSelection();
@@ -259,8 +259,8 @@ public class InvalidSoundFile : IRawBankMessage
     /// <inheritdoc />
     public void Show()
     {
-        var grp = File.Parent.Group;
-        var index = Program.MainForm.CurrentLanguage.Groups.IndexOf(grp);
+        var grp = File.Parent!.Group;
+        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(grp);
         if (index != -1)
         {
             Program.MainForm.dgvGroups.ClearSelection();
@@ -295,7 +295,7 @@ public class EmptyGroup : IRawBankMessage
     public string ResolveMessage => $"Odstrániť skupinu '{Group.Name}'.";
 
     /// <inheritdoc />
-    public string Path => Group.GetAbsPath(GlobData.OpenedProject.AbsPathToBank);
+    public string Path => Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
 
     public FyzGroup Group { get; }
 
@@ -314,7 +314,7 @@ public class EmptyGroup : IRawBankMessage
     /// <inheritdoc />
     public void Show()
     {
-        var index = Program.MainForm.CurrentLanguage.Groups.IndexOf(Group);
+        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(Group);
         if (index != -1)
         {
             Program.MainForm.dgvGroups.ClearSelection();
