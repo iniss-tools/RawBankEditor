@@ -11,19 +11,16 @@
 #define MyAppVersion GetVersionNumbersString(MyAppDir + "\" + MyAppExeName)
 
 [Setup]
-; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
-; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
-;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
-; Uncomment the following line to run in non administrative install mode (install for current user only.)
-;PrivilegesRequired=lowest
+; Predvolene sa instaluje iba pre aktualneho pouzivatela - do podpriecinka Programs v %LocalAppData%.
+PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputBaseFilename=rawbankeditor-setup
 Compression=lzma
@@ -45,6 +42,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ; config a logs vytvára program až za behu - s ignoreversion by aktualizácia prepísala nastavenia
 Source: "{#MyAppDir}\*"; DestDir: "{app}"; Excludes: "\config,\logs"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
+[UninstallDelete]
+; Nastavenia a logy si program zakladá až za behu, inštalátor o nich nevie a sám by ich nezmazal.
+Type: filesandordirs; Name: "{localappdata}\{#MyAppName}"
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

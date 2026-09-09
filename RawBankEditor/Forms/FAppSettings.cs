@@ -56,7 +56,7 @@ public partial class FAppSettings : FAppSettingsBase
         GlobSettings.UsingStyle = UsingStyle;
         GlobData.Styles = Styles;
         
-        var configsDir = Utils.CombinePath(Application.StartupPath, ToolsCore.FileConsts.CONFIG_PATH)!;
+        var configsDir = ToolsCore.AppPaths.ConfigDir;
         if (!Directory.Exists(configsDir))
             Directory.CreateDirectory(configsDir);
 

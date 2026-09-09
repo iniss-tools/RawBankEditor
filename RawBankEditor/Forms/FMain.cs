@@ -208,7 +208,7 @@ public partial class FMain : Form
     {
         base.OnLoad(e);
 
-        var configsDir = Utils.CombinePath(Application.StartupPath, ToolsCore.FileConsts.CONFIG_PATH)!;
+        var configsDir = ToolsCore.AppPaths.ConfigDir;
         
         tsmimShowErrors.Checked = GlobData.Config.ShowErrorsWindow;
         splitSoundsErrors.Panel2.VisibleChanged += (_, _) =>
@@ -902,7 +902,7 @@ public partial class FMain : Form
             tsmimWrapTextSoundCol.Checked = tsbWrapTextSoundCol.Checked;
 
         GlobData.Config.WrapSoundText = tsmimWrapTextSoundCol.Checked;
-        var configsDir = Utils.CombinePath(Application.StartupPath, ToolsCore.FileConsts.CONFIG_PATH)!;
+        var configsDir = ToolsCore.AppPaths.ConfigDir;
         XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
         SetSoundTextColumn();
     }
