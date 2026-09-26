@@ -84,7 +84,7 @@ namespace RawBankEditor.Properties {
         ///   Looks up a localized string similar to Naozaj si želáte previesť vybrané súbory/priečinky do formátu {0}?
         ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
         ///
-        ///Zadaná akcia môze trvať dlhšiu dobu..
+        ///Zadaná akcia môže trvať dlhšiu dobu..
         /// </summary>
         internal static string FMain_DoConvertFiles {
             get {
@@ -96,7 +96,7 @@ namespace RawBankEditor.Properties {
         ///   Looks up a localized string similar to Naozaj si želáte previesť všetky zvuky v skupine do formátu {0}?
         ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
         ///
-        ///Zadaná akcia môze trvať dlhšiu dobu..
+        ///Zadaná akcia môže trvať dlhšiu dobu..
         /// </summary>
         internal static string FMain_DoConvertGroup {
             get {
@@ -108,7 +108,7 @@ namespace RawBankEditor.Properties {
         ///   Looks up a localized string similar to Naozaj si želáte previesť všetky zvuky v jazyku do formátu {0}?
         ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
         ///
-        ///Zadaná akcia môze trvať dlhšiu dobu..
+        ///Zadaná akcia môže trvať dlhšiu dobu..
         /// </summary>
         internal static string FMain_DoConvertLang {
             get {
@@ -120,7 +120,7 @@ namespace RawBankEditor.Properties {
         ///   Looks up a localized string similar to Naozaj si želáte previesť vybrané zvuky do formátu {0}?
         ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
         ///
-        ///Zadaná akcia môze trvať dlhšiu dobu..
+        ///Zadaná akcia môže trvať dlhšiu dobu..
         /// </summary>
         internal static string FMain_DoConvertSounds {
             get {

@@ -67,6 +67,20 @@ public class SoundUtilsTests
     }
 
     [TestMethod]
+    public void ConvertWAVtoEWA_NikdyNepouzijeKluc0()
+    {
+        // INISS pri prvom bajte 'R' (kluc 0) subor nedekoduje - EWA musi mat kluc 1..255
+        var wav = Encoding.ASCII.GetBytes("RIFF....WAVEfmt ");
+        for (var i = 0; i < 2000; i++)
+        {
+            using var output = new MemoryStream();
+            using (var writer = new BinaryWriter(output, Encoding.ASCII, true))
+                SoundUtils.ConvertWAVtoEWA(new BinaryReader(new MemoryStream(wav)), writer);
+            Assert.AreNotEqual((byte)'R', output.ToArray()[0]);
+        }
+    }
+
+    [TestMethod]
     public void ConvertFiles_KonvertujeZmazePovodnyAPremenujePrvokAZvuk()
     {
         var original = File.ReadAllBytes(WriteWav("A.WAV"));
@@ -83,7 +97,7 @@ public class SoundUtilsTests
         Assert.AreEqual(Path.Combine(_groupDir, "A.EWA"), sfe.FileInfo.FullName);
         Assert.AreEqual("A.EWA", sound.FileName);
 
-        // spat (ako undo akcie ConvertFilesEwaWawAction)
+        // spat (ako undo akcie ConvertFilesAction)
         SoundUtils.ConvertFiles([dir], false);
 
         Assert.IsFalse(File.Exists(Path.Combine(_groupDir, "A.EWA")));
@@ -103,8 +117,12 @@ public class SoundUtilsTests
         var (_, dir) = CreateGroup();
         File.Delete(Path.Combine(_groupDir, "B.WAV"));
 
-        SoundUtils.ConvertFiles(dir.Children, true);
+        var result = SoundUtils.ConvertFiles(dir.Children, true);
 
+        // Spat skonvertuje naspat len A - C.EWA uz existoval a mohol patrit inemu zvuku
+        CollectionAssert.AreEqual(new[] { "A.EWA" }, result.Converted.Select(f => f.Name).ToList());
+        CollectionAssert.AreEqual(new[] { "C.WAV" }, result.Skipped);
+        Assert.AreEqual(0, result.Failed.Count);
         Assert.IsTrue(File.Exists(Path.Combine(_groupDir, "A.EWA")));
         Assert.IsFalse(File.Exists(Path.Combine(_groupDir, "B.EWA")));
         Assert.IsTrue(File.Exists(Path.Combine(_groupDir, "C.WAV")));

@@ -721,159 +721,29 @@ partial class FMain
         }
     }
 
-    public class ConvertLanguageEwaWawAction : Action
+    /// <summary>
+    ///     Konverzia nahravok na .EWA alebo .WAV - pamata si len subory, ktore sa naozaj skonvertovali.
+    /// </summary>
+    public class ConvertFilesAction : Action
     {
-        /// <inheritdoc />
-        public ConvertLanguageEwaWawAction(FMain form, FyzLanguage language, bool toEwa) : base(form)
-        {
-            Language = language;
-            ToEwa = toEwa;
-        }
-
-        private FyzLanguage Language { get; }
-        private bool ToEwa { get; }
-
-        /// <inheritdoc />
-        public override string CommandName
-        {
-            get
-            {
-                var extention = ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
-                return $"Konvertovanie zvukov jazyka na {extention}";
-            }
-        }
-
-        /// <inheritdoc />
-        public override void Undo()
-        {
-            Form.ChangeStatus("Konvertujem zvuky jazyka");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertSoundsInLanguage(Language, !ToEwa);
-        }
-
-        /// <inheritdoc />
-        public override void Redo()
-        {
-            Form.ChangeStatus("Konvertujem zvuky jazyka");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertSoundsInLanguage(Language, ToEwa);
-        }
-    }
-
-    public class ConvertGroupEwaWawAction : Action
-    {
-        /// <inheritdoc />
-        public ConvertGroupEwaWawAction(FMain form, FyzGroup group, bool toEwa) : base(form)
-        {
-            Group = group;
-            ToEwa = toEwa;
-        }
-
-        private FyzGroup Group { get; }
-        private bool ToEwa { get; }
-
-        /// <inheritdoc />
-        public override string CommandName
-        {
-            get
-            {
-                var extention = ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
-                return $"Konvertovanie zvukov skupiny na {extention}";
-            }
-        }
-
-        /// <inheritdoc />
-        public override void Undo()
-        {
-            Form.ChangeStatus("Konvertujem skupinu zvukov");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertSoundsInGroup(Group, !ToEwa);
-        }
-
-        /// <inheritdoc />
-        public override void Redo()
-        {
-            Form.ChangeStatus("Konvertujem skupinu zvukov");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertSoundsInGroup(Group, ToEwa);
-        }
-    }
-
-    public class ConvertSoundsEwaWawAction : Action
-    {
-        /// <inheritdoc />
-        public ConvertSoundsEwaWawAction(FMain form, IList<FyzSound> sounds, bool toEwa) : base(form)
-        {
-            Sounds = sounds;
-            ToEwa = toEwa;
-        }
-
-        private IList<FyzSound> Sounds { get; }
-        private bool ToEwa { get; }
-
-        /// <inheritdoc />
-        public override string CommandName
-        {
-            get
-            {
-                var extention = ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
-                return $"Konvertovanie vybraných zvukov na {extention}";
-            }
-        }
-
-        /// <inheritdoc />
-        public override void Undo()
-        {
-            Form.ChangeStatus("Konvertujem vybrané zvuky");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertSounds(Sounds, !ToEwa);
-        }
-
-        /// <inheritdoc />
-        public override void Redo()
-        {
-            Form.ChangeStatus("Konvertujem vybrané zvuky");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertSounds(Sounds, ToEwa);
-        }
-    }
-
-    public class ConvertFilesEwaWawAction : Action
-    {
-        /// <inheritdoc />
-        public ConvertFilesEwaWawAction(FMain form, IList<FileSystemElement> files, bool toEwa) : base(form)
+        public ConvertFilesAction(FMain form, IReadOnlyList<SoundFileElement> files, bool toEwa, string commandName) : base(form)
         {
             Files = files;
             ToEwa = toEwa;
+            Name = commandName;
         }
 
-        private IList<FileSystemElement> Files { get; }
+        private IReadOnlyList<SoundFileElement> Files { get; }
         private bool ToEwa { get; }
+        private string Name { get; }
 
         /// <inheritdoc />
-        public override string CommandName
-        {
-            get
-            {
-                var extention = ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
-                return $"Konvertovanie vybraných súborov/priečinkov na {extention}";
-            }
-        }
+        public override string CommandName => $"{Name} na {(ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT)}";
 
         /// <inheritdoc />
-        public override void Undo()
-        {
-            Form.ChangeStatus("Konvertujem vybrané súbory");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertFiles(Files, !ToEwa);
-        }
+        public override void Undo() => _ = Form.ConvertInBackground(Files, !ToEwa, "Vraciam konverziu");
 
         /// <inheritdoc />
-        public override void Redo()
-        {
-            Form.ChangeStatus("Konvertujem vybrané súbory");
-            Form.tspbProgress.Visible = true;
-            Form.ConvertFiles(Files, ToEwa);
-        }
+        public override void Redo() => _ = Form.ConvertInBackground(Files, ToEwa, "Konvertujem");
     }
 }

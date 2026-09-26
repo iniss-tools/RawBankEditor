@@ -494,6 +494,11 @@ public partial class FMain : Form
         if (dgvExplorer.ContainsFocus && keyData is Keys.Delete or Keys.F2 or Keys.F5)
             return false;
 
+        // Odstranit zvuky (bez potvrdenia) len v zozname zvukov - v zozname skupin alebo chyb by Del zmazal
+        // zvuky, ktore pouzivatel prave nevidi vybrane
+        if (keyData == (Keys)GlobData.Config.Shortcuts.DeleteSounds && keyData != Keys.None && !dgvSounds.ContainsFocus)
+            return false;
+
         return base.ProcessCmdKey(ref msg, keyData);
     }
 
@@ -1145,44 +1150,6 @@ public partial class FMain : Form
         target?.Children.Add(file);
     }
 
-    private void DoConvertSoundsToEwa(object sender, EventArgs e)
-    {
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertSounds, SoundUtils.EWA_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem vybrané zvuky");
-        tspbProgress.Visible = true;
-        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
-        RegisterNewAction(new ConvertSoundsEwaWawAction(this, sounds, true));
-        ConvertSounds(sounds, true);
-        CheckProjectState();
-    }
-
-    private void DoConvertSoundsToWav(object sender, EventArgs e)
-    {
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertSounds, SoundUtils.WAV_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem vybrané zvuky");
-        tspbProgress.Visible = true;
-        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
-        RegisterNewAction(new ConvertSoundsEwaWawAction(this, sounds, false));
-        ConvertSounds(sounds, false);
-        CheckProjectState();
-    }
-
-    private async void ConvertSounds(ICollection<FyzSound> sounds, bool toEwa)
-    {
-        tspbProgress.Minimum = 0;
-        tspbProgress.Maximum = sounds.Count;
-        tspbProgress.Style = ProgressBarStyle.Blocks;
-        tspbProgress.Value = 0;
-        await RunWithoutFileWatcher(() => SoundUtils.ConvertSounds(sounds, toEwa, tspbProgress));
-        ResetStatusAfterTask();
-    }
-
     /// <summary>
     ///     Prida prazdny jazyk (s priecinkom v RAWBANK) a otvori ho. FYZBANK.DAT a jeho FYZZVUK.DAT sa zapisu pri ulozeni.
     ///     Ak v priecinku FYZZVUK.DAT uz je, jazyk sa nacita z neho.
@@ -1272,43 +1239,6 @@ public partial class FMain : Form
         RegisterNewAction(new RemoveLanguageAction(this, language, index, directory, withData));
     }
 
-    private void DoConvertLangToEwa(object sender, EventArgs e)
-    {
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertLang, SoundUtils.EWA_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem zvuky jazyka");
-        tspbProgress.Visible = true;
-        RegisterNewAction(new ConvertLanguageEwaWawAction(this, CurrentLanguage!, true));
-        ConvertSoundsInLanguage(CurrentLanguage!, true);
-        CheckProjectState();
-    }
-
-    private void DoConvertLangToWav(object sender, EventArgs e)
-    {
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertLang, SoundUtils.WAV_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem zvuky jazyka");
-        tspbProgress.Visible = true;
-        RegisterNewAction(new ConvertLanguageEwaWawAction(this, CurrentLanguage!, false));
-        ConvertSoundsInLanguage(CurrentLanguage!, false);
-        CheckProjectState();
-    }
-
-    private async void ConvertSoundsInLanguage(FyzLanguage language, bool toEwa)
-    {
-        var sndCount = language.Groups.Sum(g => g.Sounds.Count);
-
-        tspbProgress.Minimum = 0;
-        tspbProgress.Maximum = sndCount;
-        tspbProgress.Style = ProgressBarStyle.Blocks;
-        await RunWithoutFileWatcher(() => SoundUtils.ConvertSoundsLanguage(language, toEwa, tspbProgress));
-        ResetStatusAfterTask();
-    }
-
     private void ShowAppSettings(object sender, EventArgs e)
     {
         var form = new FAppSettings(GlobData.Config, GlobData.Styles);
@@ -1382,61 +1312,6 @@ public partial class FMain : Form
 
     #endregion
 
-    #region GroupsPanel
-
-    private void DoConvertGroupToEwa(object sender, EventArgs e)
-    {
-        if (dgvGroups.IsSelectionEmpty())
-            return;
-
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertGroup, SoundUtils.EWA_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem skupinu zvukov");
-        tspbProgress.Visible = true;
-        var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
-        RegisterNewAction(new ConvertGroupEwaWawAction(this, group, true));
-        ConvertSoundsInGroup(group, true);
-        CheckProjectState();
-    }
-
-    private void DoConvertGroupToWav(object sender, EventArgs e)
-    {
-        if (dgvGroups.IsSelectionEmpty())
-            return;
-
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertGroup, SoundUtils.WAV_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem skupinu zvukov");
-        tspbProgress.Visible = true;
-        var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
-        RegisterNewAction(new ConvertGroupEwaWawAction(this, group, false));
-        ConvertSoundsInGroup(group, false);
-        CheckProjectState();
-    }
-
-    private async void ConvertSoundsInGroup(FyzGroup group, bool toEwa)
-    {
-        var sndCount = group.Sounds.Count;
-
-        tspbProgress.Minimum = 0;
-        tspbProgress.Maximum = sndCount;
-        tspbProgress.Style = ProgressBarStyle.Blocks;
-        await Task.Run(() =>
-        {
-            RawBankExplorer.ConvertSoundIsHandled = true;
-            SoundUtils.ConvertSoundsInGroup(group, toEwa, tspbProgress);
-            RawBankExplorer.ConvertSoundIsHandled = false;
-
-            Invoke(ResetStatusAfterTask);
-        });
-    }
-
-    #endregion
-
     #region ExplorerPanel
 
     private void DoOpenFileInExplorer(object sender, EventArgs e)
@@ -1470,66 +1345,6 @@ public partial class FMain : Form
 
         if (dgvExplorer.SelectedRows[0].DataBoundItem is SoundFileElement se)
             SoundUtils.Play(se.FileInfo.FullName);
-    }
-
-    private void DoConvertFilesToEwa(object sender, EventArgs e)
-    {
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertFiles, SoundUtils.EWA_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem vybrané súbory/priečinky");
-        tspbProgress.Visible = true;
-        var files = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FileSystemElement>().ToList();
-        RegisterNewAction(new ConvertFilesEwaWawAction(this, files, true));
-        ConvertFiles(files, true);
-        CheckProjectState();
-    }
-
-    private void DoConvertFilesToWav(object sender, EventArgs e)
-    {
-        var result = Utils.ShowQuestion(string.Format(Resources.FMain_DoConvertFiles, SoundUtils.WAV_EXT));
-        if (result != DialogResult.Yes) 
-            return;
-
-        ChangeStatus("Konvertujem vybrané súbory/priečinky");
-        tspbProgress.Visible = true;
-        var files = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FileSystemElement>().ToList();
-        RegisterNewAction(new ConvertFilesEwaWawAction(this, files, false));
-        ConvertFiles(files, false);
-        CheckProjectState();
-    }
-
-    private async void ConvertFiles(IEnumerable<FileSystemElement> files, bool toEwa)
-    {
-        tspbProgress.Style = ProgressBarStyle.Marquee;
-        await RunWithoutFileWatcher(() => SoundUtils.ConvertFiles(files, toEwa));
-        ResetStatusAfterTask();
-    }
-
-    /// <summary>
-    ///     Spusti konverziu suborov na pozadi tak, aby udalosti fileSystemWatcher-a o vytvoreni a zmazani
-    ///     konvertovanych suborov nevytvorili duplicitne prvky ani zvuky (prvky upravi sama konverzia).
-    /// </summary>
-    private async Task RunWithoutFileWatcher(System.Action convert)
-    {
-        var watching = fileSystemWatcher.EnableRaisingEvents;
-        RawBankExplorer.ConvertSoundIsHandled = true;
-        fileSystemWatcher.EnableRaisingEvents = false;
-        try
-        {
-            await Task.Run(convert);
-        }
-        catch (Exception ex)
-        {
-            Utils.ShowError(ex.Message);
-        }
-        finally
-        {
-            fileSystemWatcher.EnableRaisingEvents = watching;
-            // udalosti, ktore watcher zaradil do fronty okna este pred vypnutim, sa spracuju az po tomto
-            BeginInvoke(() => RawBankExplorer.ConvertSoundIsHandled = false);
-        }
     }
 
     #endregion
@@ -2473,6 +2288,10 @@ public partial class FMain : Form
             StringComparison.InvariantCultureIgnoreCase) == 0;
     }
 
+    // 1 chyba, 2 - 4 chyby, 0 a 5+ chyb
+    private static string CountText(int count, string one, string few, string many)
+        => $"{count} {(count == 1 ? one : count is >= 2 and <= 4 ? few : many)}";
+
     private void Messages_ListChanged(object? sender, ListChangedEventArgs e)
     {
         var errorCount = 0;
@@ -2499,14 +2318,14 @@ public partial class FMain : Form
 
         Invoke(() =>
         {
-            tsbErrors.Text = $"{errorCount} chýb";
-            tsbWarnings.Text = $"{warningCount} upozornení";
-            tsbInfos.Text = $"{infoCount} správ";
+            tsbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
+            tsbWarnings.Text = CountText(warningCount, "upozornenie", "upozornenia", "upozornení");
+            tsbInfos.Text = CountText(infoCount, "správa", "správy", "správ");
 
             if (errorCount != 0)
             {
                 tssbErrors.Image = _error.ToBitmap();
-                tssbErrors.Text = $"{errorCount} chýb";
+                tssbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
                 tssbErrors.ForeColor = Color.Red;
             }
             else
@@ -2582,6 +2401,9 @@ public partial class FMain : Form
         {
             //ignored
         }
+
+        // nove riadky su viditelne - skryte typy sprav sa musia skryt znova
+        ShowHideMessages();
     }
 
     private void DgvSounds_MouseDown(object sender, MouseEventArgs e)

@@ -2,6 +2,7 @@
 using RawBankEditor.Forms;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
+using static RawBankEditor.Entities.BankMessagePaths;
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace RawBankEditor.Entities;
@@ -24,6 +25,18 @@ public interface IRawBankMessage
     public abstract void Show();
 }
 
+/// <summary>
+///     Spolocne pre spravy zoznamu chyb.
+/// </summary>
+internal static class BankMessagePaths
+{
+    /// <summary>
+    ///     Cesta vzhladom na priecinok banky (RAWBANK) - rovnako ako pri chybajucich priecinkoch a suboroch.
+    /// </summary>
+    public static string RelativeToBank(string fullPath)
+        => System.IO.Path.GetRelativePath(GlobData.OpenedProject!.AbsPathToBank, fullPath);
+}
+
 public enum MessageType
 {
     Info,
@@ -43,7 +56,7 @@ public class LanguageDirMissing : IRawBankMessage
     public string Message => $"Jazyk '{Language.Key}' je definovaný, ale neexistuje v súborovom systéme.";
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Vytvoriť priečinok '{Language.Key}'.";
+    public string ResolveMessage => $"Vytvoriť priečinok '{Language.RelativePath}'.";
 
     /// <inheritdoc />
     public string Path => Language.GetAbsPath("");
@@ -57,15 +70,7 @@ public class LanguageDirMissing : IRawBankMessage
 
     public void Resolve()
     {
-        try
-        {
-            Directory.CreateDirectory(Language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
-            Language.Directory = new DirectoryElement(Language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
-        }
-        catch (Exception e)
-        {
-            Utils.ShowError(e.Message);
-        }
+        Program.MainForm.CreateLanguageDirectory(Language);
     }
 
     /// <inheritdoc />
@@ -87,7 +92,7 @@ public class GroupDirMissing : IRawBankMessage
     public string Message => $"Skupina '{Group.Name}' je definovaná, ale neexistuje v súborovom systéme.";
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Vytvoriť priečinok '{Group.Name}' pre jazyk '{Group.Language.Key}'.";
+    public string ResolveMessage => $"Vytvoriť priečinok '{Group.GetAbsPath("")}'.";
 
     /// <inheritdoc />
     public string Path => Group.GetAbsPath("");
@@ -143,7 +148,7 @@ public class SoundFileMissing : IRawBankMessage
     public string Message => $"Zvuk '{Sound.Name}' je definovaný, ale neexistuje v súborovom systéme.";
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Odstrániť dáta o zvuku '{Sound.FileName}'.";
+    public string ResolveMessage => $"Odstrániť zvuk '{Sound.Name}' zo zoznamu zvukov.";
 
     /// <inheritdoc />
     public string Path => Sound.GetAbsPath("");
@@ -157,8 +162,9 @@ public class SoundFileMissing : IRawBankMessage
 
     public void Resolve()
     {
-        Program.MainForm.RegisterNewAction(new FMain.RemovedSoundsAction(Program.MainForm, Sound));
-        Sound.Group.Sounds.Remove(Sound);
+        var action = new FMain.RemovedSoundsAction(Program.MainForm, Sound);
+        action.Apply();
+        Program.MainForm.RegisterNewAction(action);
     }
 
     /// <inheritdoc />
@@ -194,7 +200,7 @@ public class SoundDataMissing : IRawBankMessage
     public string ResolveMessage => $"Pridať dáta o zvuku '{File.Name}'.";
 
     /// <inheritdoc />
-    public string Path => File.FileInfo.FullName;
+    public string Path => RelativeToBank(File.FileInfo.FullName);
 
     public SoundFileElement File { get; }
 
@@ -249,13 +255,13 @@ public class InvalidSoundFile : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Zvuk '{File.Name}' je definovaný, ale obsahuje neplatný formát.";
+    public string Message => $"Súbor '{File.Name}' nie je platná nahrávka WAV.";
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Odstrániť súbor so zvukom '{File.Name}'.";
+    public string ResolveMessage => $"Presunúť súbor '{File.Name}' do koša.";
 
     /// <inheritdoc />
-    public string Path => File.FileInfo.FullName;
+    public string Path => RelativeToBank(File.FileInfo.FullName);
 
     public SoundFileElement File { get; }
 
@@ -267,8 +273,15 @@ public class InvalidSoundFile : IRawBankMessage
     /// <inheritdoc />
     public void Resolve()
     {
-        Program.MainForm.RegisterNewAction();
-        Utils.DeleteFileToRecycleBin(File.FileInfo.FullName);
+        // zvuk, ktoremu subor patril, ostane bez suboru
+        if (File.Sound is { } sound && ReferenceEquals(sound.File, File))
+        {
+            sound.File = null!;
+            File.Sound = null!;
+        }
+
+        Program.MainForm.RecycleElement(File);
+        Program.MainForm.FillExplorerList(Program.MainForm.CurrentDirectory);
     }
 
     /// <inheritdoc />
@@ -310,7 +323,7 @@ public class EmptyGroup : IRawBankMessage
     public string ResolveMessage => $"Odstrániť skupinu '{Group.Name}'.";
 
     /// <inheritdoc />
-    public string Path => Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
+    public string Path => Group.GetAbsPath("");
 
     public FyzGroup Group { get; }
 

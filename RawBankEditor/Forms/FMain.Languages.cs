@@ -23,6 +23,39 @@ partial class FMain
         return true;
     }
 
+    /// <summary>
+    ///     Vytvori chybajuci priecinok jazyka a prepoji ho s jazykom v prieskumniku (zoznam chyb - Vyriesit).
+    /// </summary>
+    internal void CreateLanguageDirectory(FyzLanguage language)
+    {
+        var path = Path.TrimEndingDirectorySeparator(language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+        try
+        {
+            WithoutFileWatcher(() => Directory.CreateDirectory(path));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+        {
+            Utils.ShowError($"Priečinok jazyka {path} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            return;
+        }
+
+        var folder = LanguageRules.FolderName(language.RelativePath);
+        var element = Root.Children.OfType<DirectoryElement>().FirstOrDefault(d => RawBankExplorer.EqualsPathNames(d.Name, folder));
+        if (element is null)
+        {
+            element = new DirectoryElement(path) { Parent = Root };
+            Root.Children.Add(element);
+        }
+
+        language.Directory = element;
+        if (language.Groups is not null)
+            foreach (var group in language.Groups)
+                LinkGroupDirectory(group);
+
+        if (ReferenceEquals(language, CurrentLanguage))
+            FillExplorerList(CurrentGroup?.Directory ?? element);
+    }
+
     private bool MoveLanguageDirectory(FyzLanguage language, string relativePath)
     {
         var pathToBank = GlobData.OpenedProject!.AbsPathToBank;

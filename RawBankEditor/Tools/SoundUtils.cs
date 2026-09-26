@@ -15,7 +15,7 @@ public static class SoundUtils
     private const int SOUND_UNKNOWN_LENGTH = -1;
 
     // -2 = chyba
-    private const int SOUND_ERROR = -2;
+    internal const int SOUND_ERROR = -2;
 
     public static void Play(string soundpath)
     {
@@ -95,8 +95,12 @@ public static class SoundUtils
         {
             var pos = instream.BaseStream.Position;
             b = instream.ReadByte();
-            b = (byte)(b ^ ewaByte);
-            b = (byte)((b - 0x11 * pos) & 0xff);
+            // kluc 0 (prvy bajt 'R') - nekodovany WAV, INISS ho cita bez dekodovania
+            if (ewaByte != 0)
+            {
+                b = (byte)(b ^ ewaByte);
+                b = (byte)((b - 0x11 * pos) & 0xff);
+            }
             outstream.Write(b);
         }
 
@@ -142,8 +146,8 @@ public static class SoundUtils
     /// <param name="check">whether the format of .WAV stream should be checked</param>
     public static void ConvertWAVtoEWA(BinaryReader instream, BinaryWriter outstream, bool check = false)
     {
-        var rand = new Random();
-        var ewaByte = (byte)rand.Next(0xff + 1);
+        // kluc 0 nie - INISS podla neho spozna nekodovany WAV (prvy bajt 'R') a subor by nedekodoval
+        var ewaByte = (byte)Random.Shared.Next(1, 0xff + 1);
 
         if (check)
         {
@@ -275,15 +279,6 @@ public static class SoundUtils
                     return SOUND_ERROR;
             }
         }
-        catch (FormatException)
-        {
-            Program.MainForm.Invoke(() =>
-            {
-                GlobData.OpenedProject!.Messages[Program.MainForm.CurrentLanguage!].Add(new InvalidSoundFile(file));
-            });
-            
-            return SOUND_ERROR;
-        }
         catch (Exception)
         {
             return SOUND_ERROR;
@@ -296,81 +291,107 @@ public static class SoundUtils
             throw new ArgumentNullException(nameof(file));
     }
 
-    public static void ConvertSoundsLanguage(FyzLanguage lang, bool toEwa, ToolStripProgressBar bar)
+    /// <summary>
+    ///     Vysledok konverzie suborov.
+    /// </summary>
+    public sealed class ConvertResult
     {
-        foreach (var group in lang.Groups) 
-            ConvertSoundsInGroup(group, toEwa, bar);
-    }
+        /// <summary>Skonvertovane subory - Spat ich skonvertuje naspat.</summary>
+        public List<SoundFileElement> Converted { get; } = new();
 
-    public static void ConvertSoundsInGroup(FyzGroup grp, bool toEwa, ToolStripProgressBar bar)
-    {
-        ConvertSounds(grp.Sounds, toEwa, bar);
-    }
+        /// <summary>Subory, vedla ktorych uz subor s cielovou priponou je (neprepisuje sa).</summary>
+        public List<string> Skipped { get; } = new();
 
-    public static void ConvertSounds(IEnumerable<FyzSound> sounds, bool toEwa, ToolStripProgressBar bar)
-    {
-        var ext = toEwa ? EWA_EXT : WAV_EXT;
-        foreach (var sound in sounds)
-        {
-            if (sound.File is null || sound.File.FileInfo.Extension.EqualsIgnoreCase(ext) || !File.Exists(sound.File.FileInfo.FullName))
-            {
-                bar.Owner!.Invoke(() => bar.Increment(1));
-                continue;
-            }
-
-            var newPath = Path.ChangeExtension(sound.File.FileInfo.FullName, ext);
-            if (toEwa)
-                ConvertWAVtoEWA(sound.File.FileInfo.FullName, newPath);
-            else
-                ConvertEWAtoWAV(sound.File.FileInfo.FullName, newPath);
-            File.Delete(sound.File.FileInfo.FullName);
-            sound.File.FileInfo = new FileInfo(newPath);
-            sound.FileName = sound.File.FileInfo.Name;
-            sound.File.Name = sound.FileName;
-            bar.Owner!.Invoke(() => bar.Increment(1));
-        }
+        /// <summary>Subory, ktore sa skonvertovat nepodarilo, s popisom chyby.</summary>
+        public List<string> Failed { get; } = new();
     }
 
     /// <summary>
-    ///     Skonvertuje subory (aj rekurzivne v priecinkoch) na .EWA alebo .WAV. Povodny subor sa zmaze
-    ///     a prvok aj priradeny zvuk dostanu novy nazov suboru.
+    ///     Subory nahravok vo vybranych prvkoch prieskumnika vratane obsahu priecinkov (rekurzivne).
     /// </summary>
-    /// <remarks>
-    ///     Preskoci subory, ktore uz maju cielovu priponu alebo neexistuju, a subory, vedla ktorych
-    ///     uz cielovy subor existuje (neprepisuje ho).
-    /// </remarks>
-    public static void ConvertFiles(IEnumerable<FileSystemElement> elements, bool toEwa)
+    public static List<SoundFileElement> SoundFilesIn(IEnumerable<FileSystemElement> elements)
     {
-        var ext = toEwa ? EWA_EXT : WAV_EXT;
+        var files = new List<SoundFileElement>();
         foreach (var element in elements)
         {
             switch (element)
             {
                 case SoundFileElement sfe:
-                    if (sfe.FileInfo is null || sfe.FileInfo.Extension.EqualsIgnoreCase(ext) || !File.Exists(sfe.FileInfo.FullName))
-                        continue;
-
-                    var oldPath = sfe.FileInfo.FullName;
-                    var newPath = Path.ChangeExtension(oldPath, ext);
-                    if (File.Exists(newPath))
-                        continue;
-
-                    if (toEwa)
-                        ConvertWAVtoEWA(oldPath, newPath);
-                    else
-                        ConvertEWAtoWAV(oldPath, newPath);
-                    File.Delete(oldPath);
-
-                    sfe.FileInfo = new FileInfo(newPath);
-                    sfe.Name = sfe.FileInfo.Name;
-                    if (sfe.Sound is not null)
-                        sfe.Sound.FileName = sfe.Name;
+                    files.Add(sfe);
                     break;
                 case DirectoryElement de:
-                    ConvertFiles(de.Children, toEwa);
+                    files.AddRange(SoundFilesIn(de.Children));
                     break;
             }
         }
+
+        return files;
+    }
+
+    /// <summary>
+    ///     Skonvertuje subory (aj rekurzivne v priecinkoch) na .EWA alebo .WAV, pozri <see cref="ConvertSoundFiles" />.
+    /// </summary>
+    public static ConvertResult ConvertFiles(IEnumerable<FileSystemElement> elements, bool toEwa, System.Action? progress = null)
+        => ConvertSoundFiles(SoundFilesIn(elements), toEwa, progress);
+
+    /// <summary>
+    ///     Skonvertuje subory nahravok na .EWA alebo .WAV. Povodny subor sa zmaze a prvok aj priradeny zvuk
+    ///     dostanu novy nazov suboru.
+    /// </summary>
+    /// <remarks>
+    ///     Preskoci subory, ktore uz maju cielovu priponu alebo neexistuju, a subory, vedla ktorych uz cielovy
+    ///     subor existuje - ten moze patrit inemu zvuku, preto sa neprepisuje.
+    /// </remarks>
+    /// <param name="progress">Vola sa po kazdom subore.</param>
+    public static ConvertResult ConvertSoundFiles(IEnumerable<SoundFileElement> files, bool toEwa, System.Action? progress = null)
+    {
+        var ext = toEwa ? EWA_EXT : WAV_EXT;
+        var result = new ConvertResult();
+        foreach (var sfe in files.Distinct())
+        {
+            var created = false;
+            string? newPath = null;
+            try
+            {
+                if (sfe.FileInfo is null || sfe.FileInfo.Extension.EqualsIgnoreCase(ext) || !File.Exists(sfe.FileInfo.FullName))
+                    continue;
+
+                var oldPath = sfe.FileInfo.FullName;
+                newPath = Path.ChangeExtension(oldPath, ext);
+                if (File.Exists(newPath))
+                {
+                    result.Skipped.Add(sfe.Name);
+                    continue;
+                }
+
+                created = true;
+                if (toEwa)
+                    ConvertWAVtoEWA(oldPath, newPath);
+                else
+                    ConvertEWAtoWAV(oldPath, newPath);
+                File.Delete(oldPath);
+                created = false;
+
+                sfe.FileInfo = new FileInfo(newPath);
+                sfe.Name = sfe.FileInfo.Name;
+                if (sfe.Sound is not null)
+                    sfe.Sound.FileName = sfe.Name;
+                result.Converted.Add(sfe);
+            }
+            catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+            {
+                result.Failed.Add($"{sfe.Name}: {ex.Message}");
+                // nedokonceny cielovy subor sa zmaze, povodny ostava
+                if (created && newPath is not null && File.Exists(newPath) && File.Exists(sfe.FileInfo.FullName))
+                    File.Delete(newPath);
+            }
+            finally
+            {
+                progress?.Invoke();
+            }
+        }
+
+        return result;
     }
 
     /// <summary>

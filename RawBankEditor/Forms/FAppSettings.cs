@@ -71,8 +71,7 @@ public partial class FAppSettings : FAppSettingsBase
 
     private void CboxAutoInsertSoundData_CheckedChanged(object sender, EventArgs e)
     {
-        //AutoInsertSoundData musi byt true, aby toto nastavenie fungovalo
-        cboxShowAfterInsertSoundDlg.Checked = cboxAutoInsertSoundData.Checked;
+        // okno sa otvara len pri automatickom vkladani - bez neho volba nic nerobi, ale jej hodnota ostava
         cboxShowAfterInsertSoundDlg.Enabled = cboxAutoInsertSoundData.Checked;
     }
 }

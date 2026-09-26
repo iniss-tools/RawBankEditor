@@ -51,28 +51,10 @@ internal static class RawBankExplorer
 
                     grp.Directory = de;
                     de.Group = grp;
-
-                    //sounds
-                    foreach (var sndElement in de.Children)
-                    {
-                        if (sndElement is not SoundFileElement sfe)
-                            continue;
-
-                        foreach (var snd in grp.Sounds)
-                        {
-                            if (!RawBankParser.AdditionalPathIsEmpty(snd.AdditionalRelativePath))
-                            {
-                                snd.File = new SoundFileElement(snd.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank)) { Sound = snd };
-                            }
-                            else if (EqualsPathNames(sfe.Name, snd.FileName))
-                            {
-                                snd.File = sfe;
-                                snd.File.Sound = snd;
-                            }
-                        }
-                    }
                 }
             }
+
+            LinkSoundFiles(dir, lang);
         }
         
         //check files (link LOGICAL -> FILE)
@@ -109,12 +91,73 @@ internal static class RawBankExplorer
                 {
                     CheckDefOfFile(d);
                 }
-                else if (child is SoundFileElement {Sound: null} sfe)
+                else if (child is SoundFileElement sfe)
                 {
-                    messages.Add(new SoundDataMissing(sfe));
+                    if (sfe.Sound is null)
+                        messages.Add(new SoundDataMissing(sfe));
+                    // dlzka sa zistuje az pri zobrazeni priecinka v prieskumniku - vtedy sa ukaze aj neplatna nahravka
+                    if (sfe.Duration == SoundUtils.SOUND_ERROR)
+                        messages.Add(new InvalidSoundFile(sfe));
                 }
             }
         }
+    }
+
+    /// <summary>
+    ///     Prepoji zvuky jazyka s ich nahravkami. Najprv zvuky s nahravkou priamo v priecinku skupiny, potom zvuky
+    ///     s pridavnou cestou - tie ukazuju casto do priecinka inej skupiny (napr. ..\Poz1\ZALOK.WAV) a subor tam uz
+    ///     moze patrit zvuku tej skupiny. Neexistujuci subor sa neprepoji - zoznam chyb ho ukaze ako chybajuci.
+    /// </summary>
+    private static void LinkSoundFiles(DirectoryElement languageDir, FyzLanguage lang)
+    {
+        var pathToBank = GlobData.OpenedProject!.AbsPathToBank;
+        foreach (var additional in new[] { false, true })
+        {
+            foreach (var snd in lang.Groups.SelectMany(g => g.Sounds))
+            {
+                if (RawBankParser.AdditionalPathIsEmpty(snd.AdditionalRelativePath) == additional)
+                    continue;
+
+                SoundFileElement? file;
+                if (!additional)
+                {
+                    file = snd.Group.Directory?.Children.OfType<SoundFileElement>()
+                        .FirstOrDefault(f => snd.FileName is not null && EqualsPathNames(f.Name, snd.FileName));
+                }
+                else
+                {
+                    var path = Path.GetFullPath(snd.GetAbsPath(pathToBank));
+                    file = FindInTree(languageDir, path) ?? (File.Exists(path) ? new SoundFileElement(path) : null);
+                }
+
+                if (file is null)
+                    continue;
+
+                snd.File = file;
+                file.Sound ??= snd;
+            }
+        }
+    }
+
+    // prvok suboru v strome jazyka podla absolutnej cesty (bez ohladu na velkost pismen)
+    private static SoundFileElement? FindInTree(DirectoryElement languageDir, string path)
+    {
+        var relative = Path.GetRelativePath(languageDir.DirInfo.FullName, path);
+        if (relative.StartsWith("..", StringComparison.Ordinal) || Path.IsPathRooted(relative))
+            return null;
+
+        FileSystemElement current = languageDir;
+        foreach (var part in relative.Split(Path.DirectorySeparatorChar))
+        {
+            if (current is not DirectoryElement de)
+                return null;
+            var next = de.Children.FirstOrDefault(c => EqualsPathNames(c.Name, part));
+            if (next is null)
+                return null;
+            current = next;
+        }
+
+        return current as SoundFileElement;
     }
 
     public static bool EqualsPathNames(string name1, string name2) => string.Equals(name1, name2, StringComparison.CurrentCultureIgnoreCase);

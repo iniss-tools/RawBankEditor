@@ -150,24 +150,24 @@ Program RawBankEditor nie je oficiálna aplikácia spoločnosti CHAPS ani spolo�
 	  <value>Naozaj si želáte previesť všetky zvuky v jazyku do formátu {0}?
 Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
 
-Zadaná akcia môze trvať dlhšiu dobu.</value>
+Zadaná akcia môže trvať dlhšiu dobu.</value>
   </data>
   <data name="FMain_DoConvertGroup" xml:space="preserve">
 	  <value>Naozaj si želáte previesť všetky zvuky v skupine do formátu {0}?
 Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
 
-Zadaná akcia môze trvať dlhšiu dobu.</value>
+Zadaná akcia môže trvať dlhšiu dobu.</value>
   </data>
   <data name="FMain_DoConvertSounds" xml:space="preserve">
 	  <value>Naozaj si želáte previesť vybrané zvuky do formátu {0}?
 Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
 
-Zadaná akcia môze trvať dlhšiu dobu.</value>
+Zadaná akcia môže trvať dlhšiu dobu.</value>
   </data>
   <data name="FMain_DoConvertFiles" xml:space="preserve">
 	  <value>Naozaj si želáte previesť vybrané súbory/priečinky do formátu {0}?
 Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
 
-Zadaná akcia môze trvať dlhšiu dobu.</value>
+Zadaná akcia môže trvať dlhšiu dobu.</value>
   </data>
 </root>
