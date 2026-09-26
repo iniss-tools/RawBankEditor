@@ -142,7 +142,8 @@ public class SoundUtilsTests
 
         Assert.IsNull(SoundUtils.FindSoundFile(new FyzSound(group, "B", "B", "B.WAV", "", "", 0), _bank));
 
-        var additional = SoundUtils.FindSoundFile(new FyzSound(group, "X", "X", "X.WAV", "CISLO\\", "", 0), _bank);
+        // pridavna cesta je relativna k priecinku skupiny (ako v INISS)
+        var additional = SoundUtils.FindSoundFile(new FyzSound(group, "X", "X", "X.WAV", "..\\CISLO\\", "", 0), _bank);
         Assert.IsNotNull(additional);
         Assert.AreEqual(Path.Combine(_bank, "SK", "CISLO", "X.WAV"), additional.FileInfo.FullName);
     }

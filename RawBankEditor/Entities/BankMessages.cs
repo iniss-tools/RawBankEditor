@@ -210,6 +210,7 @@ public class SoundDataMissing : IRawBankMessage
         {
             Program.MainForm.RegisterNewAction(new FMain.AddSoundAction(Program.MainForm, form.Sound));
             group.Sounds.Add(form.Sound);
+            Program.MainForm.RefreshSoundViews();
         }
     }
 

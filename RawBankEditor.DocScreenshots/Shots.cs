@@ -40,6 +40,14 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
                 SelectSound(main, stations.Sounds.First(s => s.Key == "9900100"));
             }, dispose: false);
 
+            // zoznam slov so zvukom bez súboru - bunka Názov súboru má značku chyby
+            var words = language.Groups.First(g => g.Key == "Slova");
+            Shot("uprava-zvukov/zoznam-zvukov", main, _ =>
+            {
+                SelectGroup(main, words);
+                SelectSound(main, words.Sounds.First(s => s.Key == DemoBank.MissingFileKey));
+            }, dispose: false);
+
             Shot("pridanie-zvukov/pridat-zvuk", () => new FAddSound(stations), form =>
             {
                 Field<TextBox>(form, "tbKey").Text = "9900160";
@@ -50,8 +58,12 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
             // súbor nakopírovaný do priečinka banky - okno sa otvorí samo, ak je zapnuté automatické vkladanie
             Shot("pridanie-zvukov/novopridane-subory", () =>
             {
-                var sound = new FyzSound(stations, "9900150", "9900150", DemoBank.UndefinedFile, "", "", 900);
-                return (Form)Activator.CreateInstance(typeof(FAfterInsertSounds), Any, null, [sound], CultureInfo.InvariantCulture)!;
+                var sound = new FyzSound(stations, "9900150", "9900150", DemoBank.UndefinedFile, "", "Horná Ves", 900);
+                var form = (Form)Activator.CreateInstance(typeof(FAfterInsertSounds), Any, null, [sound], CultureInfo.InvariantCulture)!;
+                // druhý súbor skopírovaný naraz s prvým - pribudne do toho istého okna
+                var sounds = (System.Collections.IList)typeof(FAfterInsertSounds).GetProperty("NewSounds", Any)!.GetValue(form)!;
+                sounds.Add(new FyzSound(stations, "9900160", "9900160", "9900160.WAV", "", "", 1100));
+                return form;
             });
 
             Shot("presun-zvukov/vyber-skupiny", () => new FSoundsMove(language.Groups, stations));

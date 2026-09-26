@@ -292,7 +292,8 @@ public partial class FMain : Form
             switch (result)
             {
                 case DialogResult.Yes:
-                    DoSave(this, EventArgs.Empty);
+                    if (!SaveBank(false))
+                        return false;
                     break;
                 case DialogResult.No:
                     break;
@@ -429,8 +430,7 @@ public partial class FMain : Form
         switch (result)
         {
             case DialogResult.Yes:
-                DoSave(this, EventArgs.Empty);
-                return true;
+                return SaveBank(false);
             case DialogResult.No:
                 DiscardLanguage(lang);
                 return true;
@@ -802,6 +802,18 @@ public partial class FMain : Form
         SetComboLanguage(CurrentLanguage);
     }
 
+    /// <summary>
+    ///     Obnovi tabulku zvukov a pocty zvukov v skupinach po zmene zoznamu zvukov priamo vo FyzGroup.Sounds
+    ///     - BindingList MenuSounds (a dgvSounds.ResetBindings) o takej zmene nevie a riadky by ostali stare.
+    /// </summary>
+    internal void RefreshSoundViews()
+    {
+        _programChange = true;
+        MenuSounds?.ResetBindings();
+        _programChange = false;
+        dgvGroups.Invalidate();
+    }
+
     internal void RegisterNewAction()
     {
         _unUndoableUnsavedChanges = true;
@@ -834,27 +846,39 @@ public partial class FMain : Form
     ///     Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov,
     ///     aby FYZBANK.DAT neodkazoval na chybajuci subor.
     /// </summary>
-    private void SaveBank(bool allLanguages)
+    /// <returns><c>false</c>, ak zapis zlyhal - zmeny ostavaju neulozene.</returns>
+    private bool SaveBank(bool allLanguages)
     {
         var project = GlobData.OpenedProject!;
-        RawBankParser.WriteFyzBankFile(project.AbsPathToBank, project.Languages.ToList());
-
-        foreach (var lang in project.Languages)
+        try
         {
-            // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
-            if (lang.Groups is null)
-                continue;
-            if (!allLanguages && !_newLanguages.Contains(lang) && !(ReferenceEquals(lang, CurrentLanguage) && _languageLoaded))
-                continue;
+            RawBankParser.WriteFyzBankFile(project.AbsPathToBank, project.Languages.ToList());
 
-            Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
-            RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
-            _newLanguages.Remove(lang);
+            foreach (var lang in project.Languages)
+            {
+                // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
+                if (lang.Groups is null)
+                    continue;
+                if (!allLanguages && !_newLanguages.Contains(lang) && !(ReferenceEquals(lang, CurrentLanguage) && _languageLoaded))
+                    continue;
+
+                Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
+                RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
+                _newLanguages.Remove(lang);
+            }
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
+        {
+            // napr. subor len na citanie, bez opravneni na zapis alebo otvoreny inym programom
+            Log.Exception(exception);
+            Utils.ShowError("Uloženie banky zlyhalo, zmeny ostali neuložené.\n\n" + exception.Message);
+            return false;
         }
 
         _unUndoableUnsavedChanges = false;
         changeManager.SetSavedState();
         Saved = true;
+        return true;
     }
 
     private void DoUndo(object sender, EventArgs e)
@@ -1000,23 +1024,16 @@ public partial class FMain : Form
         if (dgvSounds.IsSelectionEmpty() || dgvGroups.IsSelectionEmpty())
             return;
 
-        var sounds = new List<FyzSound>();
-        var first = true;
-        var firstDisplayedRow = -1;
+        // podla zvukov, nie indexov riadkov - zoznam skupiny sa pri odstranovani zmensuje
+        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
+        if (sounds.Count == 0)
+            return;
+
+        var firstDisplayedRow = sounds.Min(s => s.Group.Sounds.IndexOf(s)) - 1;
+        var action = new RemovedSoundsAction(this, sounds);
 
         _deletingRows = true;
-        foreach (DataGridViewRow row in dgvSounds.SelectedRows)
-        {
-            var sound = (FyzSound)row.DataBoundItem!;
-            sounds.Add(sound);
-            if (first)
-            {
-                first = false;
-                firstDisplayedRow = row.Index - 1;
-            }
-            CurrentLanguage!.Groups[dgvGroups.SelectedRows[0].Index].Sounds.RemoveAt(row.Index);
-        }
-        MenuSounds.ResetBindings();
+        action.Apply();
         _deletingRows = false;
 
         if (firstDisplayedRow >= 0 && firstDisplayedRow < dgvSounds.Rows.Count)
@@ -1024,8 +1041,7 @@ public partial class FMain : Form
             EnsureVisibleRow(dgvSounds, firstDisplayedRow);
         }
 
-        RegisterNewAction(new RemovedSoundsAction(this, sounds));
-        MenuGroups.ResetBindings();
+        RegisterNewAction(action);
         CheckProjectState();
     }
 
@@ -1532,10 +1548,9 @@ public partial class FMain : Form
                         if (sfe.Sound != null)
                         {
                             SelectSound(sfe.Sound);
-                            MenuSounds.Remove(sfe.Sound);
-                            //sfe.Sound.Group.Sounds.Remove(sfe.Sound);
-                            RegisterNewAction(new RemovedSoundsAction(this, sfe.Sound));
-                            MenuGroups.ResetBindings();
+                            var action = new RemovedSoundsAction(this, sfe.Sound);
+                            action.Apply();
+                            RegisterNewAction(action);
                         }
                         Utils.DeleteFileToRecycleBin(sfe.FileInfo.FullName);
                         break;
@@ -1940,8 +1955,8 @@ public partial class FMain : Form
         switch (result)
         {
             case DialogResult.Yes:
-                DoSave(this, EventArgs.Empty);
-                e.Cancel = false;
+                // neuspesne ulozenie okno nezatvori - zmeny by sa stratili
+                e.Cancel = !SaveBank(false);
                 break;
             case DialogResult.No:
                 e.Cancel = false;
@@ -1977,6 +1992,8 @@ public partial class FMain : Form
                 dgvGroups.ClearSelection();
                 dgvGroups.Rows[sel - 1].Selected = true;
                 _reorderingGroups = false;
+                // poradie skupin sa zapisuje do FYZZVUK.DAT - zmena bez moznosti vratenia spat
+                RegisterNewAction();
             }
         }
         else if (e.KeyCode == Keys.PageDown)
@@ -1992,10 +2009,13 @@ public partial class FMain : Form
                 dgvGroups.ClearSelection();
                 dgvGroups.Rows[sel + 1].Selected = true;
                 _reorderingGroups = false;
+                // poradie skupin sa zapisuje do FYZZVUK.DAT - zmena bez moznosti vratenia spat
+                RegisterNewAction();
             }
         }
 
-        e.Handled = true;
+        // ostatne klavesy (sipky, Home, End) patria tabulke - pohyb medzi skupinami
+        e.Handled = e.KeyCode is Keys.PageUp or Keys.PageDown;
     }
 
     private void DgvGroups_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
@@ -2021,20 +2041,39 @@ public partial class FMain : Form
             var alreadyDefinedSound = sfe.Parent.Group.Sounds.FirstOrDefault(s => s.Key == nameWoExt && s.File == null);
             if (alreadyDefinedSound is not null)
             {
+                // zvuk bez suboru dostal svoj subor - prepojit oboma smermi, inak zoznam chyb hlasi SoundDataMissing
                 alreadyDefinedSound.File = sfe;
+                sfe.Sound = alreadyDefinedSound;
+                // nahravka lezi priamo v priecinku skupiny a moze mat inu priponu, nez sa cakalo (.WAV/.EWA)
+                alreadyDefinedSound.FileName = sfe.Name;
+                alreadyDefinedSound.AdditionalRelativePath = "";
+                sfe.Duration = await SoundUtils.GetSoundDuration(sfe);
+                if (GlobData.Config.AutoRecalculateSoundDuration && sfe.Duration >= 0)
+                    alreadyDefinedSound.Duration = sfe.Duration;
             }
             else
             {
-                var sound = new FyzSound(sfe.Parent.Group, nameWoExt, nameWoExt, sfe.Name, "", "", await SoundUtils.GetSoundDuration(sfe));
+                sfe.Duration = await SoundUtils.GetSoundDuration(sfe);
+                var sound = new FyzSound(sfe.Parent.Group, nameWoExt, nameWoExt, sfe.Name, "", "", Math.Max(sfe.Duration, 0))
+                {
+                    File = sfe
+                };
+                sfe.Sound = sound;
                 if (GlobData.Config.ShowAfterInsertSoundDialog)
                 {
                     FAfterInsertSounds.CreateOrUseExistingForm(sound);
+                }
+                else if (SoundRules.ValidateNew([sound]).Count > 0)
+                {
+                    // kluc alebo nazov uz v skupine je (napr. 9900100.WAV k zvuku 9900100.EWA) - bez okna sa neda opravit,
+                    // subor ostane bez udajov o zvuku a zoznam chyb ho ukaze ako nedefinovany
+                    sfe.Sound = null!;
                 }
                 else
                 {
                     Program.MainForm.RegisterNewAction(new AddSoundAction(Program.MainForm, sound));
                     sound.Group.Sounds.Add(sound);
-                    Program.MainForm.dgvSounds.ResetBindings();
+                    RefreshSoundViews();
                 }
             }
         }
@@ -2144,14 +2183,21 @@ public partial class FMain : Form
 
         if (dgvSounds.SelectedRows[0].DataBoundItem is FyzSound snd)
         {
+            // povodny subor ostane bez udajov o zvuku
+            if (snd.File?.Sound == snd)
+                snd.File.Sound = null!;
+
             snd.File = sfe;
             snd.FileName = sfe.Name;
             sfe.Sound = snd;
-            if (CurrentGroup!.Directory != sfe.Parent)
-            {
-                snd.AdditionalRelativePath = 
-                    Path.GetDirectoryName(Utils.GetRelativePath(sfe.FileInfo.FullName, CurrentLanguage!.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank))) + Path.DirectorySeparatorChar;
-            }
+
+            // pridavna cesta je v INISS relativna k priecinku skupiny (napr. ..\Poz1\), subor priamo v nom ju nema
+            var groupDir = snd.Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
+            var relative = Path.GetRelativePath(groupDir, sfe.FileInfo.DirectoryName!);
+            snd.AdditionalRelativePath = relative == "." ? "" : relative + Path.DirectorySeparatorChar;
+
+            // prepisovaci mod nema akciu spat - zmena sa aspon oznaci ako neulozena
+            RegisterNewAction();
         }
 
         dgvSounds.ResetBindings();
@@ -2201,14 +2247,68 @@ public partial class FMain : Form
         _cellOldValue = val == null ? "" : val.ToString() ?? "";
     }
 
-    private void dgvSounds_RowValidated(object sender, DataGridViewCellEventArgs e)
+    /// <summary>
+    ///     Prepoji zvuk so suborom podla jeho nazvu suboru a pridavnej cesty (po uprave v tabulke, spat a znovu)
+    ///     a zisti dlzku nahravky. Povodny subor ostane bez udajov o zvuku.
+    /// </summary>
+    internal async void RelinkSoundFile(FyzSound sound)
+    {
+        if (sound.File?.Sound == sound)
+            sound.File.Sound = null!;
+        sound.File = null!;
+
+        var sfe = SoundUtils.FindSoundFile(sound, GlobData.OpenedProject!.AbsPathToBank);
+        if (sfe is null)
+            return;
+
+        sound.File = sfe;
+        sfe.Sound = sound;
+        if (sfe.Duration < 0)
+            sfe.Duration = await SoundUtils.GetSoundDuration(sfe);
+        if (GlobData.Config.AutoRecalculateSoundDuration && sfe.Duration >= 0)
+            sound.Duration = sfe.Duration;
+        CheckProjectState();
+    }
+
+    /// <summary>
+    ///     Kluc a nazov zvuku su povinne a v skupine jedinecne - rovnako ako v okne Pridat zvuk.
+    /// </summary>
+    private void DgvSounds_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+    {
+        if (!dgvSounds.IsCurrentCellInEditMode || e.RowIndex < 0 || dgvSounds.Rows[e.RowIndex].DataBoundItem is not FyzSound sound)
+            return;
+
+        var column = dgvSounds.Columns[e.ColumnIndex].Name;
+        if (column is not (nameof(cSoundKey) or nameof(cSoundName)))
+            return;
+
+        var value = e.FormattedValue as string ?? "";
+        var isKey = column == nameof(cSoundKey);
+        string? error = null;
+        if (string.IsNullOrWhiteSpace(value))
+            error = isKey ? "Kľúč zvuku je povinný." : "Názov zvuku je povinný.";
+        else if (sound.Group.Sounds.Any(s => s != sound && (isKey ? s.Key : s.Name) == value))
+            error = isKey ? $"Kľúč {value} už v skupine {sound.Group.Name} existuje." : $"Názov {value} už v skupine {sound.Group.Name} existuje.";
+
+        if (error is null)
+            return;
+
+        Utils.ShowError(error + "\n\nOpravte hodnotu alebo úpravu zrušte klávesom Esc.");
+        e.Cancel = true;
+    }
+
+    /// <summary>
+    ///     Kazda upravena bunka je samostatny krok Spat - so stlpcom a hodnotou prave tejto bunky.
+    /// </summary>
+    private void dgvSounds_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
         if (!_cellUserEditing)
             return;
 
         _cellUserEditing = false;
         var newval = dgvSounds.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-        if (newval is not string s || s == _cellOldValue)
+        var s = newval as string ?? "";
+        if (s == _cellOldValue)
             return;
 
         var action = new EditSoundAction(this, (FyzSound)dgvSounds.Rows[e.RowIndex].DataBoundItem!);
@@ -2307,33 +2407,16 @@ public partial class FMain : Form
 
         if (userEditing)
         {
-            if(sound.File is not null)
-                sound.File.Name = newFileName;
-            var newPath = Utils.CombinePath(sound.Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank), newFileName);
-            if (!File.Exists(newPath))
-            {
-                if (sound.File is not null)
-                    sound.File.Sound = null!;
-                sound.File = null!;
-                dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = "Súbor zvuku v priečinku neexistuje";
-            }
-            else
-            {
-                var fe = RawBankExplorer.GetElement(newPath, CurrentLanguage!.Directory, RawBankExplorer.SearchOperation.Create);
-                if (fe is SoundFileElement sfe)
-                {
-                    sound.File = sfe;
+            // zmena nazvu suboru alebo pridavnej cesty zvuk len prepoji na iny subor - subor na disku sa nepremenuva
+            RelinkSoundFile(sound);
+            if (sound.File is not null)
+                return;
 
-                    if (sound.File.Duration < 0 )
-                        await SoundUtils.GetSoundDuration(sound.File);
-                    if (GlobData.Config.AutoRecalculateSoundDuration) 
-                        sound.Duration = sound.File.Duration;
-                }
-                else
-                {
-                    dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = "Neplatný typ súboru";
-                }
-            }
+            var ext = Path.GetExtension(newFileName);
+            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText =
+                ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)
+                    ? "Súbor zvuku v priečinku neexistuje"
+                    : "Neplatný typ súboru";
             return;
         }
 
@@ -2345,6 +2428,7 @@ public partial class FMain : Form
 
     internal async void FillExplorerList(DirectoryElement dir)
     {
+        var generation = ++_explorerFillGeneration;
         ExplorerContent.Clear();
         _explorerBack = null;
 
@@ -2366,27 +2450,36 @@ public partial class FMain : Form
                 ExplorerContent.Add(_explorerBack);
             }
 
-            foreach (var element in dir.Children)
-            {
+            // kopia - pocas cakania na dlzky moze sledovanie suborov do priecinka pridat alebo z neho odobrat prvok
+            var children = dir.Children.ToList();
+            foreach (var element in children)
                 ExplorerContent.Add(element);
-
-                if (element is SoundFileElement { Duration: -1 } sound) 
-                    sound.Duration = await SoundUtils.GetSoundDuration(sound);
-            }
             dgvExplorer.Refresh();
         }
 
         if (SelectElement != null)
         {
             var index = ExplorerContent.IndexOf(SelectElement);
-            if (index == -1) 
-                return;
-
-            dgvExplorer.ClearSelection();
-            dgvExplorer.Rows[index].Selected = true;
+            if (index != -1)
+            {
+                dgvExplorer.ClearSelection();
+                dgvExplorer.Rows[index].Selected = true;
+            }
             SelectElement = null;
         }
+
+        // dlzky nahravok az po naplneni zoznamu; ked sa medzitym zobrazi iny priecinok, dalsie sa uz nepocitaju
+        foreach (var sound in dir.Children.OfType<SoundFileElement>().Where(s => s.Duration == -1).ToList())
+        {
+            sound.Duration = await SoundUtils.GetSoundDuration(sound);
+            if (generation != _explorerFillGeneration)
+                return;
+            dgvExplorer.InvalidateColumn(cFileDuration.Index);
+        }
     }
+
+    // pocitadlo volani FillExplorerList - starsie volanie po await zisti, ze prieskumnik uz ukazuje nieco ine
+    private int _explorerFillGeneration;
 
     private void tsbErrors_CheckedChanged(object sender, EventArgs e) => ShowHideMessages();
 

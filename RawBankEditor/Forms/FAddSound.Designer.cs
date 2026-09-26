@@ -150,7 +150,7 @@ namespace RawBankEditor.Forms
             this.tbRelativePath.DisabledForeColor = System.Drawing.SystemColors.GrayText;
             this.tbRelativePath.HighlightColor = System.Drawing.SystemColors.Highlight;
             this.tbRelativePath.HintForeColor = System.Drawing.SystemColors.GrayText;
-            this.tbRelativePath.HintText = "(Nepovinné) Namiesto priečinka skupiny, napr. ..\\CISLO\\";
+            this.tbRelativePath.HintText = "(Nepovinné) Vzhľadom na priečinok skupiny, napr. ..\\CISLO1\\";
             this.tbRelativePath.Location = new System.Drawing.Point(151, 55);
             this.tbRelativePath.Margin = new System.Windows.Forms.Padding(2);
             this.tbRelativePath.Name = "tbRelativePath";

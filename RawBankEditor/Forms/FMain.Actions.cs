@@ -147,7 +147,7 @@ partial class FMain
             // subor ostane bez udajov o zvuku (SoundDataMissing)
             if (Sound.File?.Sound == Sound)
                 Sound.File.Sound = null!;
-            Form.dgvSounds.ResetBindings();
+            Form.RefreshSoundViews();
         }
 
         public override void Redo()
@@ -157,7 +157,7 @@ partial class FMain
             Sound.Group.Sounds.Add(Sound);
             if (Sound.File is not null)
                 Sound.File.Sound = Sound;
-            Form.dgvSounds.ResetBindings();
+            Form.RefreshSoundViews();
             Form.dgvSounds.Rows[Sound.Group.Sounds.Count - 1].Selected = true;
         }
     }
@@ -174,15 +174,24 @@ partial class FMain
         public override void Undo()
         {
             foreach (var sound in Sounds)
+            {
                 sound.Group.Sounds.Remove(sound);
-            Form.dgvSounds.ResetBindings();
+                // subor ostane bez udajov o zvuku (SoundDataMissing)
+                if (sound.File?.Sound == sound)
+                    sound.File.Sound = null!;
+            }
+            Form.RefreshSoundViews();
         }
 
         public override void Redo()
         {
             foreach (var sound in Sounds)
+            {
                 sound.Group.Sounds.Add(sound);
-            Form.dgvSounds.ResetBindings();
+                if (sound.File is not null)
+                    sound.File.Sound = sound;
+            }
+            Form.RefreshSoundViews();
         }
     }
 
@@ -232,6 +241,9 @@ partial class FMain
                     throw new ArgumentOutOfRangeException();
             }
 
+            // iny nazov suboru alebo pridavna cesta = iny subor na disku
+            if (Type is PropertyType.FileName or PropertyType.RelativePath)
+                Form.RelinkSoundFile(Sound);
             Form.MenuSounds.ResetBindings();
         }
 
@@ -260,6 +272,9 @@ partial class FMain
                     throw new ArgumentOutOfRangeException();
             }
 
+            // iny nazov suboru alebo pridavna cesta = iny subor na disku
+            if (Type is PropertyType.FileName or PropertyType.RelativePath)
+                Form.RelinkSoundFile(Sound);
             Form.MenuSounds.ResetBindings();
         }
     }
@@ -353,52 +368,68 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri odstraneni viacerych (alebo 1) zvukov
+    ///     Akcia pri odstraneni viacerych (alebo 1) zvukov. Vytvara sa pred odstranenim - pamata si poradie zvukov
+    ///     v skupine, aby ich Spat vratilo na povodne miesta.
     /// </summary>
     public class RemovedSoundsAction : Action
     {
         /// <summary>Initializes a new instance of the <see cref="RemovedSoundsAction" /> class.</summary>
         public RemovedSoundsAction(FMain form, IEnumerable<FyzSound> sounds) : base(form)
         {
-            Sounds = sounds;
+            Removed = sounds
+                .Select(s => (Sound: s, Index: s.Group.Sounds.IndexOf(s)))
+                .OrderBy(x => x.Index)
+                .ToList();
         }
 
         /// <summary>Initializes a new instance of the <see cref="RemovedSoundsAction" /> class.</summary>
-        public RemovedSoundsAction(FMain form, FyzSound sound) : base(form)
+        public RemovedSoundsAction(FMain form, FyzSound sound) : this(form, new[] { sound })
         {
-            Sounds = new []{ sound };
         }
 
         /// <inheritdoc />
         public override string CommandName => "Odstránenie zvukov";
 
-        private IEnumerable<FyzSound> Sounds { get;}
+        private List<(FyzSound Sound, int Index)> Removed { get; }
+
+        /// <summary>
+        ///     Odstrani zvuky zo skupiny; ich subory ostanu na disku bez udajov o zvuku.
+        /// </summary>
+        public void Apply()
+        {
+            foreach (var (sound, _) in Removed)
+            {
+                sound.Group.Sounds.Remove(sound);
+                if (sound.File?.Sound == sound)
+                    sound.File.Sound = null!;
+            }
+
+            Form.RefreshSoundViews();
+        }
 
         public override void Undo()
         {
-            var grp = Sounds.First().Group;
+            var grp = Removed[0].Sound.Group;
             Form.SelectGroup(grp);
 
-            foreach (var sound in Sounds)
+            // od najmensieho indexu - kazdy zvuk sa vrati na miesto, ktore mal pred odstranenim
+            foreach (var (sound, index) in Removed)
             {
-                Form.MenuSounds.Add(sound);
-                Form.SelectSound(sound);
+                var sounds = sound.Group.Sounds;
+                sounds.Insert(index < 0 ? sounds.Count : Math.Min(index, sounds.Count), sound);
+                if (sound.File is not null)
+                    sound.File.Sound = sound;
             }
 
-            Form.MenuGroups.ResetBindings();
-            Form.dgvSounds.ResetBindings();
+            Form.RefreshSoundViews();
+            foreach (var (sound, _) in Removed)
+                Form.SelectSound(sound);
         }
 
         public override void Redo()
         {
-            var grp = Sounds.First().Group;
-            Form.SelectGroup(grp);
-
-            foreach (var sound in Sounds)
-                Form.MenuSounds.Remove(sound);
-
-            Form.MenuGroups.ResetBindings();
-            Form.dgvSounds.ResetBindings();
+            Form.SelectGroup(Removed[0].Sound.Group);
+            Apply();
         }
     }
 

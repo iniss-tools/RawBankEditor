@@ -1248,7 +1248,8 @@ namespace RawBankEditor.Forms
             this.dgvSounds.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvSounds_CellBeginEdit);
             this.dgvSounds.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DgvSounds_CellMouseDown);
             this.dgvSounds.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgvSounds_DataError);
-            this.dgvSounds.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSounds_RowValidated);
+            this.dgvSounds.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSounds_CellEndEdit);
+            this.dgvSounds.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvSounds_CellValidating);
             this.dgvSounds.RowValidating += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgvSounds_RowValidating);
             this.dgvSounds.SelectionChanged += new System.EventHandler(this.dgvSounds_SelectionChanged);
             this.dgvSounds.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DgvSounds_MouseDown);

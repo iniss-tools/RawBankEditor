@@ -129,6 +129,7 @@
             this.cSoundFileName.DataPropertyName = "FileName";
             this.cSoundFileName.HeaderText = "Názov súboru";
             this.cSoundFileName.Name = "cSoundFileName";
+            this.cSoundFileName.ReadOnly = true;
             // 
             // cSoundDuration
             // 
