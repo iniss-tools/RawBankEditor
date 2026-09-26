@@ -28,5 +28,7 @@ public partial class FSoundsMove : Form
         }
 
         NewGroup = GroupsWithoutCurrent[cbGroups.SelectedIndex];
+        // tlacidlo nema DialogResult v navrhu - okno zavrie az toto
+        DialogResult = DialogResult.OK;
     }
 }

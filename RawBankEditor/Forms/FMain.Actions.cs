@@ -317,54 +317,22 @@ partial class FMain
         /// <inheritdoc />
         public MoveSoundsAction(FMain form, IEnumerable<FyzSound> sounds, FyzGroup oldLocation, FyzGroup newLocation) : base(form)
         {
-            Sounds = sounds;
+            Sounds = sounds.ToList();
             OldLocation = oldLocation;
             NewLocation = newLocation;
         }
 
         /// <inheritdoc />
         public override string CommandName => "Presun zvukov";
-        private IEnumerable<FyzSound> Sounds { get; }
+        private List<FyzSound> Sounds { get; }
         private FyzGroup OldLocation { get; }
         private FyzGroup NewLocation { get; }
 
         /// <inheritdoc />
-        public override void Undo()
-        {
-            var pathTobank = GlobData.OpenedProject!.AbsPathToBank;
-            foreach (var sound in Sounds)
-            {
-                NewLocation.Sounds.Remove(sound);
-                sound.Group = OldLocation;
-                OldLocation.Sounds.Add(sound);
-                var oldPath = NewLocation.GetAbsPath(pathTobank);
-                var newPath = OldLocation.GetAbsPath(pathTobank);
-
-                if (File.Exists(oldPath))
-                    File.Move(oldPath, newPath);
-            }
-            Form.dgvSounds.ResetBindings();
-            Form.SelectGroup(OldLocation);
-        }
+        public override void Undo() => Form.MoveSoundsToGroup(Sounds, OldLocation);
 
         /// <inheritdoc />
-        public override void Redo()
-        {
-            var pathTobank = GlobData.OpenedProject!.AbsPathToBank;
-            foreach (var sound in Sounds)
-            {
-                OldLocation.Sounds.Remove(sound);
-                sound.Group = NewLocation;
-                NewLocation.Sounds.Add(sound);
-                var oldPath = OldLocation.GetAbsPath(pathTobank);
-                var newPath = NewLocation.GetAbsPath(pathTobank);
-
-                if (File.Exists(oldPath))
-                    File.Move(oldPath, newPath);
-            }
-            Form.dgvSounds.ResetBindings();
-            Form.SelectGroup(NewLocation);
-        }
+        public override void Redo() => Form.MoveSoundsToGroup(Sounds, NewLocation);
     }
 
     /// <summary>
@@ -393,6 +361,11 @@ partial class FMain
         private List<(FyzSound Sound, int Index)> Removed { get; }
 
         /// <summary>
+        ///     Subor zvuku, ktory sa s nim presunul do kosa (odstranenie v prieskumniku) - Spat ho obnovi.
+        /// </summary>
+        public SoundFileElement? RecycledFile { get; init; }
+
+        /// <summary>
         ///     Odstrani zvuky zo skupiny; ich subory ostanu na disku bez udajov o zvuku.
         /// </summary>
         public void Apply()
@@ -412,6 +385,11 @@ partial class FMain
             var grp = Removed[0].Sound.Group;
             Form.SelectGroup(grp);
 
+            // subor sa nepodarilo obnovit - zvuk sa vrati bez neho
+            if (RecycledFile is not null && !Form.RestoreElement(RecycledFile))
+                foreach (var (sound, _) in Removed.Where(r => ReferenceEquals(r.Sound.File, RecycledFile)))
+                    sound.File = null!;
+
             // od najmensieho indexu - kazdy zvuk sa vrati na miesto, ktore mal pred odstranenim
             foreach (var (sound, index) in Removed)
             {
@@ -429,19 +407,53 @@ partial class FMain
         public override void Redo()
         {
             Form.SelectGroup(Removed[0].Sound.Group);
+            if (RecycledFile is not null && File.Exists(RecycledFile.FileInfo.FullName) && !Form.RecycleElement(RecycledFile))
+                return;
             Apply();
+            Form.FillExplorerList(Form.CurrentDirectory);
         }
+    }
+
+    /// <summary>
+    ///     Premenovanie suboru alebo priecinka v prieskumniku.
+    /// </summary>
+    public class RenameFileAction : Action
+    {
+        public RenameFileAction(FMain form, string oldPath, string newPath) : base(form)
+        {
+            OldPath = oldPath;
+            NewPath = newPath;
+        }
+
+        private string OldPath { get; }
+        private string NewPath { get; }
+
+        /// <inheritdoc />
+        public override string CommandName => "Premenovanie súboru";
+
+        /// <inheritdoc />
+        public override void Undo() => Form.RenameOnDisk(NewPath, OldPath);
+
+        /// <inheritdoc />
+        public override void Redo() => Form.RenameOnDisk(OldPath, NewPath);
     }
 
     public class AddGroupAction : Action
     {
-        /// <inheritdoc />
-        public AddGroupAction(FMain form, FyzGroup grp) : base(form)
+        /// <param name="form">Hlavne okno.</param>
+        /// <param name="grp">Pridana skupina.</param>
+        /// <param name="index">Pozicia skupiny v zozname skupin jazyka.</param>
+        /// <param name="createdDirectory">Priecinok skupiny, ktory sa pri pridani vytvoril; <see langword="null" />, ak uz existoval.</param>
+        public AddGroupAction(FMain form, FyzGroup grp, int index, string? createdDirectory) : base(form)
         {
             Group = grp;
+            Index = index;
+            CreatedDirectory = createdDirectory;
         }
 
         private FyzGroup Group { get; }
+        private int Index { get; }
+        private string? CreatedDirectory { get; }
 
         /// <inheritdoc />
         public override string CommandName => "Pridanie skupiny zvukov";
@@ -450,27 +462,34 @@ partial class FMain
         public override void Undo()
         {
             Form.SelectLanguage(Group.Language);
+            Form.TakeOutGroup(Group);
 
-            Group.Language.Groups.Remove(Group);
-            Form.dgvGroups.ResetBindings();
+            // vytvoreny priecinok sa zmaze, len ak v nom nic nie je
+            if (CreatedDirectory == null || !Directory.Exists(CreatedDirectory) || Directory.EnumerateFileSystemEntries(CreatedDirectory).Any())
+                return;
+
+            Form.WithoutFileWatcher(() => Directory.Delete(CreatedDirectory));
+            Group.Directory?.Parent?.Children.Remove(Group.Directory);
+            Group.Directory = null!;
+            Form.FillExplorerList(Form.CurrentDirectory);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
             Form.SelectLanguage(Group.Language);
-
-            Group.Language.Groups.Add(Group);
-            Form.dgvGroups.ResetBindings();
+            if (CreatedDirectory != null)
+                Form.WithoutFileWatcher(() => Directory.CreateDirectory(CreatedDirectory));
+            Form.InsertGroup(Group, Index);
         }
     }
 
     public class EditGroupAction : Action
     {
         /// <inheritdoc />
-        public EditGroupAction(FMain form, FyzGroup group, 
-            (string oldkey, string newKey) keys, 
-            (string oldName, string newName) names, 
+        public EditGroupAction(FMain form, FyzGroup group,
+            (string oldkey, string newKey) keys,
+            (string oldName, string newName) names,
             (string oldRPath, string newRPath) relativePaths) : base(form)
         {
             Group = group;
@@ -493,63 +512,89 @@ partial class FMain
         /// <inheritdoc />
         public override void Undo()
         {
-            Group.Key = Keys.oldKey;
-            Group.Name = Names.oldName;
-            Group.RelativePath = RelativePaths.oldRPath;
+            Form.SelectLanguage(Group.Language);
+            Form.ChangeGroup(Group, Keys.oldKey, Names.oldName, RelativePaths.oldRPath);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
-            Group.Key = Keys.newKey;
-            Group.Name = Names.newName;
-            Group.RelativePath = RelativePaths.newRPath;
+            Form.SelectLanguage(Group.Language);
+            Form.ChangeGroup(Group, Keys.newKey, Names.newName, RelativePaths.newRPath);
         }
     }
 
     public class RemovedGroupsAction : Action
     {
-        /// <inheritdoc />
-        public RemovedGroupsAction(FMain form, IEnumerable<FyzGroup> grps) : base(form)
+        /// <param name="form">Hlavne okno.</param>
+        /// <param name="grp">Odstranovana skupina (este v zozname skupin - akcia si pamata jej poziciu).</param>
+        /// <param name="withDirectory">Ci sa priecinok skupiny presuva do kosa.</param>
+        public RemovedGroupsAction(FMain form, FyzGroup grp, bool withDirectory) : base(form)
         {
-            Groups = grps;
+            Group = grp;
+            Index = grp.Language.Groups.IndexOf(grp);
+            WithDirectory = withDirectory;
+            GroupDirectory = GroupDirectoryPath(grp);
         }
 
+        private FyzGroup Group { get; }
+        private int Index { get; }
+        private bool WithDirectory { get; }
+        private string GroupDirectory { get; }
+
         /// <inheritdoc />
-        public RemovedGroupsAction(FMain form, FyzGroup grp) : base(form)
+        public override string CommandName => "Odstránenie skupiny zvukov";
+
+        /// <summary>
+        ///     Odstrani skupinu zo zoznamu, pripadne jej priecinok presunie do kosa.
+        /// </summary>
+        /// <returns><see langword="false" />, ak sa priecinok nepodarilo odstranit - skupina ostala.</returns>
+        public bool Apply()
         {
-            Groups = new []{ grp };
+            if (WithDirectory)
+            {
+                try
+                {
+                    Form.WithoutFileWatcher(() => Utils.DeleteDirectoryToRecycleBin(GroupDirectory));
+                }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
+                {
+                    if (ex is not OperationCanceledException)
+                        Utils.ShowError($"Priečinok skupiny {GroupDirectory} sa nepodarilo presunúť do koša.\n\n{ex.Message}");
+                    return false;
+                }
+
+                // prvok priecinka sa zo stromu vyberie, ale ostane v skupine - Spat ho vrati aj s prepojeniami na zvuky
+                Group.Directory?.Parent?.Children.Remove(Group.Directory);
+            }
+
+            Form.TakeOutGroup(Group);
+            return true;
         }
-
-        private IEnumerable<FyzGroup> Groups { get; }
-
-        /// <inheritdoc />
-        public override string CommandName => "Odstránenie skupín zvukov";
 
         /// <inheritdoc />
         public override void Undo()
         {
-            Form.SelectLanguage(Groups.First().Language);
+            Form.SelectLanguage(Group.Language);
 
-            foreach (var fyzGroup in Groups)
+            if (WithDirectory && !Directory.Exists(GroupDirectory))
             {
-                fyzGroup.Language.Groups.Add(fyzGroup);
+                var restored = false;
+                Form.WithoutFileWatcher(() => restored = Utils.TryRecoverFileOrDirFromBin(GroupDirectory));
+                if (!restored)
+                    Utils.ShowError("Nepodarilo sa obnoviť priečinok skupiny z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+                else if (Group.Directory is { } directory && Group.Language.Directory is { } languageDir && !languageDir.Children.Contains(directory))
+                    languageDir.Children.Add(directory);
             }
 
-            Form.dgvGroups.ResetBindings();
+            Form.InsertGroup(Group, Index);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
-            Form.SelectLanguage(Groups.First().Language);
-
-            foreach (var fyzGroup in Groups)
-            {
-                fyzGroup.Language.Groups.Remove(fyzGroup);
-            }
-
-            Form.dgvGroups.ResetBindings();
+            Form.SelectLanguage(Group.Language);
+            Apply();
         }
     }
 
@@ -625,19 +670,13 @@ partial class FMain
         /// <inheritdoc />
         public override void Undo()
         {
-            Language.Key = Keys.oldKey;
-            Language.Name = Names.oldName;
-            Language.RelativePath = RelativePaths.oldRPath;
-            Form.RefreshLanguage(Language);
+            Form.ChangeLanguage(Language, Keys.oldKey, Names.oldName, RelativePaths.oldRPath);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
-            Language.Key = Keys.newKey;
-            Language.Name = Names.newName;
-            Language.RelativePath = RelativePaths.newRPath;
-            Form.RefreshLanguage(Language);
+            Form.ChangeLanguage(Language, Keys.newKey, Names.newName, RelativePaths.newRPath);
         }
     }
 

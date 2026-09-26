@@ -69,20 +69,21 @@ public class LanguageRulesTests
     [DataRow("SK", "Slovenčina", "", "vyplnené")]
     [DataRow("", "Slovenčina", "SK\\", "vyplnené")]
     [DataRow("SK", "Slovenčina", "SK", "končiť")]
-    [DataRow("SK", "Slovenčina", "\\", "priečinok")]
-    [DataRow("SK", "Slovenčina", "C:\\SK\\", "priečinok")]
-    [DataRow("SK", "Slovenčina", "..\\SK\\", "priečinok")]
-    [DataRow("SK", "Slovenčina", "S*K\\", "priečinok")]
-    [DataRow("SK", "Slovenčina", "SK\\\\", "priečinok")]
+    [DataRow("SK", "Slovenčina", "\\", "jedného priečinka")]
+    [DataRow("SK", "Slovenčina", "C:\\SK\\", "jedného priečinka")]
+    [DataRow("SK", "Slovenčina", "..\\SK\\", "jedného priečinka")]
+    [DataRow("SK", "Slovenčina", "S*K\\", "jedného priečinka")]
+    [DataRow("SK", "Slovenčina", "SK\\\\", "jedného priečinka")]
     public void Validate_OdmietneNeplatneHodnoty(string key, string name, string path, string expected)
     {
         Assert.Contains(expected, LanguageRules.Validate([], null, key, name, path)!);
     }
 
     [TestMethod]
-    public void Validate_PrijmeVnorenuCestu()
+    public void Validate_OdmietneVnorenuCestu()
     {
-        Assert.IsNull(LanguageRules.Validate([], null, "SK", "Slovenčina", "JAZYKY\\SK\\"));
+        // banka paruje jazyk s priecinkom v RAWBANK podla nazvu - vnoreny priecinok by sa nenasiel
+        Assert.Contains("jedného priečinka", LanguageRules.Validate([], null, "SK", "Slovenčina", "JAZYKY\\SK\\")!);
     }
 
     [TestMethod]

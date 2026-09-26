@@ -32,7 +32,7 @@ public static class LanguageRules
             return "Relatívna cesta musí končiť '\\'.";
 
         if (!IsValidRelativePath(relativePath))
-            return "Relatívna cesta musí byť priečinok vnútri priečinka RAWBANK, napr. SK\\.";
+            return "Relatívna cesta musí byť názov jedného priečinka v priečinku RAWBANK, napr. SK\\.";
 
         foreach (var lang in languages)
         {
@@ -52,15 +52,19 @@ public static class LanguageRules
         return null;
     }
 
+    // prieskumnik aj nacitanie banky paruju jazyk s priecinkom v RAWBANK podla nazvu - vnorene cesty by sa nenasli
     private static bool IsValidRelativePath(string relativePath)
     {
-        if (Path.IsPathRooted(relativePath))
-            return false;
-
-        var parts = relativePath[..^1].Split('\\');
-        var invalid = Path.GetInvalidFileNameChars();
-        return parts.All(p => p.Trim().Length != 0 && p is not ("." or "..") && p.IndexOfAny(invalid) < 0);
+        var folder = relativePath[..^1];
+        return folder.Trim().Length != 0
+               && folder is not ("." or "..")
+               && folder.IndexOfAny(Path.GetInvalidFileNameChars()) < 0;
     }
+
+    /// <summary>
+    ///     Nazov priecinka jazyka v RAWBANK (relativna cesta bez koncovej lomky).
+    /// </summary>
+    public static string FolderName(string relativePath) => relativePath.TrimEnd('\\');
 
     /// <summary>
     ///     Cesta k suboru so zvukmi jazyka (FYZZVUK.DAT).

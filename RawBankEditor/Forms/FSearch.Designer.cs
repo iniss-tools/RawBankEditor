@@ -77,7 +77,6 @@ namespace RawBankEditor.Forms
             this.tbText.Name = "tbText";
             this.tbText.Size = new System.Drawing.Size(339, 20);
             this.tbText.TabIndex = 1;
-            this.tbText.TextChanged += new System.EventHandler(this.TbText_TextChanged);
             // 
             // exGroupBox1
             // 

@@ -103,13 +103,20 @@ public class GroupDirMissing : IRawBankMessage
     {
         try
         {
-            Directory.CreateDirectory(Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
-            Group.Directory = new DirectoryElement(Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+            var path = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
+            Program.MainForm.WithoutFileWatcher(() => Directory.CreateDirectory(path));
         }
         catch (Exception e)
         {
             Utils.ShowError(e.Message);
+            return;
         }
+
+        // priecinok sa prida do prieskumnika a zvuky skupiny sa prepoja s nahravkami, ktore v nom uz su
+        Program.MainForm.LinkGroupDirectory(Group);
+        foreach (var sound in Group.Sounds)
+            Program.MainForm.RelinkSoundFile(sound);
+        Program.MainForm.FillExplorerList(Group.Directory);
     }
 
     /// <inheritdoc />
@@ -315,8 +322,10 @@ public class EmptyGroup : IRawBankMessage
     /// <inheritdoc />
     public void Resolve()
     {
-        Program.MainForm.RegisterNewAction();
-        Utils.DeleteDirectoryToRecycleBin(Group.Directory.DirInfo.FullName);
+        // priecinok ide do kosa len prazdny - nahravky bez udajov o zvuku by sa inak stratili nepozorovane
+        var directory = FMain.GroupDirectoryPath(Group);
+        var emptyDirectory = Directory.Exists(directory) && !Directory.EnumerateFileSystemEntries(directory).Any();
+        Program.MainForm.RemoveGroup(Group, emptyDirectory);
     }
 
     /// <inheritdoc />

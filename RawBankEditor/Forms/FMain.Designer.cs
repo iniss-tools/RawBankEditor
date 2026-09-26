@@ -1044,7 +1044,8 @@ namespace RawBankEditor.Forms
             this.cmiConvertToEwaFile.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.cmiConvertToEwaFile.Name = "cmiConvertToEwaFile";
             this.cmiConvertToEwaFile.Size = new System.Drawing.Size(228, 22);
-            this.cmiConvertToEwaFile.Text = "Konvertovať  súbory na .EWA";
+            this.cmiConvertToEwaFile.Text = "Konvertovať súbory na .EWA";
+            this.cmiConvertToEwaFile.Click += new System.EventHandler(this.DoConvertFilesToEwa);
             // 
             // cmiConvertToWavFile
             // 
@@ -1052,7 +1053,8 @@ namespace RawBankEditor.Forms
             this.cmiConvertToWavFile.Image = global::RawBankEditor.Properties.Resources.wav;
             this.cmiConvertToWavFile.Name = "cmiConvertToWavFile";
             this.cmiConvertToWavFile.Size = new System.Drawing.Size(228, 22);
-            this.cmiConvertToWavFile.Text = "Konvertovať  súbory na .WAV";
+            this.cmiConvertToWavFile.Text = "Konvertovať súbory na .WAV";
+            this.cmiConvertToWavFile.Click += new System.EventHandler(this.DoConvertFilesToWav);
             // 
             // fileSystemElementBindingSource
             // 

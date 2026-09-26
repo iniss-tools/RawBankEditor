@@ -183,7 +183,7 @@ namespace RawBankEditor.Forms
             this.cboxNameAndPathAutoChange.Name = "cboxNameAndPathAutoChange";
             this.cboxNameAndPathAutoChange.Size = new System.Drawing.Size(245, 17);
             this.cboxNameAndPathAutoChange.TabIndex = 6;
-            this.cboxNameAndPathAutoChange.Text = "Automaticky meniť názov a cestu podľa kľuča";
+            this.cboxNameAndPathAutoChange.Text = "Automaticky meniť názov a cestu podľa kľúča";
             this.cboxNameAndPathAutoChange.CheckedChanged += new System.EventHandler(this.CboxNameAndPathAutoChange_CheckedChanged);
             // 
             // FAddEditGroup

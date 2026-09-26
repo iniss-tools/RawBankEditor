@@ -75,10 +75,21 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
                 Unselect(form);
             });
 
-            Shot("skupiny-zvukov/pridanie-skupiny", () => new FAddEditGroup());
-            Shot("skupiny-zvukov/uprava-skupiny", () => new FAddEditGroup(stations), Unselect);
+            // napisany kluc - nazov a cesta sa doplnia samy
+            Shot("skupiny-zvukov/pridanie-skupiny", () => new FAddEditGroup(language.Groups), form =>
+            {
+                Field<Control>(form, "tbKey").Text = "Znelky";
+                Unselect(form);
+            });
+            Shot("skupiny-zvukov/uprava-skupiny", () => new FAddEditGroup(language.Groups, stations), Unselect);
 
-            Shot("jazyky/pridanie-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages));
+            // napisany kluc - nazov a cesta sa doplnia samy, nazov sa potom prepise
+            Shot("jazyky/pridanie-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages), form =>
+            {
+                Field<Control>(form, "tbKey").Text = "CZ";
+                Field<Control>(form, "tbName").Text = "Čeština";
+                Unselect(form);
+            });
             Shot("jazyky/uprava-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages, language), Unselect);
 
             // stránky nastavení programu - rovnaké ako v GVDEditore, stránka Všeobecné má navyše skupinu Program

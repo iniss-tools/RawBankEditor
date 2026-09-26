@@ -65,14 +65,14 @@ public partial class FAddSound : Form
 
         foreach (var snd in Group.Sounds)
         {
-            if (snd.Key == key)
+            if (SoundRules.SameText(snd.Key, key))
             {
-                Utils.ShowError("Položka s rovnakým kľučom už existuje.");
+                Utils.ShowError("Položka s rovnakým kľúčom už existuje.");
                 DialogResult = DialogResult.None;
                 return;
             }
 
-            if (snd.Name == name)
+            if (SoundRules.SameText(snd.Name, name))
             {
                 Utils.ShowError("Položka s rovnakým názvom už existuje.");
                 DialogResult = DialogResult.None;

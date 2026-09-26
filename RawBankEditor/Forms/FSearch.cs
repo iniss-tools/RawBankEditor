@@ -1,15 +1,15 @@
-﻿using ToolsCore.Entities;
+using ToolsCore.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 public partial class FSearch : Form
 {
-    private readonly List<(FyzGroup group, int index)> _founded = new();
+    // zvuky, nie indexy riadkov - po uprave, odstraneni alebo presune zvukov by indexy ukazovali inam
+    private readonly List<FyzSound> _found = new();
 
-    private bool _textChanged;
     private int _foundIndex;
-    private SearchType _lastSearchType = SearchType.Key;
+    private (string Text, SearchType Type, bool IgnoreCase)? _lastQuery;
 
     public FSearch()
     {
@@ -21,66 +21,76 @@ public partial class FSearch : Form
 
     private void bSearch_Click(object sender, EventArgs e)
     {
-        var searchType = GetSearchType();
-        if (!_textChanged && _lastSearchType == searchType)
+        if (string.IsNullOrEmpty(tbText.Text))
         {
-            if (_foundIndex + 1 == _founded.Count) 
-                _foundIndex = 0;
-            else
-                _foundIndex++;
-            SelectRow();
+            Utils.ShowInfo("Zadajte hľadaný text.");
             return;
         }
 
-        _lastSearchType = searchType;
-        _textChanged = false;
+        var query = (tbText.Text, GetSearchType(), cboxIgnoreCase.Checked);
 
-        Search();
-        if (_founded.Count == 0)
+        // rovnake hladanie ako naposledy - dalsi vysledok; inak (alebo ked vysledky medzitym zmizli) hladat znova
+        if (_lastQuery == query && _found.Count > 0)
         {
+            _foundIndex = (_foundIndex + 1) % _found.Count;
+            if (SelectFound())
+                return;
+        }
+
+        _lastQuery = query;
+        Search(query.Item1, query.Item2, query.Item3);
+        _foundIndex = 0;
+        if (_found.Count == 0)
+        {
+            Text = "Hľadať";
             Utils.ShowInfo("Nič sa nenašlo.");
             return;
         }
 
-        _foundIndex = 0;
-        SelectRow();
+        SelectFound();
     }
 
     private void bStorno_Click(object sender, EventArgs e) => Close();
 
-    private void TbText_TextChanged(object sender, EventArgs e) => _textChanged = true;
-
-    private void Search()
+    private void Search(string text, SearchType type, bool ignoreCase)
     {
-        _founded.Clear();
+        _found.Clear();
 
-        var comparisonType = cboxIgnoreCase.Checked ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
-
+        var comparison = ignoreCase ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
         foreach (var grp in Program.MainForm.CurrentLanguage!.Groups)
         {
-            for (var i = 0; i < grp.Sounds.Count; i++)
+            foreach (var sound in grp.Sounds)
             {
-                switch (_lastSearchType)
+                var value = type switch
                 {
-                    case SearchType.Key:
-                        if (grp.Sounds[i].Key.Contains(tbText.Text, comparisonType))
-                            _founded.Add((grp, i));
-                        break;
-                    case SearchType.Name:
-                        if (grp.Sounds[i].Name.Contains(tbText.Text, comparisonType))
-                            _founded.Add((grp, i));
-                        break;
-                    case SearchType.Text:
-                        if (grp.Sounds[i].Text.Contains(tbText.Text, comparisonType))
-                            _founded.Add((grp, i));
-                        break;
-                    case SearchType.FileName:
-                        if (grp.Sounds[i].FileName.Contains(tbText.Text, comparisonType))
-                            _founded.Add((grp, i));
-                        break;
-                }
+                    SearchType.Key => sound.Key,
+                    SearchType.Name => sound.Name,
+                    SearchType.Text => sound.Text,
+                    _ => sound.FileName
+                };
+
+                if (value is not null && value.Contains(text, comparison))
+                    _found.Add(sound);
             }
         }
+    }
+
+    /// <summary>
+    ///     Vyberie aktualny vysledok v hlavnom okne; v titulku ukaze, kolky je.
+    /// </summary>
+    /// <returns><c>false</c>, ak zvuk medzitym zo skupiny zmizol - treba hladat znova.</returns>
+    private bool SelectFound()
+    {
+        var sound = _found[_foundIndex];
+        if (!sound.Group.Sounds.Contains(sound) || !Program.MainForm.CurrentLanguage!.Groups.Contains(sound.Group))
+            return false;
+
+        Program.MainForm.dgvSounds.ClearSelection();
+        if (Program.MainForm.SelectSound(sound) == -1)
+            return false;
+
+        Text = $"Hľadať – {_foundIndex + 1} z {_found.Count}";
+        return true;
     }
 
     private SearchType GetSearchType()
@@ -92,18 +102,6 @@ public partial class FSearch : Form
         if (rbText.Checked)
             return SearchType.Text;
         return SearchType.FileName;
-    }
-
-    private void SelectRow()
-    {
-        if (_founded.Count == 0)
-            return;
-        var index = Program.MainForm.MenuGroups.IndexOf(_founded[_foundIndex].group);
-        if (index != -1)
-            Program.MainForm.dgvGroups.Rows[index].Selected = true;
-
-        Program.MainForm.dgvSounds.ClearSelection();
-        Program.MainForm.dgvSounds.Rows[_founded[_foundIndex].index].Selected = true;
     }
 
     private enum SearchType

@@ -4,14 +4,24 @@ using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
+/// <summary>
+///     Okno pridania a upravy skupiny zvukov. Len zisti a skontroluje hodnoty - skupinu a jej priecinok meni hlavne okno.
+/// </summary>
 public partial class FAddEditGroup : Form
 {
+    private readonly IEnumerable<FyzGroup> _groups;
+    private readonly FyzGroup? _group;
     private bool _autoChangeNameAndPath = true;
 
-    public FAddEditGroup(FyzGroup? group = null)
+    /// <param name="groups">Skupiny jazyka - kluc, nazov a cesta musia byt voci nim jedinecne.</param>
+    /// <param name="group">Upravovana skupina, pri pridani <see langword="null" />.</param>
+    public FAddEditGroup(IEnumerable<FyzGroup> groups, FyzGroup? group = null)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
+
+        _groups = groups;
+        _group = group;
 
         if (group == null)
         {
@@ -20,78 +30,28 @@ public partial class FAddEditGroup : Form
         }
         else
         {
-            Group = group;
+            // pri uprave by zmena kluca prepisala nazov aj cestu (a tym premenovala priecinok)
+            cboxNameAndPathAutoChange.Checked = false;
             tbKey.Text = group.Key;
             tbName.Text = group.Name;
             tbRelativePath.Text = group.RelativePath;
         }
     }
 
-    public FyzGroup? Group { get; private set; }
+    public string GroupKey => tbKey.Text.Trim();
+
+    public string GroupName => tbName.Text.Trim();
+
+    public string GroupRelativePath => tbRelativePath.Text.Trim();
 
     private void bOK_Click(object sender, EventArgs e)
     {
-        var key = tbKey.Text;
-        var name = tbName.Text;
-        var relative = tbRelativePath.Text;
-
-        if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(relative))
+        var error = GroupRules.Validate(_groups, _group, GroupKey, GroupName, GroupRelativePath);
+        if (error != null)
         {
-            Utils.ShowError("Nie sú vyplnené všetky polia.");
+            Utils.ShowError(error);
             DialogResult = DialogResult.None;
             return;
-        }
-
-        if (!relative.EndsWith("\\"))
-        {
-            Utils.ShowError("Relatívna cesta musí končiť '\\'.");
-            DialogResult = DialogResult.None;
-            return;
-        }
-
-        foreach (var grp in Program.MainForm.CurrentLanguage!.Groups)
-        {
-            if (grp.Key == key)
-            {
-                Utils.ShowError("Položka s rovnakým kľučom už existuje.");
-                DialogResult = DialogResult.None;
-                return;
-            }
-
-            if (grp.Name == name)
-            {
-                Utils.ShowError("Položka s rovnakým názvom už existuje.");
-                DialogResult = DialogResult.None;
-                return;
-            }
-
-            if (grp.RelativePath == relative)
-            {
-                Utils.ShowError("Položka s rovnakou relatívnou cestou už existuje.");
-                DialogResult = DialogResult.None;
-                return;
-            }
-        }
-
-        if (Group != null)
-        {
-            Program.MainForm.RegisterNewAction(
-                new FMain.EditGroupAction(Program.MainForm, Group, (Group.Key, key), (Group.Name,name), (Group.RelativePath, relative)));
-            var oldPath = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
-            Group.Key = key;
-            Group.Name = name;
-            Group.RelativePath = relative;
-            var newPath = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
-            Directory.Move(oldPath, newPath);
-        }
-        else
-        {
-            Group = new FyzGroup(Program.MainForm.CurrentLanguage!, key, name, relative);
-            Program.MainForm.RegisterNewAction(new FMain.AddGroupAction(Program.MainForm, Group));
-            var path = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
-            Directory.CreateDirectory(path);
-            Group.Directory = new DirectoryElement(path) { Group = Group };
-            RawBankExplorer.AddDirHandled = Group.Directory;
         }
 
         DialogResult = DialogResult.OK;
@@ -107,8 +67,8 @@ public partial class FAddEditGroup : Form
         if (!_autoChangeNameAndPath)
             return;
 
-        tbName.Text = tbKey.Text;
-        tbRelativePath.Text = tbKey.Text + '\\';
+        tbName.Text = tbKey.Text.Trim();
+        tbRelativePath.Text = GroupRules.DefaultRelativePath(tbKey.Text);
     }
 
     private void CboxNameAndPathAutoChange_CheckedChanged(object sender, EventArgs e)

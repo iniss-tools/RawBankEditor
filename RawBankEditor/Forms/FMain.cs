@@ -1050,31 +1050,99 @@ public partial class FMain : Form
         if (dgvSounds.IsSelectionEmpty() || dgvGroups.IsSelectionEmpty())
             return;
 
-        var form = new FSoundsMove(CurrentLanguage!.Groups, CurrentGroup!);
-        if (form.ShowDialog(this) != DialogResult.OK) 
+        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>()
+            .OrderBy(s => CurrentGroup!.Sounds.IndexOf(s)).ToList();
+        if (sounds.Count == 0)
             return;
 
-        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
-        var pathTobank = GlobData.OpenedProject!.AbsPathToBank;
-        foreach (var sound in sounds)
-        {
-            CurrentGroup!.Sounds.Remove(sound);
-            sound.Group = form.NewGroup;
-            form.NewGroup.Sounds.Add(sound);
-            var oldPath = CurrentGroup!.GetAbsPath(pathTobank);
-            var newPath = form.NewGroup.GetAbsPath(pathTobank);
+        var form = new FSoundsMove(CurrentLanguage!.Groups, CurrentGroup!);
+        if (form.ShowDialog(this) != DialogResult.OK)
+            return;
 
-            RawBankExplorer.MovingSoundIsHandled = true;
-            if (File.Exists(oldPath)) 
-                File.Move(oldPath, newPath);
-            RawBankExplorer.MovingSoundIsHandled = false;
+        var source = CurrentGroup!;
+        var problems = SoundRules.ValidateMove(sounds, form.NewGroup, GlobData.OpenedProject!.AbsPathToBank);
+        if (problems.Count > 0)
+        {
+            Utils.ShowError("Zvuky sa nepresunuli:\n\n" + string.Join("\n", problems.Take(10)));
+            return;
         }
 
-        RegisterNewAction(new MoveSoundsAction(this, sounds, CurrentGroup!, form.NewGroup));
+        var moved = MoveSoundsToGroup(sounds, form.NewGroup);
+        if (moved.Count > 0)
+            RegisterNewAction(new MoveSoundsAction(this, moved, source, form.NewGroup));
+    }
+
+    /// <summary>
+    ///     Presunie zvuky do skupiny <paramref name="target" />. Nahravka, ktora lezi priamo v priecinku skupiny,
+    ///     sa presunie do priecinka cielovej skupiny; nahravka s pridavnou cestou ostane na mieste a cesta sa
+    ///     prepocita voci novej skupine (INISS ju berie relativne k priecinku skupiny).
+    /// </summary>
+    /// <returns>Zvuky, ktore sa presunuli - pri chybe suboru sa presun zastavi a zvysne ostanu na mieste.</returns>
+    internal List<FyzSound> MoveSoundsToGroup(IList<FyzSound> sounds, FyzGroup target)
+    {
+        var pathToBank = GlobData.OpenedProject!.AbsPathToBank;
+        var targetDir = target.GetAbsPath(pathToBank);
+        var moved = new List<FyzSound>();
+
+        // presunute subory nesmu vyvolat automaticke vlozenie zvukov ani zmazanie prvkov prieskumnika
+        var watching = fileSystemWatcher.EnableRaisingEvents;
+        fileSystemWatcher.EnableRaisingEvents = false;
+        try
+        {
+            foreach (var sound in sounds)
+            {
+                var sourcePath = sound.File?.FileInfo.FullName ?? sound.GetAbsPath(pathToBank);
+                var moveFile = SoundRules.FileMovesWithSound(sound) && File.Exists(sourcePath);
+                var newPath = Path.Combine(targetDir, sound.FileName);
+
+                if (moveFile)
+                    File.Move(sourcePath, newPath);
+
+                sound.Group.Sounds.Remove(sound);
+                sound.Group = target;
+                target.Sounds.Add(sound);
+
+                if (moveFile)
+                {
+                    if (sound.File is not null)
+                        MoveFileElement(sound.File, target.Directory, newPath);
+                }
+                else if (!SoundRules.FileMovesWithSound(sound))
+                {
+                    // nahravka ostava, kde je - pridavna cesta musi ukazovat na nu aj z novej skupiny
+                    sound.AdditionalRelativePath = SoundRules.AdditionalPathFor(target, Path.GetDirectoryName(sourcePath)!, pathToBank);
+                }
+
+                moved.Add(sound);
+            }
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
+        {
+            Log.Exception(exception);
+            Utils.ShowError($"Presun zvukov sa zastavil – presunulo sa {moved.Count} z {sounds.Count}.\n\n{exception.Message}");
+        }
+        finally
+        {
+            fileSystemWatcher.EnableRaisingEvents = watching;
+        }
+
+        RefreshSoundViews();
+        SelectGroup(target);
+        FillExplorerList(CurrentDirectory);
         CheckProjectState();
-        dgvSounds.ResetBindings();
-        SelectGroup(form.NewGroup);
-        MenuGroups.ResetBindings();
+        return moved;
+    }
+
+    /// <summary>
+    ///     Presunie prvok suboru v strome prieskumnika do ineho priecinka (subor na disku uz je presunuty).
+    /// </summary>
+    private static void MoveFileElement(SoundFileElement file, DirectoryElement? target, string newPath)
+    {
+        file.Parent?.Children.Remove(file);
+        file.FileInfo = new FileInfo(newPath);
+        file.Name = Path.GetFileName(newPath);
+        file.Parent = target;
+        target?.Children.Add(file);
     }
 
     private void DoConvertSoundsToEwa(object sender, EventArgs e)
@@ -1175,9 +1243,8 @@ public partial class FMain : Form
 
         var action = new EditLanguageAction(this, language,
             (language.Key, form.LanguageKey), (language.Name, form.LanguageName), (language.RelativePath, form.LanguageRelativePath));
-        action.Redo();
-        RegisterNewAction(action);
-        CheckProjectState();
+        if (ChangeLanguage(language, form.LanguageKey, form.LanguageName, form.LanguageRelativePath))
+            RegisterNewAction(action);
     }
 
     private void DoDeleteLanguage(object sender, EventArgs e)
@@ -1317,66 +1384,6 @@ public partial class FMain : Form
 
     #region GroupsPanel
 
-    private void DoAddGroup(object sender, EventArgs e)
-    {
-        var form = new FAddEditGroup();
-        if (form.ShowDialog(this) == DialogResult.OK)
-        {
-            MenuGroups.Add(form.Group!);
-            CheckProjectState();
-        }
-    }
-
-    private void DoEditGroup(object sender, EventArgs e)
-    {
-        if (dgvGroups.IsSelectionEmpty())
-            return;
-
-        var form = new FAddEditGroup((FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!);
-        if (form.ShowDialog(this) == DialogResult.OK)
-        {
-            CheckProjectState();
-            MenuGroups.ResetBindings();
-        }
-    }
-
-    private void DoDeleteGroup(object sender, EventArgs e)
-    {
-        if (dgvGroups.IsSelectionEmpty())
-            return;
-
-        var delete = false;
-        var result = Utils.ShowWarning("Chystáte sa vymazať skupinu/y zvukov.\n\nMám vymazať aj priečinok/ky so zvukmi? (Ak áno, táto operácia je nenávrátná).", MessageBoxButtons.YesNoCancel);
-        switch (result)
-        {
-            case DialogResult.Yes:
-                delete = true;
-                break;
-            case DialogResult.No:
-                break;
-            default:
-                return;
-        }
-
-        var grps = new LinkedList<FyzGroup>();
-        foreach (DataGridViewRow row in dgvGroups.SelectedRows)
-        {
-            grps.AddLast((FyzGroup)row.DataBoundItem!);
-        }
-
-        RegisterNewAction(new RemovedGroupsAction(this, grps));
-
-        foreach (var fyzGroup in grps)
-        {
-            MenuGroups.Remove(fyzGroup);
-            if (delete && fyzGroup.Directory is not null) 
-                Utils.DeleteDirectoryToRecycleBin(fyzGroup.Directory.DirInfo.FullName);
-        }
-
-        MenuGroups.ResetBindings();
-        CheckProjectState();
-    }
-
     private void DoConvertGroupToEwa(object sender, EventArgs e)
     {
         if (dgvGroups.IsSelectionEmpty())
@@ -1463,103 +1470,6 @@ public partial class FMain : Form
 
         if (dgvExplorer.SelectedRows[0].DataBoundItem is SoundFileElement se)
             SoundUtils.Play(se.FileInfo.FullName);
-    }
-
-    private void DoRenameFile(object sender, EventArgs e)
-    {
-        if (dgvExplorer.IsSelectionEmpty())
-            return;
-
-        dgvExplorer.CurrentCell = dgvExplorer.SelectedRows[0].Cells[nameof(cFileName)];
-        dgvExplorer.BeginEdit(true);
-        _editingFileName = true;
-    }
-
-    private void DgvExplorer_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
-    {
-        if (!_editingFileName)
-            return;
-
-        var row = dgvExplorer.Rows[e.RowIndex].DataBoundItem as FileSystemElement;
-        var newName = (string)e.FormattedValue!;
-        e.Cancel = row switch
-        {
-            FileElement fe => !(fe.FileInfo.Directory != null && Utils.IsFileNameCorrect(fe.FileInfo.Directory.FullName, newName)),
-            DirectoryElement de => !(de.DirInfo.Parent != null && Utils.IsFileNameCorrect(de.DirInfo.Parent.FullName, newName)),
-            _ => true
-        };
-    }
-
-    private void DgvExplorer_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-    {
-        _editingFileName = false;
-        dgvExplorer.EndEdit();
-
-        var row = dgvExplorer.Rows[e.RowIndex].DataBoundItem as FileSystemElement;
-        var newName = (string)dgvExplorer[e.ColumnIndex, e.RowIndex].Value!;
-
-        try
-        {
-            switch (row)
-            {
-                case FileElement fe:
-                    if (string.Equals(newName, fe.FileInfo.Name, StringComparison.CurrentCultureIgnoreCase))
-                        return;
-                    FileSystem.RenameFile(fe.FileInfo.FullName, newName);
-                    break;
-                case DirectoryElement de:
-                    if (string.Equals(newName, de.DirInfo.Name, StringComparison.CurrentCultureIgnoreCase))
-                        return;
-                    FileSystem.RenameDirectory(de.DirInfo.FullName, newName);
-                    break;
-            }
-        }
-        catch (Exception ex)
-        {
-            Utils.ShowError(ex.Message);
-        }
-    }
-
-    private void DoDeleteFile(object sender, EventArgs e)
-    {
-        if (dgvExplorer.IsSelectionEmpty())
-            return;
-
-        var result =
-            Utils.ShowWarning("Naozaj sa majú odstrániť všetky vybrané položky ?\n\nTáto operácia je nevratná.", MessageBoxButtons.YesNo);
-        if (result == DialogResult.Yes)
-        {
-            foreach (DataGridViewRow row in dgvExplorer.SelectedRows)
-            {
-                var item = row.DataBoundItem as FileSystemElement;
-                switch (item)
-                {
-                    case BackButtonElement:
-                        break;
-                    case DirectoryElement de:
-                        if (de.Group != null)
-                        {
-                            de.Group.Language.Groups.Remove(de.Group);
-                            RegisterNewAction(new RemovedGroupsAction(this, de.Group));
-                        }
-                        Utils.DeleteDirectoryToRecycleBin(de.DirInfo.FullName);
-                        break;
-                    case SoundFileElement sfe:
-                        if (sfe.Sound != null)
-                        {
-                            SelectSound(sfe.Sound);
-                            var action = new RemovedSoundsAction(this, sfe.Sound);
-                            action.Apply();
-                            RegisterNewAction(action);
-                        }
-                        Utils.DeleteFileToRecycleBin(sfe.FileInfo.FullName);
-                        break;
-                    case OtherFileElement ofe:
-                        Utils.DeleteFileToRecycleBin(ofe.FileInfo.FullName);
-                        break;
-                }
-            }
-        }
     }
 
     private void DoConvertFilesToEwa(object sender, EventArgs e)
@@ -2035,10 +1945,19 @@ public partial class FMain : Form
 
         var newElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, RawBankExplorer.SearchOperation.Create);
 
-        if (newElement is SoundFileElement sfe && GlobData.Config.AutoInsertSoundData && sfe.Parent?.Group is not null)
+        // subor sa vratil (napr. obnovenim z kosa) - patri zvuku, ktory ho ma v nazve suboru
+        var owner = newElement is SoundFileElement returned && returned.Parent?.Group is { } ownerGroup
+            ? ownerGroup.Sounds.FirstOrDefault(s => s.File == null && RawBankParser.AdditionalPathIsEmpty(s.AdditionalRelativePath)
+                                                   && RawBankExplorer.EqualsPathNames(s.FileName ?? "", returned.Name))
+            : null;
+        if (owner is not null)
+        {
+            RelinkSoundFile(owner);
+        }
+        else if (newElement is SoundFileElement sfe && GlobData.Config.AutoInsertSoundData && sfe.Parent?.Group is not null)
         {
             var nameWoExt = Path.GetFileNameWithoutExtension(sfe.Name);
-            var alreadyDefinedSound = sfe.Parent.Group.Sounds.FirstOrDefault(s => s.Key == nameWoExt && s.File == null);
+            var alreadyDefinedSound = sfe.Parent.Group.Sounds.FirstOrDefault(s => SoundRules.SameText(s.Key, nameWoExt) && s.File == null);
             if (alreadyDefinedSound is not null)
             {
                 // zvuk bez suboru dostal svoj subor - prepojit oboma smermi, inak zoznam chyb hlasi SoundDataMissing
@@ -2149,21 +2068,8 @@ public partial class FMain : Form
         if (RawBankExplorer.ConvertSoundIsHandled)
             return;
 
-        var fileElement = RawBankExplorer.GetElement(e.OldFullPath, CurrentLanguage!.Directory);
-        
-        switch (fileElement)
-        {
-            case null:
-                break;
-            case DirectoryElement de:
-                de.DirInfo = new DirectoryInfo(e.FullPath);
-                de.Name = Path.GetDirectoryName(e.FullPath)!;
-                break;
-            case FileElement fe:
-                fe.FileInfo = new FileInfo(e.FullPath);
-                fe.Name = Path.GetFileName(e.FullPath);
-                break;
-        }
+        // premenovanie mimo programu (napr. v Prieskumnikovi Windows)
+        ApplyRename(e.OldFullPath, e.FullPath);
 
         if (e.FullPath.StartsWith(CurrentDirectory.DirInfo.FullName, StringComparison.OrdinalIgnoreCase))
             FillExplorerList(CurrentDirectory);
@@ -2192,9 +2098,7 @@ public partial class FMain : Form
             sfe.Sound = snd;
 
             // pridavna cesta je v INISS relativna k priecinku skupiny (napr. ..\Poz1\), subor priamo v nom ju nema
-            var groupDir = snd.Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
-            var relative = Path.GetRelativePath(groupDir, sfe.FileInfo.DirectoryName!);
-            snd.AdditionalRelativePath = relative == "." ? "" : relative + Path.DirectorySeparatorChar;
+            snd.AdditionalRelativePath = SoundRules.AdditionalPathFor(snd.Group, sfe.FileInfo.DirectoryName!, GlobData.OpenedProject!.AbsPathToBank);
 
             // prepisovaci mod nema akciu spat - zmena sa aspon oznaci ako neulozena
             RegisterNewAction();
@@ -2287,7 +2191,7 @@ public partial class FMain : Form
         string? error = null;
         if (string.IsNullOrWhiteSpace(value))
             error = isKey ? "Kľúč zvuku je povinný." : "Názov zvuku je povinný.";
-        else if (sound.Group.Sounds.Any(s => s != sound && (isKey ? s.Key : s.Name) == value))
+        else if (sound.Group.Sounds.Any(s => s != sound && SoundRules.SameText(isKey ? s.Key : s.Name, value)))
             error = isKey ? $"Kľúč {value} už v skupine {sound.Group.Name} existuje." : $"Názov {value} už v skupine {sound.Group.Name} existuje.";
 
         if (error is null)
@@ -2472,7 +2376,8 @@ public partial class FMain : Form
         foreach (var sound in dir.Children.OfType<SoundFileElement>().Where(s => s.Duration == -1).ToList())
         {
             sound.Duration = await SoundUtils.GetSoundDuration(sound);
-            if (generation != _explorerFillGeneration)
+            // okno sa medzitym mohlo zatvorit
+            if (generation != _explorerFillGeneration || IsDisposed)
                 return;
             dgvExplorer.InvalidateColumn(cFileDuration.Index);
         }

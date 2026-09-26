@@ -153,12 +153,9 @@ internal static class RawBankExplorer
                             dirElem.Group.Directory = null!;
                         break;
                     case SoundFileElement sfileElem:
-                        if (sfileElem.Sound is not null)
-                        {
-                            sfileElem.Parent?.Children.Remove(sfileElem);
-                            sfileElem.Sound.FileName = null!;
+                        // zvuk si nazov suboru necha - zoznam chyb ukaze chybajuci subor; vrateny subor sa so zvukom znova prepoji
+                        if (sfileElem.Sound is not null && ReferenceEquals(sfileElem.Sound.File, sfileElem))
                             sfileElem.Sound.File = null!;
-                        }
                         sfileElem.FileInfo = null!;
                         break;
                     case FileElement fileElem:
