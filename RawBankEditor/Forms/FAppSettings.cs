@@ -39,13 +39,12 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override bool OnSaving()
     {
-        base.OnSaving();
         Config.Shortcuts.SetValues(Shortcuts);
         Config.DesktopCols.SetValues(Columns);
         Config.AutoRecalculateSoundDuration = cboxAutoRecalculateSoundDurations.Checked;
         Config.AutoInsertSoundData = cboxAutoInsertSoundData.Checked;
         Config.ShowAfterInsertSoundDialog = cboxShowAfterInsertSoundDlg.Checked;
-        return true;
+        return base.OnSaving();
     }
 
     /// <inheritdoc />
