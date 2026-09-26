@@ -66,8 +66,8 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
             Shot("skupiny-zvukov/pridanie-skupiny", () => new FAddEditGroup());
             Shot("skupiny-zvukov/uprava-skupiny", () => new FAddEditGroup(stations), Unselect);
 
-            Shot("jazyky/pridanie-jazyka", () => new FAddEditLanguage());
-            Shot("jazyky/uprava-jazyka", () => new FAddEditLanguage(language), Unselect);
+            Shot("jazyky/pridanie-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages));
+            Shot("jazyky/uprava-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages, language), Unselect);
 
             // stránky nastavení programu - rovnaké ako v GVDEditore, stránka Všeobecné má navyše skupinu Program
             foreach (var (slug, panel) in new[]

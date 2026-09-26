@@ -524,27 +524,45 @@ partial class FMain
 
     public class AddLanguageAction : Action
     {
-        /// <inheritdoc />
-        public AddLanguageAction(FMain form, FyzLanguage lang) : base(form)
+        /// <param name="form">Hlavne okno.</param>
+        /// <param name="lang">Pridany jazyk.</param>
+        /// <param name="index">Pozicia jazyka v zozname jazykov banky.</param>
+        /// <param name="previous">Jazyk otvoreny pred pridanim - po vrateni sa otvori znova.</param>
+        /// <param name="createdDirectory">Priecinok jazyka, ktory sa pri pridani vytvoril; <see langword="null" />, ak uz existoval.</param>
+        public AddLanguageAction(FMain form, FyzLanguage lang, int index, FyzLanguage? previous, string? createdDirectory) : base(form)
         {
             Language = lang;
+            Index = index;
+            Previous = previous;
+            CreatedDirectory = createdDirectory;
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Pridanie zvuku";
+        public override string CommandName => "Pridanie jazyka";
 
         private FyzLanguage Language { get; }
+        private int Index { get; }
+        private FyzLanguage? Previous { get; }
+        private string? CreatedDirectory { get; }
 
         /// <inheritdoc />
         public override void Undo()
         {
-            GlobData.OpenedProject!.Languages.Remove(Language);
+            Form.RemoveLanguage(Language, Previous);
+
+            // vytvoreny priecinok sa zmaze, len ak v nom nic nie je
+            if (CreatedDirectory != null && Directory.Exists(CreatedDirectory) && !Directory.EnumerateFileSystemEntries(CreatedDirectory).Any())
+                Directory.Delete(CreatedDirectory);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
-            GlobData.OpenedProject!.Languages.Add(Language);
+            if (CreatedDirectory != null)
+                Directory.CreateDirectory(CreatedDirectory);
+
+            Form.InsertLanguage(Language, Index);
+            Form.SelectLanguage(Language);
         }
     }
 
@@ -579,6 +597,7 @@ partial class FMain
             Language.Key = Keys.oldKey;
             Language.Name = Names.oldName;
             Language.RelativePath = RelativePaths.oldRPath;
+            Form.RefreshLanguage(Language);
         }
 
         /// <inheritdoc />
@@ -587,15 +606,22 @@ partial class FMain
             Language.Key = Keys.newKey;
             Language.Name = Names.newName;
             Language.RelativePath = RelativePaths.newRPath;
+            Form.RefreshLanguage(Language);
         }
     }
 
     public class RemoveLanguageAction : Action
     {
-        /// <inheritdoc />
-        public RemoveLanguageAction(FMain form, FyzLanguage lang, bool removedWithData) : base(form)
+        /// <param name="form">Hlavne okno.</param>
+        /// <param name="lang">Odstraneny jazyk.</param>
+        /// <param name="index">Pozicia jazyka v zozname jazykov banky pred odstranenim.</param>
+        /// <param name="directory">Priecinok jazyka.</param>
+        /// <param name="removedWithData">Ci sa priecinok jazyka presunul do kosa.</param>
+        public RemoveLanguageAction(FMain form, FyzLanguage lang, int index, string directory, bool removedWithData) : base(form)
         {
             Language = lang;
+            Index = index;
+            LanguageDirectory = directory;
             RemovedWithData = removedWithData;
         }
 
@@ -603,22 +629,25 @@ partial class FMain
         public override string CommandName => "Odstránenie jazyka";
 
         private FyzLanguage Language { get; }
+        private int Index { get; }
+        private string LanguageDirectory { get; }
         public bool RemovedWithData { get; }
 
         /// <inheritdoc />
         public override void Undo()
         {
-            GlobData.OpenedProject!.Languages.Add(Language);
-            if (RemovedWithData && !Utils.TryRecoverFileOrDirFromBin(Language.Directory.DirInfo.FullName))
+            // priecinok sa obnovi pred vlozenim - v prazdnej banke sa jazyk hned nacita
+            if (RemovedWithData && !Utils.TryRecoverFileOrDirFromBin(LanguageDirectory))
                 Utils.ShowError("Nepodarilo sa obnoviť priečinok so zvukmi jazyka z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+            Form.InsertLanguage(Language, Index);
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
-            GlobData.OpenedProject!.Languages.Remove(Language);
-            if (RemovedWithData) 
-                Utils.DeleteDirectoryToRecycleBin(Language.Directory.DirInfo.FullName, true);
+            if (RemovedWithData)
+                Form.DeleteLanguageDirectory(LanguageDirectory);
+            Form.RemoveLanguage(Language);
         }
     }
 

@@ -24,6 +24,16 @@ public partial class FMain : Form
     private string _cellOldValue = null!;
     private string _actualStatusTxt = null!;
     private bool _langAlreadySet;
+    // jazyky pridane v otvorenej banke, ktorym sa este nezapisal FYZZVUK.DAT - otvaraju sa ako prazdne
+    private readonly HashSet<FyzLanguage> _newLanguages = [];
+    // jazyk, ktory nacitava bWorkerReadDat
+    private FyzLanguage? _loadingLanguage;
+    // ci sa CurrentLanguage nacital bez chyby
+    private bool _languageLoaded;
+    // prave bezi spat/znovu - prepnutie jazyka z akcie sa nepyta na ulozenie a nemaze historiu
+    private bool _inUndoRedo;
+    // prepnutie pri spat/znovu pocas nacitania ineho jazyka - plati aj pre odlozene nacitanie
+    private bool _deferredFromUndoRedo;
     private bool _saved = true;
     private bool _unUndoableUnsavedChanges;
     private bool _programChange;
@@ -269,7 +279,12 @@ public partial class FMain : Form
 
     private void ChangeStatusReady() => tsslStatus.Text = "Pripravený";
 
-    private void PrepareGlobalData(string dirpath)
+    /// <summary>
+    ///     Nacita banku a zacne nacitavat vybrany jazyk. Otvorena banka sa nahradi az ked je nova nacitana
+    ///     a jazyk vybrany - pri chybe alebo zruseni vyberu jazyka ostane otvorena povodna.
+    /// </summary>
+    /// <returns><c>true</c>, ak sa banka otvorila.</returns>
+    private bool PrepareGlobalData(string dirpath)
     {
         if (GlobData.OpenedProject is not null && !Saved)
         {
@@ -282,16 +297,15 @@ public partial class FMain : Form
                 case DialogResult.No:
                     break;
                 default:
-                    return;
+                    return false;
             }
         }
-        
-        dgvErrors.DataSource = null;
 
+        RawBankProject? project = null;
         if (GlobData.Config.DebugModeGUI != DebugMode.AppCrash)
             try
             {
-                GlobData.PrepareGlobalData(dirpath);
+                project = GlobData.LoadProject(dirpath);
             }
             catch (Exception exception)
             {
@@ -308,47 +322,136 @@ public partial class FMain : Form
                 }
             }
         else
-            GlobData.PrepareGlobalData(dirpath);
+            project = GlobData.LoadProject(dirpath);
 
-        if (GlobData.OpenedProject is null)
-            return;
+        if (project is null)
+            return false;
 
+        // banka bez jazyka sa otvori prazdna - prvy jazyk sa prida cez Nastavenia jazykov
         FyzLanguage? lang = null;
-        
-        switch (GlobData.OpenedProject!.Languages.Count)
+        if (project.Languages.Count == 1)
+            lang = project.Languages[0];
+        else if (project.Languages.Count > 1)
         {
-            case 0:
-                Utils.ShowWarning("V banke sa nenachádza žiadnen jazyk.\r\nMôžete pridať nový jazyk.");
-                break;
-            case 1:
-                lang = GlobData.OpenedProject!.Languages[0];
-                break;
-            default:
-                var flang = new FLangChoose();
-                var result = flang.ShowDialog();
-                if (result == DialogResult.OK)
-                    lang = flang.Selected;
-                break;
+            var flang = new FLangChoose(project.Languages);
+            if (flang.ShowDialog(this) != DialogResult.OK)
+                return false;
+            lang = flang.Selected;
         }
 
-        if (lang == null)
-            return;
-
+        GlobData.OpenedProject = project;
+        _newLanguages.Clear();
+        dgvErrors.DataSource = null;
         Text = @$"{Application.ProductName} - {GlobData.OpenedProject!.AbsPathToINISS}";
-
-        CurrentLanguage = lang;
 
         _langAlreadySet = true;
         tscboxLanguages.ComboBox.DataSource = GlobData.OpenedProject!.Languages;
+        _langAlreadySet = false;
+        SetComboLanguage(lang);
+
+        moveManager.Clear();
+        ResetHistory(false);
+        LoadLanguage(lang);
+        return true;
+    }
+
+    /// <summary>
+    ///     Otvori jazyk: zoznam zvukov a subory banky sa nacitaju na pozadi. Bez jazyka (banka nema ziadny) sa okno vycisti.
+    /// </summary>
+    private void LoadLanguage(FyzLanguage? lang)
+    {
+        CurrentLanguage = lang;
+        _languageLoaded = false;
+        // prieskumnik sa nacitava znova - sleduje sa az po nacitani (bWorkerReadDat_RunWorkerCompleted)
+        fileSystemWatcher.EnableRaisingEvents = false;
+        SwitchLangSettingsButtons(true);
+
+        if (lang is null)
+        {
+            ShowNoLanguage();
+            return;
+        }
+
+        // nacitava sa iny jazyk - po dokonceni sa nacita tento (bWorkerReadDat_RunWorkerCompleted)
+        if (bWorkerReadDat.IsBusy)
+        {
+            _deferredFromUndoRedo = _inUndoRedo;
+            return;
+        }
+
+        // zvuky sa citaju z disku okrem noveho jazyka (FYZZVUK.DAT este nema) a prepnutia pri spat/znovu,
+        // kde plati stav v pamati, na ktory sa akcie odkazuju
+        var keepMemory = _inUndoRedo || _deferredFromUndoRedo;
+        _deferredFromUndoRedo = false;
+        var readFile = !_newLanguages.Contains(lang) && !(keepMemory && lang.Groups is not null);
+        if (!readFile)
+            lang.Groups ??= new List<FyzGroup>();
+
+        _loadingLanguage = lang;
+        tscboxLanguages.Enabled = false;
+        tspbProgress.Visible = true;
+        tspbProgress.Style = ProgressBarStyle.Marquee;
+        ChangeStatus("Načítanie súborov banky");
+        bWorkerReadDat.RunWorkerAsync((lang, readFile));
+    }
+
+    /// <summary>
+    ///     Vymaze historiu zmien (akcie sa odkazuju na data jazyka, ktore sa znova nacitaju).
+    /// </summary>
+    /// <param name="unsavedChanges">Ci ostali neulozene zmeny, ktore sa uz nedaju vratit (napr. zoznam jazykov).</param>
+    private void ResetHistory(bool unsavedChanges)
+    {
+        changeManager.Clear();
+        changeManager.SetSavedState();
+        _unUndoableUnsavedChanges = unsavedChanges;
+        Saved = !unsavedChanges;
+        EnableUndoRedo();
+    }
+
+    /// <summary>
+    ///     Zisti, ci sa zoznam jazykov lisi od ulozeneho FYZBANK.DAT.
+    /// </summary>
+    private static bool LanguageListChanged()
+        => LanguageRules.BankDiffers(GlobData.OpenedProject!.AbsPathToBank, GlobData.OpenedProject.Languages);
+
+    /// <summary>
+    ///     Pred odchodom z otvoreneho jazyka sa spyta na neulozene zmeny jeho zoznamu zvukov:
+    ///     Ano ich ulozi, Nie zahodi (jazyk sa pri dalsom otvoreni nacita z disku).
+    /// </summary>
+    /// <returns><c>false</c>, ak pouzivatel odchod zrusil.</returns>
+    private bool ConfirmLeaveLanguage()
+    {
+        var lang = CurrentLanguage;
+        if (lang is null || !_languageLoaded || Saved || !LanguageRules.SoundsDiffer(GlobData.OpenedProject!.AbsPathToBank, lang))
+            return true;
+
+        var result = Utils.ShowQuestion($"Jazyk {lang.Name} má neuložené zmeny.\n\nUložiť ich pred prepnutím jazyka?", MessageBoxButtons.YesNoCancel);
+        switch (result)
+        {
+            case DialogResult.Yes:
+                DoSave(this, EventArgs.Empty);
+                return true;
+            case DialogResult.No:
+                DiscardLanguage(lang);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    /// <summary>
+    ///     Zahodi zoznam zvukov jazyka v pamati - pri dalsom otvoreni sa nacita z disku, novy jazyk bude prazdny.
+    /// </summary>
+    private void DiscardLanguage(FyzLanguage lang)
+    {
+        lang.Groups = _newLanguages.Contains(lang) ? new List<FyzGroup>() : null!;
+    }
+
+    private void SetComboLanguage(FyzLanguage? lang)
+    {
+        _langAlreadySet = true;
         tscboxLanguages.SelectedItem = lang;
         _langAlreadySet = false;
-
-        tspbProgress.Visible = true;
-        ChangeStatus("Načítanie súborov banky");
-        bWorkerReadDat.RunWorkerAsync(lang);
-        
-        moveManager.Clear();
-        changeManager.Clear();
     }
 
     /// <summary>
@@ -414,7 +517,10 @@ public partial class FMain : Form
     /// <param name="dirpath">Cesta k priečinku s projektom.</param>
     private void OpenProject(string dirpath)
     {
-        PrepareGlobalData(dirpath);
+        // do zoznamu nedavnych len banka, ktora sa naozaj otvorila
+        if (!PrepareGlobalData(dirpath))
+            return;
+
         AppRegistry.SetUsageOfProject(dirpath);
         AppRegistry.SetLastProject(dirpath);
         SetRecentDirs();
@@ -443,8 +549,9 @@ public partial class FMain : Form
         Root = RawBankExplorer.ExploreFileSystem();
 
         //part 2 - analyze FYZZVUK.dat file
-        var lang = (FyzLanguage)e.Argument!;
-        RawBankParser.ReadFyzZvukFile(GlobData.OpenedProject!.AbsPathToBank, lang, bWorkerReadDat);
+        var (lang, readFile) = ((FyzLanguage, bool))e.Argument!;
+        if (readFile)
+            RawBankParser.ReadFyzZvukFile(GlobData.OpenedProject!.AbsPathToBank, lang, bWorkerReadDat);
 
         //part 3 - merge physical files and logical data
         var progressMerge = new ProgressStatus("Spájam načítané dáta so súborovým systémom", 0);
@@ -489,8 +596,20 @@ public partial class FMain : Form
     {
         tspbProgress.Visible = false;
 
+        // pocas nacitania sa otvoril iny jazyk (spat/znovu, odstranenie jazyka) - vysledok neplati, nacita sa ten
+        if (!ReferenceEquals(_loadingLanguage, CurrentLanguage))
+        {
+            if (e.Error != null && _loadingLanguage != null)
+                DiscardLanguage(_loadingLanguage);
+            _loadingLanguage = null;
+            LoadLanguage(CurrentLanguage);
+            return;
+        }
+
         if (GlobData.Config.DebugModeGUI != DebugMode.AppCrash && e.Error != null)
         {
+            // ciastocne nacitane skupiny sa nesmu zapisat cez Ulozit vsetko
+            DiscardLanguage(CurrentLanguage!);
             Log.Exception(e.Error);
 
             ChangeStatus("Vznikla chyba pri načítaní banky");
@@ -505,9 +624,13 @@ public partial class FMain : Form
                     break;
             }
 
+            // jazyk nema nacitane skupiny - v okne nesmu ostat skupiny a zvuky predchadzajucej banky ani jazyka
+            // a nic sa nesmie ulozit; vyber jazyka ostava, aby sa dalo prepnut na iny
+            ClearAfterLoadError();
             return;
         }
 
+        _languageLoaded = true;
         _programChange = true;
         dgvSounds.DataSource = null;
         MenuGroups = new ExBindingList<FyzGroup>(CurrentLanguage!.Groups);
@@ -541,6 +664,142 @@ public partial class FMain : Form
 
         dgvErrors.DataSource = _messages;
         fileSystemWatcher.Path = GlobData.OpenedProject!.AbsPathToBank;
+        fileSystemWatcher.EnableRaisingEvents = true;
+    }
+
+    private void ClearAfterLoadError()
+    {
+        fileSystemWatcher.EnableRaisingEvents = false;
+        // bez skupiny ValidateRow neoveruje riadky starej banky voci novemu jazyku, ktory nema priecinok
+        CurrentGroup = null;
+        _programChange = true;
+        dgvSounds.DataSource = null;
+        dgvGroups.DataSource = null;
+        _programChange = false;
+        ExplorerContent.Clear();
+        _messages.Clear();
+        tscboxLanguages.Enabled = true;
+
+        SwitchAddSoundButtons(false);
+        SwitchRewriteModeButtons(false);
+        SwitchDeleteSoundsButtons(false);
+        SwitchMoveSoundsButtons(false);
+        SwitchAddGroupButtons(false);
+        SwitchEditGroupButtons(false);
+        SwitchDeleteGroupButtons(false);
+        SwitchConvertGroupButtons(false);
+        SwitchConvertSoundsLangButtons(false);
+        SwitchSearchButtons(false);
+        SwitchHighlightProblemButtons(false);
+        SwitchSolveProblemButtons(false);
+        SwitchSaveButtons(false);
+        // jazyk sa da odstranit alebo pridat iny; konverzia jazyka je vypnuta (_languageLoaded)
+        SwitchLangSettingsButtons(true);
+    }
+
+    /// <summary>
+    ///     Banka nema ziadny jazyk: prazdne okno, dostupne je len pridanie jazyka a ulozenie zoznamu jazykov.
+    /// </summary>
+    private void ShowNoLanguage()
+    {
+        ClearAfterLoadError();
+        tscboxLanguages.Enabled = GlobData.OpenedProject!.Languages.Count > 0;
+        // FYZBANK.DAT sa da ulozit aj bez jazyka, napr. po odstraneni posledneho
+        SwitchSaveButtons(true);
+        tspbProgress.Visible = false;
+        ChangeStatus("Banka neobsahuje žiadny jazyk – pridajte ho cez Nastavenia jazykov");
+    }
+
+    /// <summary>
+    ///     Vlozi jazyk do zoznamu jazykov banky bez prepnutia. V prazdnej banke sa jazyk rovno otvori.
+    /// </summary>
+    internal void InsertLanguage(FyzLanguage language, int index)
+    {
+        var languages = GlobData.OpenedProject!.Languages;
+        _langAlreadySet = true;
+        languages.Insert(Math.Clamp(index, 0, languages.Count), language);
+        _langAlreadySet = false;
+
+        if (CurrentLanguage is null)
+        {
+            SetComboLanguage(language);
+            LoadLanguage(language);
+        }
+        else
+            SetComboLanguage(CurrentLanguage);
+    }
+
+    /// <summary>
+    ///     Odstrani jazyk zo zoznamu jazykov banky. Ak bol otvoreny, jeho neulozene zmeny sa zahodia (novy jazyk si ich
+    ///     necha pre vratenie) a otvori sa jazyk na jeho mieste.
+    /// </summary>
+    /// <param name="language">Odstranovany jazyk.</param>
+    /// <param name="next">Jazyk, ktory sa ma otvorit namiesto odstraneneho (ak je v banke), inak jazyk na jeho mieste.</param>
+    /// <returns>Pozicia, na ktorej jazyk bol, alebo -1.</returns>
+    internal int RemoveLanguage(FyzLanguage language, FyzLanguage? next = null)
+    {
+        var languages = GlobData.OpenedProject!.Languages;
+        var index = languages.IndexOf(language);
+        if (index < 0)
+            return -1;
+
+        _langAlreadySet = true;
+        languages.RemoveAt(index);
+        _langAlreadySet = false;
+
+        if (!ReferenceEquals(language, CurrentLanguage))
+        {
+            SetComboLanguage(CurrentLanguage);
+            return index;
+        }
+
+        if (!_newLanguages.Contains(language))
+            DiscardLanguage(language);
+
+        if (next is null || !languages.Contains(next))
+            next = languages.Count == 0 ? null : languages[Math.Min(index, languages.Count - 1)];
+        SetComboLanguage(next);
+        LoadLanguage(next);
+        return index;
+    }
+
+    /// <summary>
+    ///     Presunie priecinok jazyka do kosa. Zmazanie sa v prieskumniku nespracuva - jazyk sa zaroven zatvara.
+    /// </summary>
+    internal void DeleteLanguageDirectory(string directory)
+    {
+        if (!Directory.Exists(directory))
+            return;
+
+        var watching = fileSystemWatcher.EnableRaisingEvents;
+        fileSystemWatcher.EnableRaisingEvents = false;
+        RawBankExplorer.ConvertSoundIsHandled = true;
+        try
+        {
+            Utils.DeleteDirectoryToRecycleBin(directory, true);
+        }
+        finally
+        {
+            fileSystemWatcher.EnableRaisingEvents = watching;
+            // udalosti, ktore watcher zaradil do fronty okna este pred vypnutim, sa spracuju az po tomto
+            BeginInvoke(() => RawBankExplorer.ConvertSoundIsHandled = false);
+        }
+    }
+
+    /// <summary>
+    ///     Obnovi zobrazenie jazyka v poli Jazyk po zmene nazvu.
+    /// </summary>
+    internal void RefreshLanguage(FyzLanguage language)
+    {
+        var languages = GlobData.OpenedProject!.Languages;
+        var index = languages.IndexOf(language);
+        if (index < 0)
+            return;
+
+        _langAlreadySet = true;
+        languages.ResetItem(index);
+        _langAlreadySet = false;
+        SetComboLanguage(CurrentLanguage);
     }
 
     internal void RegisterNewAction()
@@ -567,20 +826,31 @@ public partial class FMain : Form
 
     #region MainMenu
 
-    private void DoSave(object sender, EventArgs e)
-    {
-        RawBankParser.WriteFyzBankFile(GlobData.OpenedProject!.AbsPathToBank, GlobData.OpenedProject!.Languages.ToList());
-        RawBankParser.WriteFyzZvukFile(GlobData.OpenedProject!.AbsPathToBank, CurrentLanguage!);
-        _unUndoableUnsavedChanges = false;
-        changeManager.SetSavedState();
-        Saved = true;
-    }
+    private void DoSave(object sender, EventArgs e) => SaveBank(false);
 
-    private void DoSaveAll(object sender, EventArgs e)
+    private void DoSaveAll(object sender, EventArgs e) => SaveBank(true);
+
+    /// <summary>
+    ///     Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov,
+    ///     aby FYZBANK.DAT neodkazoval na chybajuci subor.
+    /// </summary>
+    private void SaveBank(bool allLanguages)
     {
-        RawBankParser.WriteFyzBankFile(GlobData.OpenedProject!.AbsPathToBank, GlobData.OpenedProject!.Languages.ToList());
-        foreach (var lang in GlobData.OpenedProject!.Languages)
-            RawBankParser.WriteFyzZvukFile(GlobData.OpenedProject!.AbsPathToBank, lang);
+        var project = GlobData.OpenedProject!;
+        RawBankParser.WriteFyzBankFile(project.AbsPathToBank, project.Languages.ToList());
+
+        foreach (var lang in project.Languages)
+        {
+            // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
+            if (lang.Groups is null)
+                continue;
+            if (!allLanguages && !_newLanguages.Contains(lang) && !(ReferenceEquals(lang, CurrentLanguage) && _languageLoaded))
+                continue;
+
+            Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
+            RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
+            _newLanguages.Remove(lang);
+        }
 
         _unUndoableUnsavedChanges = false;
         changeManager.SetSavedState();
@@ -589,13 +859,29 @@ public partial class FMain : Form
 
     private void DoUndo(object sender, EventArgs e)
     {
-        changeManager.Undo();
+        _inUndoRedo = true;
+        try
+        {
+            changeManager.Undo();
+        }
+        finally
+        {
+            _inUndoRedo = false;
+        }
         EnableUndoRedo();
     }
 
     private void DoRedo(object sender, EventArgs e)
     {
-        changeManager.Redo();
+        _inUndoRedo = true;
+        try
+        {
+            changeManager.Redo();
+        }
+        finally
+        {
+            _inUndoRedo = false;
+        }
         EnableUndoRedo();
     }
 
@@ -813,41 +1099,94 @@ public partial class FMain : Form
         ResetStatusAfterTask();
     }
 
+    /// <summary>
+    ///     Prida prazdny jazyk (s priecinkom v RAWBANK) a otvori ho. FYZBANK.DAT a jeho FYZZVUK.DAT sa zapisu pri ulozeni.
+    ///     Ak v priecinku FYZZVUK.DAT uz je, jazyk sa nacita z neho.
+    /// </summary>
     private void DoAddLanguage(object sender, EventArgs e)
     {
-        var form = new FAddEditLanguage();
-        if (form.ShowDialog(this) == DialogResult.OK)
+        var project = GlobData.OpenedProject!;
+        var form = new FAddEditLanguage(project.Languages);
+        if (form.ShowDialog(this) != DialogResult.OK || !ConfirmLeaveLanguage())
+            return;
+
+        var lang = new FyzLanguage(form.LanguageKey, form.LanguageName, form.LanguageRelativePath) { Groups = new List<FyzGroup>() };
+        var directory = Path.TrimEndingDirectorySeparator(lang.GetAbsPath(project.AbsPathToBank));
+        string? createdDirectory = null;
+        try
         {
-            GlobData.OpenedProject!.Languages.Add(form.Language!);
-            tscboxLanguages.SelectedItem = form.Language;
-            CheckProjectState();
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+                createdDirectory = directory;
+            }
         }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+        {
+            Utils.ShowError($"Priečinok jazyka {directory} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            return;
+        }
+
+        // zmeny zoznamu jazykov spred pridania sa uz nedaju vratit (historia sa maze pri kazdom prepnuti jazyka)
+        var listChanged = LanguageListChanged();
+        // priecinok uz ma FYZZVUK.DAT (napr. jazyk odstraneny len zo zoznamu) - nacita sa, inak by ho ulozenie prepisalo prazdnym
+        if (File.Exists(LanguageRules.SoundsFile(project.AbsPathToBank, lang)))
+            lang.Groups = null!;
+        else
+            _newLanguages.Add(lang);
+        var previous = CurrentLanguage;
+        var index = project.Languages.Count;
+        InsertLanguage(lang, index);
+        if (!ReferenceEquals(CurrentLanguage, lang))
+        {
+            SetComboLanguage(lang);
+            LoadLanguage(lang);
+        }
+
+        ResetHistory(listChanged);
+        RegisterNewAction(new AddLanguageAction(this, lang, index, previous, createdDirectory));
     }
 
     private void DoEditLanguage(object sender, EventArgs e)
     {
-        var form = new FAddEditLanguage(CurrentLanguage!);
-        if (form.ShowDialog(this) == DialogResult.OK) 
-            CheckProjectState();
+        var language = CurrentLanguage!;
+        var form = new FAddEditLanguage(GlobData.OpenedProject!.Languages, language);
+        if (form.ShowDialog(this) != DialogResult.OK)
+            return;
+
+        if (form.LanguageKey == language.Key && form.LanguageName == language.Name && form.LanguageRelativePath == language.RelativePath)
+            return;
+
+        var action = new EditLanguageAction(this, language,
+            (language.Key, form.LanguageKey), (language.Name, form.LanguageName), (language.RelativePath, form.LanguageRelativePath));
+        action.Redo();
+        RegisterNewAction(action);
+        CheckProjectState();
     }
 
     private void DoDeleteLanguage(object sender, EventArgs e)
     {
         var result = Utils.ShowWarning("Práve vybraný jazyk sa odstráni.\n\nSte si istý?", MessageBoxButtons.YesNo);
-        if (result == DialogResult.Yes)
-        {
-            result = Utils.ShowWarning("Vymazať aj priečinok so zvukmi jazyka?\n\nPriečinok sa premiestni do koša.", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Cancel)
-                return;
+        if (result != DialogResult.Yes)
+            return;
 
-            RegisterNewAction(new RemoveLanguageAction(this, CurrentLanguage!, result == DialogResult.Yes));
+        result = Utils.ShowWarning("Vymazať aj priečinok so zvukmi jazyka?\n\nPriečinok sa premiestni do koša.", MessageBoxButtons.YesNoCancel);
+        if (result == DialogResult.Cancel)
+            return;
 
-            GlobData.OpenedProject!.Languages.Remove(CurrentLanguage!);
-            if (result == DialogResult.Yes)
-                Utils.DeleteDirectoryToRecycleBin(CurrentLanguage!.Directory.DirInfo.FullName, true);
+        var language = CurrentLanguage!;
+        var withData = result == DialogResult.Yes;
+        var directory = Path.TrimEndingDirectorySeparator(language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
 
-            CheckProjectState();
-        }
+        // neulozene zmeny zvukov odstraneneho jazyka sa zahodia, zmeny zoznamu jazykov ostavaju neulozene
+        var listChanged = LanguageListChanged();
+        // priecinok sa maze skor, ako sa zacne nacitavat dalsi jazyk (prehliadanie suborov banky na pozadi)
+        if (withData)
+            DeleteLanguageDirectory(directory);
+        var index = RemoveLanguage(language);
+
+        ResetHistory(listChanged);
+        RegisterNewAction(new RemoveLanguageAction(this, language, index, directory, withData));
     }
 
     private void DoConvertLangToEwa(object sender, EventArgs e)
@@ -1274,24 +1613,29 @@ public partial class FMain : Form
 
     private void tscboxLanguages_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (tscboxLanguages.SelectedIndex == -1)
+        if (_langAlreadySet)
+            return;
+
+        var selected = tscboxLanguages.SelectedItem as FyzLanguage;
+        if (ReferenceEquals(selected, CurrentLanguage))
+            return;
+
+        // prepnutie z akcie spat/znovu pokracuje v jej historii
+        if (_inUndoRedo)
         {
-            CurrentLanguage = null;
+            LoadLanguage(selected);
             return;
         }
 
-        if (!_langAlreadySet)
+        if (!ConfirmLeaveLanguage())
         {
-            
-            CurrentLanguage = tscboxLanguages.SelectedItem as FyzLanguage;
-            if (!bWorkerReadDat.IsBusy)
-            {
-                tspbProgress.Visible = true;
-                tspbProgress.Style = ProgressBarStyle.Marquee;
-                ChangeStatus("Načítanie súborov banky");
-                bWorkerReadDat.RunWorkerAsync(tscboxLanguages.SelectedItem);
-            }
+            SetComboLanguage(CurrentLanguage);
+            return;
         }
+
+        LoadLanguage(selected);
+        // akcie historie sa odkazuju na data opusteneho jazyka; neulozeny moze ostat len zoznam jazykov
+        ResetHistory(LanguageListChanged());
     }
 
     private void dgvGroups_SelectionChanged(object sender, EventArgs e)
@@ -1458,10 +1802,12 @@ public partial class FMain : Form
         tsmiEditLanguage.Enabled = enabled && CurrentLanguage != null;
         tsmimDeleteLanguage.Enabled = enabled && CurrentLanguage != null;
         tsmiDeleteLanguage.Enabled = enabled && CurrentLanguage != null;
-        tsmimConvertLangToEwa.Enabled = enabled && CurrentLanguage != null;
-        tsmimConvertLangToWav.Enabled = enabled && CurrentLanguage != null;
-        tsmiConvertLangToEwa.Enabled = enabled && CurrentLanguage != null;
-        tsmiConvertLangToWav.Enabled = enabled && CurrentLanguage != null;
+        // konverzia prechadza skupiny jazyka - len nacitany jazyk
+        var convert = enabled && CurrentLanguage != null && _languageLoaded;
+        tsmimConvertLangToEwa.Enabled = convert;
+        tsmimConvertLangToWav.Enabled = convert;
+        tsmiConvertLangToEwa.Enabled = convert;
+        tsmiConvertLangToWav.Enabled = convert;
     }
 
     private void SwitchConvertSoundsLangButtons(bool enabled)
@@ -1660,6 +2006,10 @@ public partial class FMain : Form
 
     private async void fileSystemWatcher_Created(object sender, FileSystemEventArgs e)
     {
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
+        if (CurrentLanguage?.Directory is null)
+            return;
+
         if (RawBankExplorer.ConvertSoundIsHandled || RawBankExplorer.MovingSoundIsHandled)
             return;
 
@@ -1699,6 +2049,10 @@ public partial class FMain : Form
 
     private void fileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
     {
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
+        if (CurrentLanguage?.Directory is null)
+            return;
+
         if (RawBankExplorer.ConvertSoundIsHandled || RawBankExplorer.MovingSoundIsHandled)
             return;
 
@@ -1714,6 +2068,10 @@ public partial class FMain : Form
 
     private async void fileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
     {
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
+        if (CurrentLanguage?.Directory is null)
+            return;
+
         var fileElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory);
         switch (fileElement)
         {
@@ -1745,6 +2103,10 @@ public partial class FMain : Form
 
     private void fileSystemWatcher_Renamed(object sender, RenamedEventArgs e)
     {
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
+        if (CurrentLanguage?.Directory is null)
+            return;
+
         if (RawBankExplorer.ConvertSoundIsHandled)
             return;
 
@@ -2201,9 +2563,14 @@ public partial class FMain : Form
 
     private void TimerToCheck_Tick(object sender, EventArgs e)
     {
-        RawBankExplorer.MergeFilesAndData(Root, CurrentLanguage!, GlobData.OpenedProject!.Messages, true);
         timerToCheck.Stop();
         timerToCheck.Enabled = false;
+
+        // jazyk sa nenacital (chyba pri nacitani) - nie je co porovnavat
+        if (CurrentLanguage is null || GlobData.OpenedProject?.Messages.ContainsKey(CurrentLanguage) != true)
+            return;
+
+        RawBankExplorer.MergeFilesAndData(Root, CurrentLanguage, GlobData.OpenedProject.Messages, true);
 
         _messages.Clear();
         try

@@ -14,14 +14,17 @@ internal static class GlobData
     public static Styles<RawBankEditorStyle> Styles = null!;
     public static RawBankEditorStyle UsingStyle = null!;
 
-    public static void PrepareGlobalData(string pathToINISS)
+    /// <summary>
+    ///     Nacita zoznam jazykov banky v instalacii INISS. Otvorenu banku nemeni - prevezme sa az po vybere jazyka.
+    /// </summary>
+    public static RawBankProject LoadProject(string pathToINISS)
     {
         if (string.IsNullOrEmpty(pathToINISS))
             throw new ArgumentNullException(nameof(pathToINISS));
 
         var pathToBank = pathToINISS + FileConsts.DIR_RAWBANK;
 
-        OpenedProject = new RawBankProject
+        return new RawBankProject
         {
             AbsPathToINISS = pathToINISS,
             AbsPathToBank = pathToBank,

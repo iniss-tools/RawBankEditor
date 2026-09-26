@@ -5,12 +5,12 @@ namespace RawBankEditor.Forms;
 
 public partial class FLangChoose : Form
 {
-    public FLangChoose()
+    public FLangChoose(IList<FyzLanguage> languages)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
-        cboxLanguages.DataSource = GlobData.OpenedProject!.Languages;
+        cboxLanguages.DataSource = languages;
     }
 
     public FyzLanguage Selected { get; private set; } = null!;
