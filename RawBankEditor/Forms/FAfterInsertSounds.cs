@@ -12,6 +12,7 @@ public partial class FAfterInsertSounds : Form
         this.ApplyThemeAndFonts();
 
         NewSounds = new ExBindingList<FyzSound> { sound };
+        fyzSoundBindingSource.DataSource = NewSounds;
     }
 
     private static FAfterInsertSounds? OpenedForm { get; set; }

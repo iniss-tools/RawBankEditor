@@ -198,11 +198,18 @@ public class SoundDataMissing : IRawBankMessage
     
     public void Resolve()
     {
-        var form = new FAddSound(File);
+        var group = File.Parent?.Group;
+        if (group is null)
+        {
+            Utils.ShowError($"Súbor '{File.Name}' nie je v priečinku žiadnej skupiny zvukov, údaje o zvuku sa nedajú pridať.");
+            return;
+        }
+
+        var form = new FAddSound(group, File);
         if (form.ShowDialog() == DialogResult.OK)
         {
             Program.MainForm.RegisterNewAction(new FMain.AddSoundAction(Program.MainForm, form.Sound));
-            File.Parent!.Group?.Sounds.Add(form.Sound);
+            group.Sounds.Add(form.Sound);
         }
     }
 

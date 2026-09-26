@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<!-- Generator snímok okien RawBankEditora pre dokumentáciu (iniss-tools-docs).
+	     Zostaví fiktívnu zvukovú banku INISS, otvorí v nej okná programu a uloží ich
+	     ako PNG vo svetlom aj tmavom režime. Spúšťa sa ručne, nie je súčasťou inštalácie. -->
+	<PropertyGroup>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<!-- konzolová aplikácia, aby priebeh a varovania išli do terminálu; okná WinForms zobrazí aj tak -->
+		<OutputType>Exe</OutputType>
+		<UseWindowsForms>true</UseWindowsForms>
+		<RootNamespace>RawBankEditor.DocScreenshots</RootNamespace>
+		<AssemblyName>RawBankEditor.DocScreenshots</AssemblyName>
+		<!-- titulky okien (Application.ProductName) ako v programe; konfigurácia a register
+		     sa riadia názvom zostavy, takže ostávajú oddelené od RawBankEditora -->
+		<Product>RawBankEditor</Product>
+		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<SelfContained>false</SelfContained>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<SatelliteResourceLanguages>cs</SatelliteResourceLanguages>
+		<!-- LibraryImport pre PrintWindow/DWM generuje unsafe kód -->
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<!-- WFO1000 ako v RawBankEditor.csproj -->
+		<NoWarn>$(NoWarn);WFO1000</NoWarn>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\RawBankEditor\RawBankEditor.csproj" />
+	</ItemGroup>
+</Project>

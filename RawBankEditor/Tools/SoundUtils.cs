@@ -70,7 +70,8 @@ public static class SoundUtils
         outpath ??= Path.ChangeExtension(inpath, WAV_EXT);
 
         using var inStream = new FileStream(inpath, FileMode.Open, FileAccess.Read);
-        using var outStream = new FileStream(outpath, FileMode.Create, FileAccess.Write);
+        // ReadWrite - pri kontrole sa vystupny WAV cita spat
+        using var outStream = new FileStream(outpath, FileMode.Create, FileAccess.ReadWrite);
         using var reader = new BinaryReader(inStream);
         using var writer = new BinaryWriter(outStream);
 
@@ -82,7 +83,8 @@ public static class SoundUtils
     /// </summary>
     /// <param name="instream">input stream (.EWA)</param>
     /// <param name="outstream">output stream (.WAV)</param>
-    /// <param name="check">whether the format of .WAV stream should be checked</param>
+    /// <param name="check">whether the format of .WAV stream should be checked (output stream must be readable and seekable)</param>
+    /// <exception cref="FormatException">vystup nie je platny WAV (len pri <paramref name="check" />)</exception>
     public static void ConvertEWAtoWAV(BinaryReader instream, BinaryWriter outstream, bool check = false)
     {
         var b = instream.ReadByte();
@@ -100,8 +102,12 @@ public static class SoundUtils
 
         if (check)
         {
+            outstream.Flush();
+            var end = outstream.BaseStream.Position;
             outstream.BaseStream.Position = 0;
-            CheckWAV(instream);
+            using (var outReader = new BinaryReader(outstream.BaseStream, Encoding.ASCII, true))
+                CheckWAV(outReader);
+            outstream.BaseStream.Position = end;
         }
     }
 
@@ -143,6 +149,7 @@ public static class SoundUtils
         {
             instream.BaseStream.Position = 0;
             CheckWAV(instream);
+            instream.BaseStream.Position = 0;
         }
 
         while (instream.BaseStream.Position < instream.BaseStream.Length)
@@ -324,6 +331,14 @@ public static class SoundUtils
         }
     }
 
+    /// <summary>
+    ///     Skonvertuje subory (aj rekurzivne v priecinkoch) na .EWA alebo .WAV. Povodny subor sa zmaze
+    ///     a prvok aj priradeny zvuk dostanu novy nazov suboru.
+    /// </summary>
+    /// <remarks>
+    ///     Preskoci subory, ktore uz maju cielovu priponu alebo neexistuju, a subory, vedla ktorych
+    ///     uz cielovy subor existuje (neprepisuje ho).
+    /// </remarks>
     public static void ConvertFiles(IEnumerable<FileSystemElement> elements, bool toEwa)
     {
         var ext = toEwa ? EWA_EXT : WAV_EXT;
@@ -332,24 +347,68 @@ public static class SoundUtils
             switch (element)
             {
                 case SoundFileElement sfe:
-                    if (sfe.FileInfo is null || sfe.FileInfo.Extension.EqualsIgnoreCase(ext) || File.Exists(sfe.FileInfo.FullName))
+                    if (sfe.FileInfo is null || sfe.FileInfo.Extension.EqualsIgnoreCase(ext) || !File.Exists(sfe.FileInfo.FullName))
                         continue;
 
-                    var newPath = Path.ChangeExtension(sfe.FileInfo.FullName, ext);
+                    var oldPath = sfe.FileInfo.FullName;
+                    var newPath = Path.ChangeExtension(oldPath, ext);
+                    if (File.Exists(newPath))
+                        continue;
+
                     if (toEwa)
-                        ConvertWAVtoEWA(sfe.FileInfo.FullName, newPath);
+                        ConvertWAVtoEWA(oldPath, newPath);
                     else
-                        ConvertEWAtoWAV(sfe.FileInfo.FullName, newPath);
+                        ConvertEWAtoWAV(oldPath, newPath);
+                    File.Delete(oldPath);
+
                     sfe.FileInfo = new FileInfo(newPath);
+                    sfe.Name = sfe.FileInfo.Name;
                     if (sfe.Sound is not null)
-                    {
-                        sfe.Sound.FileName = sfe.FileInfo.Name;
-                    }
+                        sfe.Sound.FileName = sfe.Name;
                     break;
                 case DirectoryElement de:
                     ConvertFiles(de.Children, toEwa);
                     break;
             }
         }
+    }
+
+    /// <summary>
+    ///     Vrati predvoleny nazov suboru noveho zvuku podla kluca. Ak v priecinku skupiny existuje subor
+    ///     s nazvom kluca (.WAV/.EWA), pouzije sa jeho nazov, inak kluc s priponou prevladajucou v skupine
+    ///     (predvolene .WAV).
+    /// </summary>
+    public static string GetDefaultFileName(FyzGroup group, string key)
+    {
+        ArgumentNullException.ThrowIfNull(group);
+
+        var existing = group.Directory?.Children
+            .OfType<SoundFileElement>()
+            .FirstOrDefault(f => RawBankExplorer.EqualsPathNames(Path.GetFileNameWithoutExtension(f.Name), key));
+        if (existing is not null)
+            return existing.Name;
+
+        var ewaCount = group.Sounds.Count(s => s.FileName is not null && Path.GetExtension(s.FileName).EqualsIgnoreCase(EWA_EXT));
+        return key + (ewaCount * 2 > group.Sounds.Count ? EWA_EXT : WAV_EXT);
+    }
+
+    /// <summary>
+    ///     Najde fyzicky subor zvuku rovnako ako <see cref="RawBankExplorer.MergeFilesAndData" />: pri prazdnej
+    ///     pridavnej ceste v priecinku skupiny podla nazvu suboru, inak na absolutnej ceste zvuku.
+    /// </summary>
+    /// <returns>prvok suboru alebo <c>null</c>, ak subor neexistuje.</returns>
+    public static SoundFileElement? FindSoundFile(FyzSound sound, string pathToBank)
+    {
+        ArgumentNullException.ThrowIfNull(sound);
+
+        if (!RawBankParser.AdditionalPathIsEmpty(sound.AdditionalRelativePath))
+        {
+            var path = sound.GetAbsPath(pathToBank);
+            return File.Exists(path) ? new SoundFileElement(path) : null;
+        }
+
+        return sound.Group.Directory?.Children
+            .OfType<SoundFileElement>()
+            .FirstOrDefault(f => RawBankExplorer.EqualsPathNames(f.Name, sound.FileName));
     }
 }

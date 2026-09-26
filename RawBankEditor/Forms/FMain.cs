@@ -378,6 +378,35 @@ public partial class FMain : Form
         tsmimRecent.Enabled = enabled;
         tsbRecent.Enabled = enabled;
     }
+    
+    /// <inheritdoc />
+    protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+    {
+        // pri pisani do bunky patria Delete, Insert a Backspace textu - skratky Odstranit zvuky a Pridat zvuk
+        // z ponuky by inak zmazali alebo pridali zvuk
+        if (IsTextEditingKey(keyData) && IsEditingText())
+            return false;
+
+        // v prieskumniku suborov patria Delete, F2 a F5 suborom (DgvExplorer_KeyDown), nie zvukom
+        if (dgvExplorer.ContainsFocus && keyData is Keys.Delete or Keys.F2 or Keys.F5)
+            return false;
+
+        return base.ProcessCmdKey(ref msg, keyData);
+    }
+
+    private static bool IsTextEditingKey(Keys keyData)
+        => (keyData & Keys.KeyCode) is Keys.Delete or Keys.Insert or Keys.Back && (keyData & Keys.Alt) == 0;
+
+    private bool IsEditingText()
+    {
+        if (dgvSounds.EditingControl is TextBoxBase || dgvGroups.EditingControl is TextBoxBase || dgvExplorer.EditingControl is TextBoxBase)
+            return true;
+
+        Control? focused = ActiveControl;
+        while (focused is ContainerControl { ActiveControl: { } inner })
+            focused = inner;
+        return focused is TextBoxBase or ComboBox { DropDownStyle: not ComboBoxStyle.DropDownList };
+    }
 
     /// <summary>
     ///     Otvorí projekt a zapíše ho do zoznamu naposledy otvorených projektov.
@@ -668,8 +697,11 @@ public partial class FMain : Form
 
     private void DoAddSound(object sender, EventArgs e)
     {
-        var form = new FAddSound();
-        if (form.ShowDialog() == DialogResult.OK)
+        if (CurrentGroup is null)
+            return;
+
+        var form = new FAddSound(CurrentGroup);
+        if (form.ShowDialog(this) == DialogResult.OK)
         {
             MenuSounds.Add(form.Sound);
             RegisterNewAction(new AddSoundAction(this, form.Sound));
@@ -720,7 +752,7 @@ public partial class FMain : Form
         if (form.ShowDialog(this) != DialogResult.OK) 
             return;
 
-        var sounds = dgvSounds.SelectedRows.Cast<FyzSound>().ToList();
+        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
         var pathTobank = GlobData.OpenedProject!.AbsPathToBank;
         foreach (var sound in sounds)
         {
@@ -751,7 +783,7 @@ public partial class FMain : Form
 
         ChangeStatus("Konvertujem vybrané zvuky");
         tspbProgress.Visible = true;
-        var sounds = dgvSounds.SelectedRows.Cast<FyzSound>().ToList();
+        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
         RegisterNewAction(new ConvertSoundsEwaWawAction(this, sounds, true));
         ConvertSounds(sounds, true);
         CheckProjectState();
@@ -765,7 +797,7 @@ public partial class FMain : Form
 
         ChangeStatus("Konvertujem vybrané zvuky");
         tspbProgress.Visible = true;
-        var sounds = dgvSounds.SelectedRows.Cast<FyzSound>().ToList();
+        var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>().ToList();
         RegisterNewAction(new ConvertSoundsEwaWawAction(this, sounds, false));
         ConvertSounds(sounds, false);
         CheckProjectState();
@@ -777,14 +809,8 @@ public partial class FMain : Form
         tspbProgress.Maximum = sounds.Count;
         tspbProgress.Style = ProgressBarStyle.Blocks;
         tspbProgress.Value = 0;
-        await Task.Run(() =>
-        {
-            RawBankExplorer.ConvertSoundIsHandled = true;
-            SoundUtils.ConvertSounds(sounds, toEwa, tspbProgress);
-            RawBankExplorer.ConvertSoundIsHandled = false;
-
-            Invoke(ResetStatusAfterTask);
-        });
+        await RunWithoutFileWatcher(() => SoundUtils.ConvertSounds(sounds, toEwa, tspbProgress));
+        ResetStatusAfterTask();
     }
 
     private void DoAddLanguage(object sender, EventArgs e)
@@ -857,14 +883,8 @@ public partial class FMain : Form
         tspbProgress.Minimum = 0;
         tspbProgress.Maximum = sndCount;
         tspbProgress.Style = ProgressBarStyle.Blocks;
-        await Task.Run(() =>
-        {
-            RawBankExplorer.ConvertSoundIsHandled = true;
-            SoundUtils.ConvertSoundsLanguage(language, toEwa, tspbProgress);
-            RawBankExplorer.ConvertSoundIsHandled = false;
-
-            Invoke(ResetStatusAfterTask);
-        });
+        await RunWithoutFileWatcher(() => SoundUtils.ConvertSoundsLanguage(language, toEwa, tspbProgress));
+        ResetStatusAfterTask();
     }
 
     private void ShowAppSettings(object sender, EventArgs e)
@@ -1196,7 +1216,7 @@ public partial class FMain : Form
 
         ChangeStatus("Konvertujem vybrané súbory/priečinky");
         tspbProgress.Visible = true;
-        var files = dgvExplorer.SelectedRows.Cast<FileSystemElement>().ToList();
+        var files = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FileSystemElement>().ToList();
         RegisterNewAction(new ConvertFilesEwaWawAction(this, files, true));
         ConvertFiles(files, true);
         CheckProjectState();
@@ -1210,7 +1230,7 @@ public partial class FMain : Form
 
         ChangeStatus("Konvertujem vybrané súbory/priečinky");
         tspbProgress.Visible = true;
-        var files = dgvExplorer.SelectedRows.Cast<FileSystemElement>().ToList();
+        var files = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FileSystemElement>().ToList();
         RegisterNewAction(new ConvertFilesEwaWawAction(this, files, false));
         ConvertFiles(files, false);
         CheckProjectState();
@@ -1219,14 +1239,33 @@ public partial class FMain : Form
     private async void ConvertFiles(IEnumerable<FileSystemElement> files, bool toEwa)
     {
         tspbProgress.Style = ProgressBarStyle.Marquee;
-        await Task.Run(() =>
-        {
-            RawBankExplorer.ConvertSoundIsHandled = true;
-            SoundUtils.ConvertFiles(files, toEwa);
-            RawBankExplorer.ConvertSoundIsHandled = false;
+        await RunWithoutFileWatcher(() => SoundUtils.ConvertFiles(files, toEwa));
+        ResetStatusAfterTask();
+    }
 
-            Invoke(ResetStatusAfterTask);
-        });
+    /// <summary>
+    ///     Spusti konverziu suborov na pozadi tak, aby udalosti fileSystemWatcher-a o vytvoreni a zmazani
+    ///     konvertovanych suborov nevytvorili duplicitne prvky ani zvuky (prvky upravi sama konverzia).
+    /// </summary>
+    private async Task RunWithoutFileWatcher(System.Action convert)
+    {
+        var watching = fileSystemWatcher.EnableRaisingEvents;
+        RawBankExplorer.ConvertSoundIsHandled = true;
+        fileSystemWatcher.EnableRaisingEvents = false;
+        try
+        {
+            await Task.Run(convert);
+        }
+        catch (Exception ex)
+        {
+            Utils.ShowError(ex.Message);
+        }
+        finally
+        {
+            fileSystemWatcher.EnableRaisingEvents = watching;
+            // udalosti, ktore watcher zaradil do fronty okna este pred vypnutim, sa spracuju az po tomto
+            BeginInvoke(() => RawBankExplorer.ConvertSoundIsHandled = false);
+        }
     }
 
     #endregion

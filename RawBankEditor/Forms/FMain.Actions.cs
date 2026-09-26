@@ -144,6 +144,9 @@ partial class FMain
             Form.SelectGroup(Sound.Group);
 
             Sound.Group.Sounds.Remove(Sound);
+            // subor ostane bez udajov o zvuku (SoundDataMissing)
+            if (Sound.File?.Sound == Sound)
+                Sound.File.Sound = null!;
             Form.dgvSounds.ResetBindings();
         }
 
@@ -152,6 +155,8 @@ partial class FMain
             Form.SelectGroup(Sound.Group);
 
             Sound.Group.Sounds.Add(Sound);
+            if (Sound.File is not null)
+                Sound.File.Sound = Sound;
             Form.dgvSounds.ResetBindings();
             Form.dgvSounds.Rows[Sound.Group.Sounds.Count - 1].Selected = true;
         }

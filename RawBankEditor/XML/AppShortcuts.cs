@@ -31,7 +31,7 @@ public record AppShortcuts()
         [nameof(EditLanguage)] = (Shortcut.None, "Upraviť jazyk"),
         [nameof(DeleteLanguage)] = (Shortcut.None, "Odstrániť jazyk"),
         [nameof(AppSettings)] = (Shortcut.CtrlShiftN, "Nastavenia programu"),
-        [nameof(HighlightProblem)] = (Shortcut.F10, "Zvýrazniť problem"),
+        [nameof(HighlightProblem)] = (Shortcut.F10, "Zvýrazniť problém"),
         [nameof(ResolveProblem)] = (Shortcut.AltF10, "Vyriešiť problém")
     };
 
