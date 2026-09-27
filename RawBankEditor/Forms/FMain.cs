@@ -17,7 +17,7 @@ public partial class FMain : Form
     private readonly ExBindingList<IRawBankMessage> _messages = new();
 
     //ikony
-    private readonly ShellIcon _error, _warning, _info;
+    private readonly Bitmap _error, _warning, _info;
 
     private BackButtonElement? _explorerBack;
 
@@ -87,14 +87,14 @@ public partial class FMain : Form
 
         SetRecentDirs();
 
-        _error = new ShellIcon(ShellIconType.Error, ShellIconSize.Small);
-        _warning = new ShellIcon(ShellIconType.Warning, ShellIconSize.Small);
-        _info = new ShellIcon(ShellIconType.Info, ShellIconSize.Small);
+        _error = StockIcon(ShellIconType.Error);
+        _warning = StockIcon(ShellIconType.Warning);
+        _info = StockIcon(ShellIconType.Info);
         
-        tsbErrors.Image = _error.ToBitmap();
-        tsbWarnings.Image = _warning.ToBitmap();
-        tsbInfos.Image = _info.ToBitmap();
-        tsmimShowErrors.Image = _error.ToBitmap();
+        tsbErrors.Image = _error;
+        tsbWarnings.Image = _warning;
+        tsbInfos.Image = _info;
+        tsmimShowErrors.Image = _error;
 
         dgvExplorer.DataSource = ExplorerContent;
 
@@ -1692,6 +1692,15 @@ public partial class FMain : Form
         }
     }
 
+    /// <summary>
+    ///     Mala ikona systemu ako obrazok - vytvara sa raz, nie pri kazdom vykresleni bunky.
+    /// </summary>
+    private static Bitmap StockIcon(ShellIconType type)
+    {
+        using var icon = new ShellIcon(type, ShellIconSize.Small);
+        return icon.ToBitmap();
+    }
+
     private void FMain_FormClosed(object sender, FormClosedEventArgs e)
     {
         _error.Dispose();
@@ -2247,15 +2256,15 @@ public partial class FMain : Form
                 switch (msg.Type)
                 {
                     case MessageType.Info:
-                        e.Value = _info.ToBitmap();
+                        e.Value = _info;
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Informácia";
                         break;
                     case MessageType.Warning:
-                        e.Value = _warning.ToBitmap();
+                        e.Value = _warning;
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Upozornenie";
                         break;
                     case MessageType.Error:
-                        e.Value = _error.ToBitmap();
+                        e.Value = _error;
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Chyba";
                         break;
                     default:
@@ -2324,7 +2333,7 @@ public partial class FMain : Form
 
             if (errorCount != 0)
             {
-                tssbErrors.Image = _error.ToBitmap();
+                tssbErrors.Image = _error;
                 tssbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
                 tssbErrors.ForeColor = Color.Red;
             }
