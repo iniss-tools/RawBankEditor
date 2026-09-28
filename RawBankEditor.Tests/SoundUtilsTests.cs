@@ -2,7 +2,7 @@ using System.Text;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 
-namespace RawBankEditorTests;
+namespace RawBankEditor.Tests;
 
 [TestClass]
 public class SoundUtilsTests
@@ -13,7 +13,7 @@ public class SoundUtilsTests
     [TestInitialize]
     public void Init()
     {
-        _bank = Path.Combine(Path.GetTempPath(), "RawBankEditorTests_" + Guid.NewGuid().ToString("N")) + "\\";
+        _bank = Path.Combine(Path.GetTempPath(), "RawBankEditor.Tests_" + Guid.NewGuid().ToString("N")) + "\\";
         _groupDir = Path.Combine(_bank, "SK", "R1");
         Directory.CreateDirectory(_groupDir);
     }

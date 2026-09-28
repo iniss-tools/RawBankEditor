@@ -1,7 +1,7 @@
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 
-namespace RawBankEditorTests;
+namespace RawBankEditor.Tests;
 
 [TestClass]
 public class GroupRulesTests

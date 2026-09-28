@@ -138,6 +138,24 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uloženie banky zlyhalo – súbory banky sa vrátili do pôvodného stavu.
+        /// </summary>
+        internal static string FMain_Save_Failed {
+            get {
+                return ResourceManager.GetString("FMain_Save_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uloženie banky zlyhalo a pôvodné súbory sa nepodarilo vrátiť.
+        /// </summary>
+        internal static string FMain_Save_Failed_Rollback {
+            get {
+                return ResourceManager.GetString("FMain_Save_Failed_Rollback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to V súboroch ste vykonali zmeny. Uložiť zmeny?.
         /// </summary>
         internal static string FMain_Save_Changes {

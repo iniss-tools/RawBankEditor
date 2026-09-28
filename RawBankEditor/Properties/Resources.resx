@@ -175,4 +175,17 @@ Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
 
 Zadaná akcia môže trvať dlhšiu dobu.</value>
   </data>
+  <data name="FMain_Save_Failed" xml:space="preserve">
+    <value>Uloženie banky zlyhalo, súbory banky sa vrátili do pôvodného stavu a zmeny ostali neuložené.
+
+{0}</value>
+  </data>
+  <data name="FMain_Save_Failed_Rollback" xml:space="preserve">
+    <value>Uloženie banky zlyhalo a pôvodné súbory banky sa nepodarilo vrátiť. INISS ju nemusí načítať.
+
+Pôvodné súbory sú v priečinku:
+{1}
+
+{0}</value>
+  </data>
 </root>

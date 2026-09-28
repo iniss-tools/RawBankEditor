@@ -1,7 +1,7 @@
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 
-namespace RawBankEditorTests;
+namespace RawBankEditor.Tests;
 
 [TestClass]
 public class SoundRulesTests
@@ -103,7 +103,7 @@ public class SoundRulesTests
     [TestMethod]
     public void ValidateMove_KolizieKlucaNazvuASuboru()
     {
-        var bank = Path.Combine(Path.GetTempPath(), "RawBankEditorTests_" + Guid.NewGuid().ToString("N")) + "\\";
+        var bank = Path.Combine(Path.GetTempPath(), "RawBankEditor.Tests_" + Guid.NewGuid().ToString("N")) + "\\";
         try
         {
             var r1 = Group("R1");
@@ -135,7 +135,7 @@ public class SoundRulesTests
     [TestMethod]
     public void ValidateMove_ChybajuciPriecinokCielovejSkupiny()
     {
-        var bank = Path.Combine(Path.GetTempPath(), "RawBankEditorTests_" + Guid.NewGuid().ToString("N")) + "\\";
+        var bank = Path.Combine(Path.GetTempPath(), "RawBankEditor.Tests_" + Guid.NewGuid().ToString("N")) + "\\";
         try
         {
             var r1 = Group("R1");

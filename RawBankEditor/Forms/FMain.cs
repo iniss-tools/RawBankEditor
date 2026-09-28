@@ -4,6 +4,7 @@ using Microsoft.VisualBasic.FileIO;
 using RawBankEditor.Entities;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
+using System.Globalization;
 using ToolsCore.Entities;
 using ToolsCore;
 using ToolsCore.Forms;
@@ -877,30 +878,52 @@ public partial class FMain : Form
     private bool SaveBank(bool allLanguages)
     {
         var project = GlobData.OpenedProject!;
+
+        // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
+        var languages = project.Languages
+            .Where(lang => lang.Groups is not null
+                           && (allLanguages || _newLanguages.Contains(lang) || (ReferenceEquals(lang, CurrentLanguage) && _languageLoaded)))
+            .ToList();
+
+        // FYZBANK.DAT a FYZZVUK.DAT jazykov patria k sebe - pri chybe v polovici sa vratia vsetky,
+        // inak by FYZBANK.DAT mohol odkazovat na subor, ktory nevznikol, a INISS by pri starte skoncil
+        FileTransaction transaction;
+        try
+        {
+            transaction = new FileTransaction(
+                languages.Select(lang => RawBankParser.FyzZvukFile(project.AbsPathToBank, lang))
+                    .Prepend(RawBankParser.FyzBankFile(project.AbsPathToBank)));
+        }
+        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
+        {
+            Log.Exception(exception);
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_Save_Failed, exception.Message));
+            return false;
+        }
+
         try
         {
             RawBankParser.WriteFyzBankFile(project.AbsPathToBank, project.Languages.ToList());
 
-            foreach (var lang in project.Languages)
+            foreach (var lang in languages)
             {
-                // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
-                if (lang.Groups is null)
-                    continue;
-                if (!allLanguages && !_newLanguages.Contains(lang) && !(ReferenceEquals(lang, CurrentLanguage) && _languageLoaded))
-                    continue;
-
                 Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
                 RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
-                _newLanguages.Remove(lang);
             }
         }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
+        catch (Exception exception)
         {
-            // napr. subor len na citanie, bez opravneni na zapis alebo otvoreny inym programom
+            // napr. subor len na citanie, bez opravneni na zapis, otvoreny inym programom alebo pridlhy text
             Log.Exception(exception);
-            Utils.ShowError("Uloženie banky zlyhalo, zmeny ostali neuložené.\n\n" + exception.Message);
+            Utils.ShowError(transaction.TryRollback()
+                ? string.Format(CultureInfo.CurrentCulture, Resources.FMain_Save_Failed, exception.Message)
+                : string.Format(CultureInfo.CurrentCulture, Resources.FMain_Save_Failed_Rollback, exception.Message, transaction.BackupPath));
             return false;
         }
+
+        transaction.Commit();
+        foreach (var lang in languages)
+            _newLanguages.Remove(lang);
 
         _unUndoableUnsavedChanges = false;
         _diskChangedSinceSave = false;
