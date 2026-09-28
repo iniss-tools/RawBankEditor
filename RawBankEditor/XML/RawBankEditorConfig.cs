@@ -19,7 +19,7 @@ public record RawBankEditorConfig() : ConfigBase
     /// Klávesové skratky pre akcie na pracovnej ploche programu.
     /// </summary>
     [XmlElement("Shortcuts")] 
-    public AppShortcuts Shortcuts { get; set; } = new();
+    public ShortcutMap Shortcuts { get; set; } = new();
 
     [XmlElement("ShowErrorsWindow")]
     [DefaultValue(true)]
@@ -59,7 +59,7 @@ public record RawBankEditorConfig() : ConfigBase
     protected RawBankEditorConfig(RawBankEditorConfig original) : base(original)
     {
         DesktopCols = original.DesktopCols with { };
-        Shortcuts = original.Shortcuts with { };
+        Shortcuts = original.Shortcuts.Clone();
         ShowErrorsWindow = original.ShowErrorsWindow;
         LeftPanelWidth = original.LeftPanelWidth;
         GroupPanelWidth = original.GroupPanelWidth;

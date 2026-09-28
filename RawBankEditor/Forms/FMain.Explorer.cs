@@ -6,7 +6,7 @@ namespace RawBankEditor.Forms;
 
 partial class FMain
 {
-    private void DoRenameFile(object sender, EventArgs e)
+    private void DoRenameFile()
     {
         if (dgvExplorer.IsSelectionEmpty() || dgvExplorer.SelectedRows[0].DataBoundItem is BackButtonElement)
             return;
@@ -177,7 +177,7 @@ partial class FMain
         CheckProjectState();
     }
 
-    private void DoDeleteFile(object sender, EventArgs e)
+    private void DoDeleteFile()
     {
         if (dgvExplorer.IsSelectionEmpty())
             return;

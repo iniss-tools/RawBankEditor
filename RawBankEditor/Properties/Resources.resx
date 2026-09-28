@@ -188,4 +188,64 @@ Pôvodné súbory sú v priečinku:
 
 {0}</value>
   </data>
+  <data name="Cmd_Open" xml:space="preserve">
+    <value>Otvoriť banku</value>
+  </data>
+  <data name="Cmd_Save" xml:space="preserve">
+    <value>Uložiť</value>
+  </data>
+  <data name="Cmd_SaveAll" xml:space="preserve">
+    <value>Uložiť všetko</value>
+  </data>
+  <data name="Cmd_Undo" xml:space="preserve">
+    <value>Späť</value>
+  </data>
+  <data name="Cmd_Redo" xml:space="preserve">
+    <value>Znovu</value>
+  </data>
+  <data name="Cmd_AddSound" xml:space="preserve">
+    <value>Pridať zvuk</value>
+  </data>
+  <data name="Cmd_DeleteSounds" xml:space="preserve">
+    <value>Odstrániť vybrané zvuky</value>
+  </data>
+  <data name="Cmd_MoveSounds" xml:space="preserve">
+    <value>Premiestniť zvuky do inej skupiny</value>
+  </data>
+  <data name="Cmd_RewriteMode" xml:space="preserve">
+    <value>Prepisovací mód</value>
+  </data>
+  <data name="Cmd_WrapTextSoundCol" xml:space="preserve">
+    <value>Prispôsobiť text hlásenia v bunkách</value>
+  </data>
+  <data name="Cmd_GoBack" xml:space="preserve">
+    <value>Prejsť späť</value>
+  </data>
+  <data name="Cmd_GoForward" xml:space="preserve">
+    <value>Prejsť dopredu</value>
+  </data>
+  <data name="Cmd_Search" xml:space="preserve">
+    <value>Hľadať</value>
+  </data>
+  <data name="Cmd_AddLanguage" xml:space="preserve">
+    <value>Pridať jazyk</value>
+  </data>
+  <data name="Cmd_EditLanguage" xml:space="preserve">
+    <value>Upraviť jazyk</value>
+  </data>
+  <data name="Cmd_DeleteLanguage" xml:space="preserve">
+    <value>Odstrániť jazyk</value>
+  </data>
+  <data name="Cmd_AppSettings" xml:space="preserve">
+    <value>Nastavenia programu</value>
+  </data>
+  <data name="Cmd_HighlightProblem" xml:space="preserve">
+    <value>Zvýrazniť problém</value>
+  </data>
+  <data name="Cmd_ResolveProblem" xml:space="preserve">
+    <value>Vyriešiť problém</value>
+  </data>
+  <data name="FMain_Vyberte_priecinok_s_INISS" xml:space="preserve">
+    <value>Vyberte priečinok s INISS.exe</value>
+  </data>
 </root>

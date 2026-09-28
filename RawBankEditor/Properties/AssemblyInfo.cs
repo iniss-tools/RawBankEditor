@@ -40,3 +40,4 @@ using System.Runtime.Versioning;
 [assembly: AssemblyFileVersion("1.1.0.0")]
 [assembly: NeutralResourcesLanguage("sk")]
 [assembly: InternalsVisibleTo("RawBankEditor.DocScreenshots")]
+[assembly: InternalsVisibleTo("RawBankEditor.Tests")]

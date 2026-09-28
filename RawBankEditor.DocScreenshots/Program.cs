@@ -166,9 +166,9 @@ internal static class Program
             typeof(FMain).GetMethod("OpenProject", Any)!.Invoke(main, [installDir]);
         }
 
-        var worker = (System.ComponentModel.BackgroundWorker)main.GetType().GetField("bWorkerReadDat", Any)!.GetValue(main)!;
+        bool Reading() => (bool)main.GetType().GetField("_readingLanguage", Any)!.GetValue(main)!;
         var groups = (DataGridView)main.GetType().GetField("dgvGroups", Any)!.GetValue(main)!;
-        if (!Pump.Until(() => !worker.IsBusy && groups.DataSource is not null && groups.Rows.Count > 0))
+        if (!Pump.Until(() => !Reading() && groups.DataSource is not null && groups.Rows.Count > 0))
             throw new TimeoutException("Banka sa nenačítala.");
 
         return main;

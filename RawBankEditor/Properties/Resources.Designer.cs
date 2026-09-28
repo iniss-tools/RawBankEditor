@@ -219,5 +219,185 @@ namespace RawBankEditor.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Otvoriť banku.
+        /// </summary>
+        internal static string Cmd_Open {
+            get {
+                return ResourceManager.GetString("Cmd_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložiť.
+        /// </summary>
+        internal static string Cmd_Save {
+            get {
+                return ResourceManager.GetString("Cmd_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uložiť všetko.
+        /// </summary>
+        internal static string Cmd_SaveAll {
+            get {
+                return ResourceManager.GetString("Cmd_SaveAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Späť.
+        /// </summary>
+        internal static string Cmd_Undo {
+            get {
+                return ResourceManager.GetString("Cmd_Undo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Znovu.
+        /// </summary>
+        internal static string Cmd_Redo {
+            get {
+                return ResourceManager.GetString("Cmd_Redo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridať zvuk.
+        /// </summary>
+        internal static string Cmd_AddSound {
+            get {
+                return ResourceManager.GetString("Cmd_AddSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odstrániť vybrané zvuky.
+        /// </summary>
+        internal static string Cmd_DeleteSounds {
+            get {
+                return ResourceManager.GetString("Cmd_DeleteSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Premiestniť zvuky do inej skupiny.
+        /// </summary>
+        internal static string Cmd_MoveSounds {
+            get {
+                return ResourceManager.GetString("Cmd_MoveSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepisovací mód.
+        /// </summary>
+        internal static string Cmd_RewriteMode {
+            get {
+                return ResourceManager.GetString("Cmd_RewriteMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prispôsobiť text hlásenia v bunkách.
+        /// </summary>
+        internal static string Cmd_WrapTextSoundCol {
+            get {
+                return ResourceManager.GetString("Cmd_WrapTextSoundCol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prejsť späť.
+        /// </summary>
+        internal static string Cmd_GoBack {
+            get {
+                return ResourceManager.GetString("Cmd_GoBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prejsť dopredu.
+        /// </summary>
+        internal static string Cmd_GoForward {
+            get {
+                return ResourceManager.GetString("Cmd_GoForward", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hľadať.
+        /// </summary>
+        internal static string Cmd_Search {
+            get {
+                return ResourceManager.GetString("Cmd_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridať jazyk.
+        /// </summary>
+        internal static string Cmd_AddLanguage {
+            get {
+                return ResourceManager.GetString("Cmd_AddLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upraviť jazyk.
+        /// </summary>
+        internal static string Cmd_EditLanguage {
+            get {
+                return ResourceManager.GetString("Cmd_EditLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odstrániť jazyk.
+        /// </summary>
+        internal static string Cmd_DeleteLanguage {
+            get {
+                return ResourceManager.GetString("Cmd_DeleteLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nastavenia programu.
+        /// </summary>
+        internal static string Cmd_AppSettings {
+            get {
+                return ResourceManager.GetString("Cmd_AppSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zvýrazniť problém.
+        /// </summary>
+        internal static string Cmd_HighlightProblem {
+            get {
+                return ResourceManager.GetString("Cmd_HighlightProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyriešiť problém.
+        /// </summary>
+        internal static string Cmd_ResolveProblem {
+            get {
+                return ResourceManager.GetString("Cmd_ResolveProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyberte priečinok s INISS.exe.
+        /// </summary>
+        internal static string FMain_Vyberte_priecinok_s_INISS {
+            get {
+                return ResourceManager.GetString("FMain_Vyberte_priecinok_s_INISS", resourceCulture);
+            }
+        }
     }
 }

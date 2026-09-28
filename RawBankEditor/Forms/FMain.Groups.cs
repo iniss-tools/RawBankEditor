@@ -7,7 +7,7 @@ namespace RawBankEditor.Forms;
 
 partial class FMain
 {
-    private void DoAddGroup(object sender, EventArgs e)
+    private void DoAddGroup()
     {
         var language = CurrentLanguage!;
         var form = new FAddEditGroup(language.Groups);
@@ -32,7 +32,7 @@ partial class FMain
         RegisterNewAction(new AddGroupAction(this, group, index, created ? directory : null));
     }
 
-    private void DoEditGroup(object sender, EventArgs e)
+    private void DoEditGroup()
     {
         if (dgvGroups.IsSelectionEmpty())
             return;
@@ -51,7 +51,7 @@ partial class FMain
             RegisterNewAction(action);
     }
 
-    private void DoDeleteGroup(object sender, EventArgs e)
+    private void DoDeleteGroup()
     {
         if (dgvGroups.IsSelectionEmpty())
             return;

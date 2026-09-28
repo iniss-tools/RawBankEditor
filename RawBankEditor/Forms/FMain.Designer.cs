@@ -214,7 +214,6 @@ namespace RawBankEditor.Forms
             this.tsbWrapTextSoundCol = new System.Windows.Forms.ToolStripButton();
             this.tsbRewriteMode = new System.Windows.Forms.ToolStripButton();
             this.undoActionChooser = new ExControls.ToolStripUndoRedoActionChooser();
-            this.bWorkerReadDat = new System.ComponentModel.BackgroundWorker();
             this.fileSystemWatcher = new System.IO.FileSystemWatcher();
             this.moveManager = new ExControls.Providers.BackwardForwardProvider();
             this.changeManager = new ExControls.Providers.UndoRedoManager();
@@ -293,7 +292,6 @@ namespace RawBankEditor.Forms
             this.tsmimOpen.Name = "tsmimOpen";
             this.tsmimOpen.Size = new System.Drawing.Size(142, 22);
             this.tsmimOpen.Text = "&Otvoriť...";
-            this.tsmimOpen.Click += new System.EventHandler(this.DoOpenDir);
             // 
             // tsmimRecent
             // 
@@ -314,7 +312,6 @@ namespace RawBankEditor.Forms
             this.tsmimSave.Name = "tsmimSave";
             this.tsmimSave.Size = new System.Drawing.Size(142, 22);
             this.tsmimSave.Text = "&Uložiť";
-            this.tsmimSave.Click += new System.EventHandler(this.DoSave);
             // 
             // tsmimSaveAll
             // 
@@ -323,7 +320,6 @@ namespace RawBankEditor.Forms
             this.tsmimSaveAll.Name = "tsmimSaveAll";
             this.tsmimSaveAll.Size = new System.Drawing.Size(142, 22);
             this.tsmimSaveAll.Text = "Uložiť &všetko";
-            this.tsmimSaveAll.Click += new System.EventHandler(this.DoSaveAll);
             // 
             // tsmiEdit
             // 
@@ -350,7 +346,6 @@ namespace RawBankEditor.Forms
             this.tsmimUndo.Name = "tsmimUndo";
             this.tsmimUndo.Size = new System.Drawing.Size(264, 22);
             this.tsmimUndo.Text = "&Späť";
-            this.tsmimUndo.Click += new System.EventHandler(this.DoUndo);
             // 
             // tsmimRedo
             // 
@@ -359,7 +354,6 @@ namespace RawBankEditor.Forms
             this.tsmimRedo.Name = "tsmimRedo";
             this.tsmimRedo.Size = new System.Drawing.Size(264, 22);
             this.tsmimRedo.Text = "&Znovu";
-            this.tsmimRedo.Click += new System.EventHandler(this.DoRedo);
             // 
             // toolStripSeparator11
             // 
@@ -373,7 +367,6 @@ namespace RawBankEditor.Forms
             this.tsmimAddSound.Name = "tsmimAddSound";
             this.tsmimAddSound.Size = new System.Drawing.Size(264, 22);
             this.tsmimAddSound.Text = "P&ridať zvuk...";
-            this.tsmimAddSound.Click += new System.EventHandler(this.DoAddSound);
             // 
             // tsmimDeleteSound
             // 
@@ -382,7 +375,6 @@ namespace RawBankEditor.Forms
             this.tsmimDeleteSound.Name = "tsmimDeleteSound";
             this.tsmimDeleteSound.Size = new System.Drawing.Size(264, 22);
             this.tsmimDeleteSound.Text = "O&dstrániť zvuky";
-            this.tsmimDeleteSound.Click += new System.EventHandler(this.DoDeleteSounds);
             // 
             // tsmimMoveSounds
             // 
@@ -391,7 +383,6 @@ namespace RawBankEditor.Forms
             this.tsmimMoveSounds.Name = "tsmimMoveSounds";
             this.tsmimMoveSounds.Size = new System.Drawing.Size(264, 22);
             this.tsmimMoveSounds.Text = "&Premiestniť zvuky...";
-            this.tsmimMoveSounds.Click += new System.EventHandler(this.DoMoveSounds);
             // 
             // tsmimConvertSoundsToEwa
             // 
@@ -400,7 +391,6 @@ namespace RawBankEditor.Forms
             this.tsmimConvertSoundsToEwa.Name = "tsmimConvertSoundsToEwa";
             this.tsmimConvertSoundsToEwa.Size = new System.Drawing.Size(264, 22);
             this.tsmimConvertSoundsToEwa.Text = "Konvertovať vybrané zvuky na .&EWA";
-            this.tsmimConvertSoundsToEwa.Click += new System.EventHandler(this.DoConvertSoundsToEwa);
             // 
             // tsmimConvertSoundsToWav
             // 
@@ -409,7 +399,6 @@ namespace RawBankEditor.Forms
             this.tsmimConvertSoundsToWav.Name = "tsmimConvertSoundsToWav";
             this.tsmimConvertSoundsToWav.Size = new System.Drawing.Size(264, 22);
             this.tsmimConvertSoundsToWav.Text = "Konvertovať vybrané zvuky na .&WAV";
-            this.tsmimConvertSoundsToWav.Click += new System.EventHandler(this.DoConvertSoundsToWav);
             // 
             // toolStripSeparator26
             // 
@@ -455,7 +444,6 @@ namespace RawBankEditor.Forms
             this.tsmimGoBack.Name = "tsmimGoBack";
             this.tsmimGoBack.Size = new System.Drawing.Size(152, 22);
             this.tsmimGoBack.Text = "Prejsť &späť";
-            this.tsmimGoBack.Click += new System.EventHandler(this.DoGoBack);
             // 
             // tsmimGoForward
             // 
@@ -464,7 +452,6 @@ namespace RawBankEditor.Forms
             this.tsmimGoForward.Name = "tsmimGoForward";
             this.tsmimGoForward.Size = new System.Drawing.Size(152, 22);
             this.tsmimGoForward.Text = "Prejsť &dopredu";
-            this.tsmimGoForward.Click += new System.EventHandler(this.DoGoForward);
             // 
             // toolStripSeparator18
             // 
@@ -478,7 +465,6 @@ namespace RawBankEditor.Forms
             this.tsmimSearch.Name = "tsmimSearch";
             this.tsmimSearch.Size = new System.Drawing.Size(152, 22);
             this.tsmimSearch.Text = "&Hľadať";
-            this.tsmimSearch.Click += new System.EventHandler(this.DoSearch);
             // 
             // toolStripSeparator3
             // 
@@ -527,7 +513,6 @@ namespace RawBankEditor.Forms
             this.tsmimAddLanguage.Name = "tsmimAddLanguage";
             this.tsmimAddLanguage.Size = new System.Drawing.Size(264, 22);
             this.tsmimAddLanguage.Text = "P&ridať jazyk...";
-            this.tsmimAddLanguage.Click += new System.EventHandler(this.DoAddLanguage);
             // 
             // tsmimEditLanguage
             // 
@@ -536,7 +521,6 @@ namespace RawBankEditor.Forms
             this.tsmimEditLanguage.Name = "tsmimEditLanguage";
             this.tsmimEditLanguage.Size = new System.Drawing.Size(264, 22);
             this.tsmimEditLanguage.Text = "&Upraviť jazyk...";
-            this.tsmimEditLanguage.Click += new System.EventHandler(this.DoEditLanguage);
             // 
             // tsmimDeleteLanguage
             // 
@@ -545,7 +529,6 @@ namespace RawBankEditor.Forms
             this.tsmimDeleteLanguage.Name = "tsmimDeleteLanguage";
             this.tsmimDeleteLanguage.Size = new System.Drawing.Size(264, 22);
             this.tsmimDeleteLanguage.Text = "O&dstrániť jazyk";
-            this.tsmimDeleteLanguage.Click += new System.EventHandler(this.DoDeleteLanguage);
             // 
             // toolStripSeparator6
             // 
@@ -559,7 +542,6 @@ namespace RawBankEditor.Forms
             this.tsmimConvertLangToEwa.Name = "tsmimConvertLangToEwa";
             this.tsmimConvertLangToEwa.Size = new System.Drawing.Size(264, 22);
             this.tsmimConvertLangToEwa.Text = "Konvertovať zvuky v jazyku na .&EWA";
-            this.tsmimConvertLangToEwa.Click += new System.EventHandler(this.DoConvertLangToEwa);
             // 
             // tsmimConvertLangToWav
             // 
@@ -568,7 +550,6 @@ namespace RawBankEditor.Forms
             this.tsmimConvertLangToWav.Name = "tsmimConvertLangToWav";
             this.tsmimConvertLangToWav.Size = new System.Drawing.Size(264, 22);
             this.tsmimConvertLangToWav.Text = "Konvertovať zvuky v jazyku na .&WAV";
-            this.tsmimConvertLangToWav.Click += new System.EventHandler(this.DoConvertLangToWav);
             // 
             // toolStripSeparator8
             // 
@@ -581,7 +562,6 @@ namespace RawBankEditor.Forms
             this.tsmimAppSettings.Name = "tsmimAppSettings";
             this.tsmimAppSettings.Size = new System.Drawing.Size(188, 22);
             this.tsmimAppSettings.Text = "Nastavenia &programu";
-            this.tsmimAppSettings.Click += new System.EventHandler(this.ShowAppSettings);
             // 
             // tsmiHelp
             // 
@@ -598,14 +578,12 @@ namespace RawBankEditor.Forms
             this.tsmimInfoApp.Name = "tsmimInfoApp";
             this.tsmimInfoApp.Size = new System.Drawing.Size(222, 22);
             this.tsmimInfoApp.Text = "&Informácie o programe";
-            this.tsmimInfoApp.Click += new System.EventHandler(this.ShowInfoApp);
             // 
             // tsmimUpdates
             // 
             this.tsmimUpdates.Name = "tsmimUpdates";
             this.tsmimUpdates.Size = new System.Drawing.Size(222, 22);
             this.tsmimUpdates.Text = "&Poznámky k aktualizáciám...";
-            this.tsmimUpdates.Click += new System.EventHandler(this.ShowUpdates);
             // 
             // splitContainer1
             // 
@@ -709,7 +687,6 @@ namespace RawBankEditor.Forms
             this.tsbAddGroup.Name = "tsbAddGroup";
             this.tsbAddGroup.Size = new System.Drawing.Size(24, 24);
             this.tsbAddGroup.Text = "Pridať skupinu";
-            this.tsbAddGroup.Click += new System.EventHandler(this.DoAddGroup);
             // 
             // tsbEditGroup
             // 
@@ -720,7 +697,6 @@ namespace RawBankEditor.Forms
             this.tsbEditGroup.Name = "tsbEditGroup";
             this.tsbEditGroup.Size = new System.Drawing.Size(24, 24);
             this.tsbEditGroup.Text = "Upraviť skupinu";
-            this.tsbEditGroup.Click += new System.EventHandler(this.DoEditGroup);
             // 
             // tsbDeleteGroup
             // 
@@ -731,7 +707,6 @@ namespace RawBankEditor.Forms
             this.tsbDeleteGroup.Name = "tsbDeleteGroup";
             this.tsbDeleteGroup.Size = new System.Drawing.Size(24, 24);
             this.tsbDeleteGroup.Text = "Odstrániť skupinu";
-            this.tsbDeleteGroup.Click += new System.EventHandler(this.DoDeleteGroup);
             // 
             // toolStripSeparator21
             // 
@@ -747,7 +722,6 @@ namespace RawBankEditor.Forms
             this.tsbConvertGroupToEwa.Name = "tsbConvertGroupToEwa";
             this.tsbConvertGroupToEwa.Size = new System.Drawing.Size(24, 24);
             this.tsbConvertGroupToEwa.Text = "Konvertovať skupinu na .EWA";
-            this.tsbConvertGroupToEwa.Click += new System.EventHandler(this.DoConvertGroupToEwa);
             // 
             // tsbConvertGroupToWav
             // 
@@ -758,7 +732,6 @@ namespace RawBankEditor.Forms
             this.tsbConvertGroupToWav.Name = "tsbConvertGroupToWav";
             this.tsbConvertGroupToWav.Size = new System.Drawing.Size(24, 24);
             this.tsbConvertGroupToWav.Text = "Konvertovať skupinu na .WAV";
-            this.tsbConvertGroupToWav.Click += new System.EventHandler(this.DoConvertGroupToWav);
             // 
             // dgvGroups
             // 
@@ -828,7 +801,6 @@ namespace RawBankEditor.Forms
             this.cmiAddGroup.Name = "cmiAddGroup";
             this.cmiAddGroup.Size = new System.Drawing.Size(235, 26);
             this.cmiAddGroup.Text = "Pridať skupinu...";
-            this.cmiAddGroup.Click += new System.EventHandler(this.DoAddGroup);
             // 
             // cmiEditGroup
             // 
@@ -837,7 +809,6 @@ namespace RawBankEditor.Forms
             this.cmiEditGroup.Name = "cmiEditGroup";
             this.cmiEditGroup.Size = new System.Drawing.Size(235, 26);
             this.cmiEditGroup.Text = "Upraviť skupinu...";
-            this.cmiEditGroup.Click += new System.EventHandler(this.DoEditGroup);
             // 
             // cmiDeleteGroup
             // 
@@ -846,7 +817,6 @@ namespace RawBankEditor.Forms
             this.cmiDeleteGroup.Name = "cmiDeleteGroup";
             this.cmiDeleteGroup.Size = new System.Drawing.Size(235, 26);
             this.cmiDeleteGroup.Text = "Odstrániť skupinu";
-            this.cmiDeleteGroup.Click += new System.EventHandler(this.DoDeleteGroup);
             // 
             // toolStripSeparator4
             // 
@@ -996,7 +966,6 @@ namespace RawBankEditor.Forms
             this.cmiOpenInExplorer.Name = "cmiOpenInExplorer";
             this.cmiOpenInExplorer.Size = new System.Drawing.Size(228, 22);
             this.cmiOpenInExplorer.Text = "Otvoriť v prieskumníkovi";
-            this.cmiOpenInExplorer.Click += new System.EventHandler(this.DoOpenFileInExplorer);
             // 
             // cmiPlay
             // 
@@ -1006,7 +975,6 @@ namespace RawBankEditor.Forms
             this.cmiPlay.ShortcutKeyDisplayString = "F5";
             this.cmiPlay.Size = new System.Drawing.Size(228, 22);
             this.cmiPlay.Text = "Prehrať zvuk";
-            this.cmiPlay.Click += new System.EventHandler(this.DoPlayFile);
             // 
             // toolStripSeparator20
             // 
@@ -1021,7 +989,6 @@ namespace RawBankEditor.Forms
             this.cmiRenameFileDir.ShortcutKeyDisplayString = "F2";
             this.cmiRenameFileDir.Size = new System.Drawing.Size(228, 22);
             this.cmiRenameFileDir.Text = "Premenovať súbor";
-            this.cmiRenameFileDir.Click += new System.EventHandler(this.DoRenameFile);
             // 
             // cmiDeleteFileDir
             // 
@@ -1031,7 +998,6 @@ namespace RawBankEditor.Forms
             this.cmiDeleteFileDir.ShortcutKeyDisplayString = "Del";
             this.cmiDeleteFileDir.Size = new System.Drawing.Size(228, 22);
             this.cmiDeleteFileDir.Text = "Odstrániť súbor";
-            this.cmiDeleteFileDir.Click += new System.EventHandler(this.DoDeleteFile);
             // 
             // toolStripSeparator23
             // 
@@ -1045,7 +1011,6 @@ namespace RawBankEditor.Forms
             this.cmiConvertToEwaFile.Name = "cmiConvertToEwaFile";
             this.cmiConvertToEwaFile.Size = new System.Drawing.Size(228, 22);
             this.cmiConvertToEwaFile.Text = "Konvertovať súbory na .EWA";
-            this.cmiConvertToEwaFile.Click += new System.EventHandler(this.DoConvertFilesToEwa);
             // 
             // cmiConvertToWavFile
             // 
@@ -1054,7 +1019,6 @@ namespace RawBankEditor.Forms
             this.cmiConvertToWavFile.Name = "cmiConvertToWavFile";
             this.cmiConvertToWavFile.Size = new System.Drawing.Size(228, 22);
             this.cmiConvertToWavFile.Text = "Konvertovať súbory na .WAV";
-            this.cmiConvertToWavFile.Click += new System.EventHandler(this.DoConvertFilesToWav);
             // 
             // fileSystemElementBindingSource
             // 
@@ -1104,7 +1068,6 @@ namespace RawBankEditor.Forms
             this.tsbOpenInExplorer.Name = "tsbOpenInExplorer";
             this.tsbOpenInExplorer.Size = new System.Drawing.Size(24, 24);
             this.tsbOpenInExplorer.Text = "Otvoriť v prieskumníkovi";
-            this.tsbOpenInExplorer.Click += new System.EventHandler(this.DoOpenFileInExplorer);
             // 
             // toolStripSeparator16
             // 
@@ -1120,7 +1083,6 @@ namespace RawBankEditor.Forms
             this.tsbPlay.Name = "tsbPlay";
             this.tsbPlay.Size = new System.Drawing.Size(24, 24);
             this.tsbPlay.Text = "Prehrať zvuk (F5)";
-            this.tsbPlay.Click += new System.EventHandler(this.DoPlayFile);
             // 
             // toolStripSeparator17
             // 
@@ -1136,7 +1098,6 @@ namespace RawBankEditor.Forms
             this.tsbRenameFileDir.Name = "tsbRenameFileDir";
             this.tsbRenameFileDir.Size = new System.Drawing.Size(24, 24);
             this.tsbRenameFileDir.Text = "Premenovať (F2)";
-            this.tsbRenameFileDir.Click += new System.EventHandler(this.DoRenameFile);
             // 
             // tsbDeleteFileDir
             // 
@@ -1147,7 +1108,6 @@ namespace RawBankEditor.Forms
             this.tsbDeleteFileDir.Name = "tsbDeleteFileDir";
             this.tsbDeleteFileDir.Size = new System.Drawing.Size(24, 24);
             this.tsbDeleteFileDir.Text = "Odstrániť (Del)";
-            this.tsbDeleteFileDir.Click += new System.EventHandler(this.DoDeleteFile);
             // 
             // toolStripSeparator22
             // 
@@ -1163,7 +1123,6 @@ namespace RawBankEditor.Forms
             this.tsbConvertFilesToEwa.Name = "tsbConvertFilesToEwa";
             this.tsbConvertFilesToEwa.Size = new System.Drawing.Size(24, 24);
             this.tsbConvertFilesToEwa.Text = "Konvertovať súbory na .EWA";
-            this.tsbConvertFilesToEwa.Click += new System.EventHandler(this.DoConvertFilesToEwa);
             // 
             // tsbConvertFilesToWav
             // 
@@ -1174,7 +1133,6 @@ namespace RawBankEditor.Forms
             this.tsbConvertFilesToWav.Name = "tsbConvertFilesToWav";
             this.tsbConvertFilesToWav.Size = new System.Drawing.Size(24, 24);
             this.tsbConvertFilesToWav.Text = "Konvertovať súbory na .WAV";
-            this.tsbConvertFilesToWav.Click += new System.EventHandler(this.DoConvertFilesToWav);
             // 
             // splitSoundsErrors
             // 
@@ -1328,7 +1286,6 @@ namespace RawBankEditor.Forms
             this.cmiAddSound.Name = "cmiAddSound";
             this.cmiAddSound.Size = new System.Drawing.Size(223, 26);
             this.cmiAddSound.Text = "Pridať zvuk";
-            this.cmiAddSound.Click += new System.EventHandler(this.DoAddSound);
             // 
             // cmiDeleteSound
             // 
@@ -1337,7 +1294,6 @@ namespace RawBankEditor.Forms
             this.cmiDeleteSound.Name = "cmiDeleteSound";
             this.cmiDeleteSound.Size = new System.Drawing.Size(223, 26);
             this.cmiDeleteSound.Text = "Odstrániť vybrané zvuky";
-            this.cmiDeleteSound.Click += new System.EventHandler(this.DoDeleteSounds);
             // 
             // cmiMoveSounds
             // 
@@ -1346,7 +1302,6 @@ namespace RawBankEditor.Forms
             this.cmiMoveSounds.Name = "cmiMoveSounds";
             this.cmiMoveSounds.Size = new System.Drawing.Size(223, 26);
             this.cmiMoveSounds.Text = "Presunúť vybrané zvuky...";
-            this.cmiMoveSounds.Click += new System.EventHandler(this.DoMoveSounds);
             // 
             // toolStripSeparator19
             // 
@@ -1360,7 +1315,6 @@ namespace RawBankEditor.Forms
             this.cmiConvertSoundsToEwa.Name = "cmiConvertSoundsToEwa";
             this.cmiConvertSoundsToEwa.Size = new System.Drawing.Size(223, 26);
             this.cmiConvertSoundsToEwa.Text = "Konvertovať zvuky na .EWA";
-            this.cmiConvertSoundsToEwa.Click += new System.EventHandler(this.DoConvertSoundsToEwa);
             // 
             // cmiConvertSoundsToWav
             // 
@@ -1369,7 +1323,6 @@ namespace RawBankEditor.Forms
             this.cmiConvertSoundsToWav.Name = "cmiConvertSoundsToWav";
             this.cmiConvertSoundsToWav.Size = new System.Drawing.Size(223, 26);
             this.cmiConvertSoundsToWav.Text = "Konvertovať zvuky na .WAV";
-            this.cmiConvertSoundsToWav.Click += new System.EventHandler(this.DoConvertSoundsToWav);
             // 
             // fyzSoundBindingSource
             // 
@@ -1471,7 +1424,6 @@ namespace RawBankEditor.Forms
             this.tsbResolveProblem.Name = "tsbResolveProblem";
             this.tsbResolveProblem.Size = new System.Drawing.Size(24, 24);
             this.tsbResolveProblem.Text = "Vyriešiť";
-            this.tsbResolveProblem.Click += new System.EventHandler(this.DoSolveProblem);
             // 
             // tsbHighlightProblem
             // 
@@ -1483,7 +1435,6 @@ namespace RawBankEditor.Forms
             this.tsbHighlightProblem.Name = "tsbHighlightProblem";
             this.tsbHighlightProblem.Size = new System.Drawing.Size(24, 24);
             this.tsbHighlightProblem.Text = "Zvýrazniť problém";
-            this.tsbHighlightProblem.Click += new System.EventHandler(this.DoFindProblem);
             // 
             // dgvErrors
             // 
@@ -1606,7 +1557,6 @@ namespace RawBankEditor.Forms
             this.cmiHighlightProblem.Name = "cmiHighlightProblem";
             this.cmiHighlightProblem.Size = new System.Drawing.Size(159, 22);
             this.cmiHighlightProblem.Text = "Zvýrazniť chybu";
-            this.cmiHighlightProblem.Click += new System.EventHandler(this.DoFindProblem);
             // 
             // cmiResolveProblem
             // 
@@ -1615,7 +1565,6 @@ namespace RawBankEditor.Forms
             this.cmiResolveProblem.Name = "cmiResolveProblem";
             this.cmiResolveProblem.Size = new System.Drawing.Size(159, 22);
             this.cmiResolveProblem.Text = "Vyriešiť";
-            this.cmiResolveProblem.Click += new System.EventHandler(this.DoSolveProblem);
             // 
             // rawBankMessageBindingSource
             // 
@@ -1777,7 +1726,6 @@ namespace RawBankEditor.Forms
             this.tsbOpen.Name = "tsbOpen";
             this.tsbOpen.Size = new System.Drawing.Size(24, 24);
             this.tsbOpen.Text = "Otvoriť";
-            this.tsbOpen.Click += new System.EventHandler(this.DoOpenDir);
             // 
             // tsbRecent
             // 
@@ -1802,7 +1750,6 @@ namespace RawBankEditor.Forms
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(24, 24);
             this.tsbSave.Text = "Uložiť";
-            this.tsbSave.Click += new System.EventHandler(this.DoSave);
             // 
             // tsbSaveAll
             // 
@@ -1813,7 +1760,6 @@ namespace RawBankEditor.Forms
             this.tsbSaveAll.Name = "tsbSaveAll";
             this.tsbSaveAll.Size = new System.Drawing.Size(24, 24);
             this.tsbSaveAll.Text = "Uložiť všetko";
-            this.tsbSaveAll.Click += new System.EventHandler(this.DoSaveAll);
             // 
             // toolStripSeparator1
             // 
@@ -1831,7 +1777,6 @@ namespace RawBankEditor.Forms
             this.tsbGoBack.Name = "tsbGoBack";
             this.tsbGoBack.Size = new System.Drawing.Size(40, 24);
             this.tsbGoBack.Text = "Prejsť späť";
-            this.tsbGoBack.ButtonClick += new System.EventHandler(this.DoGoBack);
             // 
             // tsbGoForward
             // 
@@ -1842,7 +1787,6 @@ namespace RawBankEditor.Forms
             this.tsbGoForward.Name = "tsbGoForward";
             this.tsbGoForward.Size = new System.Drawing.Size(24, 24);
             this.tsbGoForward.Text = "Prejsť dopredu";
-            this.tsbGoForward.Click += new System.EventHandler(this.DoGoForward);
             // 
             // toolStripSeparator9
             // 
@@ -1858,7 +1802,6 @@ namespace RawBankEditor.Forms
             this.tsbUndo.Name = "tsbUndo";
             this.tsbUndo.Size = new System.Drawing.Size(24, 24);
             this.tsbUndo.Text = "Späť";
-            this.tsbUndo.Click += new System.EventHandler(this.DoUndo);
             // 
             // tsbRedo
             // 
@@ -1869,7 +1812,6 @@ namespace RawBankEditor.Forms
             this.tsbRedo.Name = "tsbRedo";
             this.tsbRedo.Size = new System.Drawing.Size(24, 24);
             this.tsbRedo.Text = "Znovu";
-            this.tsbRedo.Click += new System.EventHandler(this.DoRedo);
             // 
             // toolStripSeparator10
             // 
@@ -1917,7 +1859,6 @@ namespace RawBankEditor.Forms
             this.tsmiAddLanguage.Name = "tsmiAddLanguage";
             this.tsmiAddLanguage.Size = new System.Drawing.Size(264, 22);
             this.tsmiAddLanguage.Text = "Pridať jazyk";
-            this.tsmiAddLanguage.Click += new System.EventHandler(this.DoAddLanguage);
             // 
             // tsmiEditLanguage
             // 
@@ -1926,7 +1867,6 @@ namespace RawBankEditor.Forms
             this.tsmiEditLanguage.Name = "tsmiEditLanguage";
             this.tsmiEditLanguage.Size = new System.Drawing.Size(264, 22);
             this.tsmiEditLanguage.Text = "Upraviť jazyk";
-            this.tsmiEditLanguage.Click += new System.EventHandler(this.DoEditLanguage);
             // 
             // tsmiDeleteLanguage
             // 
@@ -1935,7 +1875,6 @@ namespace RawBankEditor.Forms
             this.tsmiDeleteLanguage.Name = "tsmiDeleteLanguage";
             this.tsmiDeleteLanguage.Size = new System.Drawing.Size(264, 22);
             this.tsmiDeleteLanguage.Text = "Odstrániť jazyk";
-            this.tsmiDeleteLanguage.Click += new System.EventHandler(this.DoDeleteLanguage);
             // 
             // toolStripSeparator5
             // 
@@ -1949,7 +1888,6 @@ namespace RawBankEditor.Forms
             this.tsmiConvertLangToEwa.Name = "tsmiConvertLangToEwa";
             this.tsmiConvertLangToEwa.Size = new System.Drawing.Size(264, 22);
             this.tsmiConvertLangToEwa.Text = "Konvertovať zvuky v jazyku na .EWA";
-            this.tsmiConvertLangToEwa.Click += new System.EventHandler(this.DoConvertLangToEwa);
             // 
             // tsmiConvertLangToWav
             // 
@@ -1958,7 +1896,6 @@ namespace RawBankEditor.Forms
             this.tsmiConvertLangToWav.Name = "tsmiConvertLangToWav";
             this.tsmiConvertLangToWav.Size = new System.Drawing.Size(264, 22);
             this.tsmiConvertLangToWav.Text = "Konvertovať zvuky v jazyku na .WAV";
-            this.tsmiConvertLangToWav.Click += new System.EventHandler(this.DoConvertLangToWav);
             // 
             // toolStripSeparator7
             // 
@@ -1973,7 +1910,6 @@ namespace RawBankEditor.Forms
             this.tsbAppSettings.Name = "tsbAppSettings";
             this.tsbAppSettings.Size = new System.Drawing.Size(24, 24);
             this.tsbAppSettings.Text = "Nastavenia programu";
-            this.tsbAppSettings.Click += new System.EventHandler(this.ShowAppSettings);
             // 
             // tsbInfoApp
             // 
@@ -1983,7 +1919,6 @@ namespace RawBankEditor.Forms
             this.tsbInfoApp.Name = "tsbInfoApp";
             this.tsbInfoApp.Size = new System.Drawing.Size(24, 24);
             this.tsbInfoApp.Text = "Informácie o programe";
-            this.tsbInfoApp.Click += new System.EventHandler(this.ShowInfoApp);
             // 
             // toolStripSeparator12
             // 
@@ -1999,7 +1934,6 @@ namespace RawBankEditor.Forms
             this.tsbAddSound.Name = "tsbAddSound";
             this.tsbAddSound.Size = new System.Drawing.Size(24, 24);
             this.tsbAddSound.Text = "Pridať zvuk";
-            this.tsbAddSound.Click += new System.EventHandler(this.DoAddSound);
             // 
             // tsbMoveSounds
             // 
@@ -2010,7 +1944,6 @@ namespace RawBankEditor.Forms
             this.tsbMoveSounds.Name = "tsbMoveSounds";
             this.tsbMoveSounds.Size = new System.Drawing.Size(24, 24);
             this.tsbMoveSounds.Text = "Premiestniť zvuky";
-            this.tsbMoveSounds.Click += new System.EventHandler(this.DoMoveSounds);
             // 
             // tsbDeleteSound
             // 
@@ -2021,7 +1954,6 @@ namespace RawBankEditor.Forms
             this.tsbDeleteSound.Name = "tsbDeleteSound";
             this.tsbDeleteSound.Size = new System.Drawing.Size(24, 24);
             this.tsbDeleteSound.Text = "Odstrániť zvuk";
-            this.tsbDeleteSound.Click += new System.EventHandler(this.DoDeleteSounds);
             // 
             // toolStripSeparator24
             // 
@@ -2037,7 +1969,6 @@ namespace RawBankEditor.Forms
             this.tsbConvertSoundsToEwa.Name = "tsbConvertSoundsToEwa";
             this.tsbConvertSoundsToEwa.Size = new System.Drawing.Size(24, 24);
             this.tsbConvertSoundsToEwa.Text = "Konvertovať vybrané zvuky na .EWA";
-            this.tsbConvertSoundsToEwa.Click += new System.EventHandler(this.DoConvertSoundsToEwa);
             // 
             // tsbConvertSoundsToWav
             // 
@@ -2048,7 +1979,6 @@ namespace RawBankEditor.Forms
             this.tsbConvertSoundsToWav.Name = "tsbConvertSoundsToWav";
             this.tsbConvertSoundsToWav.Size = new System.Drawing.Size(24, 24);
             this.tsbConvertSoundsToWav.Text = "Konvertovať vybrané zvuky na .WAV";
-            this.tsbConvertSoundsToWav.Click += new System.EventHandler(this.DoConvertSoundsToWav);
             // 
             // toolStripSeparator15
             // 
@@ -2064,7 +1994,6 @@ namespace RawBankEditor.Forms
             this.tsbSearch.Name = "tsbSearch";
             this.tsbSearch.Size = new System.Drawing.Size(24, 24);
             this.tsbSearch.Text = "Hľadať";
-            this.tsbSearch.Click += new System.EventHandler(this.DoSearch);
             // 
             // tsbWrapTextSoundCol
             // 
@@ -2098,12 +2027,6 @@ namespace RawBankEditor.Forms
             this.undoActionChooser.Name = "undoActionChooser";
             this.undoActionChooser.Size = new System.Drawing.Size(2, 31);
             // 
-            // bWorkerReadDat
-            // 
-            this.bWorkerReadDat.WorkerReportsProgress = true;
-            this.bWorkerReadDat.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bWorkerReadDat_DoWork);
-            this.bWorkerReadDat.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bWorkerReadDat_ProgressChanged);
-            this.bWorkerReadDat.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bWorkerReadDat_RunWorkerCompleted);
             // 
             // fileSystemWatcher
             // 
@@ -2251,7 +2174,6 @@ namespace RawBankEditor.Forms
         private System.Windows.Forms.ToolStripMenuItem tsmimGoBack;
         private System.Windows.Forms.ToolStripMenuItem tsmimGoForward;
         private System.Windows.Forms.ToolStripDropDownButton tsbRecent;
-        private System.ComponentModel.BackgroundWorker bWorkerReadDat;
         private System.Windows.Forms.ToolStripMenuItem tsmimUpdates;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private System.Windows.Forms.ToolStripMenuItem tsmimAddSound;

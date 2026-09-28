@@ -7,22 +7,6 @@ namespace RawBankEditor.Forms;
 
 partial class FMain
 {
-    private void DoConvertSoundsToEwa(object sender, EventArgs e) => ConvertSelectedSounds(true);
-
-    private void DoConvertSoundsToWav(object sender, EventArgs e) => ConvertSelectedSounds(false);
-
-    private void DoConvertGroupToEwa(object sender, EventArgs e) => ConvertSelectedGroup(true);
-
-    private void DoConvertGroupToWav(object sender, EventArgs e) => ConvertSelectedGroup(false);
-
-    private void DoConvertLangToEwa(object sender, EventArgs e) => ConvertCurrentLanguage(true);
-
-    private void DoConvertLangToWav(object sender, EventArgs e) => ConvertCurrentLanguage(false);
-
-    private void DoConvertFilesToEwa(object sender, EventArgs e) => ConvertSelectedFiles(true);
-
-    private void DoConvertFilesToWav(object sender, EventArgs e) => ConvertSelectedFiles(false);
-
     private void ConvertSelectedSounds(bool toEwa)
     {
         if (!ConfirmConversion(Resources.FMain_DoConvertSounds, toEwa))
