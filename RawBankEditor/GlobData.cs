@@ -22,7 +22,8 @@ internal static class GlobData
         if (string.IsNullOrEmpty(pathToINISS))
             throw new ArgumentNullException(nameof(pathToINISS));
 
-        var pathToBank = pathToINISS + FileConsts.DIR_RAWBANK;
+        // banka zvukov je vzdy v podpriecinku RAWBANK instalacie INISS
+        var pathToBank = pathToINISS + @"\RAWBANK\";
 
         return new RawBankProject
         {
