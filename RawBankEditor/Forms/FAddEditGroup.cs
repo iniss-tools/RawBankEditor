@@ -5,7 +5,7 @@ using ToolsCore.Tools;
 namespace RawBankEditor.Forms;
 
 /// <summary>
-///     Okno pridania a upravy skupiny zvukov. Len zisti a skontroluje hodnoty - skupinu a jej priecinok meni hlavne okno.
+/// Okno pridania a upravy skupiny zvukov. Len zisti a skontroluje hodnoty - skupinu a jej priecinok meni hlavne okno.
 /// </summary>
 public partial class FAddEditGroup : Form
 {

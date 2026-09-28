@@ -22,7 +22,7 @@ public partial class FAfterInsertSounds : Form
     }
 
     /// <summary>
-    ///     Oznaci riadky, ktorych kluc alebo nazov koliduje so zvukom skupiny alebo s inym novym zvukom.
+    /// Oznaci riadky, ktorych kluc alebo nazov koliduje so zvukom skupiny alebo s inym novym zvukom.
     /// </summary>
     /// <returns>Problemy podla zvuku.</returns>
     private Dictionary<FyzSound, string> ShowProblems()

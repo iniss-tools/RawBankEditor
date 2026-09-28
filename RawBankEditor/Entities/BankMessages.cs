@@ -26,12 +26,12 @@ public interface IRawBankMessage
 }
 
 /// <summary>
-///     Spolocne pre spravy zoznamu chyb.
+/// Spolocne pre spravy zoznamu chyb.
 /// </summary>
 internal static class BankMessagePaths
 {
     /// <summary>
-    ///     Cesta vzhladom na priecinok banky (RAWBANK) - rovnako ako pri chybajucich priecinkoch a suboroch.
+    /// Cesta vzhladom na priecinok banky (RAWBANK) - rovnako ako pri chybajucich priecinkoch a suboroch.
     /// </summary>
     public static string RelativeToBank(string fullPath)
         => System.IO.Path.GetRelativePath(GlobData.OpenedProject!.AbsPathToBank, fullPath);

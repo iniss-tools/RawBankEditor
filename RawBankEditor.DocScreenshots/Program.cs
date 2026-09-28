@@ -9,21 +9,21 @@ using ToolsCore.Tools;
 namespace RawBankEditor.DocScreenshots;
 
 /// <summary>
-///     Generátor snímok okien RawBankEditora do dokumentácie.
+/// Generátor snímok okien RawBankEditora do dokumentácie.
 /// </summary>
 /// <remarks>
-///     Použitie: <c>RawBankEditor.DocScreenshots [--out=priečinok] [--work=priečinok] [--only=text] [--theme=light|dark|both]</c>.
-///     <list type="bullet">
-///         <item><c>--out</c> – kam uložiť PNG; predvolene <c>iniss-tools-docs\static\img\rawbankeditor</c> vedľa repozitára.</item>
-///         <item><c>--work</c> – kde zostaviť ukážkovú inštaláciu INISS so zvukovou bankou; predvolene <c>C:\INISS</c>
-///         (cesta je vidno v titulku). Existujúci priečinok bez značky <c>.docshots</c> sa nezmaže.</item>
-///         <item><c>--timeout</c> – po koľkých minútach sa harness ukončí, ak ho zablokuje modálne okno (predvolene 5).</item>
-///         <item><c>--only</c> – len snímky, ktorých cesta obsahuje daný text (napr. <c>hlavne-okno</c>).</item>
-///     </list>
-///     Hodnoty sa zadávajú len v tvare <c>--názov=hodnota</c>: FMain.OnLoad otvára posledný argument, ktorý
-///     nezačína pomlčkou, ako banku – samostatná cesta (<c>--out D:\…</c>) by sa otvorila ako inštalácia INISS.
-///     Program beží pod vlastným menom, takže konfiguráciu (<c>%LocalAppData%\RawBankEditor.DocScreenshots</c>)
-///     aj register má oddelené od RawBankEditora – pri každom spustení začína s predvolenými nastaveniami.
+/// Použitie: <c>RawBankEditor.DocScreenshots [--out=priečinok] [--work=priečinok] [--only=text] [--theme=light|dark|both]</c>.
+/// <list type="bullet">
+/// <item><c>--out</c> – kam uložiť PNG; predvolene <c>iniss-tools-docs\static\img\rawbankeditor</c> vedľa repozitára.</item>
+/// <item><c>--work</c> – kde zostaviť ukážkovú inštaláciu INISS so zvukovou bankou; predvolene <c>C:\INISS</c>
+/// (cesta je vidno v titulku). Existujúci priečinok bez značky <c>.docshots</c> sa nezmaže.</item>
+/// <item><c>--timeout</c> – po koľkých minútach sa harness ukončí, ak ho zablokuje modálne okno (predvolene 5).</item>
+/// <item><c>--only</c> – len snímky, ktorých cesta obsahuje daný text (napr. <c>hlavne-okno</c>).</item>
+/// </list>
+/// Hodnoty sa zadávajú len v tvare <c>--názov=hodnota</c>: FMain.OnLoad otvára posledný argument, ktorý
+/// nezačína pomlčkou, ako banku – samostatná cesta (<c>--out D:\…</c>) by sa otvorila ako inštalácia INISS.
+/// Program beží pod vlastným menom, takže konfiguráciu (<c>%LocalAppData%\RawBankEditor.DocScreenshots</c>)
+/// aj register má oddelené od RawBankEditora – pri každom spustení začína s predvolenými nastaveniami.
 /// </remarks>
 internal static class Program
 {
@@ -87,7 +87,7 @@ internal static class Program
     }
 
     /// <summary>
-    ///     Rovnaká inicializácia ako RawBankEditor.Program.Main, s čistou konfiguráciou, registrom a slovenčinou.
+    /// Rovnaká inicializácia ako RawBankEditor.Program.Main, s čistou konfiguráciou, registrom a slovenčinou.
     /// </summary>
     private static void InitApp()
     {
@@ -124,8 +124,8 @@ internal static class Program
     }
 
     /// <summary>
-    ///     Otvorí hlavné okno s ukážkovou bankou rovnako ako Súbor → Nedávne. Výber jazyka, ktorý sa pri banke
-    ///     s viacerými jazykmi otvorí ako modálne okno, obslúži <paramref name="chooseLanguage" />.
+    /// Otvorí hlavné okno s ukážkovou bankou rovnako ako Súbor → Nedávne. Výber jazyka, ktorý sa pri banke
+    /// s viacerými jazykmi otvorí ako modálne okno, obslúži <paramref name="chooseLanguage" />.
     /// </summary>
     public static FMain OpenMain(string installDir, Action<FLangChoose> chooseLanguage)
     {
@@ -215,8 +215,8 @@ internal static class Program
 }
 
 /// <summary>
-///     Obslúži modálne okná, ktoré program otvára cez ShowDialog (výber jazyka, otázky) – bežia vo vlastnej
-///     slučke správ, preto ich zachytí časovač. Obsluha vráti <c>true</c>, ak okno spracovala (zavrela).
+/// Obslúži modálne okná, ktoré program otvára cez ShowDialog (výber jazyka, otázky) – bežia vo vlastnej
+/// slučke správ, preto ich zachytí časovač. Obsluha vráti <c>true</c>, ak okno spracovala (zavrela).
 /// </summary>
 internal sealed class ModalWatcher : IDisposable
 {

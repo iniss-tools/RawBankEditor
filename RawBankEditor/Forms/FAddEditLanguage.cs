@@ -5,7 +5,7 @@ using ToolsCore.Tools;
 namespace RawBankEditor.Forms;
 
 /// <summary>
-///     Okno na pridanie alebo upravu jazyka banky. Samo nic nemeni - zadane hodnoty spracuje FMain.
+/// Okno na pridanie alebo upravu jazyka banky. Samo nic nemeni - zadane hodnoty spracuje FMain.
 /// </summary>
 public partial class FAddEditLanguage : Form
 {

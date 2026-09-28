@@ -81,7 +81,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Priecinok skupiny sa premenuje upravou skupiny - inak by skupina ukazovala na priecinok, ktory uz neexistuje.
+    /// Priecinok skupiny sa premenuje upravou skupiny - inak by skupina ukazovala na priecinok, ktory uz neexistuje.
     /// </summary>
     private void RenameGroupFolder(FyzGroup group, string folderName)
     {
@@ -106,7 +106,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Premenuje subor alebo priecinok a upravi prvok prieskumnika aj zvuk, ktoremu subor patri.
+    /// Premenuje subor alebo priecinok a upravi prvok prieskumnika aj zvuk, ktoremu subor patri.
     /// </summary>
     /// <returns><see langword="false" />, ak premenovanie zlyhalo.</returns>
     internal bool RenameOnDisk(string oldPath, string newPath)
@@ -133,8 +133,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Po premenovani na disku (v programe aj mimo neho) upravi prvok prieskumnika. Zvuk, ktoremu subor patri,
-    ///     dostane novy nazov suboru; skupina, ktorej priecinok sa premenoval, novu relativnu cestu.
+    /// Po premenovani na disku (v programe aj mimo neho) upravi prvok prieskumnika. Zvuk, ktoremu subor patri,
+    /// dostane novy nazov suboru; skupina, ktorej priecinok sa premenoval, novu relativnu cestu.
     /// </summary>
     private void ApplyRename(string oldPath, string newPath)
     {
@@ -222,8 +222,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Presunie subor alebo priecinok do kosa a vyberie jeho prvok zo stromu prieskumnika (prvok si pamata rodica,
-    ///     aby ho Spat mohlo vratit).
+    /// Presunie subor alebo priecinok do kosa a vyberie jeho prvok zo stromu prieskumnika (prvok si pamata rodica,
+    /// aby ho Spat mohlo vratit).
     /// </summary>
     internal bool RecycleElement(FileSystemElement element)
     {
@@ -258,7 +258,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Obnovi subor z kosa a vrati jeho prvok do stromu prieskumnika.
+    /// Obnovi subor z kosa a vrati jeho prvok do stromu prieskumnika.
     /// </summary>
     internal bool RestoreElement(FileElement element)
     {

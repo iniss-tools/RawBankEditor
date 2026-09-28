@@ -294,8 +294,8 @@ public partial class FMain : Form
     private void ChangeStatusReady() => tsslStatus.Text = "Pripravený";
 
     /// <summary>
-    ///     Nacita banku a zacne nacitavat vybrany jazyk. Otvorena banka sa nahradi az ked je nova nacitana
-    ///     a jazyk vybrany - pri chybe alebo zruseni vyberu jazyka ostane otvorena povodna.
+    /// Nacita banku a zacne nacitavat vybrany jazyk. Otvorena banka sa nahradi az ked je nova nacitana
+    /// a jazyk vybrany - pri chybe alebo zruseni vyberu jazyka ostane otvorena povodna.
     /// </summary>
     /// <returns><c>true</c>, ak sa banka otvorila.</returns>
     private bool PrepareGlobalData(string dirpath)
@@ -372,7 +372,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Otvori jazyk: zoznam zvukov a subory banky sa nacitaju na pozadi. Bez jazyka (banka nema ziadny) sa okno vycisti.
+    /// Otvori jazyk: zoznam zvukov a subory banky sa nacitaju na pozadi. Bez jazyka (banka nema ziadny) sa okno vycisti.
     /// </summary>
     private void LoadLanguage(FyzLanguage? lang)
     {
@@ -412,7 +412,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Vymaze historiu zmien (akcie sa odkazuju na data jazyka, ktore sa znova nacitaju).
+    /// Vymaze historiu zmien (akcie sa odkazuju na data jazyka, ktore sa znova nacitaju).
     /// </summary>
     /// <param name="unsavedChanges">Ci ostali neulozene zmeny, ktore sa uz nedaju vratit (napr. zoznam jazykov).</param>
     private void ResetHistory(bool unsavedChanges)
@@ -425,14 +425,14 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Zisti, ci sa zoznam jazykov lisi od ulozeneho FYZBANK.DAT.
+    /// Zisti, ci sa zoznam jazykov lisi od ulozeneho FYZBANK.DAT.
     /// </summary>
     private static bool LanguageListChanged()
         => LanguageRules.BankDiffers(GlobData.OpenedProject!.AbsPathToBank, GlobData.OpenedProject.Languages);
 
     /// <summary>
-    ///     Pred odchodom z otvoreneho jazyka sa spyta na neulozene zmeny jeho zoznamu zvukov:
-    ///     Ano ich ulozi, Nie zahodi (jazyk sa pri dalsom otvoreni nacita z disku).
+    /// Pred odchodom z otvoreneho jazyka sa spyta na neulozene zmeny jeho zoznamu zvukov:
+    /// Ano ich ulozi, Nie zahodi (jazyk sa pri dalsom otvoreni nacita z disku).
     /// </summary>
     /// <returns><c>false</c>, ak pouzivatel odchod zrusil.</returns>
     private bool ConfirmLeaveLanguage()
@@ -455,7 +455,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Zahodi zoznam zvukov jazyka v pamati - pri dalsom otvoreni sa nacita z disku, novy jazyk bude prazdny.
+    /// Zahodi zoznam zvukov jazyka v pamati - pri dalsom otvoreni sa nacita z disku, novy jazyk bude prazdny.
     /// </summary>
     private void DiscardLanguage(FyzLanguage lang)
     {
@@ -463,8 +463,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Pred zahodenim zmien upozorni, ze cast z nich uz je na disku (presunute, premenovane alebo odstranene
-    ///     subory a priecinky) - bez ulozenia by im banka nezodpovedala a INISS by nenasiel nahravky.
+    /// Pred zahodenim zmien upozorni, ze cast z nich uz je na disku (presunute, premenovane alebo odstranene
+    /// subory a priecinky) - bez ulozenia by im banka nezodpovedala a INISS by nenasiel nahravky.
     /// </summary>
     /// <returns><c>true</c>, ak sa zmeny mozu zahodit.</returns>
     private bool ConfirmDiscardDiskChanges()
@@ -478,7 +478,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Naplní menu naposledy otvorenými projektmi zoradenými od naposledy otvoreného.
+    /// Naplní menu naposledy otvorenými projektmi zoradenými od naposledy otvoreného.
     /// </summary>
     private void SetRecentDirs()
     {
@@ -540,7 +540,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Otvorí projekt a zapíše ho do zoznamu naposledy otvorených projektov.
+    /// Otvorí projekt a zapíše ho do zoznamu naposledy otvorených projektov.
     /// </summary>
     /// <param name="dirpath">Cesta k priečinku s projektom.</param>
     private void OpenProject(string dirpath)
@@ -726,7 +726,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Banka nema ziadny jazyk: prazdne okno, dostupne je len pridanie jazyka a ulozenie zoznamu jazykov.
+    /// Banka nema ziadny jazyk: prazdne okno, dostupne je len pridanie jazyka a ulozenie zoznamu jazykov.
     /// </summary>
     private void ShowNoLanguage()
     {
@@ -739,7 +739,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Vlozi jazyk do zoznamu jazykov banky bez prepnutia. V prazdnej banke sa jazyk rovno otvori.
+    /// Vlozi jazyk do zoznamu jazykov banky bez prepnutia. V prazdnej banke sa jazyk rovno otvori.
     /// </summary>
     internal void InsertLanguage(FyzLanguage language, int index)
     {
@@ -758,8 +758,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Odstrani jazyk zo zoznamu jazykov banky. Ak bol otvoreny, jeho neulozene zmeny sa zahodia (novy jazyk si ich
-    ///     necha pre vratenie) a otvori sa jazyk na jeho mieste.
+    /// Odstrani jazyk zo zoznamu jazykov banky. Ak bol otvoreny, jeho neulozene zmeny sa zahodia (novy jazyk si ich
+    /// necha pre vratenie) a otvori sa jazyk na jeho mieste.
     /// </summary>
     /// <param name="language">Odstranovany jazyk.</param>
     /// <param name="next">Jazyk, ktory sa ma otvorit namiesto odstraneneho (ak je v banke), inak jazyk na jeho mieste.</param>
@@ -792,7 +792,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Presunie priecinok jazyka do kosa. Zmazanie sa v prieskumniku nespracuva - jazyk sa zaroven zatvara.
+    /// Presunie priecinok jazyka do kosa. Zmazanie sa v prieskumniku nespracuva - jazyk sa zaroven zatvara.
     /// </summary>
     internal void DeleteLanguageDirectory(string directory)
     {
@@ -815,7 +815,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Obnovi zobrazenie jazyka v poli Jazyk po zmene nazvu.
+    /// Obnovi zobrazenie jazyka v poli Jazyk po zmene nazvu.
     /// </summary>
     internal void RefreshLanguage(FyzLanguage language)
     {
@@ -831,8 +831,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Obnovi tabulku zvukov a pocty zvukov v skupinach po zmene zoznamu zvukov priamo vo FyzGroup.Sounds
-    ///     - BindingList MenuSounds (a dgvSounds.ResetBindings) o takej zmene nevie a riadky by ostali stare.
+    /// Obnovi tabulku zvukov a pocty zvukov v skupinach po zmene zoznamu zvukov priamo vo FyzGroup.Sounds
+    /// - BindingList MenuSounds (a dgvSounds.ResetBindings) o takej zmene nevie a riadky by ostali stare.
     /// </summary>
     internal void RefreshSoundViews()
     {
@@ -871,8 +871,8 @@ public partial class FMain : Form
     private void DoSaveAll(object sender, EventArgs e) => SaveBank(true);
 
     /// <summary>
-    ///     Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov,
-    ///     aby FYZBANK.DAT neodkazoval na chybajuci subor.
+    /// Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov,
+    /// aby FYZBANK.DAT neodkazoval na chybajuci subor.
     /// </summary>
     /// <returns><c>false</c>, ak zapis zlyhal - zmeny ostavaju neulozene.</returns>
     private bool SaveBank(bool allLanguages)
@@ -1124,9 +1124,9 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Presunie zvuky do skupiny <paramref name="target" />. Nahravka, ktora lezi priamo v priecinku skupiny,
-    ///     sa presunie do priecinka cielovej skupiny; nahravka s pridavnou cestou ostane na mieste a cesta sa
-    ///     prepocita voci novej skupine (INISS ju berie relativne k priecinku skupiny).
+    /// Presunie zvuky do skupiny <paramref name="target" />. Nahravka, ktora lezi priamo v priecinku skupiny,
+    /// sa presunie do priecinka cielovej skupiny; nahravka s pridavnou cestou ostane na mieste a cesta sa
+    /// prepocita voci novej skupine (INISS ju berie relativne k priecinku skupiny).
     /// </summary>
     /// <returns>Zvuky, ktore sa presunuli - pri chybe suboru sa presun zastavi a zvysne ostanu na mieste.</returns>
     internal List<FyzSound> MoveSoundsToGroup(IList<FyzSound> sounds, FyzGroup target)
@@ -1188,7 +1188,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Presunie prvok suboru v strome prieskumnika do ineho priecinka (subor na disku uz je presunuty).
+    /// Presunie prvok suboru v strome prieskumnika do ineho priecinka (subor na disku uz je presunuty).
     /// </summary>
     private static void MoveFileElement(SoundFileElement file, DirectoryElement? target, string newPath)
     {
@@ -1200,8 +1200,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Prida prazdny jazyk (s priecinkom v RAWBANK) a otvori ho. FYZBANK.DAT a jeho FYZZVUK.DAT sa zapisu pri ulozeni.
-    ///     Ak v priecinku FYZZVUK.DAT uz je, jazyk sa nacita z neho.
+    /// Prida prazdny jazyk (s priecinkom v RAWBANK) a otvori ho. FYZBANK.DAT a jeho FYZZVUK.DAT sa zapisu pri ulozeni.
+    /// Ak v priecinku FYZZVUK.DAT uz je, jazyk sa nacita z neho.
     /// </summary>
     private void DoAddLanguage(object sender, EventArgs e)
     {
@@ -1742,7 +1742,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Mala ikona systemu ako obrazok - vytvara sa raz, nie pri kazdom vykresleni bunky.
+    /// Mala ikona systemu ako obrazok - vytvara sa raz, nie pri kazdom vykresleni bunky.
     /// </summary>
     private static Bitmap StockIcon(ShellIconType type)
     {
@@ -2025,8 +2025,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Prepoji zvuk so suborom podla jeho nazvu suboru a pridavnej cesty (po uprave v tabulke, spat a znovu)
-    ///     a zisti dlzku nahravky. Povodny subor ostane bez udajov o zvuku.
+    /// Prepoji zvuk so suborom podla jeho nazvu suboru a pridavnej cesty (po uprave v tabulke, spat a znovu)
+    /// a zisti dlzku nahravky. Povodny subor ostane bez udajov o zvuku.
     /// </summary>
     internal async void RelinkSoundFile(FyzSound sound)
     {
@@ -2048,7 +2048,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Kluc a nazov zvuku su povinne a v skupine jedinecne - rovnako ako v okne Pridat zvuk.
+    /// Kluc a nazov zvuku su povinne a v skupine jedinecne - rovnako ako v okne Pridat zvuk.
     /// </summary>
     private void DgvSounds_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
     {
@@ -2075,7 +2075,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Kazda upravena bunka je samostatny krok Spat - so stlpcom a hodnotou prave tejto bunky.
+    /// Kazda upravena bunka je samostatny krok Spat - so stlpcom a hodnotou prave tejto bunky.
     /// </summary>
     private void dgvSounds_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {

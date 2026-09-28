@@ -4,12 +4,12 @@ using ToolsCore.Tools;
 namespace RawBankEditor.Tools;
 
 /// <summary>
-///     Pravidla pre jazyky banky: kontrola okna Pridat/Upravit jazyk a porovnanie jazykov v pamati so subormi na disku.
+/// Pravidla pre jazyky banky: kontrola okna Pridat/Upravit jazyk a porovnanie jazykov v pamati so subormi na disku.
 /// </summary>
 public static class LanguageRules
 {
     /// <summary>
-    ///     Relativna cesta, ktoru okno jazyka navrhne podla kluca (napr. <c>SK</c> -> <c>SK\</c>).
+    /// Relativna cesta, ktoru okno jazyka navrhne podla kluca (napr. <c>SK</c> -> <c>SK\</c>).
     /// </summary>
     public static string DefaultRelativePath(string key)
     {
@@ -18,7 +18,7 @@ public static class LanguageRules
     }
 
     /// <summary>
-    ///     Skontroluje kluc, nazov a relativnu cestu jazyka voci ostatnym jazykom banky.
+    /// Skontroluje kluc, nazov a relativnu cestu jazyka voci ostatnym jazykom banky.
     /// </summary>
     /// <param name="languages">Jazyky banky.</param>
     /// <param name="edited">Upravovany jazyk (s nim sa neporovnava), pri pridani <see langword="null" />.</param>
@@ -62,19 +62,19 @@ public static class LanguageRules
     }
 
     /// <summary>
-    ///     Nazov priecinka jazyka v RAWBANK (relativna cesta bez koncovej lomky).
+    /// Nazov priecinka jazyka v RAWBANK (relativna cesta bez koncovej lomky).
     /// </summary>
     public static string FolderName(string relativePath) => relativePath.TrimEnd('\\');
 
     /// <summary>
-    ///     Cesta k suboru so zvukmi jazyka (FYZZVUK.DAT).
+    /// Cesta k suboru so zvukmi jazyka (FYZZVUK.DAT).
     /// </summary>
     public static string SoundsFile(string pathToBank, FyzLanguage language)
         => Utils.CombinePath(pathToBank, language.RelativePath, language.FileDefName)!;
 
     /// <summary>
-    ///     Zisti, ci sa skupiny a zvuky jazyka v pamati lisia od jeho suboru FYZZVUK.DAT. Nenacitany jazyk
-    ///     (<see cref="FyzLanguage.Groups" /> je <see langword="null" />) sa nelisi; jazyk bez suboru sa lisi, len ak ma skupiny.
+    /// Zisti, ci sa skupiny a zvuky jazyka v pamati lisia od jeho suboru FYZZVUK.DAT. Nenacitany jazyk
+    /// (<see cref="FyzLanguage.Groups" /> je <see langword="null" />) sa nelisi; jazyk bez suboru sa lisi, len ak ma skupiny.
     /// </summary>
     public static bool SoundsDiffer(string pathToBank, FyzLanguage language)
     {
@@ -98,7 +98,7 @@ public static class LanguageRules
     }
 
     /// <summary>
-    ///     Zisti, ci sa zoznam jazykov v pamati lisi od suboru FYZBANK.DAT.
+    /// Zisti, ci sa zoznam jazykov v pamati lisi od suboru FYZBANK.DAT.
     /// </summary>
     public static bool BankDiffers(string pathToBank, IReadOnlyList<FyzLanguage> languages)
     {

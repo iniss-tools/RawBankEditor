@@ -5,13 +5,13 @@ using ToolsCore.Tools;
 namespace RawBankEditor.DocScreenshots;
 
 /// <summary>
-///     Fiktívna inštalácia INISS so zvukovou bankou pre snímky do dokumentácie. Obsah zodpovedá ukážkovej banke
-///     harnessu GVDEditora (stanica Dolné Mesto, stanice 99xxxxx), navyše s nahrávkami na disku: krátke
-///     generované tóny s dĺžkou podľa textu, stanice a názvy vlakov vo formáte .EWA, ostatné .WAV.
+/// Fiktívna inštalácia INISS so zvukovou bankou pre snímky do dokumentácie. Obsah zodpovedá ukážkovej banke
+/// harnessu GVDEditora (stanica Dolné Mesto, stanice 99xxxxx), navyše s nahrávkami na disku: krátke
+/// generované tóny s dĺžkou podľa textu, stanice a názvy vlakov vo formáte .EWA, ostatné .WAV.
 /// </summary>
 /// <remarks>
-///     Banka má zámerne tri nezrovnalosti, aby zoznam chýb nebol prázdny: zvuk bez súboru, súbor bez zvuku
-///     a prázdnu skupinu.
+/// Banka má zámerne tri nezrovnalosti, aby zoznam chýb nebol prázdny: zvuk bez súboru, súbor bez zvuku
+/// a prázdnu skupinu.
 /// </remarks>
 internal static class DemoBank
 {
@@ -42,7 +42,7 @@ internal static class DemoBank
     public const string EmptyGroupKey = "Reklama";
 
     /// <summary>
-    ///     Zostaví inštaláciu do <paramref name="root" /> (existujúci obsah vytvorený harnessom zmaže).
+    /// Zostaví inštaláciu do <paramref name="root" /> (existujúci obsah vytvorený harnessom zmaže).
     /// </summary>
     public static void Build(string root, List<string> log)
     {
@@ -132,12 +132,12 @@ internal static class DemoBank
     }
 
     /// <summary>
-    ///     Dĺžka nahrávky približne ako pri reči - podľa počtu znakov textu.
+    /// Dĺžka nahrávky približne ako pri reči - podľa počtu znakov textu.
     /// </summary>
     private static int DurationOf(string text) => Math.Min(3500, 350 + 65 * text.Length);
 
     /// <summary>
-    ///     Tichý tón s nábehom a doznením (22 050 Hz, 16 bit, mono); .EWA vznikne rovnakou konverziou ako v programe.
+    /// Tichý tón s nábehom a doznením (22 050 Hz, 16 bit, mono); .EWA vznikne rovnakou konverziou ako v programe.
     /// </summary>
     private static void WriteSound(string path, int durationMs)
     {

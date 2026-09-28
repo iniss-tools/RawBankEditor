@@ -15,7 +15,7 @@ internal static class GlobData
     public static RawBankEditorStyle UsingStyle = null!;
 
     /// <summary>
-    ///     Nacita zoznam jazykov banky v instalacii INISS. Otvorenu banku nemeni - prevezme sa az po vybere jazyka.
+    /// Nacita zoznam jazykov banky v instalacii INISS. Otvorenu banku nemeni - prevezme sa az po vybere jazyka.
     /// </summary>
     public static RawBankProject LoadProject(string pathToINISS)
     {

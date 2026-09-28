@@ -5,7 +5,7 @@ using ToolsCore.XML;
 namespace RawBankEditor.XML;
 
 /// <summary>
-///     Obsahuje zoznam všetkých možných klávesových skratiek pre program.
+/// Obsahuje zoznam všetkých možných klávesových skratiek pre program.
 /// </summary>
 public record AppShortcuts()
 {
@@ -76,7 +76,7 @@ public record AppShortcuts()
     }
 
     /// <summary>
-    ///     Skratka pre uloženie jazyka banky.
+    /// Skratka pre uloženie jazyka banky.
     /// </summary>
     [XmlElement("Save")]
     public CmdShortcut Save
@@ -90,7 +90,7 @@ public record AppShortcuts()
     }
 
     /// <summary>
-    ///     Skratka pre uloženie vsetkych jazykov banky.
+    /// Skratka pre uloženie vsetkych jazykov banky.
     /// </summary>
     [XmlElement("SaveAll")]
     public CmdShortcut SaveAll

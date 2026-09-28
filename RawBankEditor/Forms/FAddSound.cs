@@ -14,8 +14,8 @@ public partial class FAddSound : Form
 
     /// <param name="group">skupina, do ktorej sa zvuk prida (validacia duplicit, pripona a vyhladanie suboru).</param>
     /// <param name="file">
-    ///     existujuci subor bez udajov o zvuku - nazov suboru sa z neho prevezme a nazov suboru
-    ///     ani pridavna cesta sa nedaju menit.
+    /// existujuci subor bez udajov o zvuku - nazov suboru sa z neho prevezme a nazov suboru
+    /// ani pridavna cesta sa nedaju menit.
     /// </param>
     public FAddSound(FyzGroup group, SoundFileElement? file = null)
     {

@@ -5,7 +5,7 @@ using ToolsCore.XML;
 namespace RawBankEditor.XML;
 
 /// <summary>
-///     Obsahuje zoznam všetkých možných stĺpcov pre tabuľku na pracovnej ploche programu
+/// Obsahuje zoznam všetkých možných stĺpcov pre tabuľku na pracovnej ploche programu
 /// </summary>
 public record DesktopColumns()
 {
@@ -122,7 +122,7 @@ public record DesktopColumns()
     #endregion
 
     /// <summary>
-    ///     Vráti zoradený zoznam všetkých možných stĺpcov pre tabuľku na pracovnej ploche programu
+    /// Vráti zoradený zoznam všetkých možných stĺpcov pre tabuľku na pracovnej ploche programu
     /// </summary>
     /// <returns></returns>
     public IList<DesktopColumn> GetValues()

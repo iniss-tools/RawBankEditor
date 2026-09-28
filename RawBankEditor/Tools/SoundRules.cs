@@ -4,18 +4,18 @@ using ToolsCore.Tools;
 namespace RawBankEditor.Tools;
 
 /// <summary>
-///     Pravidla pre zvuky skupiny: kluc a nazov su povinne a v skupine jedinecne (rovnako ako v okne Pridat zvuk).
-///     INISS porovnava kluce bez ohladu na velkost pismen, preto aj tieto pravidla.
+/// Pravidla pre zvuky skupiny: kluc a nazov su povinne a v skupine jedinecne (rovnako ako v okne Pridat zvuk).
+/// INISS porovnava kluce bez ohladu na velkost pismen, preto aj tieto pravidla.
 /// </summary>
 public static class SoundRules
 {
     /// <summary>
-    ///     Porovnanie klucov a nazvov zvukov - rovnako ako INISS, bez ohladu na velkost pismen.
+    /// Porovnanie klucov a nazvov zvukov - rovnako ako INISS, bez ohladu na velkost pismen.
     /// </summary>
     public static bool SameText(string? a, string? b) => string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
-    ///     Skontroluje nove zvuky pred pridanim do ich skupin - voci zvukom, ktore uz v skupine su, aj navzajom.
+    /// Skontroluje nove zvuky pred pridanim do ich skupin - voci zvukom, ktore uz v skupine su, aj navzajom.
     /// </summary>
     /// <param name="newSounds">Nove zvuky, este nepridane do <see cref="FyzGroup.Sounds" />.</param>
     /// <returns>Pre kazdy zvuk s problemom text chyby.</returns>
@@ -43,13 +43,13 @@ public static class SoundRules
     }
 
     /// <summary>
-    ///     Ci sa nahravka zvuku pri presune do inej skupiny presuva s nim - lezi priamo v priecinku skupiny
-    ///     (bez pridavnej cesty). Nahravka s pridavnou cestou ostava na mieste, prepocita sa len cesta.
+    /// Ci sa nahravka zvuku pri presune do inej skupiny presuva s nim - lezi priamo v priecinku skupiny
+    /// (bez pridavnej cesty). Nahravka s pridavnou cestou ostava na mieste, prepocita sa len cesta.
     /// </summary>
     public static bool FileMovesWithSound(FyzSound sound) => RawBankParser.AdditionalPathIsEmpty(sound.AdditionalRelativePath);
 
     /// <summary>
-    ///     Skontroluje presun zvukov do skupiny <paramref name="target" /> - vsetko alebo nic.
+    /// Skontroluje presun zvukov do skupiny <paramref name="target" /> - vsetko alebo nic.
     /// </summary>
     /// <param name="sounds">Presuvane zvuky (este v povodnej skupine).</param>
     /// <param name="target">Cielova skupina.</param>
@@ -85,8 +85,8 @@ public static class SoundRules
     }
 
     /// <summary>
-    ///     Pridavna cesta, ktorou zvuk zo skupiny <paramref name="group" /> ukazuje na nahravku v priecinku
-    ///     <paramref name="fileDirectory" /> - prazdna, ak nahravka lezi priamo v priecinku skupiny.
+    /// Pridavna cesta, ktorou zvuk zo skupiny <paramref name="group" /> ukazuje na nahravku v priecinku
+    /// <paramref name="fileDirectory" /> - prazdna, ak nahravka lezi priamo v priecinku skupiny.
     /// </summary>
     public static string AdditionalPathFor(FyzGroup group, string fileDirectory, string pathToBank)
     {

@@ -76,7 +76,7 @@ public partial class FSearch : Form
     }
 
     /// <summary>
-    ///     Vyberie aktualny vysledok v hlavnom okne; v titulku ukaze, kolky je.
+    /// Vyberie aktualny vysledok v hlavnom okne; v titulku ukaze, kolky je.
     /// </summary>
     /// <returns><c>false</c>, ak zvuk medzitym zo skupiny zmizol - treba hladat znova.</returns>
     private bool SelectFound()

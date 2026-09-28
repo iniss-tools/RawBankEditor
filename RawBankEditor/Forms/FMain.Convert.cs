@@ -75,8 +75,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Skonvertuje subory na pozadi. Sledovanie suborov je pocas konverzie vypnute - prvky prieskumnika aj nazvy
-    ///     suborov zvukov upravi sama konverzia.
+    /// Skonvertuje subory na pozadi. Sledovanie suborov je pocas konverzie vypnute - prvky prieskumnika aj nazvy
+    /// suborov zvukov upravi sama konverzia.
     /// </summary>
     internal async Task<SoundUtils.ConvertResult> ConvertInBackground(IReadOnlyCollection<SoundFileElement> files, bool toEwa, string status)
     {

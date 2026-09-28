@@ -55,7 +55,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Converts .EWA encoded file to .WAV audio file.
+    /// Converts .EWA encoded file to .WAV audio file.
     /// </summary>
     /// <param name="inpath">input file (.EWA)</param>
     /// <param name="outpath">output file (.WAV)</param>
@@ -79,7 +79,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Converts .EWA stream to .WAV stream.
+    /// Converts .EWA stream to .WAV stream.
     /// </summary>
     /// <param name="instream">input stream (.EWA)</param>
     /// <param name="outstream">output stream (.WAV)</param>
@@ -116,7 +116,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Converts .WAV audio file to .EWA encoded file.
+    /// Converts .WAV audio file to .EWA encoded file.
     /// </summary>
     /// <param name="inpath">input file (.WAV)</param>
     /// <param name="outpath">output file (.EWA)</param>
@@ -139,7 +139,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Converts .EWA stream to .WAV stream.
+    /// Converts .EWA stream to .WAV stream.
     /// </summary>
     /// <param name="instream">input stream (.WAV)</param>
     /// <param name="outstream">output stream (.EWA)</param>
@@ -221,7 +221,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Vrati dlzku zvuku (.WAV|.EWA) v milisekundach (ms)
+    /// Vrati dlzku zvuku (.WAV|.EWA) v milisekundach (ms)
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
@@ -292,7 +292,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Vysledok konverzie suborov.
+    /// Vysledok konverzie suborov.
     /// </summary>
     public sealed class ConvertResult
     {
@@ -307,7 +307,7 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Subory nahravok vo vybranych prvkoch prieskumnika vratane obsahu priecinkov (rekurzivne).
+    /// Subory nahravok vo vybranych prvkoch prieskumnika vratane obsahu priecinkov (rekurzivne).
     /// </summary>
     public static List<SoundFileElement> SoundFilesIn(IEnumerable<FileSystemElement> elements)
     {
@@ -329,18 +329,18 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Skonvertuje subory (aj rekurzivne v priecinkoch) na .EWA alebo .WAV, pozri <see cref="ConvertSoundFiles" />.
+    /// Skonvertuje subory (aj rekurzivne v priecinkoch) na .EWA alebo .WAV, pozri <see cref="ConvertSoundFiles" />.
     /// </summary>
     public static ConvertResult ConvertFiles(IEnumerable<FileSystemElement> elements, bool toEwa, System.Action? progress = null)
         => ConvertSoundFiles(SoundFilesIn(elements), toEwa, progress);
 
     /// <summary>
-    ///     Skonvertuje subory nahravok na .EWA alebo .WAV. Povodny subor sa zmaze a prvok aj priradeny zvuk
-    ///     dostanu novy nazov suboru.
+    /// Skonvertuje subory nahravok na .EWA alebo .WAV. Povodny subor sa zmaze a prvok aj priradeny zvuk
+    /// dostanu novy nazov suboru.
     /// </summary>
     /// <remarks>
-    ///     Preskoci subory, ktore uz maju cielovu priponu alebo neexistuju, a subory, vedla ktorych uz cielovy
-    ///     subor existuje - ten moze patrit inemu zvuku, preto sa neprepisuje.
+    /// Preskoci subory, ktore uz maju cielovu priponu alebo neexistuju, a subory, vedla ktorych uz cielovy
+    /// subor existuje - ten moze patrit inemu zvuku, preto sa neprepisuje.
     /// </remarks>
     /// <param name="progress">Vola sa po kazdom subore.</param>
     public static ConvertResult ConvertSoundFiles(IEnumerable<SoundFileElement> files, bool toEwa, System.Action? progress = null)
@@ -395,9 +395,9 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Vrati predvoleny nazov suboru noveho zvuku podla kluca. Ak v priecinku skupiny existuje subor
-    ///     s nazvom kluca (.WAV/.EWA), pouzije sa jeho nazov, inak kluc s priponou prevladajucou v skupine
-    ///     (predvolene .WAV).
+    /// Vrati predvoleny nazov suboru noveho zvuku podla kluca. Ak v priecinku skupiny existuje subor
+    /// s nazvom kluca (.WAV/.EWA), pouzije sa jeho nazov, inak kluc s priponou prevladajucou v skupine
+    /// (predvolene .WAV).
     /// </summary>
     public static string GetDefaultFileName(FyzGroup group, string key)
     {
@@ -414,8 +414,8 @@ public static class SoundUtils
     }
 
     /// <summary>
-    ///     Najde fyzicky subor zvuku rovnako ako <see cref="RawBankExplorer.MergeFilesAndData" />: pri prazdnej
-    ///     pridavnej ceste v priecinku skupiny podla nazvu suboru, inak na absolutnej ceste zvuku.
+    /// Najde fyzicky subor zvuku rovnako ako <see cref="RawBankExplorer.MergeFilesAndData" />: pri prazdnej
+    /// pridavnej ceste v priecinku skupiny podla nazvu suboru, inak na absolutnej ceste zvuku.
     /// </summary>
     /// <returns>prvok suboru alebo <c>null</c>, ak subor neexistuje.</returns>
     public static SoundFileElement? FindSoundFile(FyzSound sound, string pathToBank)

@@ -4,19 +4,19 @@ using ToolsCore.XML;
 namespace RawBankEditor.XML;
 
 /// <summary>
-///     Konfiguracny subor
+/// Konfiguracny subor
 /// </summary>
 [XmlRoot("CONFIG")]
 public record RawBankEditorConfig() : ConfigBase
 {
     /// <summary>
-    ///     Stlpce zobrazujuce sa v tabulke na pracovnej ploche programu.
+    /// Stlpce zobrazujuce sa v tabulke na pracovnej ploche programu.
     /// </summary>
     [XmlElement("DesktopCols")] 
     public DesktopColumns DesktopCols { get; set; } = new();
 
     /// <summary>
-    ///     Klávesové skratky pre akcie na pracovnej ploche programu.
+    /// Klávesové skratky pre akcie na pracovnej ploche programu.
     /// </summary>
     [XmlElement("Shortcuts")] 
     public AppShortcuts Shortcuts { get; set; } = new();

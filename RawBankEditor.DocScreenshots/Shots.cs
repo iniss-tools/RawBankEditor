@@ -6,8 +6,8 @@ using ToolsCore.Entities;
 namespace RawBankEditor.DocScreenshots;
 
 /// <summary>
-///     Zoznam snímok. Každá snímka je okno uložené ako <c>&lt;priečinok&gt;/&lt;názov&gt;-light.png</c> a <c>-dark.png</c>;
-///     priečinok je názov článku v <c>docs/rawbankeditor</c>.
+/// Zoznam snímok. Každá snímka je okno uložené ako <c>&lt;priečinok&gt;/&lt;názov&gt;-light.png</c> a <c>-dark.png</c>;
+/// priečinok je názov článku v <c>docs/rawbankeditor</c>.
 /// </summary>
 internal sealed class Shots(Program.Options options, string theme, List<string> log)
 {
@@ -168,7 +168,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
     }
 
     /// <summary>
-    ///     Správy zoznamu chýb po načítaní banky - ukážková banka má mať práve tri zámerné.
+    /// Správy zoznamu chýb po načítaní banky - ukážková banka má mať práve tri zámerné.
     /// </summary>
     private void LogMessages(FMain main)
     {
@@ -180,7 +180,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
     }
 
     /// <summary>
-    ///     Výber skupiny jedným krokom ako kliknutím - každá zmena výberu skupinu znova otvára.
+    /// Výber skupiny jedným krokom ako kliknutím - každá zmena výberu skupinu znova otvára.
     /// </summary>
     private static void SelectGroup(FMain main, FyzGroup group)
     {
@@ -201,7 +201,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
     }
 
     /// <summary>
-    ///     Bez zvýrazneného textu v poliach a s fokusom na hlavnom tlačidle.
+    /// Bez zvýrazneného textu v poliach a s fokusom na hlavnom tlačidle.
     /// </summary>
     private static void Unselect(Form form)
     {

@@ -104,9 +104,9 @@ internal static class RawBankExplorer
     }
 
     /// <summary>
-    ///     Prepoji zvuky jazyka s ich nahravkami. Najprv zvuky s nahravkou priamo v priecinku skupiny, potom zvuky
-    ///     s pridavnou cestou - tie ukazuju casto do priecinka inej skupiny (napr. ..\Poz1\ZALOK.WAV) a subor tam uz
-    ///     moze patrit zvuku tej skupiny. Neexistujuci subor sa neprepoji - zoznam chyb ho ukaze ako chybajuci.
+    /// Prepoji zvuky jazyka s ich nahravkami. Najprv zvuky s nahravkou priamo v priecinku skupiny, potom zvuky
+    /// s pridavnou cestou - tie ukazuju casto do priecinka inej skupiny (napr. ..\Poz1\ZALOK.WAV) a subor tam uz
+    /// moze patrit zvuku tej skupiny. Neexistujuci subor sa neprepoji - zoznam chyb ho ukaze ako chybajuci.
     /// </summary>
     private static void LinkSoundFiles(DirectoryElement languageDir, FyzLanguage lang)
     {
@@ -163,7 +163,7 @@ internal static class RawBankExplorer
     public static bool EqualsPathNames(string name1, string name2) => string.Equals(name1, name2, StringComparison.CurrentCultureIgnoreCase);
 
     /// <summary>
-    ///     Ak uz bol Dir element vytvoreny skor, nie je potrebne ho v metode GetElement() vytvarat znova (pretoze asi nebude kompletny).
+    /// Ak uz bol Dir element vytvoreny skor, nie je potrebne ho v metode GetElement() vytvarat znova (pretoze asi nebude kompletny).
     /// </summary>
     public static DirectoryElement? AddDirHandled { get; set; }
 

@@ -7,8 +7,8 @@ namespace RawBankEditor.Forms;
 partial class FMain
 {
     /// <summary>
-    ///     Zmeni kluc, nazov a relativnu cestu jazyka. Pri zmene cesty premenuje priecinok jazyka, ak existuje - inak by
-    ///     sa FYZZVUK.DAT pri ulozeni zapisal do noveho prazdneho priecinka a skupiny s nahravkami by ostali v starom.
+    /// Zmeni kluc, nazov a relativnu cestu jazyka. Pri zmene cesty premenuje priecinok jazyka, ak existuje - inak by
+    /// sa FYZZVUK.DAT pri ulozeni zapisal do noveho prazdneho priecinka a skupiny s nahravkami by ostali v starom.
     /// </summary>
     /// <returns><see langword="false" />, ak sa priecinok nepodarilo premenovat - jazyk ostal bez zmeny.</returns>
     internal bool ChangeLanguage(FyzLanguage language, string key, string name, string relativePath)
@@ -24,7 +24,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Vytvori chybajuci priecinok jazyka a prepoji ho s jazykom v prieskumniku (zoznam chyb - Vyriesit).
+    /// Vytvori chybajuci priecinok jazyka a prepoji ho s jazykom v prieskumniku (zoznam chyb - Vyriesit).
     /// </summary>
     internal void CreateLanguageDirectory(FyzLanguage language)
     {

@@ -17,7 +17,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
+    /// Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
     /// </summary>
     public abstract class Action : IUndoRedoCommand
     {
@@ -40,7 +40,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
+    /// Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
     /// </summary>
     public abstract class MoveAction : IBackwardForwardCommand
     {
@@ -60,7 +60,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri zmene oznacenych buniek v tabulke so zvukmi
+    /// Akcia pri zmene oznacenych buniek v tabulke so zvukmi
     /// </summary>
     public class SelectedCellSoundMoveAction : MoveAction
     {
@@ -196,7 +196,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri uprave vlastnosti zvuku
+    /// Akcia pri uprave vlastnosti zvuku
     /// </summary>
     public class EditSoundAction : Action
     {
@@ -336,8 +336,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri odstraneni viacerych (alebo 1) zvukov. Vytvara sa pred odstranenim - pamata si poradie zvukov
-    ///     v skupine, aby ich Spat vratilo na povodne miesta.
+    /// Akcia pri odstraneni viacerych (alebo 1) zvukov. Vytvara sa pred odstranenim - pamata si poradie zvukov
+    /// v skupine, aby ich Spat vratilo na povodne miesta.
     /// </summary>
     public class RemovedSoundsAction : Action
     {
@@ -361,12 +361,12 @@ partial class FMain
         private List<(FyzSound Sound, int Index)> Removed { get; }
 
         /// <summary>
-        ///     Subor zvuku, ktory sa s nim presunul do kosa (odstranenie v prieskumniku) - Spat ho obnovi.
+        /// Subor zvuku, ktory sa s nim presunul do kosa (odstranenie v prieskumniku) - Spat ho obnovi.
         /// </summary>
         public SoundFileElement? RecycledFile { get; init; }
 
         /// <summary>
-        ///     Odstrani zvuky zo skupiny; ich subory ostanu na disku bez udajov o zvuku.
+        /// Odstrani zvuky zo skupiny; ich subory ostanu na disku bez udajov o zvuku.
         /// </summary>
         public void Apply()
         {
@@ -415,7 +415,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Premenovanie suboru alebo priecinka v prieskumniku.
+    /// Premenovanie suboru alebo priecinka v prieskumniku.
     /// </summary>
     public class RenameFileAction : Action
     {
@@ -546,7 +546,7 @@ partial class FMain
         public override string CommandName => "Odstránenie skupiny zvukov";
 
         /// <summary>
-        ///     Odstrani skupinu zo zoznamu, pripadne jej priecinok presunie do kosa.
+        /// Odstrani skupinu zo zoznamu, pripadne jej priecinok presunie do kosa.
         /// </summary>
         /// <returns><see langword="false" />, ak sa priecinok nepodarilo odstranit - skupina ostala.</returns>
         public bool Apply()
@@ -722,7 +722,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Konverzia nahravok na .EWA alebo .WAV - pamata si len subory, ktore sa naozaj skonvertovali.
+    /// Konverzia nahravok na .EWA alebo .WAV - pamata si len subory, ktore sa naozaj skonvertovali.
     /// </summary>
     public class ConvertFilesAction : Action
     {

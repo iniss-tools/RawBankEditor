@@ -68,7 +68,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Odstrani skupinu zo zoznamu a zaregistruje akciu spat.
+    /// Odstrani skupinu zo zoznamu a zaregistruje akciu spat.
     /// </summary>
     /// <param name="group">Odstranovana skupina.</param>
     /// <param name="withDirectory">Ci sa ma do kosa presunut aj priecinok skupiny.</param>
@@ -80,13 +80,13 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Absolutna cesta k priecinku skupiny bez koncovej lomky.
+    /// Absolutna cesta k priecinku skupiny bez koncovej lomky.
     /// </summary>
     internal static string GroupDirectoryPath(FyzGroup group)
         => Path.TrimEndingDirectorySeparator(group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
 
     /// <summary>
-    ///     Vlozi skupinu do zoznamu skupin jazyka, prepoji ju s priecinkom a vyberie ju.
+    /// Vlozi skupinu do zoznamu skupin jazyka, prepoji ju s priecinkom a vyberie ju.
     /// </summary>
     internal void InsertGroup(FyzGroup group, int index)
     {
@@ -101,7 +101,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Vyberie skupinu zo zoznamu skupin jazyka; jej priecinok a subory ostanu v prieskumniku bez udajov o skupine a zvukoch.
+    /// Vyberie skupinu zo zoznamu skupin jazyka; jej priecinok a subory ostanu v prieskumniku bez udajov o skupine a zvukoch.
     /// </summary>
     internal void TakeOutGroup(FyzGroup group)
     {
@@ -116,7 +116,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Zmeni kluc, nazov a relativnu cestu skupiny. Pri zmene cesty premenuje priecinok skupiny, ak existuje.
+    /// Zmeni kluc, nazov a relativnu cestu skupiny. Pri zmene cesty premenuje priecinok skupiny, ak existuje.
     /// </summary>
     /// <returns><see langword="false" />, ak sa priecinok nepodarilo premenovat - skupina ostala bez zmeny.</returns>
     internal bool ChangeGroup(FyzGroup group, string key, string name, string relativePath)
@@ -178,7 +178,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Prepoji skupinu s priecinkom jej relativnej cesty v strome prieskumnika (ak priecinok existuje).
+    /// Prepoji skupinu s priecinkom jej relativnej cesty v strome prieskumnika (ak priecinok existuje).
     /// </summary>
     internal void LinkGroupDirectory(FyzGroup group)
     {
@@ -204,7 +204,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Po premenovani priecinka na disku upravi cesty prvku a vsetkych prvkov v nom.
+    /// Po premenovani priecinka na disku upravi cesty prvku a vsetkych prvkov v nom.
     /// </summary>
     internal static void SetElementPath(DirectoryElement directory, string newPath)
     {
@@ -226,8 +226,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Vykona zmenu na disku tak, aby udalosti sledovania suborov nevytvorili ani nezmazali prvky prieskumnika
-    ///     - tie upravi volajuci sam.
+    /// Vykona zmenu na disku tak, aby udalosti sledovania suborov nevytvorili ani nezmazali prvky prieskumnika
+    /// - tie upravi volajuci sam.
     /// </summary>
     internal void WithoutFileWatcher(System.Action action)
     {
@@ -248,7 +248,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Obnovi zoznam skupin, zvukov a prieskumnik po zmene skupin jazyka a vyberie skupinu.
+    /// Obnovi zoznam skupin, zvukov a prieskumnik po zmene skupin jazyka a vyberie skupinu.
     /// </summary>
     private void RefreshGroupViews(FyzGroup? select)
     {

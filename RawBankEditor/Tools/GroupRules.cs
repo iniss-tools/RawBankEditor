@@ -3,12 +3,12 @@ using ToolsCore.Entities;
 namespace RawBankEditor.Tools;
 
 /// <summary>
-///     Pravidla pre skupiny zvukov: kontrola okna Pridat/Upravit skupinu.
+/// Pravidla pre skupiny zvukov: kontrola okna Pridat/Upravit skupinu.
 /// </summary>
 public static class GroupRules
 {
     /// <summary>
-    ///     Relativna cesta, ktoru okno skupiny navrhne podla kluca (napr. <c>Slova</c> -> <c>Slova\</c>).
+    /// Relativna cesta, ktoru okno skupiny navrhne podla kluca (napr. <c>Slova</c> -> <c>Slova\</c>).
     /// </summary>
     public static string DefaultRelativePath(string key)
     {
@@ -17,13 +17,13 @@ public static class GroupRules
     }
 
     /// <summary>
-    ///     Nazov priecinka skupiny v priecinku jazyka (relativna cesta bez koncovej lomky).
+    /// Nazov priecinka skupiny v priecinku jazyka (relativna cesta bez koncovej lomky).
     /// </summary>
     public static string FolderName(string relativePath) => relativePath.TrimEnd('\\');
 
     /// <summary>
-    ///     Skontroluje kluc, nazov a relativnu cestu skupiny voci ostatnym skupinam jazyka. Kluce a nazvy sa porovnavaju
-    ///     bez ohladu na velkost pismen - INISS hlada skupinu podla kluca rovnako.
+    /// Skontroluje kluc, nazov a relativnu cestu skupiny voci ostatnym skupinam jazyka. Kluce a nazvy sa porovnavaju
+    /// bez ohladu na velkost pismen - INISS hlada skupinu podla kluca rovnako.
     /// </summary>
     /// <param name="groups">Skupiny jazyka.</param>
     /// <param name="edited">Upravovana skupina (s nou sa neporovnava), pri pridani <see langword="null" />.</param>
