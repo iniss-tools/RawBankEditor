@@ -1,36 +1,23 @@
-﻿using ExControls;
-using RawBankEditor.Entities;
+﻿using RawBankEditor.Entities;
 using RawBankEditor.XML;
-using ToolsCore.Entities;
-using ToolsCore.Tools;
+using ToolsCore;
 using ToolsCore.XML;
 
 namespace RawBankEditor;
 
 internal static class GlobData
 {
-    public static RawBankProject? OpenedProject;
-    public static RawBankEditorConfig Config = null!;
-    public static Styles<RawBankEditorStyle> Styles = null!;
-    public static RawBankEditorStyle UsingStyle = null!;
+    /// <summary>
+    /// Nastavenia programu (konfiguracia a styly), vytvorene pri starte.
+    /// </summary>
+    public static AppSession<RawBankEditorConfig, RawBankEditorStyle> Session { get; set; } = null!;
 
     /// <summary>
-    /// Nacita zoznam jazykov banky v instalacii INISS. Otvorenu banku nemeni - prevezme sa az po vybere jazyka.
+    /// Otvorena banka zvukov; <see langword="null" />, kym pouzivatel ziadnu neotvori.
     /// </summary>
-    public static RawBankProject LoadProject(string pathToINISS)
-    {
-        if (string.IsNullOrEmpty(pathToINISS))
-            throw new ArgumentNullException(nameof(pathToINISS));
+    public static RawBankProject? OpenedProject { get; set; }
 
-        // banka zvukov je vzdy v podpriecinku RAWBANK instalacie INISS
-        var pathToBank = pathToINISS + @"\RAWBANK\";
-
-        return new RawBankProject
-        {
-            AbsPathToINISS = pathToINISS,
-            AbsPathToBank = pathToBank,
-            Languages = new ExBindingList<FyzLanguage>(RawBankParser.ReadFyzBankFile(pathToBank, out _)),
-            Messages = new Dictionary<FyzLanguage, List<IRawBankMessage>>()
-        };
-    }
+    public static RawBankEditorConfig Config { get => Session.Config; set => Session.Config = value; }
+    public static Styles<RawBankEditorStyle> Styles { get => Session.Styles; set => Session.Styles = value; }
+    public static RawBankEditorStyle UsingStyle { get => Session.UsingStyle; set => Session.UsingStyle = value; }
 }

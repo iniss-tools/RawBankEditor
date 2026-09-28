@@ -320,7 +320,7 @@ public partial class FMain : Form
         if (GlobData.Config.DebugModeGUI != DebugMode.AppCrash)
             try
             {
-                project = GlobData.LoadProject(dirpath);
+                project = RawBankProject.Load(dirpath);
             }
             catch (Exception exception)
             {
@@ -337,7 +337,7 @@ public partial class FMain : Form
                 }
             }
         else
-            project = GlobData.LoadProject(dirpath);
+            project = RawBankProject.Load(dirpath);
 
         if (project is null)
             return false;

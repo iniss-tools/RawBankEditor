@@ -98,7 +98,7 @@ internal static class Program
         var name = Assembly.GetEntryAssembly()!.GetName().Name;
         Registry.CurrentUser.DeleteSubKeyTree($@"SOFTWARE\{name}", throwOnMissingSubKey: false);
 
-        AppInit.Initialization(out GlobData.Config, out GlobData.Styles, out GlobData.UsingStyle);
+        GlobData.Session = AppInit.Initialization<RawBankEditorConfig, RawBankEditorStyle>();
 
         // harness nebezi v Application.Run: modalne okno (ShowDialog) by pri skonceni svojej slucky odinstalovalo
         // synchronizacny kontext WinForms a BackgroundWorker spusteny potom by volal ProgressChanged/RunWorkerCompleted
@@ -119,7 +119,6 @@ internal static class Program
     {
         var style = theme == "dark" ? RawBankEditorStyle.DefaultDarkStyle : RawBankEditorStyle.DefaultLightStyle;
         GlobData.UsingStyle = style;
-        GlobSettings.UsingStyle = style;
         AppInit.MsgBoxStyleInit(style, GlobData.Config);
     }
 

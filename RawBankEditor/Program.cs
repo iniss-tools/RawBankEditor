@@ -1,4 +1,5 @@
 using RawBankEditor.Forms;
+using RawBankEditor.XML;
 using ToolsCore;
 
 namespace RawBankEditor;
@@ -10,7 +11,7 @@ internal static class Program
     [STAThread]
     private static void Main()
     {
-        AppInit.Initialization(out GlobData.Config, out GlobData.Styles, out GlobData.UsingStyle);
+        GlobData.Session = AppInit.Initialization<RawBankEditorConfig, RawBankEditorStyle>();
 
         AppInit.Run(GlobData.Config, () => MainForm = new FMain());
     }
