@@ -95,6 +95,7 @@ partial class FMain
         {
             result = await Task.Run(() => SoundUtils.ConvertSoundFiles(files, toEwa,
                 () => BeginInvoke(() => tspbProgress.Increment(1))));
+            _diskChangedSinceSave |= result.Converted.Count > 0;
         }
         catch (Exception ex)
         {

@@ -20,6 +20,7 @@ public partial class MinButton : UserControl
         _toolTip = new ToolTip();
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public string ToolTipText
     {
         get => toolTipText;
@@ -30,6 +31,7 @@ public partial class MinButton : UserControl
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Color IconColor
     {
         get => iconColor;
@@ -40,6 +42,7 @@ public partial class MinButton : UserControl
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Color IconHoverColor
     {
         get => iconHoverColor;
@@ -50,6 +53,7 @@ public partial class MinButton : UserControl
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Color HoverColor
     {
         get => hoverColor;

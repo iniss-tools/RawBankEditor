@@ -19,8 +19,6 @@
 		<SatelliteResourceLanguages>cs</SatelliteResourceLanguages>
 		<!-- LibraryImport pre PrintWindow/DWM generuje unsafe kód -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<!-- WFO1000 ako v RawBankEditor.csproj -->
-		<NoWarn>$(NoWarn);WFO1000</NoWarn>
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\RawBankEditor\RawBankEditor.csproj" />

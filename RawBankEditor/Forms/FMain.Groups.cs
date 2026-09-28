@@ -237,6 +237,7 @@ partial class FMain
         try
         {
             action();
+            _diskChangedSinceSave = true;
         }
         finally
         {

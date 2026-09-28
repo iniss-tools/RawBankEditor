@@ -9,9 +9,6 @@
 		<StartupObject>RawBankEditor.Program</StartupObject>
 		<ApplicationIcon>raw.ico</ApplicationIcon>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
-		<!-- WFO1000 (chýbajúci DesignerSerializationVisibility) je na net10.0-windows analyzer default=error
-		     (rovnaký prípad ako v ExControls) - dočasne potlačené, pozri MIGRATION_PROGRESS.md. -->
-		<NoWarn>$(NoWarn);WFO1000</NoWarn>
 		<LangVersion>default</LangVersion>
 		<!-- Orezanie výstupu pre inštalátor - rovnako ako v GVDEditor.csproj.
 		     Bez RID kopíruje SDK do runtimes\ aj natívne knižnice pre Android, Linux a macOS.
@@ -22,30 +19,6 @@
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 		<!-- Slovenčina je v hlavnej zostave, preložená je len čeština. -->
 		<SatelliteResourceLanguages>cs</SatelliteResourceLanguages>
-	</PropertyGroup>
-	<!-- ClickOnce publish nastavenia (pôvodne pre .NET Framework) - zachované pre kontinuitu,
-	     ale `dotnet publish` ClickOnce flow pre SDK-style .NET treba pred použitím overiť samostatne. -->
-	<PropertyGroup>
-		<PublishUrl>ftp://endora.endora.cz/iniss.6f.sk/web/apps/RawBankEditor/</PublishUrl>
-		<Install>true</Install>
-		<InstallFrom>Web</InstallFrom>
-		<UpdateEnabled>false</UpdateEnabled>
-		<UpdateMode>Foreground</UpdateMode>
-		<UpdateInterval>7</UpdateInterval>
-		<UpdateIntervalUnits>Days</UpdateIntervalUnits>
-		<UpdatePeriodically>false</UpdatePeriodically>
-		<UpdateRequired>false</UpdateRequired>
-		<MapFileExtensions>true</MapFileExtensions>
-		<InstallUrl>http://iniss.6f.sk/apps/RawBankEditor/</InstallUrl>
-		<ApplicationRevision>1</ApplicationRevision>
-		<ApplicationVersion>0.1.0.*</ApplicationVersion>
-		<UseApplicationTrust>false</UseApplicationTrust>
-		<ManifestCertificateThumbprint>B97ABAA6C3D241E476C79AE2D5335E05C1E4C140</ManifestCertificateThumbprint>
-		<ManifestKeyFile>iniss6f.pfx</ManifestKeyFile>
-		<!-- GenerateManifests/SignManifests vypnuté: úloha GenerateTrustInfo (ClickOnce) nie je podporovaná
-		     .NET Core MSBuildom (MSB4803), pozri MIGRATION_PROGRESS.md. -->
-		<GenerateManifests>false</GenerateManifests>
-		<SignManifests>false</SignManifests>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="NAudio" Version="2.2.1" />

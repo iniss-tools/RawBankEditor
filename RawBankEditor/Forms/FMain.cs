@@ -36,6 +36,9 @@ public partial class FMain : Form
     private bool _deferredFromUndoRedo;
     private bool _saved = true;
     private bool _unUndoableUnsavedChanges;
+
+    // presun, premenovanie a mazanie sa na disku prejavia hned, FYZZVUK.DAT az pri ulozeni
+    private bool _diskChangedSinceSave;
     private bool _programChange;
     private bool _editingFileName;
     private bool _doNotChangeExplorerSelection;
@@ -45,13 +48,23 @@ public partial class FMain : Form
     private bool _reorderingGroups;
     private bool _cellUserEditing;
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal bool DoNotChangeSoundsSelection { get; set; }
+
     internal FyzLanguage? CurrentLanguage { get; private set; }
     internal FyzGroup? CurrentGroup { get; private set; }
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal FileSystemElement? SelectElement { get; set; }
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal DirectoryElement Root { get; set; } = null!;
+
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal DirectoryElement CurrentDirectory { get; set; } = null!;
 
     internal ExBindingList<FyzSound> MenuSounds { get; private set; } = null!;
@@ -295,7 +308,7 @@ public partial class FMain : Form
                     if (!SaveBank(false))
                         return false;
                     break;
-                case DialogResult.No:
+                case DialogResult.No when ConfirmDiscardDiskChanges():
                     break;
                 default:
                     return false;
@@ -342,6 +355,7 @@ public partial class FMain : Form
 
         GlobData.OpenedProject = project;
         _newLanguages.Clear();
+        _diskChangedSinceSave = false;
         dgvErrors.DataSource = null;
         Text = @$"{Application.ProductName} - {GlobData.OpenedProject!.AbsPathToINISS}";
 
@@ -431,7 +445,7 @@ public partial class FMain : Form
         {
             case DialogResult.Yes:
                 return SaveBank(false);
-            case DialogResult.No:
+            case DialogResult.No when ConfirmDiscardDiskChanges():
                 DiscardLanguage(lang);
                 return true;
             default:
@@ -446,6 +460,14 @@ public partial class FMain : Form
     {
         lang.Groups = _newLanguages.Contains(lang) ? new List<FyzGroup>() : null!;
     }
+
+    /// <summary>
+    ///     Pred zahodenim zmien upozorni, ze cast z nich uz je na disku (presunute, premenovane alebo odstranene
+    ///     subory a priecinky) - bez ulozenia by im banka nezodpovedala a INISS by nenasiel nahravky.
+    /// </summary>
+    /// <returns><c>true</c>, ak sa zmeny mozu zahodit.</returns>
+    private bool ConfirmDiscardDiskChanges()
+        => !_diskChangedSinceSave || Utils.ShowWarning(Resources.FMain_Disk_Changed_Discard, MessageBoxButtons.YesNo) == DialogResult.Yes;
 
     private void SetComboLanguage(FyzLanguage? lang)
     {
@@ -881,6 +903,7 @@ public partial class FMain : Form
         }
 
         _unUndoableUnsavedChanges = false;
+        _diskChangedSinceSave = false;
         changeManager.SetSavedState();
         Saved = true;
         return true;
@@ -1101,7 +1124,10 @@ public partial class FMain : Form
                 var newPath = Path.Combine(targetDir, sound.FileName);
 
                 if (moveFile)
+                {
                     File.Move(sourcePath, newPath);
+                    _diskChangedSinceSave = true;
+                }
 
                 sound.Group.Sounds.Remove(sound);
                 sound.Group = target;
@@ -1684,7 +1710,7 @@ public partial class FMain : Form
                 e.Cancel = !SaveBank(false);
                 break;
             case DialogResult.No:
-                e.Cancel = false;
+                e.Cancel = !ConfirmDiscardDiskChanges();
                 break;
             default:
                 e.Cancel = true;
@@ -2154,7 +2180,7 @@ public partial class FMain : Form
         }
     }
 
-    internal async void FillExplorerList(DirectoryElement dir)
+    internal async void FillExplorerList(DirectoryElement? dir)
     {
         var generation = ++_explorerFillGeneration;
         ExplorerContent.Clear();

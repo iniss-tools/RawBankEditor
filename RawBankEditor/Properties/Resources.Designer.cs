@@ -129,6 +129,15 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Niektoré zmeny sa už prejavili na disku.
+        /// </summary>
+        internal static string FMain_Disk_Changed_Discard {
+            get {
+                return ResourceManager.GetString("FMain_Disk_Changed_Discard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to V súboroch ste vykonali zmeny. Uložiť zmeny?.
         /// </summary>
         internal static string FMain_Save_Changes {
