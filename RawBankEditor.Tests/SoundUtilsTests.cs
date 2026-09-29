@@ -107,6 +107,27 @@ public class SoundUtilsTests
     }
 
     [TestMethod]
+    public void ConvertSoundFiles_SoZurnalom_ZahodenieVratiPovodnySubor()
+    {
+        var original = File.ReadAllBytes(WriteWav("A.WAV"));
+        var (_, dir) = CreateGroup();
+        var backup = Path.Combine(_bank, "_zurnal");
+        var journal = new BankJournal(backup, _ => Assert.Fail("do kosa sa pri zahodeni nic neposiela"), _ => false);
+
+        SoundUtils.ConvertSoundFiles(dir.Children.OfType<SoundFileElement>(), true, journal: journal, scope: "SK");
+
+        // povodny subor je v zalohe zurnalu, nie zmazany
+        Assert.IsFalse(File.Exists(Path.Combine(_groupDir, "A.WAV")));
+        Assert.IsTrue(File.Exists(Path.Combine(_groupDir, "A.EWA")));
+
+        Assert.IsEmpty(journal.Rollback("SK"));
+
+        Assert.IsFalse(File.Exists(Path.Combine(_groupDir, "A.EWA")));
+        CollectionAssert.AreEqual(original, File.ReadAllBytes(Path.Combine(_groupDir, "A.WAV")));
+        Assert.IsFalse(Directory.Exists(backup));
+    }
+
+    [TestMethod]
     public void ConvertFiles_PreskociCielovuPriponuChybajuciSuborAExistujuciCiel()
     {
         WriteWav("A.WAV");

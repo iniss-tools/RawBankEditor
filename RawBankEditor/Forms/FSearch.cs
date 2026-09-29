@@ -8,13 +8,17 @@ namespace RawBankEditor.Forms;
 public partial class FSearch : Form
 {
     // zvuky, nie indexy riadkov - po uprave, odstraneni alebo presune zvukov by indexy ukazovali inam
-    private readonly List<FyzSound> _found = new();
+    private readonly List<FyzSound> _found = [];
 
     private int _foundIndex;
     private (string Text, SearchType Type, bool IgnoreCase)? _lastQuery;
 
-    public FSearch()
+    // hlavne okno - hlada sa v jeho otvorenom jazyku a vysledok sa v nom vyberie
+    private readonly FMain _main;
+
+    internal FSearch(FMain main)
     {
+        _main = main;
         InitializeComponent();
         this.ApplyThemeAndFonts();
     }
@@ -59,7 +63,7 @@ public partial class FSearch : Form
         _found.Clear();
 
         var comparison = ignoreCase ? StringComparison.CurrentCultureIgnoreCase : StringComparison.CurrentCulture;
-        foreach (var grp in Program.MainForm.CurrentLanguage!.Groups)
+        foreach (var grp in _main.CurrentLanguage!.Groups)
         {
             foreach (var sound in grp.Sounds)
             {
@@ -84,11 +88,11 @@ public partial class FSearch : Form
     private bool SelectFound()
     {
         var sound = _found[_foundIndex];
-        if (!sound.Group.Sounds.Contains(sound) || !Program.MainForm.CurrentLanguage!.Groups.Contains(sound.Group))
+        if (!sound.Group.Sounds.Contains(sound) || !_main.CurrentLanguage!.Groups.Contains(sound.Group))
             return false;
 
-        Program.MainForm.dgvSounds.ClearSelection();
-        if (Program.MainForm.SelectSound(sound) == -1)
+        _main.dgvSounds.ClearSelection();
+        if (_main.SelectSound(sound) == -1)
             return false;
 
         Text = string.Format(CultureInfo.CurrentCulture, Resources.FSearch_TitleFound, _foundIndex + 1, _found.Count);

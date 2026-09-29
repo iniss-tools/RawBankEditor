@@ -10,6 +10,7 @@ namespace RawBankEditor.Forms;
 public partial class FAddSound : Form
 {
     private bool _autoChangeNameAndFile = true;
+    private readonly string _pathToBank;
 
     public FyzSound Sound { get; private set; } = null!;
     private FyzGroup Group { get; }
@@ -20,8 +21,12 @@ public partial class FAddSound : Form
     /// existujuci subor bez udajov o zvuku - nazov suboru sa z neho prevezme a nazov suboru
     /// ani pridavna cesta sa nedaju menit.
     /// </param>
-    public FAddSound(FyzGroup group, SoundFileElement? file = null)
+    /// <param name="group">skupina noveho zvuku</param>
+    /// <param name="pathToBank">priecinok RAWBANK - nahravka noveho zvuku sa hlada v nom</param>
+    /// <param name="file">subor bez udajov o zvuku, ku ktoremu sa zvuk pridava</param>
+    public FAddSound(FyzGroup group, string pathToBank, SoundFileElement? file = null)
     {
+        _pathToBank = pathToBank;
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
@@ -86,7 +91,7 @@ public partial class FAddSound : Form
         var sound = new FyzSound(Group, key, name, fileName, relative, rtbText.Text, 0);
 
         // prepojenie s existujucim suborom a dlzka zvuku (rovnako ako pri automatickom vkladani)
-        var sfe = File ?? SoundUtils.FindSoundFile(sound, GlobData.OpenedProject!.AbsPathToBank);
+        var sfe = File ?? SoundUtils.FindSoundFile(sound, _pathToBank);
         if (sfe is not null)
         {
             if (sfe.Duration < 0)

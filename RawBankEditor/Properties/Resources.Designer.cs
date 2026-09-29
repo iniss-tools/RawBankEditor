@@ -129,15 +129,6 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Niektoré zmeny sa už prejavili na disku.
-        /// </summary>
-        internal static string FMain_Disk_Changed_Discard {
-            get {
-                return ResourceManager.GetString("FMain_Disk_Changed_Discard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Uloženie banky zlyhalo – súbory banky sa vrátili do pôvodného stavu.
         /// </summary>
         internal static string FMain_Save_Failed {
@@ -491,7 +482,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vymazať aj priečinok so zvukmi jazyka?  Priečinok sa premiestni do koša..
+        ///   Looks up a localized string similar to Vymazať aj priečinok so zvukmi jazyka?  Priečinok sa pri uložení banky premiestni do koša..
         /// </summary>
         internal static string FMain_DeleteLanguageDir {
             get {
@@ -689,7 +680,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Priečinok skupiny {0} sa nepodarilo presunúť do koša.  {1}.
+        ///   Looks up a localized string similar to Priečinok skupiny {0} sa nepodarilo odstrániť.  {1}.
         /// </summary>
         internal static string Action_GroupToRecycleFailed {
             get {
@@ -752,7 +743,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vybrané položky sa presunú do koša.  Zvuky, ktorým vybrané súbory patria, sa odstránia zo zoznamu zvukov, priečinok skupiny sa odstráni aj so skupinou.  Pokračovať?.
+        ///   Looks up a localized string similar to Vybrané položky sa odstránia, do koša sa presunú pri uložení banky.  Zvuky, ktorým vybrané súbory patria, sa odstránia zo zoznamu zvukov, priečinok skupiny sa odstráni aj so skupinou.  Pokračovať?.
         /// </summary>
         internal static string Explorer_DeleteConfirm {
             get {
@@ -761,7 +752,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} sa nepodarilo presunúť do koša.  {1}.
+        ///   Looks up a localized string similar to {0} sa nepodarilo odstrániť.  {1}.
         /// </summary>
         internal static string Explorer_RecycleFailed {
             get {
@@ -788,7 +779,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Skupina {0} sa odstráni zo zoznamu skupín spolu so svojimi zvukmi ({1}).  Premiestniť do koša aj priečinok skupiny s nahrávkami?.
+        ///   Looks up a localized string similar to Skupina {0} sa odstráni zo zoznamu skupín spolu so svojimi zvukmi ({1}).  Odstrániť aj priečinok skupiny s nahrávkami? Do koša sa presunie pri uložení banky..
         /// </summary>
         internal static string Groups_DeleteConfirm {
             get {
@@ -968,7 +959,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Presunúť súbor '{0}' do koša..
+        ///   Looks up a localized string similar to Odstrániť súbor '{0}' (do koša sa presunie pri uložení banky)..
         /// </summary>
         internal static string Msg_RecycleFile {
             get {
@@ -1297,6 +1288,168 @@ namespace RawBankEditor.Properties {
         internal static string FAddEditGroup_Add {
             get {
                 return ResourceManager.GetString("FAddEditGroup_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Po predchádzajúcom neukončenom behu programu ostali odstránené položky, ktoré sa neuložili. Presunuli sa do koša, odkiaľ sa dajú obnoviť:  {0}.
+        /// </summary>
+        internal static string FMain_JournalLeftovers {
+            get {
+                return ResourceManager.GetString("FMain_JournalLeftovers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banka je uložená, ale niektoré odstránené položky sa nepodarilo presunúť do koša. Ostali v skrytom záložnom priečinku v priečinku INISS a do koša sa presunú neskôr:  {0}.
+        /// </summary>
+        internal static string FMain_RecycleFailed {
+            get {
+                return ResourceManager.GetString("FMain_RecycleFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niektoré zmeny na disku sa nepodarilo vrátiť – banka im nemusí zodpovedať:  {0}.
+        /// </summary>
+        internal static string FMain_RollbackFailed {
+            get {
+                return ResourceManager.GetString("FMain_RollbackFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priečinok jazyka {0} sa nepodarilo odstrániť.  {1}.
+        /// </summary>
+        internal static string FMain_LanguageDirDeleteFailed {
+            get {
+                return ResourceManager.GetString("FMain_LanguageDirDeleteFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zvuky sa nepresunuli:  {0}.
+        /// </summary>
+        internal static string FMain_SoundsNotMoved {
+            get {
+                return ResourceManager.GetString("FMain_SoundsNotMoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridanie zvuku.
+        /// </summary>
+        internal static string Action_AddSound {
+            get {
+                return ResourceManager.GetString("Action_AddSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridanie zvukov.
+        /// </summary>
+        internal static string Action_AddSounds {
+            get {
+                return ResourceManager.GetString("Action_AddSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Presun zvukov.
+        /// </summary>
+        internal static string Action_MoveSounds {
+            get {
+                return ResourceManager.GetString("Action_MoveSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridanie skupiny zvukov.
+        /// </summary>
+        internal static string Action_AddGroup {
+            get {
+                return ResourceManager.GetString("Action_AddGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridanie jazyka.
+        /// </summary>
+        internal static string Action_AddLanguage {
+            get {
+                return ResourceManager.GetString("Action_AddLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} na {1}.
+        /// </summary>
+        internal static string Action_Convert {
+            get {
+                return ResourceManager.GetString("Action_Convert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jazyk: '{0}', Skupina: {1}, Zvuky:{2}.
+        /// </summary>
+        internal static string Action_SoundSelection {
+            get {
+                return ResourceManager.GetString("Action_SoundSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vraciam konverziu.
+        /// </summary>
+        internal static string Convert_RevertStatus {
+            get {
+                return ResourceManager.GetString("Convert_RevertStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konvertujem.
+        /// </summary>
+        internal static string Convert_RedoStatus {
+            get {
+                return ResourceManager.GetString("Convert_RedoStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konvertovanie zvukov skupiny.
+        /// </summary>
+        internal static string Convert_GroupTitle {
+            get {
+                return ResourceManager.GetString("Convert_GroupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konvertujem skupinu zvukov.
+        /// </summary>
+        internal static string Convert_GroupStatus {
+            get {
+                return ResourceManager.GetString("Convert_GroupStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konvertovanie zvukov jazyka.
+        /// </summary>
+        internal static string Convert_LanguageTitle {
+            get {
+                return ResourceManager.GetString("Convert_LanguageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Konvertujem zvuky jazyka.
+        /// </summary>
+        internal static string Convert_LanguageStatus {
+            get {
+                return ResourceManager.GetString("Convert_LanguageStatus", resourceCulture);
             }
         }
     }

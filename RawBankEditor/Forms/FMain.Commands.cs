@@ -6,9 +6,9 @@ namespace RawBankEditor.Forms;
 
 public partial class FMain
 {
-    private readonly CommandSet _commands = new();
+    private readonly CommandSet _commands = [];
 
-    private static bool ProjectOpen => GlobData.OpenedProject is not null;
+    private bool ProjectOpen => _bank.Project is not null;
 
     // otvoreny jazyk sa nacital bez chyby - az potom sa daju upravovat skupiny a zvuky
     private bool LanguageReady => ProjectOpen && _languageLoaded;

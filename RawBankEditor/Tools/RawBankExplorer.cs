@@ -8,9 +8,22 @@ namespace RawBankEditor.Tools;
 
 internal static class RawBankExplorer
 {
-    public static DirectoryElement ExploreFileSystem() => new(GlobData.OpenedProject!.AbsPathToBank);
+    /// <summary>
+    /// Strom suborov banky.
+    /// </summary>
+    /// <param name="pathToBank">priecinok RAWBANK</param>
+    public static DirectoryElement ExploreFileSystem(string pathToBank) => new(pathToBank);
 
-    public static void MergeFilesAndData(DirectoryElement root, FyzLanguage lang, Dictionary<FyzLanguage,List<IRawBankMessage>> dict, bool onlyCheck = false)
+    /// <summary>
+    /// Prepoji subory banky so zoznamom zvukov jazyka a naplni zoznam chyb jazyka.
+    /// </summary>
+    /// <param name="root">strom suborov banky</param>
+    /// <param name="lang">jazyk</param>
+    /// <param name="dict">zoznamy chyb jazykov</param>
+    /// <param name="pathToBank">priecinok RAWBANK</param>
+    /// <param name="onlyCheck">len obnovit zoznam chyb (prepojenia uz su)</param>
+    public static void MergeFilesAndData(DirectoryElement root, FyzLanguage lang, Dictionary<FyzLanguage, List<IRawBankMessage>> dict, string pathToBank,
+        bool onlyCheck = false)
     {
         List<IRawBankMessage> messages;
         if (onlyCheck)
@@ -22,7 +35,7 @@ internal static class RawBankExplorer
         {
             dict.Remove(lang);
 
-            messages = new List<IRawBankMessage>();
+            messages = [];
             dict.Add(lang, messages);
         }
         
@@ -55,7 +68,7 @@ internal static class RawBankExplorer
                 }
             }
 
-            LinkSoundFiles(dir, lang);
+            LinkSoundFiles(dir, lang, pathToBank);
         }
         
         //check files (link LOGICAL -> FILE)
@@ -95,10 +108,10 @@ internal static class RawBankExplorer
                 else if (child is SoundFileElement sfe)
                 {
                     if (sfe.Sound is null)
-                        messages.Add(new SoundDataMissing(sfe));
+                        messages.Add(new SoundDataMissing(sfe, pathToBank));
                     // dlzka sa zistuje az pri zobrazeni priecinka v prieskumniku - vtedy sa ukaze aj neplatna nahravka
                     if (sfe.Duration == SoundUtils.SOUND_ERROR)
-                        messages.Add(new InvalidSoundFile(sfe));
+                        messages.Add(new InvalidSoundFile(sfe, pathToBank));
                 }
             }
         }
@@ -109,9 +122,8 @@ internal static class RawBankExplorer
     /// s pridavnou cestou - tie ukazuju casto do priecinka inej skupiny (napr. ..\Poz1\ZALOK.WAV) a subor tam uz
     /// moze patrit zvuku tej skupiny. Neexistujuci subor sa neprepoji - zoznam chyb ho ukaze ako chybajuci.
     /// </summary>
-    private static void LinkSoundFiles(DirectoryElement languageDir, FyzLanguage lang)
+    private static void LinkSoundFiles(DirectoryElement languageDir, FyzLanguage lang, string pathToBank)
     {
-        var pathToBank = GlobData.OpenedProject!.AbsPathToBank;
         foreach (var additional in new[] { false, true })
         {
             foreach (var snd in lang.Groups.SelectMany(g => g.Sounds))
@@ -175,11 +187,11 @@ internal static class RawBankExplorer
 
     public static bool MovingSoundIsHandled { get; set; }
 
-    public static FileSystemElement? GetElement(string fullpath, DirectoryElement root, SearchOperation op = SearchOperation.None)
+    public static FileSystemElement? GetElement(string fullpath, DirectoryElement root, string pathToBank, SearchOperation op = SearchOperation.None)
     {
         ArgumentNullException.ThrowIfNull(root);
 
-        var path = Utils.GetRelativePath(fullpath, GlobData.OpenedProject!.AbsPathToBank);
+        var path = Utils.GetRelativePath(fullpath, pathToBank);
 
         var splitted = path.Split('\\');
         for (var i = 1; i < splitted.Length; i++)

@@ -1,5 +1,6 @@
 ﻿using ExControls;
 using RawBankEditor.XML;
+using ToolsCore;
 using ToolsCore.Forms;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.XML;
@@ -12,14 +13,18 @@ public partial class FAppSettings : FAppSettingsBase
     public new Styles<RawBankEditorStyle> Styles => (Styles<RawBankEditorStyle>)base.Styles;
 
     protected override IList<CmdShortcut> DefaultShortcuts => ShortcutMap.DefaultRows(RbeCommands.All);
-    
+
     protected override IList<DesktopColumn> DefaultColumns => new DesktopColumns().GetValues();
 
-    public FAppSettings(RawBankEditorConfig config, Styles<RawBankEditorStyle> styles) 
-        : base(config, new Styles<RawBankEditorStyle>(styles), GlobData.UsingStyle, typeof(RawBankEditorStyle))
+    // nastavenia programu - po ulozeni sa v nich nahradi konfiguracia a styly
+    private readonly AppSession<RawBankEditorConfig, RawBankEditorStyle> _session;
+
+    internal FAppSettings(AppSession<RawBankEditorConfig, RawBankEditorStyle> session)
+        : base(session.Config, new Styles<RawBankEditorStyle>(session.Styles), session.UsingStyle, typeof(RawBankEditorStyle))
     {
+        _session = session;
         InitializeComponent();
-        
+
         Shortcuts = new ExBindingList<CmdShortcut>(Config.Shortcuts.ToRows(RbeCommands.All));
         Columns = new ExBindingList<DesktopColumn>(Config.DesktopCols.GetValues());
 
@@ -49,16 +54,16 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override void SaveData()
     {
-        GlobData.Config = Config;
-        GlobData.UsingStyle = (RawBankEditorStyle)UsingStyle;
-        GlobData.Styles = Styles;
-        
+        _session.Config = Config;
+        _session.UsingStyle = (RawBankEditorStyle)UsingStyle;
+        _session.Styles = Styles;
+
         var configsDir = ToolsCore.AppPaths.ConfigDir;
         if (!Directory.Exists(configsDir))
             Directory.CreateDirectory(configsDir);
 
-        Styles<RawBankEditorStyle>.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES)!, GlobData.Styles);
-        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+        Styles<RawBankEditorStyle>.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES)!, _session.Styles);
+        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, _session.Config);
     }
 
     /// <inheritdoc />

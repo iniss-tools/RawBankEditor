@@ -48,7 +48,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
                 SelectSound(main, words.Sounds.First(s => s.Key == DemoBank.MissingFileKey));
             }, dispose: false);
 
-            Shot("pridanie-zvukov/pridat-zvuk", () => new FAddSound(stations), form =>
+            Shot("pridanie-zvukov/pridat-zvuk", () => new FAddSound(stations, Program.Bank.PathToBank), form =>
             {
                 Field<TextBox>(form, "tbKey").Text = "9900160";
                 Field<RichTextBox>(form, "rtbText").Text = "Horná Ves";
@@ -59,7 +59,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
             Shot("pridanie-zvukov/novopridane-subory", () =>
             {
                 var sound = new FyzSound(stations, "9900150", "9900150", DemoBank.UndefinedFile, "", "Horná Ves", 900);
-                var form = (Form)Activator.CreateInstance(typeof(FAfterInsertSounds), Any, null, [sound], CultureInfo.InvariantCulture)!;
+                var form = (Form)Activator.CreateInstance(typeof(FAfterInsertSounds), Any, null, [main, sound], CultureInfo.InvariantCulture)!;
                 // druhý súbor skopírovaný naraz s prvým - pribudne do toho istého okna
                 var sounds = (System.Collections.IList)typeof(FAfterInsertSounds).GetProperty("NewSounds", Any)!.GetValue(form)!;
                 sounds.Add(new FyzSound(stations, "9900160", "9900160", "9900160.WAV", "", "", 1100));
@@ -68,7 +68,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
 
             Shot("presun-zvukov/vyber-skupiny", () => new FSoundsMove(language.Groups, stations));
 
-            Shot("hladanie/hladanie", () => new FSearch(), form =>
+            Shot("hladanie/hladanie", () => new FSearch(main), form =>
             {
                 Field<TextBox>(form, "tbText").Text = "Dolné";
                 Field<RadioButton>(form, "rbText").Checked = true;
@@ -84,13 +84,13 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
             Shot("skupiny-zvukov/uprava-skupiny", () => new FAddEditGroup(language.Groups, stations), Unselect);
 
             // napisany kluc - nazov a cesta sa doplnia samy, nazov sa potom prepise
-            Shot("jazyky/pridanie-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages), form =>
+            Shot("jazyky/pridanie-jazyka", () => new FAddEditLanguage(Program.Bank.Project!.Languages), form =>
             {
                 Field<Control>(form, "tbKey").Text = "CZ";
                 Field<Control>(form, "tbName").Text = "Čeština";
                 Unselect(form);
             });
-            Shot("jazyky/uprava-jazyka", () => new FAddEditLanguage(GlobData.OpenedProject!.Languages, language), Unselect);
+            Shot("jazyky/uprava-jazyka", () => new FAddEditLanguage(Program.Bank.Project!.Languages, language), Unselect);
 
             // stránky nastavení programu - rovnaké ako v GVDEditore, stránka Všeobecné má navyše skupinu Program
             foreach (var (slug, panel) in new[]
@@ -107,7 +107,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
             {
                 Shot($"nastavenia-programu/{slug}", () =>
                 {
-                    var form = new FAppSettings(GlobData.Config, GlobData.Styles);
+                    var form = new FAppSettings(Program.Session);
                     if (panel.Length > 0)
                         form.PreselectMenuItem(panel);
                     return form;
@@ -118,7 +118,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
         {
             // Dispose namiesto Close - Close by sa pri neuloženej banke pýtal na uloženie
             main.Dispose();
-            GlobData.OpenedProject = null;
+            Program.Bank.Close(false);
         }
 
         return _count;
@@ -175,7 +175,7 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
         if (theme != "light")
             return;
 
-        foreach (var message in GlobData.OpenedProject!.Messages[main.CurrentLanguage!])
+        foreach (var message in Program.Bank.Project!.Messages[main.CurrentLanguage!])
             log.Add($"  zoznam chýb: {message.Code}: {message.Message}");
     }
 

@@ -2,8 +2,10 @@ using System.Globalization;
 using System.Reflection;
 using Microsoft.Win32;
 using RawBankEditor.Forms;
+using RawBankEditor.Services;
 using RawBankEditor.XML;
 using ToolsCore;
+using ToolsCore.Tools;
 
 namespace RawBankEditor.DocScreenshots;
 
@@ -88,6 +90,16 @@ internal static class Program
     /// <summary>
     /// Rovnaká inicializácia ako RawBankEditor.Program.Main, s čistou konfiguráciou, registrom a slovenčinou.
     /// </summary>
+    /// <summary>
+    /// Nastavenia programu harnessu.
+    /// </summary>
+    public static AppSession<RawBankEditorConfig, RawBankEditorStyle> Session { get; private set; } = null!;
+
+    /// <summary>
+    /// Služba banky otvoreného hlavného okna.
+    /// </summary>
+    public static BankEditor Bank { get; private set; } = null!;
+
     private static void InitApp()
     {
         if (Directory.Exists(AppPaths.DataDir))
@@ -97,7 +109,7 @@ internal static class Program
         var name = Assembly.GetEntryAssembly()!.GetName().Name;
         Registry.CurrentUser.DeleteSubKeyTree($@"SOFTWARE\{name}", throwOnMissingSubKey: false);
 
-        GlobData.Session = AppInit.Initialization<RawBankEditorConfig, RawBankEditorStyle>();
+        Session = AppInit.Initialization<RawBankEditorConfig, RawBankEditorStyle>();
 
         // harness nebezi v Application.Run: modalne okno (ShowDialog) by pri skonceni svojej slucky odinstalovalo
         // synchronizacny kontext WinForms a BackgroundWorker spusteny potom by volal ProgressChanged/RunWorkerCompleted
@@ -117,8 +129,8 @@ internal static class Program
     private static void SetTheme(string theme)
     {
         var style = theme == "dark" ? RawBankEditorStyle.DefaultDarkStyle : RawBankEditorStyle.DefaultLightStyle;
-        GlobData.UsingStyle = style;
-        AppInit.MsgBoxStyleInit(style, GlobData.Config);
+        Session.UsingStyle = style;
+        AppInit.MsgBoxStyleInit(style, Session.Config);
     }
 
     /// <summary>
@@ -128,13 +140,14 @@ internal static class Program
     public static FMain OpenMain(string installDir, Action<FLangChoose> chooseLanguage)
     {
         // FMain si šírky panelov pri posune deliča ukladá do konfigurácie - každá téma začína s predvolenými
-        GlobData.Config.LeftPanelWidth = -1;
-        GlobData.Config.GroupPanelWidth = -1;
-        GlobData.Config.ErrorPanelWidth = -1;
-        GlobData.Config.ShowErrorsWindow = true;
+        Session.Config.LeftPanelWidth = -1;
+        Session.Config.GroupPanelWidth = -1;
+        Session.Config.ErrorPanelWidth = -1;
+        Session.Config.ShowErrorsWindow = true;
 
-        var main = new FMain();
-        typeof(global::RawBankEditor.Program).GetProperty(nameof(global::RawBankEditor.Program.MainForm), Any)!.SetValue(null, main);
+        // každá téma otvára banku v novej službe – ako nový beh programu
+        Bank = new BankEditor(Session);
+        var main = new FMain(Bank, new DialogService());
 
         main.StartPosition = FormStartPosition.Manual;
         main.Location = new Point(40, 40);

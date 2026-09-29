@@ -18,14 +18,14 @@ partial class FMain
 
         var group = new FyzGroup(language, form.GroupKey, form.GroupName, form.GroupRelativePath);
         var directory = GroupDirectoryPath(group);
-        var created = !Directory.Exists(directory);
+        var created = false;
         try
         {
-            WithoutFileWatcher(() => Directory.CreateDirectory(directory));
+            WithoutFileWatcher(() => created = _bank.Journal.CreateDirectory(directory, language));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, directory, ex.Message));
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, directory, ex.Message));
             return;
         }
 
@@ -59,7 +59,7 @@ partial class FMain
             return;
 
         var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
-        var result = Utils.ShowWarning(
+        var result = _dialogs.ShowWarning(
             string.Format(CultureInfo.CurrentCulture, Resources.Groups_DeleteConfirm, group.Name, group.Sounds.Count),
             MessageBoxButtons.YesNoCancel);
         if (result == DialogResult.Cancel)
@@ -72,7 +72,7 @@ partial class FMain
     /// Odstrani skupinu zo zoznamu a zaregistruje akciu spat.
     /// </summary>
     /// <param name="group">Odstranovana skupina.</param>
-    /// <param name="withDirectory">Ci sa ma do kosa presunut aj priecinok skupiny.</param>
+    /// <param name="withDirectory">Ci sa ma odstranit aj priecinok skupiny (do kosa pojde pri ulozeni).</param>
     internal void RemoveGroup(FyzGroup group, bool withDirectory)
     {
         var action = new RemovedGroupsAction(this, group, withDirectory && Directory.Exists(GroupDirectoryPath(group)));
@@ -83,8 +83,31 @@ partial class FMain
     /// <summary>
     /// Absolutna cesta k priecinku skupiny bez koncovej lomky.
     /// </summary>
-    internal static string GroupDirectoryPath(FyzGroup group)
-        => Path.TrimEndingDirectorySeparator(group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+    internal string GroupDirectoryPath(FyzGroup group)
+        => Path.TrimEndingDirectorySeparator(group.GetAbsPath(_bank.PathToBank));
+
+    /// <summary>
+    /// Vytvori chybajuci priecinok skupiny a prepoji skupinu s nim aj so zvukmi, ktorych nahravky v nom uz su
+    /// (zoznam chyb - Vyriesit).
+    /// </summary>
+    internal void CreateGroupDirectory(FyzGroup group)
+    {
+        var path = GroupDirectoryPath(group);
+        try
+        {
+            WithoutFileWatcher(() => _bank.Journal.CreateDirectory(path, group.Language));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+        {
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, path, ex.Message));
+            return;
+        }
+
+        LinkGroupDirectory(group);
+        foreach (var sound in group.Sounds)
+            RelinkSoundFile(sound);
+        FillExplorerList(group.Directory);
+    }
 
     /// <summary>
     /// Vlozi skupinu do zoznamu skupin jazyka, prepoji ju s priecinkom a vyberie ju.
@@ -151,7 +174,7 @@ partial class FMain
             {
                 try
                 {
-                    WithoutFileWatcher(() => Directory.Move(oldPath, newPath));
+                    WithoutFileWatcher(() => _bank.Journal.Move(oldPath, newPath, group.Language));
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
                 {
@@ -162,7 +185,7 @@ partial class FMain
             if (error is not null)
             {
                 group.RelativePath = oldRelativePath;
-                Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_RenameFailed, oldPath, error));
+                _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_RenameFailed, oldPath, error));
                 return false;
             }
 
@@ -227,8 +250,8 @@ partial class FMain
     }
 
     /// <summary>
-    /// Vykona zmenu na disku tak, aby udalosti sledovania suborov nevytvorili ani nezmazali prvky prieskumnika
-    /// - tie upravi volajuci sam.
+    /// Vykona zmenu na disku (cez zurnal banky) tak, aby udalosti sledovania suborov nevytvorili ani nezmazali prvky
+    /// prieskumnika - tie upravi volajuci sam.
     /// </summary>
     internal void WithoutFileWatcher(System.Action action)
     {
@@ -238,7 +261,6 @@ partial class FMain
         try
         {
             action();
-            _diskChangedSinceSave = true;
         }
         finally
         {
@@ -268,7 +290,7 @@ partial class FMain
         if (dgvGroups.IsSelectionEmpty())
         {
             CurrentGroup = null;
-            MenuSounds = new ExBindingList<FyzSound>(new List<FyzSound>());
+            MenuSounds = new ExBindingList<FyzSound>([]);
             dgvSounds.DataSource = MenuSounds;
             FillExplorerList(CurrentLanguage.Directory);
         }

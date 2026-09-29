@@ -59,8 +59,7 @@ public static class SoundUtils
     /// <param name="check">whether the format of .WAV file should be checked</param>
     public static void ConvertEWAtoWAV(string inpath, string? outpath = null, bool check = false)
     {
-        if (string.IsNullOrWhiteSpace(inpath))
-            throw new ArgumentNullException(nameof(inpath));
+        ArgumentException.ThrowIfNullOrWhiteSpace(inpath);
         if (!File.Exists(inpath))
             throw new FileNotFoundException("Input file must be exists.", inpath);
 
@@ -97,8 +96,7 @@ public static class SoundUtils
     /// <param name="check">whether the format of .WAV file should be checked</param>
     public static void ConvertWAVtoEWA(string inpath, string? outpath = null, bool check = false)
     {
-        if (string.IsNullOrWhiteSpace(inpath))
-            throw new ArgumentNullException(nameof(inpath));
+        ArgumentException.ThrowIfNullOrWhiteSpace(inpath);
         if (!File.Exists(inpath))
             throw new FileNotFoundException("Input file must be exists.", inpath);
 
@@ -198,13 +196,13 @@ public static class SoundUtils
     public sealed class ConvertResult
     {
         /// <summary>Skonvertovane subory - Spat ich skonvertuje naspat.</summary>
-        public List<SoundFileElement> Converted { get; } = new();
+        public List<SoundFileElement> Converted { get; } = [];
 
         /// <summary>Subory, vedla ktorych uz subor s cielovou priponou je (neprepisuje sa).</summary>
-        public List<string> Skipped { get; } = new();
+        public List<string> Skipped { get; } = [];
 
         /// <summary>Subory, ktore sa skonvertovat nepodarilo, s popisom chyby.</summary>
-        public List<string> Failed { get; } = new();
+        public List<string> Failed { get; } = [];
     }
 
     /// <summary>
@@ -236,15 +234,18 @@ public static class SoundUtils
         => ConvertSoundFiles(SoundFilesIn(elements), toEwa, progress);
 
     /// <summary>
-    /// Skonvertuje subory nahravok na .EWA alebo .WAV. Povodny subor sa zmaze a prvok aj priradeny zvuk
-    /// dostanu novy nazov suboru.
+    /// Skonvertuje subory nahravok na .EWA alebo .WAV. Povodny subor sa zmaze (so zurnalom sa odstrani cez neho - zahodenie
+    /// zmien ho vrati) a prvok aj priradeny zvuk dostanu novy nazov suboru.
     /// </summary>
     /// <remarks>
     /// Preskoci subory, ktore uz maju cielovu priponu alebo neexistuju, a subory, vedla ktorych uz cielovy
     /// subor existuje - ten moze patrit inemu zvuku, preto sa neprepisuje.
     /// </remarks>
     /// <param name="progress">Vola sa po kazdom subore.</param>
-    public static ConvertResult ConvertSoundFiles(IEnumerable<SoundFileElement> files, bool toEwa, System.Action? progress = null)
+    /// <param name="journal">zurnal zmien banky; <see langword="null" /> = povodny subor sa zmaze natrvalo</param>
+    /// <param name="scope">rozsah operacii v zurnale (jazyk)</param>
+    public static ConvertResult ConvertSoundFiles(IEnumerable<SoundFileElement> files, bool toEwa, System.Action? progress = null,
+        BankJournal? journal = null, object? scope = null)
     {
         var ext = toEwa ? EWA_EXT : WAV_EXT;
         var result = new ConvertResult();
@@ -270,7 +271,15 @@ public static class SoundUtils
                     ConvertWAVtoEWA(oldPath, newPath);
                 else
                     ConvertEWAtoWAV(oldPath, newPath);
-                File.Delete(oldPath);
+                if (journal is null)
+                {
+                    File.Delete(oldPath);
+                }
+                else
+                {
+                    journal.FileCreated(newPath, scope);
+                    journal.Delete(oldPath, scope);
+                }
                 created = false;
 
                 sfe.FileInfo = new FileInfo(newPath);

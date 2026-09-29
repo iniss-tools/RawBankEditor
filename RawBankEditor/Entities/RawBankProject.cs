@@ -24,7 +24,7 @@ public class RawBankProject
             AbsPathToINISS = pathToINISS,
             AbsPathToBank = pathToBank,
             Languages = new ExBindingList<FyzLanguage>(RawBankParser.ReadFyzBankFile(pathToBank, out _)),
-            Messages = new Dictionary<FyzLanguage, List<IRawBankMessage>>()
+            Messages = []
         };
     }
 

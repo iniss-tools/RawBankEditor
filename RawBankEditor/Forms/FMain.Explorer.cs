@@ -34,7 +34,7 @@ partial class FMain
         if (error is null)
             return;
 
-        Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_FixNameOrEsc, error));
+        _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_FixNameOrEsc, error));
         e.Cancel = true;
     }
 
@@ -92,7 +92,7 @@ partial class FMain
         var error = GroupRules.Validate(group.Language.Groups, group, group.Key, group.Name, relativePath);
         if (error is not null)
         {
-            Utils.ShowError(error);
+            _dialogs.ShowError(error);
             return;
         }
 
@@ -116,17 +116,11 @@ partial class FMain
     {
         try
         {
-            WithoutFileWatcher(() =>
-            {
-                if (Directory.Exists(oldPath))
-                    Directory.Move(oldPath, newPath);
-                else
-                    File.Move(oldPath, newPath);
-            });
+            WithoutFileWatcher(() => _bank.Journal.Move(oldPath, newPath, CurrentLanguage));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RenameFailed, Path.GetFileName(oldPath), ex.Message));
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RenameFailed, Path.GetFileName(oldPath), ex.Message));
             return false;
         }
 
@@ -144,7 +138,7 @@ partial class FMain
         if (CurrentLanguage?.Directory is null)
             return;
 
-        switch (RawBankExplorer.GetElement(oldPath, CurrentLanguage.Directory))
+        switch (RawBankExplorer.GetElement(oldPath, CurrentLanguage.Directory, _bank.PathToBank))
         {
             case DirectoryElement de:
                 SetElementPath(de, newPath);
@@ -185,7 +179,7 @@ partial class FMain
         if (dgvExplorer.IsSelectionEmpty())
             return;
 
-        var result = Utils.ShowWarning(Resources.Explorer_DeleteConfirm, MessageBoxButtons.YesNo);
+        var result = _dialogs.ShowWarning(Resources.Explorer_DeleteConfirm, MessageBoxButtons.YesNo);
         if (result != DialogResult.Yes)
             return;
 
@@ -221,8 +215,8 @@ partial class FMain
     }
 
     /// <summary>
-    /// Presunie subor alebo priecinok do kosa a vyberie jeho prvok zo stromu prieskumnika (prvok si pamata rodica,
-    /// aby ho Spat mohlo vratit).
+    /// Odstrani subor alebo priecinok (do kosa pojde pri ulozeni banky) a vyberie jeho prvok zo stromu prieskumnika
+    /// (prvok si pamata rodica, aby ho Spat mohlo vratit).
     /// </summary>
     internal bool RecycleElement(FileSystemElement element)
     {
@@ -237,18 +231,11 @@ partial class FMain
 
         try
         {
-            WithoutFileWatcher(() =>
-            {
-                if (element is DirectoryElement)
-                    Utils.DeleteDirectoryToRecycleBin(path);
-                else
-                    Utils.DeleteFileToRecycleBin(path);
-            });
+            WithoutFileWatcher(() => _bank.Journal.Delete(path, CurrentLanguage));
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            if (ex is not OperationCanceledException)
-                Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RecycleFailed, element.Name, ex.Message));
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RecycleFailed, element.Name, ex.Message));
             return false;
         }
 
@@ -257,17 +244,17 @@ partial class FMain
     }
 
     /// <summary>
-    /// Obnovi subor z kosa a vrati jeho prvok do stromu prieskumnika.
+    /// Vrati odstraneny subor (zo zalohy zurnalu, po ulozeni z kosa) a jeho prvok do stromu prieskumnika.
     /// </summary>
     internal bool RestoreElement(FileElement element)
     {
         var path = element.FileInfo.FullName;
         var restored = File.Exists(path);
         if (!restored)
-            WithoutFileWatcher(() => restored = Utils.TryRecoverFileOrDirFromBin(path));
+            WithoutFileWatcher(() => restored = _bank.Journal.Restore(path, CurrentLanguage));
         if (!restored)
         {
-            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RestoreFailed, element.Name));
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RestoreFailed, element.Name));
             return false;
         }
 

@@ -30,14 +30,14 @@ partial class FMain
     /// </summary>
     internal void CreateLanguageDirectory(FyzLanguage language)
     {
-        var path = Path.TrimEndingDirectorySeparator(language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+        var path = Path.TrimEndingDirectorySeparator(language.GetAbsPath(_bank.PathToBank));
         try
         {
-            WithoutFileWatcher(() => Directory.CreateDirectory(path));
+            WithoutFileWatcher(() => _bank.Journal.CreateDirectory(path, null));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirFailed, path, ex.Message));
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirFailed, path, ex.Message));
             return;
         }
 
@@ -60,7 +60,7 @@ partial class FMain
 
     private bool MoveLanguageDirectory(FyzLanguage language, string relativePath)
     {
-        var pathToBank = GlobData.OpenedProject!.AbsPathToBank;
+        var pathToBank = _bank.PathToBank;
         var oldRelativePath = language.RelativePath;
         var oldPath = Path.TrimEndingDirectorySeparator(language.GetAbsPath(pathToBank));
         language.RelativePath = relativePath;
@@ -79,7 +79,7 @@ partial class FMain
             {
                 try
                 {
-                    WithoutFileWatcher(() => Directory.Move(oldPath, newPath));
+                    WithoutFileWatcher(() => _bank.Journal.Move(oldPath, newPath, null));
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
                 {
@@ -90,7 +90,7 @@ partial class FMain
             if (error is not null)
             {
                 language.RelativePath = oldRelativePath;
-                Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Languages_RenameFailed, oldPath, error));
+                _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Languages_RenameFailed, oldPath, error));
                 return false;
             }
 

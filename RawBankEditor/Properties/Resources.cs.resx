@@ -158,7 +158,7 @@ Jste si jisti?</value>
   <data name="FMain_DeleteLanguageDir" xml:space="preserve">
     <value>Smazat i složku se zvuky jazyka?
 
-Složka bude přesunuta do koše.</value>
+Složka bude při uložení banky přesunuta do koše.</value>
   </data>
   <data name="FMain_Status_OpeningGroup" xml:space="preserve">
     <value>Otevírám skupinu zvuků</value>
@@ -226,7 +226,7 @@ Opravte hodnotu nebo úpravu zrušte klávesou Esc.</value>
     <value>Odstranění jazyka</value>
   </data>
   <data name="Action_GroupToRecycleFailed" xml:space="preserve">
-    <value>Složku skupiny {0} se nepodařilo přesunout do koše.
+    <value>Složku skupiny {0} se nepodařilo odstranit.
 
 {1}</value>
   </data>
@@ -257,14 +257,14 @@ Opravte název nebo přejmenování zrušte klávesou Esc.</value>
 {1}</value>
   </data>
   <data name="Explorer_DeleteConfirm" xml:space="preserve">
-    <value>Vybrané položky budou přesunuty do koše.
+    <value>Vybrané položky budou odstraněny, do koše se přesunou při uložení banky.
 
 Zvuky, kterým vybrané soubory patří, budou odstraněny ze seznamu zvuků, složka skupiny bude odstraněna i se skupinou.
 
 Pokračovat?</value>
   </data>
   <data name="Explorer_RecycleFailed" xml:space="preserve">
-    <value>{0} se nepodařilo přesunout do koše.
+    <value>{0} se nepodařilo odstranit.
 
 {1}</value>
   </data>
@@ -281,7 +281,7 @@ Pravděpodobně byl trvale smazán.</value>
   <data name="Groups_DeleteConfirm" xml:space="preserve">
     <value>Skupina {0} bude odstraněna ze seznamu skupin spolu se svými zvuky ({1}).
 
-Přesunout do koše i složku skupiny s nahrávkami?</value>
+Odstranit i složku skupiny s nahrávkami? Do koše se přesune při uložení banky.</value>
   </data>
   <data name="Groups_DirExists" xml:space="preserve">
     <value>Složka {0} už existuje.</value>
@@ -349,7 +349,7 @@ Přesunout do koše i složku skupiny s nahrávkami?</value>
     <value>Soubor '{0}' není platná nahrávka WAV.</value>
   </data>
   <data name="Msg_RecycleFile" xml:space="preserve">
-    <value>Přesunout soubor '{0}' do koše.</value>
+    <value>Odstranit soubor '{0}' (do koše se přesune při uložení banky).</value>
   </data>
   <data name="Msg_GroupEmpty" xml:space="preserve">
     <value>Skupina '{0}' je prázdná.</value>
@@ -465,11 +465,6 @@ Přesunout do koše i složku skupiny s nahrávkami?</value>
     <value>Tento program slouží k úpravě binárních souborů zvukové banky, které používá program INISS. 
 Program RawBankEditor není oficiální aplikace společnosti CHAPS ani společnosti INPROP.</value>
   </data>
-  <data name="FMain_Disk_Changed_Discard" xml:space="preserve">
-    <value>Některé změny se už projevily na disku (přesunuté, přejmenované, převedené nebo odstraněné soubory a složky). Bez uložení jim banka nebude odpovídat a INISS nemusí najít nahrávky.
-
-Opravdu pokračovat bez uložení?</value>
-  </data>
   <data name="FMain_Save_Changes" xml:space="preserve">
     <value>V souborech jste provedli změny. Uložit změny?</value>
   </data>
@@ -581,5 +576,69 @@ Původní soubory jsou ve složce:
   </data>
   <data name="FMain_Vyberte_priecinok_s_INISS" xml:space="preserve">
     <value>Vyberte složku s INISS.exe</value>
+  </data>
+  <data name="FMain_JournalLeftovers" xml:space="preserve">
+    <value>Po předchozím neukončeném běhu programu zůstaly odstraněné položky, které nebyly uloženy. Byly přesunuty do koše, odkud je lze obnovit:
+
+{0}</value>
+  </data>
+  <data name="FMain_RecycleFailed" xml:space="preserve">
+    <value>Banka je uložena, ale některé odstraněné položky se nepodařilo přesunout do koše. Zůstaly ve skryté záložní složce ve složce INISS a do koše se přesunou později:
+
+{0}</value>
+  </data>
+  <data name="FMain_RollbackFailed" xml:space="preserve">
+    <value>Některé změny na disku se nepodařilo vrátit – banka jim nemusí odpovídat:
+
+{0}</value>
+  </data>
+  <data name="FMain_LanguageDirDeleteFailed" xml:space="preserve">
+    <value>Složku jazyka {0} se nepodařilo odstranit.
+
+{1}</value>
+  </data>
+  <data name="FMain_SoundsNotMoved" xml:space="preserve">
+    <value>Zvuky nebyly přesunuty:
+
+{0}</value>
+  </data>
+  <data name="Action_AddSound" xml:space="preserve">
+    <value>Přidání zvuku</value>
+  </data>
+  <data name="Action_AddSounds" xml:space="preserve">
+    <value>Přidání zvuků</value>
+  </data>
+  <data name="Action_MoveSounds" xml:space="preserve">
+    <value>Přesun zvuků</value>
+  </data>
+  <data name="Action_AddGroup" xml:space="preserve">
+    <value>Přidání skupiny zvuků</value>
+  </data>
+  <data name="Action_AddLanguage" xml:space="preserve">
+    <value>Přidání jazyka</value>
+  </data>
+  <data name="Action_Convert" xml:space="preserve">
+    <value>{0} na {1}</value>
+  </data>
+  <data name="Action_SoundSelection" xml:space="preserve">
+    <value>Jazyk: '{0}', Skupina: {1}, Zvuky:{2}</value>
+  </data>
+  <data name="Convert_RevertStatus" xml:space="preserve">
+    <value>Vracím převod</value>
+  </data>
+  <data name="Convert_RedoStatus" xml:space="preserve">
+    <value>Převádím</value>
+  </data>
+  <data name="Convert_GroupTitle" xml:space="preserve">
+    <value>Převod zvuků skupiny</value>
+  </data>
+  <data name="Convert_GroupStatus" xml:space="preserve">
+    <value>Převádím skupinu zvuků</value>
+  </data>
+  <data name="Convert_LanguageTitle" xml:space="preserve">
+    <value>Převod zvuků jazyka</value>
+  </data>
+  <data name="Convert_LanguageStatus" xml:space="preserve">
+    <value>Převádím zvuky jazyka</value>
   </data>
 </root>
