@@ -1,7 +1,8 @@
 using System.Globalization;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;

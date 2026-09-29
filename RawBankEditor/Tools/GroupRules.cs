@@ -1,5 +1,5 @@
 using RawBankEditor.Properties;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 
 namespace RawBankEditor.Tools;
 

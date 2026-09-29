@@ -1,7 +1,7 @@
 ﻿using ExControls;
 using RawBankEditor.XML;
 using ToolsCore.Forms;
-using ToolsCore.Tools;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.XML;
 
 namespace RawBankEditor.Forms;
@@ -57,8 +57,8 @@ public partial class FAppSettings : FAppSettingsBase
         if (!Directory.Exists(configsDir))
             Directory.CreateDirectory(configsDir);
 
-        Styles<RawBankEditorStyle>.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES)!, GlobData.Styles);
-        XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+        Styles<RawBankEditorStyle>.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES)!, GlobData.Styles);
+        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
     }
 
     /// <inheritdoc />

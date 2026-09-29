@@ -1,6 +1,7 @@
 ﻿using System.Media;
 using NAudio.Wave;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Tools;

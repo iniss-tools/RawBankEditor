@@ -2,7 +2,7 @@
 using ExControls;
 using RawBankEditor.Entities;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 
 namespace RawBankEditor.Forms
 {
@@ -781,7 +781,7 @@ namespace RawBankEditor.Forms
             // 
             // fyzGroupBindingSource
             // 
-            this.fyzGroupBindingSource.DataSource = typeof(ToolsCore.Entities.FyzGroup);
+            this.fyzGroupBindingSource.DataSource = typeof(FyzGroup);
             // 
             // tableLayoutPanel3
             // 
@@ -948,7 +948,7 @@ namespace RawBankEditor.Forms
             // 
             // fileSystemElementBindingSource
             // 
-            this.fileSystemElementBindingSource.DataSource = typeof(ToolsCore.Entities.FileSystemElement);
+            this.fileSystemElementBindingSource.DataSource = typeof(FileSystemElement);
             // 
             // label2
             // 
@@ -1225,7 +1225,7 @@ namespace RawBankEditor.Forms
             // 
             // fyzSoundBindingSource
             // 
-            this.fyzSoundBindingSource.DataSource = typeof(ToolsCore.Entities.FyzSound);
+            this.fyzSoundBindingSource.DataSource = typeof(FyzSound);
             // 
             // tableLayoutPanel4
             // 

@@ -4,9 +4,10 @@ using RawBankEditor.Entities;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using System.Globalization;
-using ToolsCore.Entities;
 using ToolsCore;
 using ToolsCore.Forms;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 using ToolsCore.XML;
 
@@ -215,28 +216,28 @@ public partial class FMain : Form
         splitSoundsErrors.Panel2.VisibleChanged += (_, _) =>
         {
             GlobData.Config.ShowErrorsWindow = !splitSoundsErrors.Panel2Collapsed;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
         };
 
         if (GlobData.Config.LeftPanelWidth != -1) splitContainer1.SplitterDistance = GlobData.Config.LeftPanelWidth;
         splitContainer1.SplitterMoved += (_, _) =>
         {
             GlobData.Config.LeftPanelWidth = splitContainer1.SplitterDistance;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
         };
 
         if (GlobData.Config.GroupPanelWidth != -1) splitContainer2.SplitterDistance = GlobData.Config.GroupPanelWidth;
         splitContainer2.SplitterMoved += (_, _) =>
         {
             GlobData.Config.GroupPanelWidth = splitContainer2.SplitterDistance;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
         };
 
         if (GlobData.Config.ErrorPanelWidth != -1) splitSoundsErrors.SplitterDistance = splitSoundsErrors.Width - GlobData.Config.ErrorPanelWidth;
         splitSoundsErrors.SplitterMoved += (_, _) =>
         {
             GlobData.Config.ErrorPanelWidth = splitSoundsErrors.Width - splitSoundsErrors.SplitterDistance;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
         };
 
         AppRegistry.RegisterJumpList();
@@ -1271,7 +1272,7 @@ public partial class FMain : Form
 
         GlobData.Config.WrapSoundText = tsmimWrapTextSoundCol.Checked;
         var configsDir = ToolsCore.AppPaths.ConfigDir;
-        XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
         SetSoundTextColumn();
     }
 

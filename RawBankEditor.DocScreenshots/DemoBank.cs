@@ -1,6 +1,6 @@
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
-using ToolsCore.Tools;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 
 namespace RawBankEditor.DocScreenshots;
 

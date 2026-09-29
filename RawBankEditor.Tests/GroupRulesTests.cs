@@ -1,5 +1,5 @@
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 
 namespace RawBankEditor.Tests;
 

@@ -1,6 +1,6 @@
 using RawBankEditor.Properties;
-using ToolsCore.Entities;
-using ToolsCore.Tools;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 
 namespace RawBankEditor.Tools;
 
@@ -71,7 +71,7 @@ public static class LanguageRules
     /// Cesta k suboru so zvukmi jazyka (FYZZVUK.DAT).
     /// </summary>
     public static string SoundsFile(string pathToBank, FyzLanguage language)
-        => Utils.CombinePath(pathToBank, language.RelativePath, language.FileDefName)!;
+        => PathUtils.CombinePath(pathToBank, language.RelativePath, language.FileDefName)!;
 
     /// <summary>
     /// Zisti, ci sa skupiny a zvuky jazyka v pamati lisia od jeho suboru FYZZVUK.DAT. Nenacitany jazyk

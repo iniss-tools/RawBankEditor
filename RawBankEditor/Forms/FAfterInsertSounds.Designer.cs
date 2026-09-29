@@ -1,4 +1,6 @@
-﻿namespace RawBankEditor.Forms
+﻿using ToolsCore.Iniss.Entities;
+
+namespace RawBankEditor.Forms
 {
     partial class FAfterInsertSounds
     {
@@ -134,7 +136,7 @@
             // 
             // fyzSoundBindingSource
             // 
-            this.fyzSoundBindingSource.DataSource = typeof(ToolsCore.Entities.FyzSound);
+            this.fyzSoundBindingSource.DataSource = typeof(FyzSound);
             // 
             // exLabel1
             // 

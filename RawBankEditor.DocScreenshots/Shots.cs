@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Reflection;
 using RawBankEditor.Forms;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 
 namespace RawBankEditor.DocScreenshots;
 

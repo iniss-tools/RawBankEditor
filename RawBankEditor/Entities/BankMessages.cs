@@ -2,7 +2,7 @@
 using System.Globalization;
 using RawBankEditor.Forms;
 using RawBankEditor.Properties;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 using static RawBankEditor.Entities.BankMessagePaths;
 // ReSharper disable MemberCanBePrivate.Global
