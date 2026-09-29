@@ -107,7 +107,7 @@ public partial class FMain : Form
                 menuStripMain.Items.Remove(tscboxLanguages);
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new UnreachableException();
         }
 
         SetRecentDirs();
@@ -225,28 +225,28 @@ public partial class FMain : Form
         splitSoundsErrors.Panel2.VisibleChanged += (_, _) =>
         {
             _bank.Config.ShowErrorsWindow = !splitSoundsErrors.Panel2Collapsed;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, _bank.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
         if (_bank.Config.LeftPanelWidth != -1) splitContainer1.SplitterDistance = _bank.Config.LeftPanelWidth;
         splitContainer1.SplitterMoved += (_, _) =>
         {
             _bank.Config.LeftPanelWidth = splitContainer1.SplitterDistance;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, _bank.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
         if (_bank.Config.GroupPanelWidth != -1) splitContainer2.SplitterDistance = _bank.Config.GroupPanelWidth;
         splitContainer2.SplitterMoved += (_, _) =>
         {
             _bank.Config.GroupPanelWidth = splitContainer2.SplitterDistance;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, _bank.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
         if (_bank.Config.ErrorPanelWidth != -1) splitSoundsErrors.SplitterDistance = splitSoundsErrors.Width - _bank.Config.ErrorPanelWidth;
         splitSoundsErrors.SplitterMoved += (_, _) =>
         {
             _bank.Config.ErrorPanelWidth = splitSoundsErrors.Width - splitSoundsErrors.SplitterDistance;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, _bank.Config);
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
         AppRegistry.RegisterJumpList();
@@ -1274,7 +1274,7 @@ public partial class FMain : Form
 
         _bank.Config.WrapSoundText = tsmimWrapTextSoundCol.Checked;
         var configsDir = ToolsCore.AppPaths.ConfigDir;
-        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, _bank.Config);
+        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         SetSoundTextColumn();
     }
 
@@ -1798,7 +1798,7 @@ public partial class FMain : Form
     private void dgvSounds_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
     {
         var newAdditionalPath = (string)dgvSounds.Rows[e.RowIndex].Cells[nameof(cSoundAdditionalRelativePath)].Value!;
-        if (!string.IsNullOrEmpty(newAdditionalPath) && (!newAdditionalPath.EndsWith("\\") || string.IsNullOrWhiteSpace(newAdditionalPath)))
+        if (!string.IsNullOrEmpty(newAdditionalPath) && (!newAdditionalPath.EndsWith('\\') || string.IsNullOrWhiteSpace(newAdditionalPath)))
         {
             _dialogs.ShowError(Resources.FMain_InvalidRelativePath);
             e.Cancel = true;
@@ -1958,7 +1958,7 @@ public partial class FMain : Form
 
             var ext = Path.GetExtension(newFileName);
             dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText =
-                ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)
+                ext.EqualsIgnoreCase(SoundUtils.WAVExt) || ext.EqualsIgnoreCase(SoundUtils.EWAExt)
                     ? Resources.FMain_SoundFileMissing
                     : Resources.FMain_InvalidFileType;
             return;
@@ -2084,7 +2084,7 @@ public partial class FMain : Form
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RError;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new UnreachableException();
                 }
             }
         }
@@ -2107,10 +2107,10 @@ public partial class FMain : Form
 
     private bool IsRootPath(DirectoryElement dir)
     {
-        return string.Compare(
+        return string.Equals(
             Path.GetFullPath(dir.DirInfo.FullName).TrimEnd('\\'),
             Path.GetFullPath(_bank.PathToBank + CurrentLanguage!.RelativePath).TrimEnd('\\'),
-            StringComparison.InvariantCultureIgnoreCase) == 0;
+            StringComparison.OrdinalIgnoreCase);
     }
 
     // 1 chyba, 2 - 4 chyby, 0 a 5+ chyb
@@ -2143,7 +2143,7 @@ public partial class FMain : Form
                     errorCount++;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new UnreachableException();
             }
         }
 

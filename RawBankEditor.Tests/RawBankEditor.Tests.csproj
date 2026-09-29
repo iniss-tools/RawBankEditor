@@ -4,6 +4,8 @@
 		<RootNamespace>RawBankEditor.Tests</RootNamespace>
 		<AssemblyName>RawBankEditor.Tests</AssemblyName>
 		<IsPackable>false</IsPackable>
+		<!-- RawBankEditor je pripnuty na win-x64 (MSB3270) -->
+		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />

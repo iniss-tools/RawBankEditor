@@ -110,7 +110,7 @@ internal static class RawBankExplorer
                     if (sfe.Sound is null)
                         messages.Add(new SoundDataMissing(sfe, pathToBank));
                     // dlzka sa zistuje az pri zobrazeni priecinka v prieskumniku - vtedy sa ukaze aj neplatna nahravka
-                    if (sfe.Duration == SoundUtils.SOUND_ERROR)
+                    if (sfe.Duration == SoundUtils.SoundError)
                         messages.Add(new InvalidSoundFile(sfe, pathToBank));
                 }
             }
@@ -173,7 +173,7 @@ internal static class RawBankExplorer
         return current as SoundFileElement;
     }
 
-    public static bool EqualsPathNames(string name1, string name2) => string.Equals(name1, name2, StringComparison.CurrentCultureIgnoreCase);
+    public static bool EqualsPathNames(string name1, string name2) => string.Equals(name1, name2, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Ak uz bol Dir element vytvoreny skor, nie je potrebne ho v metode GetElement() vytvarat znova (pretoze asi nebude kompletny).

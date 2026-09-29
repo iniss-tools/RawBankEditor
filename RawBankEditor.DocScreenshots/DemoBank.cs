@@ -124,7 +124,7 @@ internal static class DemoBank
         var group = new FyzGroup(language, key, key, key + @"\");
         foreach (var (soundKey, text) in sounds)
         {
-            var file = soundKey + (ewa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT);
+            var file = soundKey + (ewa ? SoundUtils.EWAExt : SoundUtils.WAVExt);
             group.Sounds.Add(new FyzSound(group, soundKey, soundKey, file, "", text, DurationOf(text)));
         }
 
@@ -143,7 +143,7 @@ internal static class DemoBank
     {
         const int rate = 22050;
         var samples = rate * durationMs / 1000;
-        var wav = Path.ChangeExtension(path, SoundUtils.WAV_EXT);
+        var wav = Path.ChangeExtension(path, SoundUtils.WAVExt);
 
         using (var writer = new BinaryWriter(File.Create(wav)))
         {
@@ -168,7 +168,7 @@ internal static class DemoBank
             }
         }
 
-        if (!Path.GetExtension(path).Equals(SoundUtils.EWA_EXT, StringComparison.OrdinalIgnoreCase))
+        if (!Path.GetExtension(path).Equals(SoundUtils.EWAExt, StringComparison.OrdinalIgnoreCase))
             return;
 
         SoundUtils.ConvertWAVtoEWA(wav, path);

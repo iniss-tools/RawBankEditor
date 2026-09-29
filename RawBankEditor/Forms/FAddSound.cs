@@ -57,14 +57,14 @@ public partial class FAddSound : Form
         }
 
         var ext = Path.GetExtension(fileName);
-        if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || !(ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)))
+        if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || !(ext.EqualsIgnoreCase(SoundUtils.WAVExt) || ext.EqualsIgnoreCase(SoundUtils.EWAExt)))
         {
-            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FAddSound_InvalidFileName, SoundUtils.WAV_EXT, SoundUtils.EWA_EXT));
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FAddSound_InvalidFileName, SoundUtils.WAVExt, SoundUtils.EWAExt));
             DialogResult = DialogResult.None;
             return;
         }
 
-        if (!string.IsNullOrEmpty(relative) && (!relative.EndsWith("\\") || string.IsNullOrWhiteSpace(relative)))
+        if (!string.IsNullOrEmpty(relative) && (!relative.EndsWith('\\') || string.IsNullOrWhiteSpace(relative)))
         {
             Utils.ShowError(Resources.FMain_InvalidRelativePath);
             DialogResult = DialogResult.None;

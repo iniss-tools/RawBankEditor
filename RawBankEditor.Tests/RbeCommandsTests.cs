@@ -1,3 +1,4 @@
+using System.Xml;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using RawBankEditor.Forms;
@@ -39,7 +40,7 @@ public class RbeCommandsTests
             """;
 
         using var reader = new StringReader(xml);
-        var config = (RawBankEditorConfig)new XmlSerializer(typeof(RawBankEditorConfig)).Deserialize(reader)!;
+        var config = (RawBankEditorConfig)new XmlSerializer(typeof(RawBankEditorConfig)).Deserialize(XmlReader.Create(reader))!;
 
         Assert.AreEqual(Shortcut.CtrlShiftL, config.Shortcuts.Get(RbeCommands.AddLanguage));
         Assert.AreEqual(Shortcut.None, config.Shortcuts.Get(RbeCommands.DeleteSounds));

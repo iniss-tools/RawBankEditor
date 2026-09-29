@@ -87,7 +87,7 @@ public partial class FMain
 
         Add(RbeCommands.AppSettings, ShowAppSettings, null, tsmimAppSettings, tsbAppSettings);
         Add(RbeCommands.InfoApp, ShowInfoApp, null, tsmimInfoApp, tsbInfoApp);
-        Add(RbeCommands.Updates, () => Utils.OpenShell(LinkConsts.UPDATE), null, tsmimUpdates);
+        Add(RbeCommands.Updates, () => Utils.OpenShell(LinkConsts.Update), null, tsmimUpdates);
     }
 
     /// <summary>

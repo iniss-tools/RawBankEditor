@@ -8,14 +8,14 @@ namespace RawBankEditor.Tools;
 
 public static class SoundUtils
 {
-    public const string EWA_EXT = ".EWA";
-    public const string WAV_EXT = ".WAV";
+    public const string EWAExt = ".EWA";
+    public const string WAVExt = ".WAV";
 
     // -1 = este nezistene
     private const int SOUND_UNKNOWN_LENGTH = -1;
 
     // -2 = chyba
-    internal const int SOUND_ERROR = -2;
+    internal const int SoundError = -2;
 
     public static void Play(string soundpath)
     {
@@ -23,9 +23,9 @@ public static class SoundUtils
             return;
         try
         {
-            switch (Path.GetExtension(soundpath).ToUpper())
+            switch (Path.GetExtension(soundpath).ToUpperInvariant())
             {
-                case EWA_EXT:
+                case EWAExt:
                 {
                     using var fileStream = File.OpenRead(soundpath);
                     using var memoryStream = new MemoryStream();
@@ -37,7 +37,7 @@ public static class SoundUtils
                     player.Play();
                     break;
                 }
-                case WAV_EXT:
+                case WAVExt:
                 {
                     using var player = new SoundPlayer(soundpath);
                     player.Play();
@@ -63,7 +63,7 @@ public static class SoundUtils
         if (!File.Exists(inpath))
             throw new FileNotFoundException("Input file must be exists.", inpath);
 
-        outpath ??= Path.ChangeExtension(inpath, WAV_EXT);
+        outpath ??= Path.ChangeExtension(inpath, WAVExt);
 
         using var inStream = new FileStream(inpath, FileMode.Open, FileAccess.Read);
         // ReadWrite - pri kontrole sa vystupny WAV cita spat
@@ -100,7 +100,7 @@ public static class SoundUtils
         if (!File.Exists(inpath))
             throw new FileNotFoundException("Input file must be exists.", inpath);
 
-        outpath ??= Path.ChangeExtension(inpath, EWA_EXT);
+        outpath ??= Path.ChangeExtension(inpath, EWAExt);
 
         using var inStream = new FileStream(inpath, FileMode.Open, FileAccess.Read);
         using var outStream = new FileStream(outpath, FileMode.Create, FileAccess.Write);
@@ -135,9 +135,9 @@ public static class SoundUtils
         try
         {
             var path = file.FileInfo.FullName;
-            switch (Path.GetExtension(path).ToUpper())
+            switch (Path.GetExtension(path).ToUpperInvariant())
             {
-                case EWA_EXT:
+                case EWAExt:
                 {
                     return await Task.Run(() =>
                     {
@@ -159,7 +159,7 @@ public static class SoundUtils
                     });
 
                 }
-                case WAV_EXT:
+                case WAVExt:
                 {
                     return await Task.Run(() =>
                     {
@@ -176,12 +176,12 @@ public static class SoundUtils
                     });
                 }
                 default:
-                    return SOUND_ERROR;
+                    return SoundError;
             }
         }
         catch (Exception)
         {
-            return SOUND_ERROR;
+            return SoundError;
         }
     }
 
@@ -247,7 +247,7 @@ public static class SoundUtils
     public static ConvertResult ConvertSoundFiles(IEnumerable<SoundFileElement> files, bool toEwa, System.Action? progress = null,
         BankJournal? journal = null, object? scope = null)
     {
-        var ext = toEwa ? EWA_EXT : WAV_EXT;
+        var ext = toEwa ? EWAExt : WAVExt;
         var result = new ConvertResult();
         foreach (var sfe in files.Distinct())
         {
@@ -319,8 +319,8 @@ public static class SoundUtils
         if (existing is not null)
             return existing.Name;
 
-        var ewaCount = group.Sounds.Count(s => s.FileName is not null && Path.GetExtension(s.FileName).EqualsIgnoreCase(EWA_EXT));
-        return key + (ewaCount * 2 > group.Sounds.Count ? EWA_EXT : WAV_EXT);
+        var ewaCount = group.Sounds.Count(s => s.FileName is not null && Path.GetExtension(s.FileName).EqualsIgnoreCase(EWAExt));
+        return key + (ewaCount * 2 > group.Sounds.Count ? EWAExt : WAVExt);
     }
 
     /// <summary>

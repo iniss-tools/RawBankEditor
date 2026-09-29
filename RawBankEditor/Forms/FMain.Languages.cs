@@ -2,7 +2,6 @@
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Iniss.Entities;
-using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 

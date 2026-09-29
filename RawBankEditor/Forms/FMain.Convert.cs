@@ -47,7 +47,7 @@ partial class FMain
     }
 
     private bool ConfirmConversion(string question, bool toEwa)
-        => _dialogs.ShowQuestion(string.Format(CultureInfo.CurrentCulture, question, toEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT)) == DialogResult.Yes;
+        => _dialogs.ShowQuestion(string.Format(CultureInfo.CurrentCulture, question, toEwa ? SoundUtils.EWAExt : SoundUtils.WAVExt)) == DialogResult.Yes;
 
     // nahravky zvukov, ktore subor maju
     private static List<SoundFileElement> FilesOf(IEnumerable<FyzSound> sounds)
@@ -105,7 +105,7 @@ partial class FMain
 
     private void ReportConversion(SoundUtils.ConvertResult result, bool toEwa)
     {
-        var ext = toEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
+        var ext = toEwa ? SoundUtils.EWAExt : SoundUtils.WAVExt;
         if (result.Skipped.Count > 0)
             _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.Convert_Skipped, ext, ListOf(result.Skipped)));
         if (result.Failed.Count > 0)

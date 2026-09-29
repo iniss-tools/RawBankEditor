@@ -66,7 +66,7 @@ partial class FMain
     /// </summary>
     public class SelectedCellSoundMoveAction : MoveAction
     {
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="System.Object" /> class.</summary>
         public SelectedCellSoundMoveAction(FMain form, MovePosition position) : base(form)
         {
             Position = position;
@@ -81,13 +81,13 @@ partial class FMain
             {
                 var builder = new StringBuilder();
                 if (Position.SelectedItems.Length >= 1) 
-                    builder.Append($" {Position.SelectedItems[0].Name}");
+                    builder.Append(CultureInfo.CurrentCulture, $" {Position.SelectedItems[0].Name}");
                 if (Position.SelectedItems.Length >= 2)
-                    builder.Append($", {Position.SelectedItems[1].Name}");
+                    builder.Append(CultureInfo.CurrentCulture, $", {Position.SelectedItems[1].Name}");
                 if (Position.SelectedItems.Length >= 3)
-                    builder.Append($", {Position.SelectedItems[2].Name}");
+                    builder.Append(CultureInfo.CurrentCulture, $", {Position.SelectedItems[2].Name}");
                 if (Position.SelectedItems.Length >= 4)
-                    builder.Append($",... (+{Position.SelectedItems.Length - 3})");
+                    builder.Append(CultureInfo.CurrentCulture, $",... (+{Position.SelectedItems.Length - 3})");
                 return string.Format(CultureInfo.CurrentCulture, Resources.Action_SoundSelection, Position.Language, Position.Group, builder);
             }
         }
@@ -740,7 +740,7 @@ partial class FMain
 
         /// <inheritdoc />
         public override string CommandName =>
-            string.Format(CultureInfo.CurrentCulture, Resources.Action_Convert, Name, ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT);
+            string.Format(CultureInfo.CurrentCulture, Resources.Action_Convert, Name, ToEwa ? SoundUtils.EWAExt : SoundUtils.WAVExt);
 
         /// <inheritdoc />
         public override void Undo() => _ = Form.ConvertInBackground(Files, !ToEwa, Resources.Convert_RevertStatus);

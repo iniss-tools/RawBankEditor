@@ -55,7 +55,7 @@ internal static partial class WindowCapture
     {
         var pid = (uint)Environment.ProcessId;
         var titles = new List<string>();
-        EnumWindows((hwnd, _param) =>
+        EnumWindows((hwnd, param) =>
         {
             _ = GetWindowThreadProcessId(hwnd, out var owner);
             if (owner == pid && IsWindowVisible(hwnd))

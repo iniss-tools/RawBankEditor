@@ -12,7 +12,6 @@
 		<!-- titulky okien (Application.ProductName) ako v programe; konfigurácia a register
 		     sa riadia názvom zostavy, takže ostávajú oddelené od RawBankEditora -->
 		<Product>RawBankEditor</Product>
-		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<SelfContained>false</SelfContained>
 		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>

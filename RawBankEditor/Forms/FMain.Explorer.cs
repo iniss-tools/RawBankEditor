@@ -156,7 +156,7 @@ partial class FMain
                 if (fe is SoundFileElement { Sound: { } sound } sfe && ReferenceEquals(sound.File, sfe))
                 {
                     var ext = Path.GetExtension(sfe.Name);
-                    if (ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT))
+                    if (ext.EqualsIgnoreCase(SoundUtils.WAVExt) || ext.EqualsIgnoreCase(SoundUtils.EWAExt))
                     {
                         sound.FileName = sfe.Name;
                     }
