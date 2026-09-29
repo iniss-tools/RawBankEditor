@@ -71,17 +71,19 @@ internal static partial class WindowCapture
 
     private delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr param);
 
+    // spatne volanie cez delegat [LibraryImport] nepodporuje
     [DllImport("user32.dll")]
     private static extern bool EnumWindows(EnumWindowsProc callback, IntPtr param);
 
-    [DllImport("user32.dll")]
-    private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
+    [LibraryImport("user32.dll")]
+    private static partial uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
 
-    [DllImport("user32.dll")]
-    private static extern bool IsWindowVisible(IntPtr hwnd);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool IsWindowVisible(IntPtr hwnd);
 
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern int GetWindowText(IntPtr hwnd, char[] text, int maxCount);
+    [LibraryImport("user32.dll", EntryPoint = "GetWindowTextW", StringMarshalling = StringMarshalling.Utf16)]
+    private static partial int GetWindowText(IntPtr hwnd, [Out] char[] text, int maxCount);
 
     [StructLayout(LayoutKind.Sequential)]
     private struct Rect

@@ -1,6 +1,5 @@
 ﻿using ExControls;
 using ExControls.Providers;
-using Microsoft.VisualBasic.FileIO;
 using RawBankEditor.Entities;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;

@@ -4,7 +4,6 @@ using Microsoft.Win32;
 using RawBankEditor.Forms;
 using RawBankEditor.XML;
 using ToolsCore;
-using ToolsCore.Tools;
 
 namespace RawBankEditor.DocScreenshots;
 

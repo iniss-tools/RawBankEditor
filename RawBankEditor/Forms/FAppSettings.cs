@@ -1,6 +1,5 @@
 ﻿using ExControls;
 using RawBankEditor.XML;
-using ToolsCore;
 using ToolsCore.Forms;
 using ToolsCore.Tools;
 using ToolsCore.XML;

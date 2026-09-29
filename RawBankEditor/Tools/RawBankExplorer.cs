@@ -176,8 +176,7 @@ internal static class RawBankExplorer
 
     public static FileSystemElement? GetElement(string fullpath, DirectoryElement root, SearchOperation op = SearchOperation.None)
     {
-        if (root is null)
-            throw new ArgumentNullException(nameof(root));
+        ArgumentNullException.ThrowIfNull(root);
 
         var path = Utils.GetRelativePath(fullpath, GlobData.OpenedProject!.AbsPathToBank);
 

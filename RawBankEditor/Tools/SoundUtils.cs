@@ -1,6 +1,5 @@
 ﻿using System.Media;
 using NAudio.Wave;
-using RawBankEditor.Entities;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -27,12 +26,9 @@ public static class SoundUtils
             {
                 case EWA_EXT:
                 {
-                    using var fileStream = new FileStream(soundpath, FileMode.Open);
+                    using var fileStream = File.OpenRead(soundpath);
                     using var memoryStream = new MemoryStream();
-                    using var reader = new BinaryReader(fileStream);
-                    using var writer = new BinaryWriter(memoryStream);
-
-                    ConvertEWAtoWAV(reader, writer);
+                    EwaCodec.Decode(fileStream, memoryStream);
 
                     memoryStream.Position = 0;
                     using var player = new SoundPlayer(memoryStream);
@@ -87,32 +83,9 @@ public static class SoundUtils
     /// <exception cref="FormatException">vystup nie je platny WAV (len pri <paramref name="check" />)</exception>
     public static void ConvertEWAtoWAV(BinaryReader instream, BinaryWriter outstream, bool check = false)
     {
-        var b = instream.ReadByte();
-        var ewaByte = (byte)(b ^ 82);
         instream.BaseStream.Position = 0;
-
-        while (instream.BaseStream.Position < instream.BaseStream.Length)
-        {
-            var pos = instream.BaseStream.Position;
-            b = instream.ReadByte();
-            // kluc 0 (prvy bajt 'R') - nekodovany WAV, INISS ho cita bez dekodovania
-            if (ewaByte != 0)
-            {
-                b = (byte)(b ^ ewaByte);
-                b = (byte)((b - 0x11 * pos) & 0xff);
-            }
-            outstream.Write(b);
-        }
-
-        if (check)
-        {
-            outstream.Flush();
-            var end = outstream.BaseStream.Position;
-            outstream.BaseStream.Position = 0;
-            using (var outReader = new BinaryReader(outstream.BaseStream, Encoding.ASCII, true))
-                CheckWAV(outReader);
-            outstream.BaseStream.Position = end;
-        }
+        outstream.Flush();
+        EwaCodec.Decode(instream.BaseStream, outstream.BaseStream, check);
     }
 
     /// <summary>
@@ -146,78 +119,9 @@ public static class SoundUtils
     /// <param name="check">whether the format of .WAV stream should be checked</param>
     public static void ConvertWAVtoEWA(BinaryReader instream, BinaryWriter outstream, bool check = false)
     {
-        // kluc 0 nie - INISS podla neho spozna nekodovany WAV (prvy bajt 'R') a subor by nedekodoval
-        var ewaByte = (byte)Random.Shared.Next(1, 0xff + 1);
-
-        if (check)
-        {
-            instream.BaseStream.Position = 0;
-            CheckWAV(instream);
-            instream.BaseStream.Position = 0;
-        }
-
-        while (instream.BaseStream.Position < instream.BaseStream.Length)
-        {
-            var pos = instream.BaseStream.Position;
-            var b = instream.ReadByte();
-            b = (byte)((b + 0x11 * pos) & 0xff);
-            b = (byte)(b ^ ewaByte);
-            outstream.Write(b);
-        }
-    }
-
-    private static void CheckWAV(BinaryReader reader)
-    {
-        if (Read4ByteString(reader) != "RIFF")
-            throw new FormatException("Chybný formát WAV súboru (chýba hlavička RIFF)!");
-        if (reader.ReadInt32() != reader.BaseStream.Length - 8)
-            throw new FormatException("Chybný formát WAV súboru (chybná dĺžka súboru)");
-        if (Read4ByteString(reader) != "WAVE")
-            throw new FormatException("Chybný formát WAV súboru (nie je typu WAVE)");
-
-        double formatPos = -1;
-        var fmtLen = 0;
-
-        while (reader.BaseStream.Length > reader.BaseStream.Position)
-        {
-            if (Read4ByteString(reader) == "fmt ")
-            {
-                fmtLen = reader.ReadInt32();
-                formatPos = reader.BaseStream.Position;
-                break;
-            }
-
-            reader.BaseStream.Position += reader.ReadInt32();
-        }
-
-        if (formatPos < 0)
-            throw new FormatException("Chybný formát WAV súboru (nenájdený formát)");
-        if (fmtLen < 16)
-            throw new FormatException("Chybný formát WAV súboru (fmt chunk má dĺžku menšiu ako 16 bytov)");
-
-        var formatTag = reader.ReadInt16();
-        reader.ReadInt16(); //channels
-        reader.ReadInt32(); //sample per second
-        reader.ReadInt32(); //average bytes per seconds
-        reader.ReadInt16(); //block align
-        reader.ReadInt16(); //bits per sample
-
-        if (formatTag == -2)
-        {
-            reader.ReadInt16();
-            reader.ReadInt16();
-            reader.ReadInt32();
-            var b = new Guid(reader.ReadBytes(16));
-            if (new Guid("00000001-0000-0010-8000-00AA00389B71") != b)
-                throw new FormatException("Chybný formát WAV súboru (neznámy subformát (GUID))");
-        }
-    }
-
-    private static string Read4ByteString(BinaryReader reader)
-    {
-        var array = new byte[4];
-        var read = reader.Read(array, 0, array.Length);
-        return Encoding.ASCII.GetString(array, 0, read);
+        instream.BaseStream.Position = 0;
+        outstream.Flush();
+        EwaCodec.Encode(instream.BaseStream, outstream.BaseStream, check);
     }
 
     /// <summary>
@@ -240,12 +144,9 @@ public static class SoundUtils
                     {
                         try
                         {
-                            using var fileStream = new FileStream(path, FileMode.Open);
+                            using var fileStream = File.OpenRead(path);
                             using var memoryStream = new MemoryStream();
-                            using var reader = new BinaryReader(fileStream);
-                            using var writer = new BinaryWriter(memoryStream);
-
-                            ConvertEWAtoWAV(reader, writer);
+                            EwaCodec.Decode(fileStream, memoryStream);
 
                             memoryStream.Position = 0;
                             var wreader = new WaveFileReader(memoryStream);
@@ -287,8 +188,7 @@ public static class SoundUtils
 
     private static void CheckSoundDurationInput(SoundFileElement file)
     {
-        if (file is null)
-            throw new ArgumentNullException(nameof(file));
+        ArgumentNullException.ThrowIfNull(file);
     }
 
     /// <summary>
