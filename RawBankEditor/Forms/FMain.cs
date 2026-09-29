@@ -268,7 +268,7 @@ public partial class FMain : Form
 
     private void ChangeStatus(string status) => tsslStatus.Text = status;
 
-    private void ChangeStatusReady() => tsslStatus.Text = "Pripravený";
+    private void ChangeStatusReady() => tsslStatus.Text = Resources.FMain_Status_Ready;
 
     /// <summary>
     /// Nacita banku a zacne nacitavat vybrany jazyk. Otvorena banka sa nahradi az ked je nova nacitana
@@ -384,7 +384,7 @@ public partial class FMain : Form
         tscboxLanguages.Enabled = false;
         tspbProgress.Visible = true;
         tspbProgress.Style = ProgressBarStyle.Marquee;
-        ChangeStatus("Načítanie súborov banky");
+        ChangeStatus(Resources.FMain_Status_LoadingFiles);
         ReadLanguage(lang, readFile);
     }
 
@@ -418,7 +418,7 @@ public partial class FMain : Form
         if (lang is null || !_languageLoaded || Saved || !LanguageRules.SoundsDiffer(GlobData.OpenedProject!.AbsPathToBank, lang))
             return true;
 
-        var result = Utils.ShowQuestion($"Jazyk {lang.Name} má neuložené zmeny.\n\nUložiť ich pred prepnutím jazyka?", MessageBoxButtons.YesNoCancel);
+        var result = Utils.ShowQuestion(string.Format(CultureInfo.CurrentCulture, Resources.FMain_Language_Unsaved, lang.Name), MessageBoxButtons.YesNoCancel);
         switch (result)
         {
             case DialogResult.Yes:
@@ -579,7 +579,7 @@ public partial class FMain : Form
     private static DirectoryElement ReadLanguage(RawBankProject project, FyzLanguage lang, bool readFile, IProgress<ProgressStatus> progress)
     {
         // subory banky
-        progress.Report(new ProgressStatus("Načítavanie súborového systému", 0));
+        progress.Report(new ProgressStatus(Resources.FMain_Progress_FileSystem, 0));
         var root = RawBankExplorer.ExploreFileSystem();
 
         // zoznam zvukov jazyka z FYZZVUK.DAT
@@ -587,7 +587,7 @@ public partial class FMain : Form
             RawBankParser.ReadFyzZvukFile(project.AbsPathToBank, lang, progress);
 
         // spojenie suborov so zoznamom zvukov
-        progress.Report(new ProgressStatus("Spájam načítané dáta so súborovým systémom", 0));
+        progress.Report(new ProgressStatus(Resources.FMain_Progress_Merging, 0));
         RawBankExplorer.MergeFilesAndData(root, lang, project.Messages);
         return root;
     }
@@ -627,7 +627,7 @@ public partial class FMain : Form
             DiscardLanguage(CurrentLanguage!);
             Log.Exception(error);
 
-            ChangeStatus("Vznikla chyba pri načítaní banky");
+            ChangeStatus(Resources.FMain_Status_LoadFailed);
 
             switch (GlobData.Config.DebugModeGUI)
             {
@@ -696,7 +696,7 @@ public partial class FMain : Form
         // FYZBANK.DAT sa da ulozit aj bez jazyka, napr. po odstraneni posledneho (CanSave)
         UpdateCommandStates();
         tspbProgress.Visible = false;
-        ChangeStatus("Banka neobsahuje žiadny jazyk – pridajte ho cez Nastavenia jazykov");
+        ChangeStatus(Resources.FMain_Status_NoLanguage);
     }
 
     /// <summary>
@@ -1122,7 +1122,7 @@ public partial class FMain : Form
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
             Log.Exception(exception);
-            Utils.ShowError($"Presun zvukov sa zastavil – presunulo sa {moved.Count} z {sounds.Count}.\n\n{exception.Message}");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_MoveStopped, moved.Count, sounds.Count, exception.Message));
         }
         finally
         {
@@ -1172,7 +1172,7 @@ public partial class FMain : Form
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError($"Priečinok jazyka {directory} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirFailed, directory, ex.Message));
             return;
         }
 
@@ -1214,11 +1214,11 @@ public partial class FMain : Form
 
     private void DoDeleteLanguage()
     {
-        var result = Utils.ShowWarning("Práve vybraný jazyk sa odstráni.\n\nSte si istý?", MessageBoxButtons.YesNo);
+        var result = Utils.ShowWarning(Resources.FMain_DeleteLanguage, MessageBoxButtons.YesNo);
         if (result != DialogResult.Yes)
             return;
 
-        result = Utils.ShowWarning("Vymazať aj priečinok so zvukmi jazyka?\n\nPriečinok sa premiestni do koša.", MessageBoxButtons.YesNoCancel);
+        result = Utils.ShowWarning(Resources.FMain_DeleteLanguageDir, MessageBoxButtons.YesNoCancel);
         if (result == DialogResult.Cancel)
             return;
 
@@ -1380,7 +1380,7 @@ public partial class FMain : Form
             return;
         
         _actualStatusTxt = tsslStatus.Text!;
-        tsslStatus.Text = "Otváram skupinu zvukov";
+        tsslStatus.Text = Resources.FMain_Status_OpeningGroup;
         tsslStatus.Invalidate();
         tspbProgress.Visible = true;
         tspbProgress.Style = ProgressBarStyle.Marquee;
@@ -1786,7 +1786,7 @@ public partial class FMain : Form
         var newAdditionalPath = (string)dgvSounds.Rows[e.RowIndex].Cells[nameof(cSoundAdditionalRelativePath)].Value!;
         if (!string.IsNullOrEmpty(newAdditionalPath) && (!newAdditionalPath.EndsWith("\\") || string.IsNullOrWhiteSpace(newAdditionalPath)))
         {
-            Utils.ShowError("Prídavná relatívna cesta musí končiť '\\' a nesmie obsahovať iba prázdne znaky.");
+            Utils.ShowError(Resources.FMain_InvalidRelativePath);
             e.Cancel = true;
             dgvSounds.Rows[e.RowIndex].Cells[nameof(cSoundAdditionalRelativePath)].Value = "";
             return;
@@ -1794,7 +1794,7 @@ public partial class FMain : Form
         ValidateRow(e.RowIndex, true);
     }
 
-    private void dgvSounds_DataError(object sender, DataGridViewDataErrorEventArgs e) => Utils.ShowError("Tabuľka obsahuje nesprávny údaj: " + e.Exception!.Message);
+    private void dgvSounds_DataError(object sender, DataGridViewDataErrorEventArgs e) => Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_GridDataError, e.Exception!.Message));
 
     private void dgvSounds_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
     {
@@ -1842,14 +1842,14 @@ public partial class FMain : Form
         var isKey = column == nameof(cSoundKey);
         string? error = null;
         if (string.IsNullOrWhiteSpace(value))
-            error = isKey ? "Kľúč zvuku je povinný." : "Názov zvuku je povinný.";
+            error = isKey ? Resources.FMain_SoundKeyRequired : Resources.FMain_SoundNameRequired;
         else if (sound.Group.Sounds.Any(s => s != sound && SoundRules.SameText(isKey ? s.Key : s.Name, value)))
-            error = isKey ? $"Kľúč {value} už v skupine {sound.Group.Name} existuje." : $"Názov {value} už v skupine {sound.Group.Name} existuje.";
+            error = string.Format(CultureInfo.CurrentCulture, isKey ? Resources.SoundRules_KeyExists : Resources.SoundRules_NameExists, value, sound.Group.Name);
 
         if (error is null)
             return;
 
-        Utils.ShowError(error + "\n\nOpravte hodnotu alebo úpravu zrušte klávesom Esc.");
+        Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_FixValueOrEsc, error));
         e.Cancel = true;
     }
 
@@ -1906,7 +1906,7 @@ public partial class FMain : Form
             e.Value = item switch
             {
                 SoundFileElement se => se.DurationText,
-                DirectoryElement de => de.Children.Count+ " položiek",
+                DirectoryElement de => string.Format(CultureInfo.CurrentCulture, Resources.FMain_ItemCount, de.Children.Count),
                 _ => null
             };
         }
@@ -1931,7 +1931,7 @@ public partial class FMain : Form
             if (sound.File is not null)
                 sound.File.Sound = null!;
             sound.File = null!;
-            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = "Neplatný názov súboru";
+            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = Resources.FMain_InvalidFileName;
             return;
         }
 
@@ -1945,14 +1945,14 @@ public partial class FMain : Form
             var ext = Path.GetExtension(newFileName);
             dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText =
                 ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)
-                    ? "Súbor zvuku v priečinku neexistuje"
-                    : "Neplatný typ súboru";
+                    ? Resources.FMain_SoundFileMissing
+                    : Resources.FMain_InvalidFileType;
             return;
         }
 
         if (sound.File == null || !sound.File.FileInfo.Exists)
         {
-            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = "Súbor zvuku v priečinku neexistuje";
+            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = Resources.FMain_SoundFileMissing;
         }
     }
 
@@ -2059,15 +2059,15 @@ public partial class FMain : Form
                 {
                     case MessageType.Info:
                         e.Value = _info;
-                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Informácia";
+                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RInfo;
                         break;
                     case MessageType.Warning:
                         e.Value = _warning;
-                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Upozornenie";
+                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RWarning;
                         break;
                     case MessageType.Error:
                         e.Value = _error;
-                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Chyba";
+                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RError;
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -2100,8 +2100,14 @@ public partial class FMain : Form
     }
 
     // 1 chyba, 2 - 4 chyby, 0 a 5+ chyb
-    private static string CountText(int count, string one, string few, string many)
-        => $"{count} {(count == 1 ? one : count is >= 2 and <= 4 ? few : many)}";
+    /// <summary>
+    /// Pocet s tvarom slova podla poctu; <paramref name="forms" /> su tvary pre 1, 2-4 a 5+ oddelene '|'.
+    /// </summary>
+    private static string CountText(int count, string forms)
+    {
+        var f = forms.Split('|');
+        return $"{count} {(count == 1 ? f[0] : count is >= 2 and <= 4 ? f[1] : f[2])}";
+    }
 
     private void Messages_ListChanged(object? sender, ListChangedEventArgs e)
     {
@@ -2129,14 +2135,14 @@ public partial class FMain : Form
 
         Invoke(() =>
         {
-            tsbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
-            tsbWarnings.Text = CountText(warningCount, "upozornenie", "upozornenia", "upozornení");
-            tsbInfos.Text = CountText(infoCount, "správa", "správy", "správ");
+            tsbErrors.Text = CountText(errorCount, Resources.FMain_Count_Errors);
+            tsbWarnings.Text = CountText(warningCount, Resources.FMain_Count_Warnings);
+            tsbInfos.Text = CountText(infoCount, Resources.FMain_Count_Infos);
 
             if (errorCount != 0)
             {
                 tssbErrors.Image = _error;
-                tssbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
+                tssbErrors.Text = CountText(errorCount, Resources.FMain_Count_Errors);
                 tssbErrors.ForeColor = Color.Red;
             }
             else

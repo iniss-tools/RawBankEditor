@@ -1,3 +1,4 @@
+using RawBankEditor.Properties;
 using ToolsCore.Entities;
 
 namespace RawBankEditor.Tools;
@@ -31,13 +32,13 @@ public static class GroupRules
     public static string? Validate(IEnumerable<FyzGroup> groups, FyzGroup? edited, string key, string name, string relativePath)
     {
         if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(relativePath))
-            return "Nie sú vyplnené všetky polia.";
+            return Resources.Rules_AllFieldsRequired;
 
         if (!relativePath.EndsWith('\\'))
-            return "Relatívna cesta musí končiť '\\'.";
+            return Resources.Rules_PathMustEndWithBackslash;
 
         if (!IsValidRelativePath(relativePath))
-            return "Relatívna cesta musí byť názov jedného priečinka v priečinku jazyka, napr. Slova\\.";
+            return Resources.GroupRules_PathSingleDir;
 
         foreach (var grp in groups)
         {
@@ -45,13 +46,13 @@ public static class GroupRules
                 continue;
 
             if (SoundRules.SameText(grp.Key, key))
-                return "Skupina s rovnakým kľúčom už existuje.";
+                return Resources.GroupRules_KeyExists;
 
             if (SoundRules.SameText(grp.Name, name))
-                return "Skupina s rovnakým názvom už existuje.";
+                return Resources.GroupRules_NameExists;
 
             if (SoundRules.SameText(grp.RelativePath, relativePath))
-                return "Skupina s rovnakou relatívnou cestou už existuje.";
+                return Resources.GroupRules_PathExists;
         }
 
         return null;

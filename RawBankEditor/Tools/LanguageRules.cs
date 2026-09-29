@@ -1,3 +1,4 @@
+using RawBankEditor.Properties;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -26,13 +27,13 @@ public static class LanguageRules
     public static string? Validate(IEnumerable<FyzLanguage> languages, FyzLanguage? edited, string key, string name, string relativePath)
     {
         if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(relativePath))
-            return "Nie sú vyplnené všetky polia.";
+            return Resources.Rules_AllFieldsRequired;
 
         if (!relativePath.EndsWith('\\'))
-            return "Relatívna cesta musí končiť '\\'.";
+            return Resources.Rules_PathMustEndWithBackslash;
 
         if (!IsValidRelativePath(relativePath))
-            return "Relatívna cesta musí byť názov jedného priečinka v priečinku RAWBANK, napr. SK\\.";
+            return Resources.LanguageRules_PathSingleDir;
 
         foreach (var lang in languages)
         {
@@ -40,13 +41,13 @@ public static class LanguageRules
                 continue;
 
             if (string.Equals(lang.Key, key, StringComparison.OrdinalIgnoreCase))
-                return "Jazyk s rovnakým kľúčom už existuje.";
+                return Resources.LanguageRules_KeyExists;
 
             if (string.Equals(lang.Name, name, StringComparison.OrdinalIgnoreCase))
-                return "Jazyk s rovnakým názvom už existuje.";
+                return Resources.LanguageRules_NameExists;
 
             if (string.Equals(lang.RelativePath, relativePath, StringComparison.OrdinalIgnoreCase))
-                return "Jazyk s rovnakou relatívnou cestou už existuje.";
+                return Resources.LanguageRules_PathExists;
         }
 
         return null;

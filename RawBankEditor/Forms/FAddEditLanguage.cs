@@ -1,3 +1,4 @@
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
@@ -37,7 +38,7 @@ public partial class FAddEditLanguage : Form
         }
         else
         {
-            base.Text = "Pridať jazyk";
+            base.Text = Resources.FAddEditLanguage_AddTitle;
         }
     }
 

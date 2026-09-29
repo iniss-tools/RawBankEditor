@@ -1,3 +1,5 @@
+using System.Globalization;
+using RawBankEditor.Properties;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -28,15 +30,15 @@ public static class SoundRules
         {
             if (string.IsNullOrWhiteSpace(sound.Key) || string.IsNullOrWhiteSpace(sound.Name))
             {
-                problems[sound] = "Kľúč aj názov zvuku sú povinné.";
+                problems[sound] = Resources.SoundRules_Required;
                 continue;
             }
 
             var others = sound.Group.Sounds.Concat(sounds.Where(s => s != sound && s.Group == sound.Group)).ToList();
             if (others.Any(s => SameText(s.Key, sound.Key)))
-                problems[sound] = $"Kľúč {sound.Key} už v skupine {sound.Group.Name} existuje.";
+                problems[sound] = string.Format(CultureInfo.CurrentCulture, Resources.SoundRules_KeyExists, sound.Key, sound.Group.Name);
             else if (others.Any(s => SameText(s.Name, sound.Name)))
-                problems[sound] = $"Názov {sound.Name} už v skupine {sound.Group.Name} existuje.";
+                problems[sound] = string.Format(CultureInfo.CurrentCulture, Resources.SoundRules_NameExists, sound.Name, sound.Group.Name);
         }
 
         return problems;
@@ -64,9 +66,9 @@ public static class SoundRules
         foreach (var sound in moving)
         {
             if (target.Sounds.Any(s => SameText(s.Key, sound.Key)))
-                problems.Add($"Kľúč {sound.Key} už v skupine {target.Name} existuje.");
+                problems.Add(string.Format(CultureInfo.CurrentCulture, Resources.SoundRules_KeyExists, sound.Key, target.Name));
             else if (target.Sounds.Any(s => SameText(s.Name, sound.Name)))
-                problems.Add($"Názov {sound.Name} už v skupine {target.Name} existuje.");
+                problems.Add(string.Format(CultureInfo.CurrentCulture, Resources.SoundRules_NameExists, sound.Name, target.Name));
 
             if (!FileMovesWithSound(sound) || string.IsNullOrEmpty(sound.FileName))
                 continue;
@@ -76,9 +78,9 @@ public static class SoundRules
                 continue;
 
             if (!Directory.Exists(targetDir))
-                problems.Add($"Priečinok skupiny {target.Name} ({targetDir}) neexistuje – nahrávku {sound.FileName} nie je kam presunúť.");
+                problems.Add(string.Format(CultureInfo.CurrentCulture, Resources.SoundRules_NoGroupDir, target.Name, targetDir, sound.FileName));
             else if (File.Exists(Path.Combine(targetDir, sound.FileName)))
-                problems.Add($"V priečinku skupiny {target.Name} už je súbor {sound.FileName}.");
+                problems.Add(string.Format(CultureInfo.CurrentCulture, Resources.SoundRules_FileExists, target.Name, sound.FileName));
         }
 
         return problems.Distinct().ToList();

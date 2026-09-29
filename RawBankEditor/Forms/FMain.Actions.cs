@@ -1,4 +1,6 @@
-﻿using ExControls.Providers;
+﻿using System.Globalization;
+using ExControls.Providers;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
@@ -206,7 +208,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Zmena dát o zvuku";
+        public override string CommandName => Resources.Action_SoundData;
 
         private FyzSound Sound { get; }
 
@@ -290,7 +292,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Zmena súboru zvuku";
+        public override string CommandName => Resources.Action_SoundFile;
         private FyzSound Sound { get; }
         private SoundFileElement OldFile { get; }
         private SoundFileElement NewFile { get; }
@@ -356,7 +358,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Odstránenie zvukov";
+        public override string CommandName => Resources.Action_DeleteSounds;
 
         private List<(FyzSound Sound, int Index)> Removed { get; }
 
@@ -429,7 +431,7 @@ partial class FMain
         private string NewPath { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Premenovanie súboru";
+        public override string CommandName => Resources.Action_RenameFile;
 
         /// <inheritdoc />
         public override void Undo() => Form.RenameOnDisk(NewPath, OldPath);
@@ -507,7 +509,7 @@ partial class FMain
         private (string oldRPath, string newRPath) RelativePaths { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Úprava skupiny zvukov";
+        public override string CommandName => Resources.Action_EditGroup;
 
         /// <inheritdoc />
         public override void Undo()
@@ -543,7 +545,7 @@ partial class FMain
         private string GroupDirectory { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Odstránenie skupiny zvukov";
+        public override string CommandName => Resources.Action_DeleteGroup;
 
         /// <summary>
         /// Odstrani skupinu zo zoznamu, pripadne jej priecinok presunie do kosa.
@@ -560,7 +562,7 @@ partial class FMain
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
                 {
                     if (ex is not OperationCanceledException)
-                        Utils.ShowError($"Priečinok skupiny {GroupDirectory} sa nepodarilo presunúť do koša.\n\n{ex.Message}");
+                        Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Action_GroupToRecycleFailed, GroupDirectory, ex.Message));
                     return false;
                 }
 
@@ -582,7 +584,7 @@ partial class FMain
                 var restored = false;
                 Form.WithoutFileWatcher(() => restored = Utils.TryRecoverFileOrDirFromBin(GroupDirectory));
                 if (!restored)
-                    Utils.ShowError("Nepodarilo sa obnoviť priečinok skupiny z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+                    Utils.ShowError(Resources.Action_GroupRestoreFailed);
                 else if (Group.Directory is { } directory && Group.Language.Directory is { } languageDir && !languageDir.Children.Contains(directory))
                     languageDir.Children.Add(directory);
             }
@@ -657,7 +659,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Úprava jazyka";
+        public override string CommandName => Resources.Action_EditLanguage;
 
         private FyzLanguage Language { get; }
 
@@ -696,7 +698,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Odstránenie jazyka";
+        public override string CommandName => Resources.Action_DeleteLanguage;
 
         private FyzLanguage Language { get; }
         private int Index { get; }
@@ -708,7 +710,7 @@ partial class FMain
         {
             // priecinok sa obnovi pred vlozenim - v prazdnej banke sa jazyk hned nacita
             if (RemovedWithData && !Utils.TryRecoverFileOrDirFromBin(LanguageDirectory))
-                Utils.ShowError("Nepodarilo sa obnoviť priečinok so zvukmi jazyka z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+                Utils.ShowError(Resources.Action_LanguageRestoreFailed);
             Form.InsertLanguage(Language, Index);
         }
 

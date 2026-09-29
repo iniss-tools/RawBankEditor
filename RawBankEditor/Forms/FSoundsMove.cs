@@ -1,4 +1,5 @@
-﻿using ToolsCore.Entities;
+﻿using RawBankEditor.Properties;
+using ToolsCore.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
@@ -23,7 +24,7 @@ public partial class FSoundsMove : Form
         DialogResult = DialogResult.None;
         if (cbGroups.SelectedIndex == -1)
         {
-            Utils.ShowError("Nebola vybratá žiadna skupina.");
+            Utils.ShowError(Resources.FSoundsMove_NoGroup);
             return;
         }
 

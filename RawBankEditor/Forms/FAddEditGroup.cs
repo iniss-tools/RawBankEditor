@@ -1,4 +1,5 @@
-﻿using RawBankEditor.Tools;
+﻿using RawBankEditor.Properties;
+using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -25,8 +26,8 @@ public partial class FAddEditGroup : Form
 
         if (group == null)
         {
-            base.Text = "Pridanie skupiny zvukov";
-            bOK.Text = "Pridať";
+            base.Text = Resources.FAddEditGroup_AddTitle;
+            bOK.Text = Resources.FAddEditGroup_Add;
         }
         else
         {

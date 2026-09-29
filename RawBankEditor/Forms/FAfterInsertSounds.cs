@@ -1,4 +1,6 @@
-﻿using ExControls;
+﻿using System.Globalization;
+using ExControls;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
@@ -77,8 +79,8 @@ public partial class FAfterInsertSounds : Form
         var problems = ShowProblems();
         if (problems.Count > 0)
         {
-            Utils.ShowError("Niektoré zvuky sa nedajú pridať – opravte kľúč alebo názov, alebo riadok odstráňte (Del):\n\n"
-                            + string.Join("\n", problems.Values.Distinct().Take(10)));
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FAfterInsertSounds_Problems,
+                string.Join("\n", problems.Values.Distinct().Take(10))));
             return;
         }
 

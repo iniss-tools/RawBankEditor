@@ -4238,4 +4238,2279 @@
   <metadata name="timerToCheck.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 99</value>
   </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1095, 24</value>
+  </data>
+  <data name="menuStripMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="menuStripMain.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Name" xml:space="preserve">
+    <value>menuStripMain</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>&amp;Súbor</value>
+  </data>
+  <data name="&gt;&gt;tsmiFile.Name" xml:space="preserve">
+    <value>tsmiFile</value>
+  </data>
+  <data name="&gt;&gt;tsmiFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
+  </data>
+  <data name="tsmimOpen.Text" xml:space="preserve">
+    <value>&amp;Otvoriť...</value>
+  </data>
+  <data name="&gt;&gt;tsmimOpen.Name" xml:space="preserve">
+    <value>tsmimOpen</value>
+  </data>
+  <data name="&gt;&gt;tsmimOpen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimRecent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
+  </data>
+  <data name="tsmimRecent.Text" xml:space="preserve">
+    <value>&amp;Nedávne</value>
+  </data>
+  <data name="&gt;&gt;tsmimRecent.Name" xml:space="preserve">
+    <value>tsmimRecent</value>
+  </data>
+  <data name="&gt;&gt;tsmimRecent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>139, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
+    <value>toolStripSeparator2</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
+  </data>
+  <data name="tsmimSave.Text" xml:space="preserve">
+    <value>&amp;Uložiť</value>
+  </data>
+  <data name="&gt;&gt;tsmimSave.Name" xml:space="preserve">
+    <value>tsmimSave</value>
+  </data>
+  <data name="&gt;&gt;tsmimSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimSaveAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 22</value>
+  </data>
+  <data name="tsmimSaveAll.Text" xml:space="preserve">
+    <value>Uložiť &amp;všetko</value>
+  </data>
+  <data name="&gt;&gt;tsmimSaveAll.Name" xml:space="preserve">
+    <value>tsmimSaveAll</value>
+  </data>
+  <data name="&gt;&gt;tsmimSaveAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiEdit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 20</value>
+  </data>
+  <data name="tsmiEdit.Text" xml:space="preserve">
+    <value>&amp;Upraviť</value>
+  </data>
+  <data name="&gt;&gt;tsmiEdit.Name" xml:space="preserve">
+    <value>tsmiEdit</value>
+  </data>
+  <data name="&gt;&gt;tsmiEdit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimUndo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimUndo.Text" xml:space="preserve">
+    <value>&amp;Späť</value>
+  </data>
+  <data name="&gt;&gt;tsmimUndo.Name" xml:space="preserve">
+    <value>tsmimUndo</value>
+  </data>
+  <data name="&gt;&gt;tsmimUndo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimRedo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimRedo.Text" xml:space="preserve">
+    <value>&amp;Znovu</value>
+  </data>
+  <data name="&gt;&gt;tsmimRedo.Name" xml:space="preserve">
+    <value>tsmimRedo</value>
+  </data>
+  <data name="&gt;&gt;tsmimRedo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
+    <value>toolStripSeparator11</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimAddSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimAddSound.Text" xml:space="preserve">
+    <value>P&amp;ridať zvuk...</value>
+  </data>
+  <data name="&gt;&gt;tsmimAddSound.Name" xml:space="preserve">
+    <value>tsmimAddSound</value>
+  </data>
+  <data name="&gt;&gt;tsmimAddSound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimDeleteSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimDeleteSound.Text" xml:space="preserve">
+    <value>O&amp;dstrániť zvuky</value>
+  </data>
+  <data name="&gt;&gt;tsmimDeleteSound.Name" xml:space="preserve">
+    <value>tsmimDeleteSound</value>
+  </data>
+  <data name="&gt;&gt;tsmimDeleteSound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimMoveSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimMoveSounds.Text" xml:space="preserve">
+    <value>&amp;Premiestniť zvuky...</value>
+  </data>
+  <data name="&gt;&gt;tsmimMoveSounds.Name" xml:space="preserve">
+    <value>tsmimMoveSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmimMoveSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimConvertSoundsToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimConvertSoundsToEwa.Text" xml:space="preserve">
+    <value>Konvertovať vybrané zvuky na .&amp;EWA</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertSoundsToEwa.Name" xml:space="preserve">
+    <value>tsmimConvertSoundsToEwa</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertSoundsToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimConvertSoundsToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimConvertSoundsToWav.Text" xml:space="preserve">
+    <value>Konvertovať vybrané zvuky na .&amp;WAV</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertSoundsToWav.Name" xml:space="preserve">
+    <value>tsmimConvertSoundsToWav</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertSoundsToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator26.Name" xml:space="preserve">
+    <value>toolStripSeparator26</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator26.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimRewriteMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimRewriteMode.Text" xml:space="preserve">
+    <value>Prepisovací &amp;mód</value>
+  </data>
+  <data name="&gt;&gt;tsmimRewriteMode.Name" xml:space="preserve">
+    <value>tsmimRewriteMode</value>
+  </data>
+  <data name="&gt;&gt;tsmimRewriteMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimWrapTextSoundCol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimWrapTextSoundCol.Text" xml:space="preserve">
+    <value>Prispôsobiť &amp;text hlásenia v bunkách</value>
+  </data>
+  <data name="&gt;&gt;tsmimWrapTextSoundCol.Name" xml:space="preserve">
+    <value>tsmimWrapTextSoundCol</value>
+  </data>
+  <data name="&gt;&gt;tsmimWrapTextSoundCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiShow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 20</value>
+  </data>
+  <data name="tsmiShow.Text" xml:space="preserve">
+    <value>Z&amp;obraziť</value>
+  </data>
+  <data name="&gt;&gt;tsmiShow.Name" xml:space="preserve">
+    <value>tsmiShow</value>
+  </data>
+  <data name="&gt;&gt;tsmiShow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimGoBack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsmimGoBack.Text" xml:space="preserve">
+    <value>Prejsť &amp;späť</value>
+  </data>
+  <data name="&gt;&gt;tsmimGoBack.Name" xml:space="preserve">
+    <value>tsmimGoBack</value>
+  </data>
+  <data name="&gt;&gt;tsmimGoBack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimGoForward.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsmimGoForward.Text" xml:space="preserve">
+    <value>Prejsť &amp;dopredu</value>
+  </data>
+  <data name="&gt;&gt;tsmimGoForward.Name" xml:space="preserve">
+    <value>tsmimGoForward</value>
+  </data>
+  <data name="&gt;&gt;tsmimGoForward.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
+    <value>toolStripSeparator18</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsmimSearch.Text" xml:space="preserve">
+    <value>&amp;Hľadať</value>
+  </data>
+  <data name="&gt;&gt;tsmimSearch.Name" xml:space="preserve">
+    <value>tsmimSearch</value>
+  </data>
+  <data name="&gt;&gt;tsmimSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimShowErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="tsmimShowErrors.Text" xml:space="preserve">
+    <value>Zoznam &amp;chýb</value>
+  </data>
+  <data name="&gt;&gt;tsmimShowErrors.Name" xml:space="preserve">
+    <value>tsmimShowErrors</value>
+  </data>
+  <data name="&gt;&gt;tsmimShowErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiTools.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 20</value>
+  </data>
+  <data name="tsmiTools.Text" xml:space="preserve">
+    <value>&amp;Nástroje</value>
+  </data>
+  <data name="&gt;&gt;tsmiTools.Name" xml:space="preserve">
+    <value>tsmiTools</value>
+  </data>
+  <data name="&gt;&gt;tsmiTools.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimLangsSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="tsmimLangsSettings.Text" xml:space="preserve">
+    <value>Nastavenia &amp;jazykov</value>
+  </data>
+  <data name="&gt;&gt;tsmimLangsSettings.Name" xml:space="preserve">
+    <value>tsmimLangsSettings</value>
+  </data>
+  <data name="&gt;&gt;tsmimLangsSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimAddLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimAddLanguage.Text" xml:space="preserve">
+    <value>P&amp;ridať jazyk...</value>
+  </data>
+  <data name="&gt;&gt;tsmimAddLanguage.Name" xml:space="preserve">
+    <value>tsmimAddLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmimAddLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimEditLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimEditLanguage.Text" xml:space="preserve">
+    <value>&amp;Upraviť jazyk...</value>
+  </data>
+  <data name="&gt;&gt;tsmimEditLanguage.Name" xml:space="preserve">
+    <value>tsmimEditLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmimEditLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimDeleteLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimDeleteLanguage.Text" xml:space="preserve">
+    <value>O&amp;dstrániť jazyk</value>
+  </data>
+  <data name="&gt;&gt;tsmimDeleteLanguage.Name" xml:space="preserve">
+    <value>tsmimDeleteLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmimDeleteLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
+    <value>toolStripSeparator6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimConvertLangToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimConvertLangToEwa.Text" xml:space="preserve">
+    <value>Konvertovať zvuky v jazyku na .&amp;EWA</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertLangToEwa.Name" xml:space="preserve">
+    <value>tsmimConvertLangToEwa</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertLangToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimConvertLangToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimConvertLangToWav.Text" xml:space="preserve">
+    <value>Konvertovať zvuky v jazyku na .&amp;WAV</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertLangToWav.Name" xml:space="preserve">
+    <value>tsmimConvertLangToWav</value>
+  </data>
+  <data name="&gt;&gt;tsmimConvertLangToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
+    <value>toolStripSeparator8</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimAppSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 22</value>
+  </data>
+  <data name="tsmimAppSettings.Text" xml:space="preserve">
+    <value>Nastavenia &amp;programu</value>
+  </data>
+  <data name="&gt;&gt;tsmimAppSettings.Name" xml:space="preserve">
+    <value>tsmimAppSettings</value>
+  </data>
+  <data name="&gt;&gt;tsmimAppSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="tsmiHelp.Text" xml:space="preserve">
+    <value>&amp;Pomocník</value>
+  </data>
+  <data name="&gt;&gt;tsmiHelp.Name" xml:space="preserve">
+    <value>tsmiHelp</value>
+  </data>
+  <data name="&gt;&gt;tsmiHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimInfoApp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="tsmimInfoApp.Text" xml:space="preserve">
+    <value>&amp;Informácie o programe</value>
+  </data>
+  <data name="&gt;&gt;tsmimInfoApp.Name" xml:space="preserve">
+    <value>tsmimInfoApp</value>
+  </data>
+  <data name="&gt;&gt;tsmimInfoApp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="tsmimUpdates.Text" xml:space="preserve">
+    <value>&amp;Poznámky k aktualizáciám...</value>
+  </data>
+  <data name="&gt;&gt;tsmimUpdates.Name" xml:space="preserve">
+    <value>tsmimUpdates</value>
+  </data>
+  <data name="&gt;&gt;tsmimUpdates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Name" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="splitContainer2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitContainer2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Name" xml:space="preserve">
+    <value>splitContainer2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tableLayoutPanel2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 186</value>
+  </data>
+  <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Name" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Type" xml:space="preserve">
+    <value>ExControls.ExTableLayoutPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.Parent" xml:space="preserve">
+    <value>splitContainer2.Panel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 21</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Skupiny zvukov</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="toolStripGroups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 27</value>
+  </data>
+  <data name="toolStripGroups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 27</value>
+  </data>
+  <data name="toolStripGroups.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolStripGroups.Text" xml:space="preserve">
+    <value>toolStrip2</value>
+  </data>
+  <data name="&gt;&gt;toolStripGroups.Name" xml:space="preserve">
+    <value>toolStripGroups</value>
+  </data>
+  <data name="&gt;&gt;toolStripGroups.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripGroups.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;toolStripGroups.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tsbAddGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbAddGroup.Text" xml:space="preserve">
+    <value>Pridať skupinu</value>
+  </data>
+  <data name="&gt;&gt;tsbAddGroup.Name" xml:space="preserve">
+    <value>tsbAddGroup</value>
+  </data>
+  <data name="&gt;&gt;tsbAddGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbEditGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbEditGroup.Text" xml:space="preserve">
+    <value>Upraviť skupinu</value>
+  </data>
+  <data name="&gt;&gt;tsbEditGroup.Name" xml:space="preserve">
+    <value>tsbEditGroup</value>
+  </data>
+  <data name="&gt;&gt;tsbEditGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbDeleteGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbDeleteGroup.Text" xml:space="preserve">
+    <value>Odstrániť skupinu</value>
+  </data>
+  <data name="&gt;&gt;tsbDeleteGroup.Name" xml:space="preserve">
+    <value>tsbDeleteGroup</value>
+  </data>
+  <data name="&gt;&gt;tsbDeleteGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator21.Name" xml:space="preserve">
+    <value>toolStripSeparator21</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator21.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbConvertGroupToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbConvertGroupToEwa.Text" xml:space="preserve">
+    <value>Konvertovať skupinu na .EWA</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertGroupToEwa.Name" xml:space="preserve">
+    <value>tsbConvertGroupToEwa</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertGroupToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbConvertGroupToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbConvertGroupToWav.Text" xml:space="preserve">
+    <value>Konvertovať skupinu na .WAV</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertGroupToWav.Name" xml:space="preserve">
+    <value>tsbConvertGroupToWav</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertGroupToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dgvGroups.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dgvGroups.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 57</value>
+  </data>
+  <data name="dgvGroups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 126</value>
+  </data>
+  <data name="dgvGroups.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dgvGroups.Name" xml:space="preserve">
+    <value>dgvGroups</value>
+  </data>
+  <data name="&gt;&gt;dgvGroups.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvGroups.Parent" xml:space="preserve">
+    <value>tableLayoutPanel2</value>
+  </data>
+  <data name="&gt;&gt;dgvGroups.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cGroupName.HeaderText" xml:space="preserve">
+    <value>Názov</value>
+  </data>
+  <data name="&gt;&gt;cGroupName.Name" xml:space="preserve">
+    <value>cGroupName</value>
+  </data>
+  <data name="&gt;&gt;cGroupName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cGroupRelativePath.HeaderText" xml:space="preserve">
+    <value>Relatívna cesta</value>
+  </data>
+  <data name="&gt;&gt;cGroupRelativePath.Name" xml:space="preserve">
+    <value>cGroupRelativePath</value>
+  </data>
+  <data name="&gt;&gt;cGroupRelativePath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cGroupCountSounds.HeaderText" xml:space="preserve">
+    <value>Počet zvukov</value>
+  </data>
+  <data name="&gt;&gt;cGroupCountSounds.Name" xml:space="preserve">
+    <value>cGroupCountSounds</value>
+  </data>
+  <data name="&gt;&gt;cGroupCountSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="contextMenuGroups.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 140</value>
+  </data>
+  <data name="&gt;&gt;contextMenuGroups.Name" xml:space="preserve">
+    <value>contextMenuGroups</value>
+  </data>
+  <data name="&gt;&gt;contextMenuGroups.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiAddGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 26</value>
+  </data>
+  <data name="cmiAddGroup.Text" xml:space="preserve">
+    <value>Pridať skupinu...</value>
+  </data>
+  <data name="&gt;&gt;cmiAddGroup.Name" xml:space="preserve">
+    <value>cmiAddGroup</value>
+  </data>
+  <data name="&gt;&gt;cmiAddGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiEditGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 26</value>
+  </data>
+  <data name="cmiEditGroup.Text" xml:space="preserve">
+    <value>Upraviť skupinu...</value>
+  </data>
+  <data name="&gt;&gt;cmiEditGroup.Name" xml:space="preserve">
+    <value>cmiEditGroup</value>
+  </data>
+  <data name="&gt;&gt;cmiEditGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiDeleteGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 26</value>
+  </data>
+  <data name="cmiDeleteGroup.Text" xml:space="preserve">
+    <value>Odstrániť skupinu</value>
+  </data>
+  <data name="&gt;&gt;cmiDeleteGroup.Name" xml:space="preserve">
+    <value>cmiDeleteGroup</value>
+  </data>
+  <data name="&gt;&gt;cmiDeleteGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiConvertGroupToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 26</value>
+  </data>
+  <data name="cmiConvertGroupToEwa.Text" xml:space="preserve">
+    <value>Konvertovať skupinu na .EWA</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertGroupToEwa.Name" xml:space="preserve">
+    <value>cmiConvertGroupToEwa</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertGroupToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiConvertGroupToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 26</value>
+  </data>
+  <data name="cmiConvertGroupToWav.Text" xml:space="preserve">
+    <value>Konvertovať skupinu na .WAV</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertGroupToWav.Name" xml:space="preserve">
+    <value>cmiConvertGroupToWav</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertGroupToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fyzGroupBindingSource.Name" xml:space="preserve">
+    <value>fyzGroupBindingSource</value>
+  </data>
+  <data name="&gt;&gt;fyzGroupBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 310</value>
+  </data>
+  <data name="tableLayoutPanel3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Name" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Type" xml:space="preserve">
+    <value>ExControls.ExTableLayoutPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.Parent" xml:space="preserve">
+    <value>splitContainer2.Panel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dgvExplorer.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dgvExplorer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 59</value>
+  </data>
+  <data name="dgvExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 248</value>
+  </data>
+  <data name="dgvExplorer.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dgvExplorer.Name" xml:space="preserve">
+    <value>dgvExplorer</value>
+  </data>
+  <data name="&gt;&gt;dgvExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvExplorer.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;dgvExplorer.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cFileName.HeaderText" xml:space="preserve">
+    <value>Názov</value>
+  </data>
+  <data name="cFileName.Width" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="&gt;&gt;cFileName.Name" xml:space="preserve">
+    <value>cFileName</value>
+  </data>
+  <data name="&gt;&gt;cFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cFileType.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="cFileType.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;cFileType.Name" xml:space="preserve">
+    <value>cFileType</value>
+  </data>
+  <data name="&gt;&gt;cFileType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cFileDuration.HeaderText" xml:space="preserve">
+    <value>Dĺžka</value>
+  </data>
+  <data name="&gt;&gt;cFileDuration.Name" xml:space="preserve">
+    <value>cFileDuration</value>
+  </data>
+  <data name="&gt;&gt;cFileDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="contextMenuExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>229, 148</value>
+  </data>
+  <data name="&gt;&gt;contextMenuExplorer.Name" xml:space="preserve">
+    <value>contextMenuExplorer</value>
+  </data>
+  <data name="&gt;&gt;contextMenuExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiOpenInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="cmiOpenInExplorer.Text" xml:space="preserve">
+    <value>Otvoriť v prieskumníkovi</value>
+  </data>
+  <data name="&gt;&gt;cmiOpenInExplorer.Name" xml:space="preserve">
+    <value>cmiOpenInExplorer</value>
+  </data>
+  <data name="&gt;&gt;cmiOpenInExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiPlay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="cmiPlay.Text" xml:space="preserve">
+    <value>Prehrať zvuk</value>
+  </data>
+  <data name="&gt;&gt;cmiPlay.Name" xml:space="preserve">
+    <value>cmiPlay</value>
+  </data>
+  <data name="&gt;&gt;cmiPlay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator20.Name" xml:space="preserve">
+    <value>toolStripSeparator20</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator20.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiRenameFileDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="cmiRenameFileDir.Text" xml:space="preserve">
+    <value>Premenovať súbor</value>
+  </data>
+  <data name="&gt;&gt;cmiRenameFileDir.Name" xml:space="preserve">
+    <value>cmiRenameFileDir</value>
+  </data>
+  <data name="&gt;&gt;cmiRenameFileDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiDeleteFileDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="cmiDeleteFileDir.Text" xml:space="preserve">
+    <value>Odstrániť súbor</value>
+  </data>
+  <data name="&gt;&gt;cmiDeleteFileDir.Name" xml:space="preserve">
+    <value>cmiDeleteFileDir</value>
+  </data>
+  <data name="&gt;&gt;cmiDeleteFileDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
+    <value>225, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator23.Name" xml:space="preserve">
+    <value>toolStripSeparator23</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator23.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiConvertToEwaFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="cmiConvertToEwaFile.Text" xml:space="preserve">
+    <value>Konvertovať súbory na .EWA</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertToEwaFile.Name" xml:space="preserve">
+    <value>cmiConvertToEwaFile</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertToEwaFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiConvertToWavFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 22</value>
+  </data>
+  <data name="cmiConvertToWavFile.Text" xml:space="preserve">
+    <value>Konvertovať súbory na .WAV</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertToWavFile.Name" xml:space="preserve">
+    <value>cmiConvertToWavFile</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertToWavFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fileSystemElementBindingSource.Name" xml:space="preserve">
+    <value>fileSystemElementBindingSource</value>
+  </data>
+  <data name="&gt;&gt;fileSystemElementBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 21</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Prieskumník súborov</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="toolStripExplorer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 27</value>
+  </data>
+  <data name="toolStripExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>286, 27</value>
+  </data>
+  <data name="toolStripExplorer.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolStripExplorer.Text" xml:space="preserve">
+    <value>toolStrip2</value>
+  </data>
+  <data name="&gt;&gt;toolStripExplorer.Name" xml:space="preserve">
+    <value>toolStripExplorer</value>
+  </data>
+  <data name="&gt;&gt;toolStripExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripExplorer.Parent" xml:space="preserve">
+    <value>tableLayoutPanel3</value>
+  </data>
+  <data name="&gt;&gt;toolStripExplorer.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tsbOpenInExplorer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbOpenInExplorer.Text" xml:space="preserve">
+    <value>Otvoriť v prieskumníkovi</value>
+  </data>
+  <data name="&gt;&gt;tsbOpenInExplorer.Name" xml:space="preserve">
+    <value>tsbOpenInExplorer</value>
+  </data>
+  <data name="&gt;&gt;tsbOpenInExplorer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator16.Name" xml:space="preserve">
+    <value>toolStripSeparator16</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator16.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbPlay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbPlay.Text" xml:space="preserve">
+    <value>Prehrať zvuk (F5)</value>
+  </data>
+  <data name="&gt;&gt;tsbPlay.Name" xml:space="preserve">
+    <value>tsbPlay</value>
+  </data>
+  <data name="&gt;&gt;tsbPlay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator17.Name" xml:space="preserve">
+    <value>toolStripSeparator17</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbRenameFileDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbRenameFileDir.Text" xml:space="preserve">
+    <value>Premenovať (F2)</value>
+  </data>
+  <data name="&gt;&gt;tsbRenameFileDir.Name" xml:space="preserve">
+    <value>tsbRenameFileDir</value>
+  </data>
+  <data name="&gt;&gt;tsbRenameFileDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbDeleteFileDir.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbDeleteFileDir.Text" xml:space="preserve">
+    <value>Odstrániť (Del)</value>
+  </data>
+  <data name="&gt;&gt;tsbDeleteFileDir.Name" xml:space="preserve">
+    <value>tsbDeleteFileDir</value>
+  </data>
+  <data name="&gt;&gt;tsbDeleteFileDir.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator22.Name" xml:space="preserve">
+    <value>toolStripSeparator22</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator22.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbConvertFilesToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbConvertFilesToEwa.Text" xml:space="preserve">
+    <value>Konvertovať súbory na .EWA</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertFilesToEwa.Name" xml:space="preserve">
+    <value>tsbConvertFilesToEwa</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertFilesToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbConvertFilesToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbConvertFilesToWav.Text" xml:space="preserve">
+    <value>Konvertovať súbory na .WAV</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertFilesToWav.Name" xml:space="preserve">
+    <value>tsbConvertFilesToWav</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertFilesToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="splitSoundsErrors.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="splitSoundsErrors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Name" xml:space="preserve">
+    <value>splitSoundsErrors</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitContainer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="dgvSounds.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dgvSounds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="dgvSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>785, 339</value>
+  </data>
+  <data name="dgvSounds.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;dgvSounds.Name" xml:space="preserve">
+    <value>dgvSounds</value>
+  </data>
+  <data name="&gt;&gt;dgvSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvSounds.Parent" xml:space="preserve">
+    <value>splitSoundsErrors.Panel1</value>
+  </data>
+  <data name="&gt;&gt;dgvSounds.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cSoundKey.HeaderText" xml:space="preserve">
+    <value>Kľúč zvuku</value>
+  </data>
+  <data name="cSoundKey.Width" type="System.Int32, mscorlib">
+    <value>80</value>
+  </data>
+  <data name="&gt;&gt;cSoundKey.Name" xml:space="preserve">
+    <value>cSoundKey</value>
+  </data>
+  <data name="&gt;&gt;cSoundKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundName.HeaderText" xml:space="preserve">
+    <value>Názov zvuku</value>
+  </data>
+  <data name="&gt;&gt;cSoundName.Name" xml:space="preserve">
+    <value>cSoundName</value>
+  </data>
+  <data name="&gt;&gt;cSoundName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundAdditionalRelativePath.HeaderText" xml:space="preserve">
+    <value>Prídavná relatívna cesta</value>
+  </data>
+  <data name="cSoundAdditionalRelativePath.Width" type="System.Int32, mscorlib">
+    <value>95</value>
+  </data>
+  <data name="&gt;&gt;cSoundAdditionalRelativePath.Name" xml:space="preserve">
+    <value>cSoundAdditionalRelativePath</value>
+  </data>
+  <data name="&gt;&gt;cSoundAdditionalRelativePath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundFileName.HeaderText" xml:space="preserve">
+    <value>Názov súboru</value>
+  </data>
+  <data name="cSoundFileName.Width" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="&gt;&gt;cSoundFileName.Name" xml:space="preserve">
+    <value>cSoundFileName</value>
+  </data>
+  <data name="&gt;&gt;cSoundFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundDuration.HeaderText" xml:space="preserve">
+    <value>Trvanie</value>
+  </data>
+  <data name="cSoundDuration.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="&gt;&gt;cSoundDuration.Name" xml:space="preserve">
+    <value>cSoundDuration</value>
+  </data>
+  <data name="&gt;&gt;cSoundDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundText.HeaderText" xml:space="preserve">
+    <value>Text hlásenia</value>
+  </data>
+  <data name="&gt;&gt;cSoundText.Name" xml:space="preserve">
+    <value>cSoundText</value>
+  </data>
+  <data name="&gt;&gt;cSoundText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="contextMenuSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 140</value>
+  </data>
+  <data name="&gt;&gt;contextMenuSounds.Name" xml:space="preserve">
+    <value>contextMenuSounds</value>
+  </data>
+  <data name="&gt;&gt;contextMenuSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiAddSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiAddSound.Text" xml:space="preserve">
+    <value>Pridať zvuk</value>
+  </data>
+  <data name="&gt;&gt;cmiAddSound.Name" xml:space="preserve">
+    <value>cmiAddSound</value>
+  </data>
+  <data name="&gt;&gt;cmiAddSound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiDeleteSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiDeleteSound.Text" xml:space="preserve">
+    <value>Odstrániť vybrané zvuky</value>
+  </data>
+  <data name="&gt;&gt;cmiDeleteSound.Name" xml:space="preserve">
+    <value>cmiDeleteSound</value>
+  </data>
+  <data name="&gt;&gt;cmiDeleteSound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiMoveSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiMoveSounds.Text" xml:space="preserve">
+    <value>Presunúť vybrané zvuky...</value>
+  </data>
+  <data name="&gt;&gt;cmiMoveSounds.Name" xml:space="preserve">
+    <value>cmiMoveSounds</value>
+  </data>
+  <data name="&gt;&gt;cmiMoveSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
+    <value>toolStripSeparator19</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiConvertSoundsToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiConvertSoundsToEwa.Text" xml:space="preserve">
+    <value>Konvertovať zvuky na .EWA</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertSoundsToEwa.Name" xml:space="preserve">
+    <value>cmiConvertSoundsToEwa</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertSoundsToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiConvertSoundsToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiConvertSoundsToWav.Text" xml:space="preserve">
+    <value>Konvertovať zvuky na .WAV</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertSoundsToWav.Name" xml:space="preserve">
+    <value>cmiConvertSoundsToWav</value>
+  </data>
+  <data name="&gt;&gt;cmiConvertSoundsToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fyzSoundBindingSource.Name" xml:space="preserve">
+    <value>fyzSoundBindingSource</value>
+  </data>
+  <data name="&gt;&gt;fyzSoundBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tableLayoutPanel4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>785, 157</value>
+  </data>
+  <data name="tableLayoutPanel4.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Name" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Type" xml:space="preserve">
+    <value>ExControls.ExTableLayoutPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.Parent" xml:space="preserve">
+    <value>splitSoundsErrors.Panel2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="toolStripErrors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 33</value>
+  </data>
+  <data name="toolStripErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>779, 27</value>
+  </data>
+  <data name="toolStripErrors.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolStripErrors.Text" xml:space="preserve">
+    <value>toolStrip2</value>
+  </data>
+  <data name="&gt;&gt;toolStripErrors.Name" xml:space="preserve">
+    <value>toolStripErrors</value>
+  </data>
+  <data name="&gt;&gt;toolStripErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripErrors.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;toolStripErrors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tsbErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 24</value>
+  </data>
+  <data name="tsbErrors.Text" xml:space="preserve">
+    <value>0 chýb</value>
+  </data>
+  <data name="&gt;&gt;tsbErrors.Name" xml:space="preserve">
+    <value>tsbErrors</value>
+  </data>
+  <data name="&gt;&gt;tsbErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator13.Name" xml:space="preserve">
+    <value>toolStripSeparator13</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbWarnings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 24</value>
+  </data>
+  <data name="tsbWarnings.Text" xml:space="preserve">
+    <value>0 upozornení</value>
+  </data>
+  <data name="&gt;&gt;tsbWarnings.Name" xml:space="preserve">
+    <value>tsbWarnings</value>
+  </data>
+  <data name="&gt;&gt;tsbWarnings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator14.Name" xml:space="preserve">
+    <value>toolStripSeparator14</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator14.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbInfos.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 24</value>
+  </data>
+  <data name="tsbInfos.Text" xml:space="preserve">
+    <value>0 správ</value>
+  </data>
+  <data name="&gt;&gt;tsbInfos.Name" xml:space="preserve">
+    <value>tsbInfos</value>
+  </data>
+  <data name="&gt;&gt;tsbInfos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbResolveProblem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbResolveProblem.Text" xml:space="preserve">
+    <value>Vyriešiť</value>
+  </data>
+  <data name="&gt;&gt;tsbResolveProblem.Name" xml:space="preserve">
+    <value>tsbResolveProblem</value>
+  </data>
+  <data name="&gt;&gt;tsbResolveProblem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbHighlightProblem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbHighlightProblem.Text" xml:space="preserve">
+    <value>Zvýrazniť problém</value>
+  </data>
+  <data name="&gt;&gt;tsbHighlightProblem.Name" xml:space="preserve">
+    <value>tsbHighlightProblem</value>
+  </data>
+  <data name="&gt;&gt;tsbHighlightProblem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="dgvErrors.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dgvErrors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 63</value>
+  </data>
+  <data name="dgvErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>779, 91</value>
+  </data>
+  <data name="dgvErrors.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dgvErrors.Name" xml:space="preserve">
+    <value>dgvErrors</value>
+  </data>
+  <data name="&gt;&gt;dgvErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvErrors.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;dgvErrors.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cMsgType.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="cMsgType.Width" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="&gt;&gt;cMsgType.Name" xml:space="preserve">
+    <value>cMsgType</value>
+  </data>
+  <data name="&gt;&gt;cMsgType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cMsgCode.HeaderText" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="cMsgCode.Width" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="&gt;&gt;cMsgCode.Name" xml:space="preserve">
+    <value>cMsgCode</value>
+  </data>
+  <data name="&gt;&gt;cMsgCode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cMessage.HeaderText" xml:space="preserve">
+    <value>Správa</value>
+  </data>
+  <data name="cMessage.Width" type="System.Int32, mscorlib">
+    <value>450</value>
+  </data>
+  <data name="&gt;&gt;cMessage.Name" xml:space="preserve">
+    <value>cMessage</value>
+  </data>
+  <data name="&gt;&gt;cMessage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cMsgResolve.HeaderText" xml:space="preserve">
+    <value>Riešenie</value>
+  </data>
+  <data name="cMsgResolve.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="&gt;&gt;cMsgResolve.Name" xml:space="preserve">
+    <value>cMsgResolve</value>
+  </data>
+  <data name="&gt;&gt;cMsgResolve.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cMsgPath.HeaderText" xml:space="preserve">
+    <value>Cesta</value>
+  </data>
+  <data name="&gt;&gt;cMsgPath.Name" xml:space="preserve">
+    <value>cMsgPath</value>
+  </data>
+  <data name="&gt;&gt;cMsgPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="contextMenuErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 48</value>
+  </data>
+  <data name="&gt;&gt;contextMenuErrors.Name" xml:space="preserve">
+    <value>contextMenuErrors</value>
+  </data>
+  <data name="&gt;&gt;contextMenuErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiHighlightProblem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 22</value>
+  </data>
+  <data name="cmiHighlightProblem.Text" xml:space="preserve">
+    <value>Zvýrazniť chybu</value>
+  </data>
+  <data name="&gt;&gt;cmiHighlightProblem.Name" xml:space="preserve">
+    <value>cmiHighlightProblem</value>
+  </data>
+  <data name="&gt;&gt;cmiHighlightProblem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiResolveProblem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 22</value>
+  </data>
+  <data name="cmiResolveProblem.Text" xml:space="preserve">
+    <value>Vyriešiť</value>
+  </data>
+  <data name="&gt;&gt;cmiResolveProblem.Name" xml:space="preserve">
+    <value>cmiResolveProblem</value>
+  </data>
+  <data name="&gt;&gt;cmiResolveProblem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rawBankMessageBindingSource.Name" xml:space="preserve">
+    <value>rawBankMessageBindingSource</value>
+  </data>
+  <data name="&gt;&gt;rawBankMessageBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tableLayoutPanel5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tableLayoutPanel5.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="tableLayoutPanel5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>779, 25</value>
+  </data>
+  <data name="tableLayoutPanel5.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Name" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Type" xml:space="preserve">
+    <value>ExControls.ExTableLayoutPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.Parent" xml:space="preserve">
+    <value>tableLayoutPanel4</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel5.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="mmErrors.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="mmErrors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>765, 2</value>
+  </data>
+  <data name="mmErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>12, 13</value>
+  </data>
+  <data name="mmErrors.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="mmErrors.ToolTipText" xml:space="preserve">
+    <value>Zavrieť</value>
+  </data>
+  <data name="&gt;&gt;mmErrors.Name" xml:space="preserve">
+    <value>mmErrors</value>
+  </data>
+  <data name="&gt;&gt;mmErrors.Type" xml:space="preserve">
+    <value>RawBankEditor.Controls.MinButton, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;mmErrors.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;mmErrors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 2</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>385, 21</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Zoznam chýb</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>tableLayoutPanel5</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 51</value>
+  </data>
+  <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1095, 532</value>
+  </data>
+  <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
+    <value>ExControls.ExTableLayoutPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tableLayoutPanel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="statusStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 506</value>
+  </data>
+  <data name="statusStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1095, 26</value>
+  </data>
+  <data name="statusStripMain.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="statusStripMain.Text" xml:space="preserve">
+    <value>statusStrip1</value>
+  </data>
+  <data name="&gt;&gt;statusStripMain.Name" xml:space="preserve">
+    <value>statusStripMain</value>
+  </data>
+  <data name="&gt;&gt;statusStripMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.StatusStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;statusStripMain.Parent" xml:space="preserve">
+    <value>tableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;statusStripMain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tsslStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 21</value>
+  </data>
+  <data name="tsslStatus.Text" xml:space="preserve">
+    <value>Neotvorená žiadna banka</value>
+  </data>
+  <data name="&gt;&gt;tsslStatus.Name" xml:space="preserve">
+    <value>tsslStatus</value>
+  </data>
+  <data name="&gt;&gt;tsslStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tspbProgress.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 18</value>
+  </data>
+  <data name="&gt;&gt;tspbProgress.Name" xml:space="preserve">
+    <value>tspbProgress</value>
+  </data>
+  <data name="&gt;&gt;tspbProgress.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripProgressBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripStatusLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>807, 21</value>
+  </data>
+  <data name="&gt;&gt;toolStripStatusLabel1.Name" xml:space="preserve">
+    <value>toolStripStatusLabel1</value>
+  </data>
+  <data name="&gt;&gt;toolStripStatusLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripStatusLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tssbErrors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="&gt;&gt;tssbErrors.Name" xml:space="preserve">
+    <value>tssbErrors</value>
+  </data>
+  <data name="&gt;&gt;tssbErrors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="toolStripMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1095, 27</value>
+  </data>
+  <data name="toolStripMain.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="toolStripMain.Text" xml:space="preserve">
+    <value>toolStrip1</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.Name" xml:space="preserve">
+    <value>toolStripMain</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;toolStripMain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tsbOpen.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbOpen.Text" xml:space="preserve">
+    <value>Otvoriť</value>
+  </data>
+  <data name="&gt;&gt;tsbOpen.Name" xml:space="preserve">
+    <value>tsbOpen</value>
+  </data>
+  <data name="&gt;&gt;tsbOpen.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbRecent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 24</value>
+  </data>
+  <data name="tsbRecent.Text" xml:space="preserve">
+    <value>Nedávne</value>
+  </data>
+  <data name="&gt;&gt;tsbRecent.Name" xml:space="preserve">
+    <value>tsbRecent</value>
+  </data>
+  <data name="&gt;&gt;tsbRecent.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator25.Name" xml:space="preserve">
+    <value>toolStripSeparator25</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator25.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbSave.Text" xml:space="preserve">
+    <value>Uložiť</value>
+  </data>
+  <data name="&gt;&gt;tsbSave.Name" xml:space="preserve">
+    <value>tsbSave</value>
+  </data>
+  <data name="&gt;&gt;tsbSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbSaveAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbSaveAll.Text" xml:space="preserve">
+    <value>Uložiť všetko</value>
+  </data>
+  <data name="&gt;&gt;tsbSaveAll.Name" xml:space="preserve">
+    <value>tsbSaveAll</value>
+  </data>
+  <data name="&gt;&gt;tsbSaveAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbGoBack.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 24</value>
+  </data>
+  <data name="tsbGoBack.Text" xml:space="preserve">
+    <value>Prejsť späť</value>
+  </data>
+  <data name="&gt;&gt;tsbGoBack.Name" xml:space="preserve">
+    <value>tsbGoBack</value>
+  </data>
+  <data name="&gt;&gt;tsbGoBack.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbGoForward.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbGoForward.Text" xml:space="preserve">
+    <value>Prejsť dopredu</value>
+  </data>
+  <data name="&gt;&gt;tsbGoForward.Name" xml:space="preserve">
+    <value>tsbGoForward</value>
+  </data>
+  <data name="&gt;&gt;tsbGoForward.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
+    <value>toolStripSeparator9</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbUndo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbUndo.Text" xml:space="preserve">
+    <value>Späť</value>
+  </data>
+  <data name="&gt;&gt;tsbUndo.Name" xml:space="preserve">
+    <value>tsbUndo</value>
+  </data>
+  <data name="&gt;&gt;tsbUndo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbRedo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbRedo.Text" xml:space="preserve">
+    <value>Znovu</value>
+  </data>
+  <data name="&gt;&gt;tsbRedo.Name" xml:space="preserve">
+    <value>tsbRedo</value>
+  </data>
+  <data name="&gt;&gt;tsbRedo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
+    <value>toolStripSeparator10</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 24</value>
+  </data>
+  <data name="toolStripLabel1.Text" xml:space="preserve">
+    <value>Jazyk:</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel1.Name" xml:space="preserve">
+    <value>toolStripLabel1</value>
+  </data>
+  <data name="&gt;&gt;toolStripLabel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tscboxLanguages.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 24</value>
+  </data>
+  <data name="&gt;&gt;tscboxLanguages.Name" xml:space="preserve">
+    <value>tscboxLanguages</value>
+  </data>
+  <data name="&gt;&gt;tscboxLanguages.Type" xml:space="preserve">
+    <value>ExControls.ExToolStripComboBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsbLangsSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 24</value>
+  </data>
+  <data name="tsbLangsSettings.Text" xml:space="preserve">
+    <value>Nastavenie jazykov</value>
+  </data>
+  <data name="&gt;&gt;tsbLangsSettings.Name" xml:space="preserve">
+    <value>tsbLangsSettings</value>
+  </data>
+  <data name="&gt;&gt;tsbLangsSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiAddLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiAddLanguage.Text" xml:space="preserve">
+    <value>Pridať jazyk</value>
+  </data>
+  <data name="&gt;&gt;tsmiAddLanguage.Name" xml:space="preserve">
+    <value>tsmiAddLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmiAddLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiEditLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiEditLanguage.Text" xml:space="preserve">
+    <value>Upraviť jazyk</value>
+  </data>
+  <data name="&gt;&gt;tsmiEditLanguage.Name" xml:space="preserve">
+    <value>tsmiEditLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmiEditLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiDeleteLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiDeleteLanguage.Text" xml:space="preserve">
+    <value>Odstrániť jazyk</value>
+  </data>
+  <data name="&gt;&gt;tsmiDeleteLanguage.Name" xml:space="preserve">
+    <value>tsmiDeleteLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmiDeleteLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiConvertLangToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiConvertLangToEwa.Text" xml:space="preserve">
+    <value>Konvertovať zvuky v jazyku na .EWA</value>
+  </data>
+  <data name="&gt;&gt;tsmiConvertLangToEwa.Name" xml:space="preserve">
+    <value>tsmiConvertLangToEwa</value>
+  </data>
+  <data name="&gt;&gt;tsmiConvertLangToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiConvertLangToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiConvertLangToWav.Text" xml:space="preserve">
+    <value>Konvertovať zvuky v jazyku na .WAV</value>
+  </data>
+  <data name="&gt;&gt;tsmiConvertLangToWav.Name" xml:space="preserve">
+    <value>tsmiConvertLangToWav</value>
+  </data>
+  <data name="&gt;&gt;tsmiConvertLangToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
+    <value>toolStripSeparator7</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbAppSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbAppSettings.Text" xml:space="preserve">
+    <value>Nastavenia programu</value>
+  </data>
+  <data name="&gt;&gt;tsbAppSettings.Name" xml:space="preserve">
+    <value>tsbAppSettings</value>
+  </data>
+  <data name="&gt;&gt;tsbAppSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbInfoApp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbInfoApp.Text" xml:space="preserve">
+    <value>Informácie o programe</value>
+  </data>
+  <data name="&gt;&gt;tsbInfoApp.Name" xml:space="preserve">
+    <value>tsbInfoApp</value>
+  </data>
+  <data name="&gt;&gt;tsbInfoApp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
+    <value>toolStripSeparator12</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbAddSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbAddSound.Text" xml:space="preserve">
+    <value>Pridať zvuk</value>
+  </data>
+  <data name="&gt;&gt;tsbAddSound.Name" xml:space="preserve">
+    <value>tsbAddSound</value>
+  </data>
+  <data name="&gt;&gt;tsbAddSound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbMoveSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbMoveSounds.Text" xml:space="preserve">
+    <value>Premiestniť zvuky</value>
+  </data>
+  <data name="&gt;&gt;tsbMoveSounds.Name" xml:space="preserve">
+    <value>tsbMoveSounds</value>
+  </data>
+  <data name="&gt;&gt;tsbMoveSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbDeleteSound.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbDeleteSound.Text" xml:space="preserve">
+    <value>Odstrániť zvuk</value>
+  </data>
+  <data name="&gt;&gt;tsbDeleteSound.Name" xml:space="preserve">
+    <value>tsbDeleteSound</value>
+  </data>
+  <data name="&gt;&gt;tsbDeleteSound.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator24.Name" xml:space="preserve">
+    <value>toolStripSeparator24</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator24.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbConvertSoundsToEwa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbConvertSoundsToEwa.Text" xml:space="preserve">
+    <value>Konvertovať vybrané zvuky na .EWA</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertSoundsToEwa.Name" xml:space="preserve">
+    <value>tsbConvertSoundsToEwa</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertSoundsToEwa.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbConvertSoundsToWav.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbConvertSoundsToWav.Text" xml:space="preserve">
+    <value>Konvertovať vybrané zvuky na .WAV</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertSoundsToWav.Name" xml:space="preserve">
+    <value>tsbConvertSoundsToWav</value>
+  </data>
+  <data name="&gt;&gt;tsbConvertSoundsToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 27</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Name" xml:space="preserve">
+    <value>toolStripSeparator15</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbSearch.Text" xml:space="preserve">
+    <value>Hľadať</value>
+  </data>
+  <data name="&gt;&gt;tsbSearch.Name" xml:space="preserve">
+    <value>tsbSearch</value>
+  </data>
+  <data name="&gt;&gt;tsbSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbWrapTextSoundCol.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbWrapTextSoundCol.Text" xml:space="preserve">
+    <value>Prispôsobiť text hlásenia v bunkách</value>
+  </data>
+  <data name="&gt;&gt;tsbWrapTextSoundCol.Name" xml:space="preserve">
+    <value>tsbWrapTextSoundCol</value>
+  </data>
+  <data name="&gt;&gt;tsbWrapTextSoundCol.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsbRewriteMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbRewriteMode.Text" xml:space="preserve">
+    <value>Prepisovací mód</value>
+  </data>
+  <data name="&gt;&gt;tsbRewriteMode.Name" xml:space="preserve">
+    <value>tsbRewriteMode</value>
+  </data>
+  <data name="&gt;&gt;tsbRewriteMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="undoActionChooser.Size" type="System.Drawing.Size, System.Drawing">
+    <value>2, 31</value>
+  </data>
+  <data name="&gt;&gt;undoActionChooser.Name" xml:space="preserve">
+    <value>undoActionChooser</value>
+  </data>
+  <data name="&gt;&gt;undoActionChooser.Type" xml:space="preserve">
+    <value>ExControls.ToolStripUndoRedoActionChooser, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;fileSystemWatcher.Name" xml:space="preserve">
+    <value>fileSystemWatcher</value>
+  </data>
+  <data name="&gt;&gt;fileSystemWatcher.Type" xml:space="preserve">
+    <value>System.IO.FileSystemWatcher, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;moveManager.Name" xml:space="preserve">
+    <value>moveManager</value>
+  </data>
+  <data name="&gt;&gt;moveManager.Type" xml:space="preserve">
+    <value>ExControls.Providers.BackwardForwardProvider, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;changeManager.Name" xml:space="preserve">
+    <value>changeManager</value>
+  </data>
+  <data name="&gt;&gt;changeManager.Type" xml:space="preserve">
+    <value>ExControls.Providers.UndoRedoManager, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;timerToCheck.Name" xml:space="preserve">
+    <value>timerToCheck</value>
+  </data>
+  <data name="&gt;&gt;timerToCheck.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Name" xml:space="preserve">
+    <value>AutoScaleDimensions</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Type" xml:space="preserve">
+    <value>System.Drawing.SizeF, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Name" xml:space="preserve">
+    <value>ClientSize</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Type" xml:space="preserve">
+    <value>System.Drawing.Size, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Margin.Name" xml:space="preserve">
+    <value>Margin</value>
+  </data>
+  <data name="&gt;&gt;Margin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Padding, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1095, 583</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>RawBankEditor</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
+    <value>splitContainer1.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer1.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.Name" xml:space="preserve">
+    <value>splitContainer2.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.Parent" xml:space="preserve">
+    <value>splitContainer2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel2.Name" xml:space="preserve">
+    <value>splitContainer2.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel2.Parent" xml:space="preserve">
+    <value>splitContainer2</value>
+  </data>
+  <data name="&gt;&gt;splitContainer2.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel1.Name" xml:space="preserve">
+    <value>splitSoundsErrors.Panel1</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel1.Parent" xml:space="preserve">
+    <value>splitSoundsErrors</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel2.Name" xml:space="preserve">
+    <value>splitSoundsErrors.Panel2</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SplitterPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel2.Parent" xml:space="preserve">
+    <value>splitSoundsErrors</value>
+  </data>
+  <data name="&gt;&gt;splitSoundsErrors.Panel2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FMain</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

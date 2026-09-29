@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using RawBankEditor.Forms;
+using RawBankEditor.Properties;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 using static RawBankEditor.Entities.BankMessagePaths;
@@ -53,10 +55,10 @@ public class LanguageDirMissing : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Jazyk '{Language.Key}' je definovaný, ale neexistuje v súborovom systéme.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_LanguageMissing, Language.Key);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Vytvoriť priečinok '{Language.RelativePath}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_CreateDir, Language.RelativePath);
 
     /// <inheritdoc />
     public string Path => Language.GetAbsPath("");
@@ -89,10 +91,10 @@ public class GroupDirMissing : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Skupina '{Group.Name}' je definovaná, ale neexistuje v súborovom systéme.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_GroupMissing, Group.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Vytvoriť priečinok '{Group.GetAbsPath("")}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_CreateDir, Group.GetAbsPath(""));
 
     /// <inheritdoc />
     public string Path => Group.GetAbsPath("");
@@ -145,10 +147,10 @@ public class SoundFileMissing : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Zvuk '{Sound.Name}' je definovaný, ale neexistuje v súborovom systéme.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_SoundMissing, Sound.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Odstrániť zvuk '{Sound.Name}' zo zoznamu zvukov.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_RemoveSound, Sound.Name);
 
     /// <inheritdoc />
     public string Path => Sound.GetAbsPath("");
@@ -194,10 +196,10 @@ public class SoundDataMissing : IRawBankMessage
     public MessageType Type => MessageType.Warning;
 
     /// <inheritdoc />
-    public string Message => $"Zvuk '{File.Name}' existuje v súborovom systéme, ale nie je definovaný.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_SoundUndefined, File.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Pridať dáta o zvuku '{File.Name}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_AddSoundData, File.Name);
 
     /// <inheritdoc />
     public string Path => RelativeToBank(File.FileInfo.FullName);
@@ -214,7 +216,7 @@ public class SoundDataMissing : IRawBankMessage
         var group = File.Parent?.Group;
         if (group is null)
         {
-            Utils.ShowError($"Súbor '{File.Name}' nie je v priečinku žiadnej skupiny zvukov, údaje o zvuku sa nedajú pridať.");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Msg_FileNotInGroup, File.Name));
             return;
         }
 
@@ -255,10 +257,10 @@ public class InvalidSoundFile : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Súbor '{File.Name}' nie je platná nahrávka WAV.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_InvalidWav, File.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Presunúť súbor '{File.Name}' do koša.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_RecycleFile, File.Name);
 
     /// <inheritdoc />
     public string Path => RelativeToBank(File.FileInfo.FullName);
@@ -317,10 +319,10 @@ public class EmptyGroup : IRawBankMessage
     public MessageType Type => MessageType.Info;
 
     /// <inheritdoc />
-    public string Message => $"Skupina '{Group.Name}' je prázdna.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_GroupEmpty, Group.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Odstrániť skupinu '{Group.Name}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_RemoveGroup, Group.Name);
 
     /// <inheritdoc />
     public string Path => Group.GetAbsPath("");

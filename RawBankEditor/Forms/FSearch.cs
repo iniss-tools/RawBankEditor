@@ -1,3 +1,5 @@
+using System.Globalization;
+using RawBankEditor.Properties;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -23,7 +25,7 @@ public partial class FSearch : Form
     {
         if (string.IsNullOrEmpty(tbText.Text))
         {
-            Utils.ShowInfo("Zadajte hľadaný text.");
+            Utils.ShowInfo(Resources.FSearch_EnterText);
             return;
         }
 
@@ -42,8 +44,8 @@ public partial class FSearch : Form
         _foundIndex = 0;
         if (_found.Count == 0)
         {
-            Text = "Hľadať";
-            Utils.ShowInfo("Nič sa nenašlo.");
+            Text = Resources.FSearch_Title;
+            Utils.ShowInfo(Resources.FSearch_NotFound);
             return;
         }
 
@@ -89,7 +91,7 @@ public partial class FSearch : Form
         if (Program.MainForm.SelectSound(sound) == -1)
             return false;
 
-        Text = $"Hľadať – {_foundIndex + 1} z {_found.Count}";
+        Text = string.Format(CultureInfo.CurrentCulture, Resources.FSearch_TitleFound, _foundIndex + 1, _found.Count);
         return true;
     }
 

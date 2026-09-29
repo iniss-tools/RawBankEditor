@@ -1,4 +1,6 @@
-﻿using ExControls;
+﻿using System.Globalization;
+using ExControls;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
@@ -23,7 +25,7 @@ partial class FMain
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError($"Priečinok skupiny {directory} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, directory, ex.Message));
             return;
         }
 
@@ -58,8 +60,7 @@ partial class FMain
 
         var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
         var result = Utils.ShowWarning(
-            $"Skupina {group.Name} sa odstráni zo zoznamu skupín spolu so svojimi zvukmi ({group.Sounds.Count}).\n\n" +
-            "Premiestniť do koša aj priečinok skupiny s nahrávkami?",
+            string.Format(CultureInfo.CurrentCulture, Resources.Groups_DeleteConfirm, group.Name, group.Sounds.Count),
             MessageBoxButtons.YesNoCancel);
         if (result == DialogResult.Cancel)
             return;
@@ -144,7 +145,7 @@ partial class FMain
             string? error = null;
             if (!sameFolder && Directory.Exists(newPath))
             {
-                error = $"Priečinok {newPath} už existuje.";
+                error = string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirExists, newPath);
             }
             else
             {
@@ -161,7 +162,7 @@ partial class FMain
             if (error is not null)
             {
                 group.RelativePath = oldRelativePath;
-                Utils.ShowError($"Priečinok skupiny {oldPath} sa nepodarilo premenovať.\n\n{error}");
+                Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_RenameFailed, oldPath, error));
                 return false;
             }
 

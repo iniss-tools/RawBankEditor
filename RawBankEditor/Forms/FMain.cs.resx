@@ -1,0 +1,456 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>&amp;Soubor</value>
+  </data>
+  <data name="tsmimOpen.Text" xml:space="preserve">
+    <value>&amp;Otevřít...</value>
+  </data>
+  <data name="tsmimRecent.Text" xml:space="preserve">
+    <value>&amp;Nedávné</value>
+  </data>
+  <data name="tsmimSave.Text" xml:space="preserve">
+    <value>&amp;Uložit</value>
+  </data>
+  <data name="tsmimSaveAll.Text" xml:space="preserve">
+    <value>Uložit &amp;vše</value>
+  </data>
+  <data name="tsmiEdit.Text" xml:space="preserve">
+    <value>Úp&amp;ravy</value>
+  </data>
+  <data name="tsmimUndo.Text" xml:space="preserve">
+    <value>&amp;Zpět</value>
+  </data>
+  <data name="tsmimRedo.Text" xml:space="preserve">
+    <value>Zn&amp;ovu</value>
+  </data>
+  <data name="tsmimAddSound.Text" xml:space="preserve">
+    <value>P&amp;řidat zvuk...</value>
+  </data>
+  <data name="tsmimDeleteSound.Text" xml:space="preserve">
+    <value>O&amp;dstranit zvuky</value>
+  </data>
+  <data name="tsmimMoveSounds.Text" xml:space="preserve">
+    <value>&amp;Přesunout zvuky...</value>
+  </data>
+  <data name="tsmimConvertSoundsToEwa.Text" xml:space="preserve">
+    <value>Převést vybrané zvuky na .&amp;EWA</value>
+  </data>
+  <data name="tsmimConvertSoundsToWav.Text" xml:space="preserve">
+    <value>Převést vybrané zvuky na .&amp;WAV</value>
+  </data>
+  <data name="tsmimRewriteMode.Text" xml:space="preserve">
+    <value>Režim &amp;přepisování</value>
+  </data>
+  <data name="tsmimWrapTextSoundCol.Text" xml:space="preserve">
+    <value>Přizpůsobit &amp;text hlášení v buňkách</value>
+  </data>
+  <data name="tsmiShow.Text" xml:space="preserve">
+    <value>Z&amp;obrazit</value>
+  </data>
+  <data name="tsmimGoBack.Text" xml:space="preserve">
+    <value>Přejít &amp;zpět</value>
+  </data>
+  <data name="tsmimGoForward.Text" xml:space="preserve">
+    <value>Přejít &amp;vpřed</value>
+  </data>
+  <data name="tsmimSearch.Text" xml:space="preserve">
+    <value>&amp;Hledat</value>
+  </data>
+  <data name="tsmimShowErrors.Text" xml:space="preserve">
+    <value>Seznam &amp;chyb</value>
+  </data>
+  <data name="tsmiTools.Text" xml:space="preserve">
+    <value>&amp;Nástroje</value>
+  </data>
+  <data name="tsmimLangsSettings.Text" xml:space="preserve">
+    <value>Nastavení &amp;jazyků</value>
+  </data>
+  <data name="tsmimAddLanguage.Text" xml:space="preserve">
+    <value>P&amp;řidat jazyk...</value>
+  </data>
+  <data name="tsmimEditLanguage.Text" xml:space="preserve">
+    <value>&amp;Upravit jazyk...</value>
+  </data>
+  <data name="tsmimDeleteLanguage.Text" xml:space="preserve">
+    <value>O&amp;dstranit jazyk</value>
+  </data>
+  <data name="tsmimConvertLangToEwa.Text" xml:space="preserve">
+    <value>Převést zvuky v jazyce na .&amp;EWA</value>
+  </data>
+  <data name="tsmimConvertLangToWav.Text" xml:space="preserve">
+    <value>Převést zvuky v jazyce na .&amp;WAV</value>
+  </data>
+  <data name="tsmimAppSettings.Text" xml:space="preserve">
+    <value>Nastavení &amp;programu</value>
+  </data>
+  <data name="tsmiHelp.Text" xml:space="preserve">
+    <value>Nápo&amp;věda</value>
+  </data>
+  <data name="tsmimInfoApp.Text" xml:space="preserve">
+    <value>&amp;Informace o programu</value>
+  </data>
+  <data name="tsmimUpdates.Text" xml:space="preserve">
+    <value>&amp;Poznámky k aktualizacím...</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Skupiny zvuků</value>
+  </data>
+  <data name="tsbAddGroup.Text" xml:space="preserve">
+    <value>Přidat skupinu</value>
+  </data>
+  <data name="tsbEditGroup.Text" xml:space="preserve">
+    <value>Upravit skupinu</value>
+  </data>
+  <data name="tsbDeleteGroup.Text" xml:space="preserve">
+    <value>Odstranit skupinu</value>
+  </data>
+  <data name="tsbConvertGroupToEwa.Text" xml:space="preserve">
+    <value>Převést skupinu na .EWA</value>
+  </data>
+  <data name="tsbConvertGroupToWav.Text" xml:space="preserve">
+    <value>Převést skupinu na .WAV</value>
+  </data>
+  <data name="cGroupName.HeaderText" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="cGroupRelativePath.HeaderText" xml:space="preserve">
+    <value>Relativní cesta</value>
+  </data>
+  <data name="cGroupCountSounds.HeaderText" xml:space="preserve">
+    <value>Počet zvuků</value>
+  </data>
+  <data name="cmiAddGroup.Text" xml:space="preserve">
+    <value>Přidat skupinu...</value>
+  </data>
+  <data name="cmiEditGroup.Text" xml:space="preserve">
+    <value>Upravit skupinu...</value>
+  </data>
+  <data name="cmiDeleteGroup.Text" xml:space="preserve">
+    <value>Odstranit skupinu</value>
+  </data>
+  <data name="cmiConvertGroupToEwa.Text" xml:space="preserve">
+    <value>Převést skupinu na .EWA</value>
+  </data>
+  <data name="cmiConvertGroupToWav.Text" xml:space="preserve">
+    <value>Převést skupinu na .WAV</value>
+  </data>
+  <data name="cFileName.HeaderText" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="cFileType.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="cFileDuration.HeaderText" xml:space="preserve">
+    <value>Délka</value>
+  </data>
+  <data name="cmiOpenInExplorer.Text" xml:space="preserve">
+    <value>Otevřít v průzkumníkovi</value>
+  </data>
+  <data name="cmiPlay.Text" xml:space="preserve">
+    <value>Přehrát zvuk</value>
+  </data>
+  <data name="cmiRenameFileDir.Text" xml:space="preserve">
+    <value>Přejmenovat soubor</value>
+  </data>
+  <data name="cmiDeleteFileDir.Text" xml:space="preserve">
+    <value>Odstranit soubor</value>
+  </data>
+  <data name="cmiConvertToEwaFile.Text" xml:space="preserve">
+    <value>Převést soubory na .EWA</value>
+  </data>
+  <data name="cmiConvertToWavFile.Text" xml:space="preserve">
+    <value>Převést soubory na .WAV</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>Průzkumník souborů</value>
+  </data>
+  <data name="tsbOpenInExplorer.Text" xml:space="preserve">
+    <value>Otevřít v průzkumníkovi</value>
+  </data>
+  <data name="tsbPlay.Text" xml:space="preserve">
+    <value>Přehrát zvuk (F5)</value>
+  </data>
+  <data name="tsbRenameFileDir.Text" xml:space="preserve">
+    <value>Přejmenovat (F2)</value>
+  </data>
+  <data name="tsbDeleteFileDir.Text" xml:space="preserve">
+    <value>Odstranit (Del)</value>
+  </data>
+  <data name="tsbConvertFilesToEwa.Text" xml:space="preserve">
+    <value>Převést soubory na .EWA</value>
+  </data>
+  <data name="tsbConvertFilesToWav.Text" xml:space="preserve">
+    <value>Převést soubory na .WAV</value>
+  </data>
+  <data name="cSoundKey.HeaderText" xml:space="preserve">
+    <value>Klíč zvuku</value>
+  </data>
+  <data name="cSoundName.HeaderText" xml:space="preserve">
+    <value>Název zvuku</value>
+  </data>
+  <data name="cSoundAdditionalRelativePath.HeaderText" xml:space="preserve">
+    <value>Přídavná relativní cesta</value>
+  </data>
+  <data name="cSoundFileName.HeaderText" xml:space="preserve">
+    <value>Název souboru</value>
+  </data>
+  <data name="cSoundDuration.HeaderText" xml:space="preserve">
+    <value>Trvání</value>
+  </data>
+  <data name="cSoundText.HeaderText" xml:space="preserve">
+    <value>Text hlášení</value>
+  </data>
+  <data name="cmiAddSound.Text" xml:space="preserve">
+    <value>Přidat zvuk</value>
+  </data>
+  <data name="cmiDeleteSound.Text" xml:space="preserve">
+    <value>Odstranit vybrané zvuky</value>
+  </data>
+  <data name="cmiMoveSounds.Text" xml:space="preserve">
+    <value>Přesunout vybrané zvuky...</value>
+  </data>
+  <data name="cmiConvertSoundsToEwa.Text" xml:space="preserve">
+    <value>Převést zvuky na .EWA</value>
+  </data>
+  <data name="cmiConvertSoundsToWav.Text" xml:space="preserve">
+    <value>Převést zvuky na .WAV</value>
+  </data>
+  <data name="tsbErrors.Text" xml:space="preserve">
+    <value>0 chyb</value>
+  </data>
+  <data name="tsbWarnings.Text" xml:space="preserve">
+    <value>0 upozornění</value>
+  </data>
+  <data name="tsbInfos.Text" xml:space="preserve">
+    <value>0 zpráv</value>
+  </data>
+  <data name="tsbResolveProblem.Text" xml:space="preserve">
+    <value>Vyřešit</value>
+  </data>
+  <data name="tsbHighlightProblem.Text" xml:space="preserve">
+    <value>Zvýraznit problém</value>
+  </data>
+  <data name="cMsgType.HeaderText" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="cMsgCode.HeaderText" xml:space="preserve">
+    <value>Kód</value>
+  </data>
+  <data name="cMessage.HeaderText" xml:space="preserve">
+    <value>Zpráva</value>
+  </data>
+  <data name="cMsgResolve.HeaderText" xml:space="preserve">
+    <value>Řešení</value>
+  </data>
+  <data name="cMsgPath.HeaderText" xml:space="preserve">
+    <value>Cesta</value>
+  </data>
+  <data name="cmiHighlightProblem.Text" xml:space="preserve">
+    <value>Zvýraznit chybu</value>
+  </data>
+  <data name="cmiResolveProblem.Text" xml:space="preserve">
+    <value>Vyřešit</value>
+  </data>
+  <data name="mmErrors.ToolTipText" xml:space="preserve">
+    <value>Zavřít</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>Seznam chyb</value>
+  </data>
+  <data name="tsslStatus.Text" xml:space="preserve">
+    <value>Není otevřena žádná banka</value>
+  </data>
+  <data name="tsbOpen.Text" xml:space="preserve">
+    <value>Otevřít</value>
+  </data>
+  <data name="tsbRecent.Text" xml:space="preserve">
+    <value>Nedávné</value>
+  </data>
+  <data name="tsbSave.Text" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="tsbSaveAll.Text" xml:space="preserve">
+    <value>Uložit vše</value>
+  </data>
+  <data name="tsbGoBack.Text" xml:space="preserve">
+    <value>Přejít zpět</value>
+  </data>
+  <data name="tsbGoForward.Text" xml:space="preserve">
+    <value>Přejít vpřed</value>
+  </data>
+  <data name="tsbUndo.Text" xml:space="preserve">
+    <value>Zpět</value>
+  </data>
+  <data name="tsbRedo.Text" xml:space="preserve">
+    <value>Znovu</value>
+  </data>
+  <data name="toolStripLabel1.Text" xml:space="preserve">
+    <value>Jazyk:</value>
+  </data>
+  <data name="tsbLangsSettings.Text" xml:space="preserve">
+    <value>Nastavení jazyků</value>
+  </data>
+  <data name="tsmiAddLanguage.Text" xml:space="preserve">
+    <value>Přidat jazyk</value>
+  </data>
+  <data name="tsmiEditLanguage.Text" xml:space="preserve">
+    <value>Upravit jazyk</value>
+  </data>
+  <data name="tsmiDeleteLanguage.Text" xml:space="preserve">
+    <value>Odstranit jazyk</value>
+  </data>
+  <data name="tsmiConvertLangToEwa.Text" xml:space="preserve">
+    <value>Převést zvuky v jazyce na .EWA</value>
+  </data>
+  <data name="tsmiConvertLangToWav.Text" xml:space="preserve">
+    <value>Převést zvuky v jazyce na .WAV</value>
+  </data>
+  <data name="tsbAppSettings.Text" xml:space="preserve">
+    <value>Nastavení programu</value>
+  </data>
+  <data name="tsbInfoApp.Text" xml:space="preserve">
+    <value>Informace o programu</value>
+  </data>
+  <data name="tsbAddSound.Text" xml:space="preserve">
+    <value>Přidat zvuk</value>
+  </data>
+  <data name="tsbMoveSounds.Text" xml:space="preserve">
+    <value>Přesunout zvuky</value>
+  </data>
+  <data name="tsbDeleteSound.Text" xml:space="preserve">
+    <value>Odstranit zvuk</value>
+  </data>
+  <data name="tsbConvertSoundsToEwa.Text" xml:space="preserve">
+    <value>Převést vybrané zvuky na .EWA</value>
+  </data>
+  <data name="tsbConvertSoundsToWav.Text" xml:space="preserve">
+    <value>Převést vybrané zvuky na .WAV</value>
+  </data>
+  <data name="tsbSearch.Text" xml:space="preserve">
+    <value>Hledat</value>
+  </data>
+  <data name="tsbWrapTextSoundCol.Text" xml:space="preserve">
+    <value>Přizpůsobit text hlášení v buňkách</value>
+  </data>
+  <data name="tsbRewriteMode.Text" xml:space="preserve">
+    <value>Režim přepisování</value>
+  </data>
+</root>

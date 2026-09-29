@@ -117,4 +117,455 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 5</value>
+  </data>
+  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="label1.Text" xml:space="preserve">
+    <value>Hľadaný text:</value>
+  </data>
+  <data name="&gt;&gt;label1.Name" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>77, 2</value>
+  </data>
+  <data name="tbText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>339, 20</value>
+  </data>
+  <data name="tbText.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbText.Name" xml:space="preserve">
+    <value>tbText</value>
+  </data>
+  <data name="&gt;&gt;tbText.Type" xml:space="preserve">
+    <value>ExControls.ExTextBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbText.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;tbText.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="exGroupBox1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="exGroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 26</value>
+  </data>
+  <data name="exGroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 116</value>
+  </data>
+  <data name="exGroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="exGroupBox1.Text" xml:space="preserve">
+    <value>Parameter hľadania</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox1.Name" xml:space="preserve">
+    <value>exGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox1.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox1.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox1.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rbText.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 82</value>
+  </data>
+  <data name="rbText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="rbText.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rbText.Text" xml:space="preserve">
+    <value>Text hlásenia</value>
+  </data>
+  <data name="&gt;&gt;rbText.Name" xml:space="preserve">
+    <value>rbText</value>
+  </data>
+  <data name="&gt;&gt;rbText.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbText.Parent" xml:space="preserve">
+    <value>exGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;rbText.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 39</value>
+  </data>
+  <data name="rbName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 17</value>
+  </data>
+  <data name="rbName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbName.Text" xml:space="preserve">
+    <value>Názov zvuku</value>
+  </data>
+  <data name="&gt;&gt;rbName.Name" xml:space="preserve">
+    <value>rbName</value>
+  </data>
+  <data name="&gt;&gt;rbName.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbName.Parent" xml:space="preserve">
+    <value>exGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;rbName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbKey.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 17</value>
+  </data>
+  <data name="rbKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 17</value>
+  </data>
+  <data name="rbKey.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbKey.Text" xml:space="preserve">
+    <value>Kľúč zvuku</value>
+  </data>
+  <data name="&gt;&gt;rbKey.Name" xml:space="preserve">
+    <value>rbKey</value>
+  </data>
+  <data name="&gt;&gt;rbKey.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbKey.Parent" xml:space="preserve">
+    <value>exGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;rbKey.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rbFileName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbFileName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 61</value>
+  </data>
+  <data name="rbFileName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 17</value>
+  </data>
+  <data name="rbFileName.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbFileName.Text" xml:space="preserve">
+    <value>Názov súboru (s príponou)</value>
+  </data>
+  <data name="&gt;&gt;rbFileName.Name" xml:space="preserve">
+    <value>rbFileName</value>
+  </data>
+  <data name="&gt;&gt;rbFileName.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbFileName.Parent" xml:space="preserve">
+    <value>exGroupBox1</value>
+  </data>
+  <data name="&gt;&gt;rbFileName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboxIgnoreCase.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="cboxIgnoreCase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxIgnoreCase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 125</value>
+  </data>
+  <data name="cboxIgnoreCase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 17</value>
+  </data>
+  <data name="cboxIgnoreCase.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cboxIgnoreCase.Text" xml:space="preserve">
+    <value>Ignorovať VEĽKÉ/malé písmená</value>
+  </data>
+  <data name="&gt;&gt;cboxIgnoreCase.Name" xml:space="preserve">
+    <value>cboxIgnoreCase</value>
+  </data>
+  <data name="&gt;&gt;cboxIgnoreCase.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxIgnoreCase.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;cboxIgnoreCase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="exGroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="exGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 26</value>
+  </data>
+  <data name="exGroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 91</value>
+  </data>
+  <data name="exGroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="exGroupBox2.Text" xml:space="preserve">
+    <value>Nepriehľadnosť okna</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.Name" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 63</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 13</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>50%</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>148, 63</value>
+  </data>
+  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="label2.Text" xml:space="preserve">
+    <value>100%</value>
+  </data>
+  <data name="&gt;&gt;label2.Name" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="trackBarOpacity.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left, Right</value>
+  </data>
+  <data name="trackBarOpacity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 18</value>
+  </data>
+  <data name="trackBarOpacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 45</value>
+  </data>
+  <data name="trackBarOpacity.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;trackBarOpacity.Name" xml:space="preserve">
+    <value>trackBarOpacity</value>
+  </data>
+  <data name="&gt;&gt;trackBarOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBarOpacity.Parent" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;trackBarOpacity.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="bSearch.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="bSearch.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 155</value>
+  </data>
+  <data name="bSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 23</value>
+  </data>
+  <data name="bSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="bSearch.Text" xml:space="preserve">
+    <value>Hľadať ďalší</value>
+  </data>
+  <data name="&gt;&gt;bSearch.Name" xml:space="preserve">
+    <value>bSearch</value>
+  </data>
+  <data name="&gt;&gt;bSearch.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bSearch.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bSearch.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="bStorno.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="bStorno.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bStorno.Location" type="System.Drawing.Point, System.Drawing">
+    <value>360, 155</value>
+  </data>
+  <data name="bStorno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 23</value>
+  </data>
+  <data name="bStorno.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="bStorno.Text" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Name" xml:space="preserve">
+    <value>bStorno</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bStorno.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>418, 185</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Name" xml:space="preserve">
+    <value>AutoScaleDimensions</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Type" xml:space="preserve">
+    <value>System.Drawing.SizeF, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Name" xml:space="preserve">
+    <value>ClientSize</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Type" xml:space="preserve">
+    <value>System.Drawing.Size, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Margin.Name" xml:space="preserve">
+    <value>Margin</value>
+  </data>
+  <data name="&gt;&gt;Margin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Padding, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MinimumSize.Name" xml:space="preserve">
+    <value>MinimumSize</value>
+  </data>
+  <data name="&gt;&gt;MinimumSize.Type" xml:space="preserve">
+    <value>System.Drawing.Size, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Padding.Name" xml:space="preserve">
+    <value>Padding</value>
+  </data>
+  <data name="&gt;&gt;Padding.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Padding, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>434, 201</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Hľadať</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FSearch</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

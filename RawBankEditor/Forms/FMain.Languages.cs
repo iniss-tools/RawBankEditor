@@ -1,4 +1,6 @@
-﻿using RawBankEditor.Tools;
+﻿using System.Globalization;
+using RawBankEditor.Properties;
+using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -35,7 +37,7 @@ partial class FMain
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError($"Priečinok jazyka {path} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirFailed, path, ex.Message));
             return;
         }
 
@@ -71,7 +73,7 @@ partial class FMain
             string? error = null;
             if (!sameFolder && Directory.Exists(newPath))
             {
-                error = $"Priečinok {newPath} už existuje.";
+                error = string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirExists, newPath);
             }
             else
             {
@@ -88,7 +90,7 @@ partial class FMain
             if (error is not null)
             {
                 language.RelativePath = oldRelativePath;
-                Utils.ShowError($"Priečinok jazyka {oldPath} sa nepodarilo premenovať.\n\n{error}");
+                Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Languages_RenameFailed, oldPath, error));
                 return false;
             }
 

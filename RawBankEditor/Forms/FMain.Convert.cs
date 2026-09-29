@@ -1,4 +1,5 @@
-﻿using RawBankEditor.Properties;
+﻿using System.Globalization;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
@@ -13,7 +14,7 @@ partial class FMain
             return;
 
         var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>();
-        StartConversion(FilesOf(sounds), toEwa, "Konvertovanie vybraných zvukov", "Konvertujem vybrané zvuky");
+        StartConversion(FilesOf(sounds), toEwa, Resources.Convert_SoundsTitle, Resources.Convert_SoundsStatus);
     }
 
     private void ConvertSelectedGroup(bool toEwa)
@@ -40,7 +41,7 @@ partial class FMain
 
         var elements = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FileSystemElement>()
             .Where(el => el is not BackButtonElement);
-        StartConversion(SoundUtils.SoundFilesIn(elements), toEwa, "Konvertovanie vybraných súborov", "Konvertujem vybrané súbory");
+        StartConversion(SoundUtils.SoundFilesIn(elements), toEwa, Resources.Convert_FilesTitle, Resources.Convert_FilesStatus);
     }
 
     private static bool ConfirmConversion(string question, bool toEwa)
@@ -103,11 +104,11 @@ partial class FMain
     {
         var ext = toEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
         if (result.Skipped.Count > 0)
-            Utils.ShowWarning($"Niektoré súbory sa neskonvertovali, lebo vedľa nich už je súbor s príponou {ext}:\n\n{List(result.Skipped)}");
+            Utils.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.Convert_Skipped, ext, List(result.Skipped)));
         if (result.Failed.Count > 0)
-            Utils.ShowError($"Niektoré súbory sa nepodarilo skonvertovať:\n\n{List(result.Failed)}");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Convert_Failed, List(result.Failed)));
 
         static string List(List<string> items)
-            => string.Join("\n", items.Take(10)) + (items.Count > 10 ? $"\n… a ďalšie ({items.Count - 10})" : "");
+            => string.Join("\n", items.Take(10)) + (items.Count > 10 ? "\n" + string.Format(CultureInfo.CurrentCulture, Resources.Convert_More, items.Count - 10) : "");
     }
 }

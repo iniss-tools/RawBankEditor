@@ -1,4 +1,6 @@
-﻿using RawBankEditor.Tools;
+﻿using System.Globalization;
+using RawBankEditor.Properties;
+using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
 
@@ -31,21 +33,21 @@ partial class FMain
         if (error is null)
             return;
 
-        Utils.ShowError(error + "\n\nOpravte názov alebo premenovanie zrušte klávesom Esc.");
+        Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_FixNameOrEsc, error));
         e.Cancel = true;
     }
 
     private static string? RenameError(string path, string newName)
     {
         if (string.IsNullOrWhiteSpace(newName) || newName is "." or ".." || newName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
-            return $"Názov {newName} nie je platný.";
+            return string.Format(CultureInfo.CurrentCulture, Resources.Explorer_InvalidName, newName);
 
         // len zmena velkosti pismen - ta ista polozka
         if (string.Equals(Path.GetFileName(path), newName, StringComparison.OrdinalIgnoreCase))
             return null;
 
         var target = Path.Combine(Path.GetDirectoryName(path)!, newName);
-        return File.Exists(target) || Directory.Exists(target) ? $"Položka {newName} už v priečinku existuje." : null;
+        return File.Exists(target) || Directory.Exists(target) ? string.Format(CultureInfo.CurrentCulture, Resources.Explorer_ItemExists, newName) : null;
     }
 
     private void DgvExplorer_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -123,7 +125,7 @@ partial class FMain
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            Utils.ShowError($"{Path.GetFileName(oldPath)} sa nepodarilo premenovať.\n\n{ex.Message}");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RenameFailed, Path.GetFileName(oldPath), ex.Message));
             return false;
         }
 
@@ -182,11 +184,7 @@ partial class FMain
         if (dgvExplorer.IsSelectionEmpty())
             return;
 
-        var result = Utils.ShowWarning(
-            "Vybrané položky sa presunú do koša.\n\n" +
-            "Zvuky, ktorým vybrané súbory patria, sa odstránia zo zoznamu zvukov, priečinok skupiny sa odstráni aj so skupinou.\n\n" +
-            "Pokračovať?",
-            MessageBoxButtons.YesNo);
+        var result = Utils.ShowWarning(Resources.Explorer_DeleteConfirm, MessageBoxButtons.YesNo);
         if (result != DialogResult.Yes)
             return;
 
@@ -249,7 +247,7 @@ partial class FMain
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
         {
             if (ex is not OperationCanceledException)
-                Utils.ShowError($"{element.Name} sa nepodarilo presunúť do koša.\n\n{ex.Message}");
+                Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RecycleFailed, element.Name, ex.Message));
             return false;
         }
 
@@ -268,7 +266,7 @@ partial class FMain
             WithoutFileWatcher(() => restored = Utils.TryRecoverFileOrDirFromBin(path));
         if (!restored)
         {
-            Utils.ShowError($"Súbor {element.Name} sa nepodarilo obnoviť z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RestoreFailed, element.Name));
             return false;
         }
 

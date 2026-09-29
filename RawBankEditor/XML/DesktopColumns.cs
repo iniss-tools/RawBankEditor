@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Xml.Serialization;
+using RawBankEditor.Properties;
 using ToolsCore.XML;
 
 namespace RawBankEditor.XML;
@@ -14,12 +15,12 @@ public record DesktopColumns()
     [XmlIgnore]
     private static readonly Dictionary<string, (string name, int order, int minWidth, bool visible)> Props = new()
     {
-        [nameof(Key)] = ("Kľúč", 0, 150, true),
-        [nameof(Name)] = ("Názov", 1, 150, true),
-        [nameof(RelativePath)] = ("Prídavná relatívna cesta", 2, 150, true),
-        [nameof(FileName)] = ("Názov súboru", 3, 150, true),
-        [nameof(Duration)] = ("Trvanie", 4, 100, true),
-        [nameof(Text)] = ("Text hlásenia", 5, 200, true)
+        [nameof(Key)] = (Resources.Column_Key, 0, 150, true),
+        [nameof(Name)] = (Resources.Column_Name, 1, 150, true),
+        [nameof(RelativePath)] = (Resources.Column_RelativePath, 2, 150, true),
+        [nameof(FileName)] = (Resources.Column_FileName, 3, 150, true),
+        [nameof(Duration)] = (Resources.Column_Duration, 4, 100, true),
+        [nameof(Text)] = (Resources.Column_Text, 5, 200, true)
     };
 
     #region Fields

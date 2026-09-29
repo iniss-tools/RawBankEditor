@@ -1,3 +1,5 @@
+using System.Globalization;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
 using ToolsCore.Entities;
 using ToolsCore.Tools;
@@ -43,7 +45,7 @@ public partial class FAddSound : Form
 
         if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(name) || string.IsNullOrEmpty(fileName))
         {
-            Utils.ShowError("Nie sú vyplnené všetky požadované polia.");
+            Utils.ShowError(Resources.FAddSound_FieldsRequired);
             DialogResult = DialogResult.None;
             return;
         }
@@ -51,14 +53,14 @@ public partial class FAddSound : Form
         var ext = Path.GetExtension(fileName);
         if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || !(ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)))
         {
-            Utils.ShowError($"Názov súboru musí mať príponu {SoundUtils.WAV_EXT} alebo {SoundUtils.EWA_EXT} a nesmie obsahovať cestu ani neplatné znaky.");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FAddSound_InvalidFileName, SoundUtils.WAV_EXT, SoundUtils.EWA_EXT));
             DialogResult = DialogResult.None;
             return;
         }
 
         if (!string.IsNullOrEmpty(relative) && (!relative.EndsWith("\\") || string.IsNullOrWhiteSpace(relative)))
         {
-            Utils.ShowError("Prídavná relatívna cesta musí končiť '\\' a nesmie obsahovať iba prázdne znaky.");
+            Utils.ShowError(Resources.FMain_InvalidRelativePath);
             DialogResult = DialogResult.None;
             return;
         }
@@ -67,14 +69,14 @@ public partial class FAddSound : Form
         {
             if (SoundRules.SameText(snd.Key, key))
             {
-                Utils.ShowError("Položka s rovnakým kľúčom už existuje.");
+                Utils.ShowError(Resources.FAddSound_KeyExists);
                 DialogResult = DialogResult.None;
                 return;
             }
 
             if (SoundRules.SameText(snd.Name, name))
             {
-                Utils.ShowError("Položka s rovnakým názvom už existuje.");
+                Utils.ShowError(Resources.FAddSound_NameExists);
                 DialogResult = DialogResult.None;
                 return;
             }
