@@ -1,11 +1,12 @@
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 /// <summary>
-///     Okno na pridanie alebo upravu jazyka banky. Samo nic nemeni - zadane hodnoty spracuje FMain.
+/// Okno na pridanie alebo upravu jazyka banky. Samo nic nemeni - zadane hodnoty spracuje FMain.
 /// </summary>
 public partial class FAddEditLanguage : Form
 {
@@ -37,7 +38,7 @@ public partial class FAddEditLanguage : Form
         }
         else
         {
-            base.Text = "Pridať jazyk";
+            base.Text = Resources.FAddEditLanguage_AddTitle;
         }
     }
 

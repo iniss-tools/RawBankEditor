@@ -1,12 +1,15 @@
-﻿using RawBankEditor.Tools;
-using ToolsCore.Entities;
+﻿using System.Globalization;
+using RawBankEditor.Properties;
+using RawBankEditor.Tools;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 partial class FMain
 {
-    private void DoRenameFile(object sender, EventArgs e)
+    private void DoRenameFile()
     {
         if (dgvExplorer.IsSelectionEmpty() || dgvExplorer.SelectedRows[0].DataBoundItem is BackButtonElement)
             return;
@@ -31,21 +34,21 @@ partial class FMain
         if (error is null)
             return;
 
-        Utils.ShowError(error + "\n\nOpravte názov alebo premenovanie zrušte klávesom Esc.");
+        _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_FixNameOrEsc, error));
         e.Cancel = true;
     }
 
     private static string? RenameError(string path, string newName)
     {
         if (string.IsNullOrWhiteSpace(newName) || newName is "." or ".." || newName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
-            return $"Názov {newName} nie je platný.";
+            return string.Format(CultureInfo.CurrentCulture, Resources.Explorer_InvalidName, newName);
 
         // len zmena velkosti pismen - ta ista polozka
         if (string.Equals(Path.GetFileName(path), newName, StringComparison.OrdinalIgnoreCase))
             return null;
 
         var target = Path.Combine(Path.GetDirectoryName(path)!, newName);
-        return File.Exists(target) || Directory.Exists(target) ? $"Položka {newName} už v priečinku existuje." : null;
+        return File.Exists(target) || Directory.Exists(target) ? string.Format(CultureInfo.CurrentCulture, Resources.Explorer_ItemExists, newName) : null;
     }
 
     private void DgvExplorer_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -81,7 +84,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Priecinok skupiny sa premenuje upravou skupiny - inak by skupina ukazovala na priecinok, ktory uz neexistuje.
+    /// Priecinok skupiny sa premenuje upravou skupiny - inak by skupina ukazovala na priecinok, ktory uz neexistuje.
     /// </summary>
     private void RenameGroupFolder(FyzGroup group, string folderName)
     {
@@ -89,7 +92,7 @@ partial class FMain
         var error = GroupRules.Validate(group.Language.Groups, group, group.Key, group.Name, relativePath);
         if (error is not null)
         {
-            Utils.ShowError(error);
+            _dialogs.ShowError(error);
             return;
         }
 
@@ -106,24 +109,18 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Premenuje subor alebo priecinok a upravi prvok prieskumnika aj zvuk, ktoremu subor patri.
+    /// Premenuje subor alebo priecinok a upravi prvok prieskumnika aj zvuk, ktoremu subor patri.
     /// </summary>
     /// <returns><see langword="false" />, ak premenovanie zlyhalo.</returns>
     internal bool RenameOnDisk(string oldPath, string newPath)
     {
         try
         {
-            WithoutFileWatcher(() =>
-            {
-                if (Directory.Exists(oldPath))
-                    Directory.Move(oldPath, newPath);
-                else
-                    File.Move(oldPath, newPath);
-            });
+            WithoutFileWatcher(() => _bank.Journal.Move(oldPath, newPath, CurrentLanguage));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            Utils.ShowError($"{Path.GetFileName(oldPath)} sa nepodarilo premenovať.\n\n{ex.Message}");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RenameFailed, Path.GetFileName(oldPath), ex.Message));
             return false;
         }
 
@@ -133,15 +130,15 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Po premenovani na disku (v programe aj mimo neho) upravi prvok prieskumnika. Zvuk, ktoremu subor patri,
-    ///     dostane novy nazov suboru; skupina, ktorej priecinok sa premenoval, novu relativnu cestu.
+    /// Po premenovani na disku (v programe aj mimo neho) upravi prvok prieskumnika. Zvuk, ktoremu subor patri,
+    /// dostane novy nazov suboru; skupina, ktorej priecinok sa premenoval, novu relativnu cestu.
     /// </summary>
     private void ApplyRename(string oldPath, string newPath)
     {
         if (CurrentLanguage?.Directory is null)
             return;
 
-        switch (RawBankExplorer.GetElement(oldPath, CurrentLanguage.Directory))
+        switch (RawBankExplorer.GetElement(oldPath, CurrentLanguage.Directory, _bank.PathToBank))
         {
             case DirectoryElement de:
                 SetElementPath(de, newPath);
@@ -159,7 +156,7 @@ partial class FMain
                 if (fe is SoundFileElement { Sound: { } sound } sfe && ReferenceEquals(sound.File, sfe))
                 {
                     var ext = Path.GetExtension(sfe.Name);
-                    if (ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT))
+                    if (ext.EqualsIgnoreCase(SoundUtils.WAVExt) || ext.EqualsIgnoreCase(SoundUtils.EWAExt))
                     {
                         sound.FileName = sfe.Name;
                     }
@@ -177,16 +174,12 @@ partial class FMain
         CheckProjectState();
     }
 
-    private void DoDeleteFile(object sender, EventArgs e)
+    private void DoDeleteFile()
     {
         if (dgvExplorer.IsSelectionEmpty())
             return;
 
-        var result = Utils.ShowWarning(
-            "Vybrané položky sa presunú do koša.\n\n" +
-            "Zvuky, ktorým vybrané súbory patria, sa odstránia zo zoznamu zvukov, priečinok skupiny sa odstráni aj so skupinou.\n\n" +
-            "Pokračovať?",
-            MessageBoxButtons.YesNo);
+        var result = _dialogs.ShowWarning(Resources.Explorer_DeleteConfirm, MessageBoxButtons.YesNo);
         if (result != DialogResult.Yes)
             return;
 
@@ -222,8 +215,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Presunie subor alebo priecinok do kosa a vyberie jeho prvok zo stromu prieskumnika (prvok si pamata rodica,
-    ///     aby ho Spat mohlo vratit).
+    /// Odstrani subor alebo priecinok (do kosa pojde pri ulozeni banky) a vyberie jeho prvok zo stromu prieskumnika
+    /// (prvok si pamata rodica, aby ho Spat mohlo vratit).
     /// </summary>
     internal bool RecycleElement(FileSystemElement element)
     {
@@ -238,18 +231,11 @@ partial class FMain
 
         try
         {
-            WithoutFileWatcher(() =>
-            {
-                if (element is DirectoryElement)
-                    Utils.DeleteDirectoryToRecycleBin(path);
-                else
-                    Utils.DeleteFileToRecycleBin(path);
-            });
+            WithoutFileWatcher(() => _bank.Journal.Delete(path, CurrentLanguage));
         }
-        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            if (ex is not OperationCanceledException)
-                Utils.ShowError($"{element.Name} sa nepodarilo presunúť do koša.\n\n{ex.Message}");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RecycleFailed, element.Name, ex.Message));
             return false;
         }
 
@@ -258,17 +244,17 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Obnovi subor z kosa a vrati jeho prvok do stromu prieskumnika.
+    /// Vrati odstraneny subor (zo zalohy zurnalu, po ulozeni z kosa) a jeho prvok do stromu prieskumnika.
     /// </summary>
     internal bool RestoreElement(FileElement element)
     {
         var path = element.FileInfo.FullName;
         var restored = File.Exists(path);
         if (!restored)
-            WithoutFileWatcher(() => restored = Utils.TryRecoverFileOrDirFromBin(path));
+            WithoutFileWatcher(() => restored = _bank.Journal.Restore(path, CurrentLanguage));
         if (!restored)
         {
-            Utils.ShowError($"Súbor {element.Name} sa nepodarilo obnoviť z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Explorer_RestoreFailed, element.Name));
             return false;
         }
 

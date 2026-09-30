@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Reflection;
 using Microsoft.Win32;
 using RawBankEditor.Forms;
+using RawBankEditor.Services;
 using RawBankEditor.XML;
 using ToolsCore;
 using ToolsCore.Tools;
@@ -9,21 +10,21 @@ using ToolsCore.Tools;
 namespace RawBankEditor.DocScreenshots;
 
 /// <summary>
-///     Generátor snímok okien RawBankEditora do dokumentácie.
+/// Generátor snímok okien RawBankEditora do dokumentácie.
 /// </summary>
 /// <remarks>
-///     Použitie: <c>RawBankEditor.DocScreenshots [--out=priečinok] [--work=priečinok] [--only=text] [--theme=light|dark|both]</c>.
-///     <list type="bullet">
-///         <item><c>--out</c> – kam uložiť PNG; predvolene <c>iniss-tools-docs\static\img\rawbankeditor</c> vedľa repozitára.</item>
-///         <item><c>--work</c> – kde zostaviť ukážkovú inštaláciu INISS so zvukovou bankou; predvolene <c>C:\INISS</c>
-///         (cesta je vidno v titulku). Existujúci priečinok bez značky <c>.docshots</c> sa nezmaže.</item>
-///         <item><c>--timeout</c> – po koľkých minútach sa harness ukončí, ak ho zablokuje modálne okno (predvolene 5).</item>
-///         <item><c>--only</c> – len snímky, ktorých cesta obsahuje daný text (napr. <c>hlavne-okno</c>).</item>
-///     </list>
-///     Hodnoty sa zadávajú len v tvare <c>--názov=hodnota</c>: FMain.OnLoad otvára posledný argument, ktorý
-///     nezačína pomlčkou, ako banku – samostatná cesta (<c>--out D:\…</c>) by sa otvorila ako inštalácia INISS.
-///     Program beží pod vlastným menom, takže konfiguráciu (<c>%LocalAppData%\RawBankEditor.DocScreenshots</c>)
-///     aj register má oddelené od RawBankEditora – pri každom spustení začína s predvolenými nastaveniami.
+/// Použitie: <c>RawBankEditor.DocScreenshots [--out=priečinok] [--work=priečinok] [--only=text] [--theme=light|dark|both]</c>.
+/// <list type="bullet">
+/// <item><c>--out</c> – kam uložiť PNG; predvolene <c>iniss-tools-docs\static\img\rawbankeditor</c> vedľa repozitára.</item>
+/// <item><c>--work</c> – kde zostaviť ukážkovú inštaláciu INISS so zvukovou bankou; predvolene <c>C:\INISS</c>
+/// (cesta je vidno v titulku). Existujúci priečinok bez značky <c>.docshots</c> sa nezmaže.</item>
+/// <item><c>--timeout</c> – po koľkých minútach sa harness ukončí, ak ho zablokuje modálne okno (predvolene 5).</item>
+/// <item><c>--only</c> – len snímky, ktorých cesta obsahuje daný text (napr. <c>hlavne-okno</c>).</item>
+/// </list>
+/// Hodnoty sa zadávajú len v tvare <c>--názov=hodnota</c>: FMain.OnLoad otvára posledný argument, ktorý
+/// nezačína pomlčkou, ako banku – samostatná cesta (<c>--out D:\…</c>) by sa otvorila ako inštalácia INISS.
+/// Program beží pod vlastným menom, takže konfiguráciu (<c>%LocalAppData%\RawBankEditor.DocScreenshots</c>)
+/// aj register má oddelené od RawBankEditora – pri každom spustení začína s predvolenými nastaveniami.
 /// </remarks>
 internal static class Program
 {
@@ -87,8 +88,18 @@ internal static class Program
     }
 
     /// <summary>
-    ///     Rovnaká inicializácia ako RawBankEditor.Program.Main, s čistou konfiguráciou, registrom a slovenčinou.
+    /// Rovnaká inicializácia ako RawBankEditor.Program.Main, s čistou konfiguráciou, registrom a slovenčinou.
     /// </summary>
+    /// <summary>
+    /// Nastavenia programu harnessu.
+    /// </summary>
+    public static AppSession<RawBankEditorConfig, RawBankEditorStyle> Session { get; private set; } = null!;
+
+    /// <summary>
+    /// Služba banky otvoreného hlavného okna.
+    /// </summary>
+    public static BankEditor Bank { get; private set; } = null!;
+
     private static void InitApp()
     {
         if (Directory.Exists(AppPaths.DataDir))
@@ -98,7 +109,7 @@ internal static class Program
         var name = Assembly.GetEntryAssembly()!.GetName().Name;
         Registry.CurrentUser.DeleteSubKeyTree($@"SOFTWARE\{name}", throwOnMissingSubKey: false);
 
-        AppInit.Initialization(out GlobData.Config, out GlobData.Styles, out GlobData.UsingStyle);
+        Session = AppInit.Initialization<RawBankEditorConfig, RawBankEditorStyle>();
 
         // harness nebezi v Application.Run: modalne okno (ShowDialog) by pri skonceni svojej slucky odinstalovalo
         // synchronizacny kontext WinForms a BackgroundWorker spusteny potom by volal ProgressChanged/RunWorkerCompleted
@@ -118,25 +129,25 @@ internal static class Program
     private static void SetTheme(string theme)
     {
         var style = theme == "dark" ? RawBankEditorStyle.DefaultDarkStyle : RawBankEditorStyle.DefaultLightStyle;
-        GlobData.UsingStyle = style;
-        GlobSettings.UsingStyle = style;
-        AppInit.MsgBoxStyleInit(style, GlobData.Config);
+        Session.UsingStyle = style;
+        AppInit.MsgBoxStyleInit(style, Session.Config);
     }
 
     /// <summary>
-    ///     Otvorí hlavné okno s ukážkovou bankou rovnako ako Súbor → Nedávne. Výber jazyka, ktorý sa pri banke
-    ///     s viacerými jazykmi otvorí ako modálne okno, obslúži <paramref name="chooseLanguage" />.
+    /// Otvorí hlavné okno s ukážkovou bankou rovnako ako Súbor → Nedávne. Výber jazyka, ktorý sa pri banke
+    /// s viacerými jazykmi otvorí ako modálne okno, obslúži <paramref name="chooseLanguage" />.
     /// </summary>
     public static FMain OpenMain(string installDir, Action<FLangChoose> chooseLanguage)
     {
         // FMain si šírky panelov pri posune deliča ukladá do konfigurácie - každá téma začína s predvolenými
-        GlobData.Config.LeftPanelWidth = -1;
-        GlobData.Config.GroupPanelWidth = -1;
-        GlobData.Config.ErrorPanelWidth = -1;
-        GlobData.Config.ShowErrorsWindow = true;
+        Session.Config.LeftPanelWidth = -1;
+        Session.Config.GroupPanelWidth = -1;
+        Session.Config.ErrorPanelWidth = -1;
+        Session.Config.ShowErrorsWindow = true;
 
-        var main = new FMain();
-        typeof(global::RawBankEditor.Program).GetProperty(nameof(global::RawBankEditor.Program.MainForm), Any)!.SetValue(null, main);
+        // každá téma otvára banku v novej službe – ako nový beh programu
+        Bank = new BankEditor(Session);
+        var main = new FMain(Bank, new DialogService());
 
         main.StartPosition = FormStartPosition.Manual;
         main.Location = new Point(40, 40);
@@ -167,9 +178,9 @@ internal static class Program
             typeof(FMain).GetMethod("OpenProject", Any)!.Invoke(main, [installDir]);
         }
 
-        var worker = (System.ComponentModel.BackgroundWorker)main.GetType().GetField("bWorkerReadDat", Any)!.GetValue(main)!;
+        bool Reading() => (bool)main.GetType().GetField("_readingLanguage", Any)!.GetValue(main)!;
         var groups = (DataGridView)main.GetType().GetField("dgvGroups", Any)!.GetValue(main)!;
-        if (!Pump.Until(() => !worker.IsBusy && groups.DataSource is not null && groups.Rows.Count > 0))
+        if (!Pump.Until(() => !Reading() && groups.DataSource is not null && groups.Rows.Count > 0))
             throw new TimeoutException("Banka sa nenačítala.");
 
         return main;
@@ -215,8 +226,8 @@ internal static class Program
 }
 
 /// <summary>
-///     Obslúži modálne okná, ktoré program otvára cez ShowDialog (výber jazyka, otázky) – bežia vo vlastnej
-///     slučke správ, preto ich zachytí časovač. Obsluha vráti <c>true</c>, ak okno spracovala (zavrela).
+/// Obslúži modálne okná, ktoré program otvára cez ShowDialog (výber jazyka, otázky) – bežia vo vlastnej
+/// slučke správ, preto ich zachytí časovač. Obsluha vráti <c>true</c>, ak okno spracovala (zavrela).
 /// </summary>
 internal sealed class ModalWatcher : IDisposable
 {

@@ -1,11 +1,12 @@
-﻿using RawBankEditor.Tools;
-using ToolsCore.Entities;
+﻿using RawBankEditor.Properties;
+using RawBankEditor.Tools;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 /// <summary>
-///     Okno pridania a upravy skupiny zvukov. Len zisti a skontroluje hodnoty - skupinu a jej priecinok meni hlavne okno.
+/// Okno pridania a upravy skupiny zvukov. Len zisti a skontroluje hodnoty - skupinu a jej priecinok meni hlavne okno.
 /// </summary>
 public partial class FAddEditGroup : Form
 {
@@ -25,8 +26,8 @@ public partial class FAddEditGroup : Form
 
         if (group == null)
         {
-            base.Text = "Pridanie skupiny zvukov";
-            bOK.Text = "Pridať";
+            base.Text = Resources.FAddEditGroup_AddTitle;
+            bOK.Text = Resources.FAddEditGroup_Add;
         }
         else
         {

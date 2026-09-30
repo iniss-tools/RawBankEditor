@@ -170,4 +170,485 @@ Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
 
 Zadaná akcia môže trvať dlhšiu dobu.</value>
   </data>
+  <data name="FMain_Save_Failed" xml:space="preserve">
+    <value>Uloženie banky zlyhalo, súbory banky sa vrátili do pôvodného stavu a zmeny ostali neuložené.
+
+{0}</value>
+  </data>
+  <data name="FMain_Save_Failed_Rollback" xml:space="preserve">
+    <value>Uloženie banky zlyhalo a pôvodné súbory banky sa nepodarilo vrátiť. INISS ju nemusí načítať.
+
+Pôvodné súbory sú v priečinku:
+{1}
+
+{0}</value>
+  </data>
+  <data name="Cmd_Open" xml:space="preserve">
+    <value>Otvoriť banku</value>
+  </data>
+  <data name="Cmd_Save" xml:space="preserve">
+    <value>Uložiť</value>
+  </data>
+  <data name="Cmd_SaveAll" xml:space="preserve">
+    <value>Uložiť všetko</value>
+  </data>
+  <data name="Cmd_Undo" xml:space="preserve">
+    <value>Späť</value>
+  </data>
+  <data name="Cmd_Redo" xml:space="preserve">
+    <value>Znovu</value>
+  </data>
+  <data name="Cmd_AddSound" xml:space="preserve">
+    <value>Pridať zvuk</value>
+  </data>
+  <data name="Cmd_DeleteSounds" xml:space="preserve">
+    <value>Odstrániť vybrané zvuky</value>
+  </data>
+  <data name="Cmd_MoveSounds" xml:space="preserve">
+    <value>Premiestniť zvuky do inej skupiny</value>
+  </data>
+  <data name="Cmd_RewriteMode" xml:space="preserve">
+    <value>Prepisovací mód</value>
+  </data>
+  <data name="Cmd_WrapTextSoundCol" xml:space="preserve">
+    <value>Prispôsobiť text hlásenia v bunkách</value>
+  </data>
+  <data name="Cmd_GoBack" xml:space="preserve">
+    <value>Prejsť späť</value>
+  </data>
+  <data name="Cmd_GoForward" xml:space="preserve">
+    <value>Prejsť dopredu</value>
+  </data>
+  <data name="Cmd_Search" xml:space="preserve">
+    <value>Hľadať</value>
+  </data>
+  <data name="Cmd_AddLanguage" xml:space="preserve">
+    <value>Pridať jazyk</value>
+  </data>
+  <data name="Cmd_EditLanguage" xml:space="preserve">
+    <value>Upraviť jazyk</value>
+  </data>
+  <data name="Cmd_DeleteLanguage" xml:space="preserve">
+    <value>Odstrániť jazyk</value>
+  </data>
+  <data name="Cmd_AppSettings" xml:space="preserve">
+    <value>Nastavenia programu</value>
+  </data>
+  <data name="Cmd_HighlightProblem" xml:space="preserve">
+    <value>Zvýrazniť problém</value>
+  </data>
+  <data name="Cmd_ResolveProblem" xml:space="preserve">
+    <value>Vyriešiť problém</value>
+  </data>
+  <data name="FMain_Vyberte_priecinok_s_INISS" xml:space="preserve">
+    <value>Vyberte priečinok s INISS.exe</value>
+  </data>
+  <data name="FMain_Status_Ready" xml:space="preserve">
+    <value>Pripravený</value>
+  </data>
+  <data name="FMain_Status_LoadingFiles" xml:space="preserve">
+    <value>Načítanie súborov banky</value>
+  </data>
+  <data name="FMain_Language_Unsaved" xml:space="preserve">
+    <value>Jazyk {0} má neuložené zmeny.
+
+Uložiť ich pred prepnutím jazyka?</value>
+  </data>
+  <data name="FMain_Progress_FileSystem" xml:space="preserve">
+    <value>Načítavanie súborového systému</value>
+  </data>
+  <data name="FMain_Progress_Merging" xml:space="preserve">
+    <value>Spájam načítané dáta so súborovým systémom</value>
+  </data>
+  <data name="FMain_Status_LoadFailed" xml:space="preserve">
+    <value>Vznikla chyba pri načítaní banky</value>
+  </data>
+  <data name="FMain_Status_NoLanguage" xml:space="preserve">
+    <value>Banka neobsahuje žiadny jazyk – pridajte ho cez Nastavenia jazykov</value>
+  </data>
+  <data name="FMain_MoveStopped" xml:space="preserve">
+    <value>Presun zvukov sa zastavil – presunulo sa {0} z {1}.
+
+{2}</value>
+  </data>
+  <data name="FMain_LanguageDirFailed" xml:space="preserve">
+    <value>Priečinok jazyka {0} sa nepodarilo vytvoriť.
+
+{1}</value>
+  </data>
+  <data name="FMain_DeleteLanguage" xml:space="preserve">
+    <value>Práve vybraný jazyk sa odstráni.
+
+Ste si istý?</value>
+  </data>
+  <data name="FMain_DeleteLanguageDir" xml:space="preserve">
+    <value>Vymazať aj priečinok so zvukmi jazyka?
+
+Priečinok sa pri uložení banky premiestni do koša.</value>
+  </data>
+  <data name="FMain_Status_OpeningGroup" xml:space="preserve">
+    <value>Otváram skupinu zvukov</value>
+  </data>
+  <data name="FMain_InvalidRelativePath" xml:space="preserve">
+    <value>Prídavná relatívna cesta musí končiť '\' a nesmie obsahovať iba prázdne znaky.</value>
+  </data>
+  <data name="FMain_GridDataError" xml:space="preserve">
+    <value>Tabuľka obsahuje nesprávny údaj: {0}</value>
+  </data>
+  <data name="FMain_SoundKeyRequired" xml:space="preserve">
+    <value>Kľúč zvuku je povinný.</value>
+  </data>
+  <data name="FMain_SoundNameRequired" xml:space="preserve">
+    <value>Názov zvuku je povinný.</value>
+  </data>
+  <data name="FMain_FixValueOrEsc" xml:space="preserve">
+    <value>{0}
+
+Opravte hodnotu alebo úpravu zrušte klávesom Esc.</value>
+  </data>
+  <data name="FMain_ItemCount" xml:space="preserve">
+    <value>{0} položiek</value>
+  </data>
+  <data name="FMain_InvalidFileName" xml:space="preserve">
+    <value>Neplatný názov súboru</value>
+  </data>
+  <data name="FMain_SoundFileMissing" xml:space="preserve">
+    <value>Súbor zvuku v priečinku neexistuje</value>
+  </data>
+  <data name="FMain_InvalidFileType" xml:space="preserve">
+    <value>Neplatný typ súboru</value>
+  </data>
+  <data name="FMain_Count_Errors" xml:space="preserve">
+    <value>chyba|chyby|chýb</value>
+  </data>
+  <data name="FMain_Count_Warnings" xml:space="preserve">
+    <value>upozornenie|upozornenia|upozornení</value>
+  </data>
+  <data name="FMain_Count_Infos" xml:space="preserve">
+    <value>správa|správy|správ</value>
+  </data>
+  <data name="Action_SoundData" xml:space="preserve">
+    <value>Zmena dát o zvuku</value>
+  </data>
+  <data name="Action_SoundFile" xml:space="preserve">
+    <value>Zmena súboru zvuku</value>
+  </data>
+  <data name="Action_DeleteSounds" xml:space="preserve">
+    <value>Odstránenie zvukov</value>
+  </data>
+  <data name="Action_RenameFile" xml:space="preserve">
+    <value>Premenovanie súboru</value>
+  </data>
+  <data name="Action_EditGroup" xml:space="preserve">
+    <value>Úprava skupiny zvukov</value>
+  </data>
+  <data name="Action_DeleteGroup" xml:space="preserve">
+    <value>Odstránenie skupiny zvukov</value>
+  </data>
+  <data name="Action_EditLanguage" xml:space="preserve">
+    <value>Úprava jazyka</value>
+  </data>
+  <data name="Action_DeleteLanguage" xml:space="preserve">
+    <value>Odstránenie jazyka</value>
+  </data>
+  <data name="Action_GroupToRecycleFailed" xml:space="preserve">
+    <value>Priečinok skupiny {0} sa nepodarilo odstrániť.
+
+{1}</value>
+  </data>
+  <data name="Action_GroupRestoreFailed" xml:space="preserve">
+    <value>Nepodarilo sa obnoviť priečinok skupiny z koša.
+
+Pravdepodobne bol permanentne vymazaný.</value>
+  </data>
+  <data name="Action_LanguageRestoreFailed" xml:space="preserve">
+    <value>Nepodarilo sa obnoviť priečinok so zvukmi jazyka z koša.
+
+Pravdepodobne bol permanentne vymazaný.</value>
+  </data>
+  <data name="Explorer_FixNameOrEsc" xml:space="preserve">
+    <value>{0}
+
+Opravte názov alebo premenovanie zrušte klávesom Esc.</value>
+  </data>
+  <data name="Explorer_InvalidName" xml:space="preserve">
+    <value>Názov {0} nie je platný.</value>
+  </data>
+  <data name="Explorer_ItemExists" xml:space="preserve">
+    <value>Položka {0} už v priečinku existuje.</value>
+  </data>
+  <data name="Explorer_RenameFailed" xml:space="preserve">
+    <value>{0} sa nepodarilo premenovať.
+
+{1}</value>
+  </data>
+  <data name="Explorer_DeleteConfirm" xml:space="preserve">
+    <value>Vybrané položky sa odstránia, do koša sa presunú pri uložení banky.
+
+Zvuky, ktorým vybrané súbory patria, sa odstránia zo zoznamu zvukov, priečinok skupiny sa odstráni aj so skupinou.
+
+Pokračovať?</value>
+  </data>
+  <data name="Explorer_RecycleFailed" xml:space="preserve">
+    <value>{0} sa nepodarilo odstrániť.
+
+{1}</value>
+  </data>
+  <data name="Explorer_RestoreFailed" xml:space="preserve">
+    <value>Súbor {0} sa nepodarilo obnoviť z koša.
+
+Pravdepodobne bol permanentne vymazaný.</value>
+  </data>
+  <data name="Groups_DirFailed" xml:space="preserve">
+    <value>Priečinok skupiny {0} sa nepodarilo vytvoriť.
+
+{1}</value>
+  </data>
+  <data name="Groups_DeleteConfirm" xml:space="preserve">
+    <value>Skupina {0} sa odstráni zo zoznamu skupín spolu so svojimi zvukmi ({1}).
+
+Odstrániť aj priečinok skupiny s nahrávkami? Do koša sa presunie pri uložení banky.</value>
+  </data>
+  <data name="Groups_DirExists" xml:space="preserve">
+    <value>Priečinok {0} už existuje.</value>
+  </data>
+  <data name="Groups_RenameFailed" xml:space="preserve">
+    <value>Priečinok skupiny {0} sa nepodarilo premenovať.
+
+{1}</value>
+  </data>
+  <data name="Languages_RenameFailed" xml:space="preserve">
+    <value>Priečinok jazyka {0} sa nepodarilo premenovať.
+
+{1}</value>
+  </data>
+  <data name="Convert_SoundsTitle" xml:space="preserve">
+    <value>Konvertovanie vybraných zvukov</value>
+  </data>
+  <data name="Convert_SoundsStatus" xml:space="preserve">
+    <value>Konvertujem vybrané zvuky</value>
+  </data>
+  <data name="Convert_FilesTitle" xml:space="preserve">
+    <value>Konvertovanie vybraných súborov</value>
+  </data>
+  <data name="Convert_FilesStatus" xml:space="preserve">
+    <value>Konvertujem vybrané súbory</value>
+  </data>
+  <data name="Convert_Skipped" xml:space="preserve">
+    <value>Niektoré súbory sa neskonvertovali, lebo vedľa nich už je súbor s príponou {0}:
+
+{1}</value>
+  </data>
+  <data name="Convert_Failed" xml:space="preserve">
+    <value>Niektoré súbory sa nepodarilo skonvertovať:
+
+{0}</value>
+  </data>
+  <data name="Convert_More" xml:space="preserve">
+    <value>… a ďalšie ({0})</value>
+  </data>
+  <data name="Msg_LanguageMissing" xml:space="preserve">
+    <value>Jazyk '{0}' je definovaný, ale neexistuje v súborovom systéme.</value>
+  </data>
+  <data name="Msg_CreateDir" xml:space="preserve">
+    <value>Vytvoriť priečinok '{0}'.</value>
+  </data>
+  <data name="Msg_GroupMissing" xml:space="preserve">
+    <value>Skupina '{0}' je definovaná, ale neexistuje v súborovom systéme.</value>
+  </data>
+  <data name="Msg_SoundMissing" xml:space="preserve">
+    <value>Zvuk '{0}' je definovaný, ale neexistuje v súborovom systéme.</value>
+  </data>
+  <data name="Msg_RemoveSound" xml:space="preserve">
+    <value>Odstrániť zvuk '{0}' zo zoznamu zvukov.</value>
+  </data>
+  <data name="Msg_SoundUndefined" xml:space="preserve">
+    <value>Zvuk '{0}' existuje v súborovom systéme, ale nie je definovaný.</value>
+  </data>
+  <data name="Msg_AddSoundData" xml:space="preserve">
+    <value>Pridať dáta o zvuku '{0}'.</value>
+  </data>
+  <data name="Msg_FileNotInGroup" xml:space="preserve">
+    <value>Súbor '{0}' nie je v priečinku žiadnej skupiny zvukov, údaje o zvuku sa nedajú pridať.</value>
+  </data>
+  <data name="Msg_InvalidWav" xml:space="preserve">
+    <value>Súbor '{0}' nie je platná nahrávka WAV.</value>
+  </data>
+  <data name="Msg_RecycleFile" xml:space="preserve">
+    <value>Odstrániť súbor '{0}' (do koša sa presunie pri uložení banky).</value>
+  </data>
+  <data name="Msg_GroupEmpty" xml:space="preserve">
+    <value>Skupina '{0}' je prázdna.</value>
+  </data>
+  <data name="Msg_RemoveGroup" xml:space="preserve">
+    <value>Odstrániť skupinu '{0}'.</value>
+  </data>
+  <data name="SoundRules_Required" xml:space="preserve">
+    <value>Kľúč aj názov zvuku sú povinné.</value>
+  </data>
+  <data name="SoundRules_KeyExists" xml:space="preserve">
+    <value>Kľúč {0} už v skupine {1} existuje.</value>
+  </data>
+  <data name="SoundRules_NameExists" xml:space="preserve">
+    <value>Názov {0} už v skupine {1} existuje.</value>
+  </data>
+  <data name="SoundRules_NoGroupDir" xml:space="preserve">
+    <value>Priečinok skupiny {0} ({1}) neexistuje – nahrávku {2} nie je kam presunúť.</value>
+  </data>
+  <data name="SoundRules_FileExists" xml:space="preserve">
+    <value>V priečinku skupiny {0} už je súbor {1}.</value>
+  </data>
+  <data name="Rules_AllFieldsRequired" xml:space="preserve">
+    <value>Nie sú vyplnené všetky polia.</value>
+  </data>
+  <data name="Rules_PathMustEndWithBackslash" xml:space="preserve">
+    <value>Relatívna cesta musí končiť '\'.</value>
+  </data>
+  <data name="LanguageRules_PathSingleDir" xml:space="preserve">
+    <value>Relatívna cesta musí byť názov jedného priečinka v priečinku RAWBANK, napr. SK\.</value>
+  </data>
+  <data name="LanguageRules_KeyExists" xml:space="preserve">
+    <value>Jazyk s rovnakým kľúčom už existuje.</value>
+  </data>
+  <data name="LanguageRules_NameExists" xml:space="preserve">
+    <value>Jazyk s rovnakým názvom už existuje.</value>
+  </data>
+  <data name="LanguageRules_PathExists" xml:space="preserve">
+    <value>Jazyk s rovnakou relatívnou cestou už existuje.</value>
+  </data>
+  <data name="GroupRules_PathSingleDir" xml:space="preserve">
+    <value>Relatívna cesta musí byť názov jedného priečinka v priečinku jazyka, napr. Slova\.</value>
+  </data>
+  <data name="GroupRules_KeyExists" xml:space="preserve">
+    <value>Skupina s rovnakým kľúčom už existuje.</value>
+  </data>
+  <data name="GroupRules_NameExists" xml:space="preserve">
+    <value>Skupina s rovnakým názvom už existuje.</value>
+  </data>
+  <data name="GroupRules_PathExists" xml:space="preserve">
+    <value>Skupina s rovnakou relatívnou cestou už existuje.</value>
+  </data>
+  <data name="Column_Key" xml:space="preserve">
+    <value>Kľúč</value>
+  </data>
+  <data name="Column_Name" xml:space="preserve">
+    <value>Názov</value>
+  </data>
+  <data name="Column_RelativePath" xml:space="preserve">
+    <value>Prídavná relatívna cesta</value>
+  </data>
+  <data name="Column_FileName" xml:space="preserve">
+    <value>Názov súboru</value>
+  </data>
+  <data name="Column_Duration" xml:space="preserve">
+    <value>Trvanie</value>
+  </data>
+  <data name="Column_Text" xml:space="preserve">
+    <value>Text hlásenia</value>
+  </data>
+  <data name="FAddSound_FieldsRequired" xml:space="preserve">
+    <value>Nie sú vyplnené všetky požadované polia.</value>
+  </data>
+  <data name="FAddSound_InvalidFileName" xml:space="preserve">
+    <value>Názov súboru musí mať príponu {0} alebo {1} a nesmie obsahovať cestu ani neplatné znaky.</value>
+  </data>
+  <data name="FAddSound_KeyExists" xml:space="preserve">
+    <value>Položka s rovnakým kľúčom už existuje.</value>
+  </data>
+  <data name="FAddSound_NameExists" xml:space="preserve">
+    <value>Položka s rovnakým názvom už existuje.</value>
+  </data>
+  <data name="FSearch_EnterText" xml:space="preserve">
+    <value>Zadajte hľadaný text.</value>
+  </data>
+  <data name="FSearch_Title" xml:space="preserve">
+    <value>Hľadať</value>
+  </data>
+  <data name="FSearch_NotFound" xml:space="preserve">
+    <value>Nič sa nenašlo.</value>
+  </data>
+  <data name="FSearch_TitleFound" xml:space="preserve">
+    <value>Hľadať – {0} z {1}</value>
+  </data>
+  <data name="FSoundsMove_NoGroup" xml:space="preserve">
+    <value>Nebola vybratá žiadna skupina.</value>
+  </data>
+  <data name="FAfterInsertSounds_Problems" xml:space="preserve">
+    <value>Niektoré zvuky sa nedajú pridať – opravte kľúč alebo názov, alebo riadok odstráňte (Del):
+
+{0}</value>
+  </data>
+  <data name="FAddEditLanguage_AddTitle" xml:space="preserve">
+    <value>Pridať jazyk</value>
+  </data>
+  <data name="FAddEditGroup_AddTitle" xml:space="preserve">
+    <value>Pridanie skupiny zvukov</value>
+  </data>
+  <data name="FAddEditGroup_Add" xml:space="preserve">
+    <value>Pridať</value>
+  </data>
+  <data name="FMain_JournalLeftovers" xml:space="preserve">
+    <value>Po predchádzajúcom neukončenom behu programu ostali odstránené položky, ktoré sa neuložili. Presunuli sa do koša, odkiaľ sa dajú obnoviť:
+
+{0}</value>
+  </data>
+  <data name="FMain_RecycleFailed" xml:space="preserve">
+    <value>Banka je uložená, ale niektoré odstránené položky sa nepodarilo presunúť do koša. Ostali v skrytom záložnom priečinku v priečinku INISS a do koša sa presunú neskôr:
+
+{0}</value>
+  </data>
+  <data name="FMain_RollbackFailed" xml:space="preserve">
+    <value>Niektoré zmeny na disku sa nepodarilo vrátiť – banka im nemusí zodpovedať:
+
+{0}</value>
+  </data>
+  <data name="FMain_LanguageDirDeleteFailed" xml:space="preserve">
+    <value>Priečinok jazyka {0} sa nepodarilo odstrániť.
+
+{1}</value>
+  </data>
+  <data name="FMain_SoundsNotMoved" xml:space="preserve">
+    <value>Zvuky sa nepresunuli:
+
+{0}</value>
+  </data>
+  <data name="Action_AddSound" xml:space="preserve">
+    <value>Pridanie zvuku</value>
+  </data>
+  <data name="Action_AddSounds" xml:space="preserve">
+    <value>Pridanie zvukov</value>
+  </data>
+  <data name="Action_MoveSounds" xml:space="preserve">
+    <value>Presun zvukov</value>
+  </data>
+  <data name="Action_AddGroup" xml:space="preserve">
+    <value>Pridanie skupiny zvukov</value>
+  </data>
+  <data name="Action_AddLanguage" xml:space="preserve">
+    <value>Pridanie jazyka</value>
+  </data>
+  <data name="Action_Convert" xml:space="preserve">
+    <value>{0} na {1}</value>
+  </data>
+  <data name="Action_SoundSelection" xml:space="preserve">
+    <value>Jazyk: '{0}', Skupina: {1}, Zvuky:{2}</value>
+  </data>
+  <data name="Convert_RevertStatus" xml:space="preserve">
+    <value>Vraciam konverziu</value>
+  </data>
+  <data name="Convert_RedoStatus" xml:space="preserve">
+    <value>Konvertujem</value>
+  </data>
+  <data name="Convert_GroupTitle" xml:space="preserve">
+    <value>Konvertovanie zvukov skupiny</value>
+  </data>
+  <data name="Convert_GroupStatus" xml:space="preserve">
+    <value>Konvertujem skupinu zvukov</value>
+  </data>
+  <data name="Convert_LanguageTitle" xml:space="preserve">
+    <value>Konvertovanie zvukov jazyka</value>
+  </data>
+  <data name="Convert_LanguageStatus" xml:space="preserve">
+    <value>Konvertujem zvuky jazyka</value>
+  </data>
 </root>

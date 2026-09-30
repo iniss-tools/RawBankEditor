@@ -1,5 +1,5 @@
 <Solution>
   <Project Path="RawBankEditor/RawBankEditor.csproj" />
   <Project Path="RawBankEditor.DocScreenshots/RawBankEditor.DocScreenshots.csproj" />
-  <Project Path="RawBankEditorTests/RawBankEditorTests.csproj" />
+  <Project Path="RawBankEditor.Tests/RawBankEditor.Tests.csproj" />
 </Solution>

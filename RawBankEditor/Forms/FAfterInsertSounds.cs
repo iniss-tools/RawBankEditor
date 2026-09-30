@@ -1,18 +1,24 @@
-﻿using ExControls;
+﻿using System.Globalization;
+using ExControls;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 public partial class FAfterInsertSounds : Form
 {
-    private FAfterInsertSounds(FyzSound sound)
+    // hlavne okno - do jeho historie ide akcia pridania zvukov
+    private readonly FMain _main;
+
+    private FAfterInsertSounds(FMain main, FyzSound sound)
     {
+        _main = main;
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
-        NewSounds = new ExBindingList<FyzSound> { sound };
+        NewSounds = [sound];
         fyzSoundBindingSource.DataSource = NewSounds;
 
         // kluc a nazov sa kontroluju priebezne - rovnake pravidla ako v okne Pridat zvuk
@@ -22,7 +28,7 @@ public partial class FAfterInsertSounds : Form
     }
 
     /// <summary>
-    ///     Oznaci riadky, ktorych kluc alebo nazov koliduje so zvukom skupiny alebo s inym novym zvukom.
+    /// Oznaci riadky, ktorych kluc alebo nazov koliduje so zvukom skupiny alebo s inym novym zvukom.
     /// </summary>
     /// <returns>Problemy podla zvuku.</returns>
     private Dictionary<FyzSound, string> ShowProblems()
@@ -41,12 +47,12 @@ public partial class FAfterInsertSounds : Form
 
     private ExBindingList<FyzSound> NewSounds { get; }
 
-    public static void CreateOrUseExistingForm(FyzSound sound)
+    internal static void CreateOrUseExistingForm(FMain main, FyzSound sound)
     {
         if (OpenedForm is null)
         {
-            OpenedForm = new FAfterInsertSounds(sound);
-            OpenedForm.ShowDialog(Program.MainForm);
+            OpenedForm = new FAfterInsertSounds(main, sound);
+            OpenedForm.ShowDialog(main);
         }
         else
         {
@@ -77,8 +83,8 @@ public partial class FAfterInsertSounds : Form
         var problems = ShowProblems();
         if (problems.Count > 0)
         {
-            Utils.ShowError("Niektoré zvuky sa nedajú pridať – opravte kľúč alebo názov, alebo riadok odstráňte (Del):\n\n"
-                            + string.Join("\n", problems.Values.Distinct().Take(10)));
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FAfterInsertSounds_Problems,
+                string.Join("\n", problems.Values.Distinct().Take(10))));
             return;
         }
 
@@ -87,10 +93,10 @@ public partial class FAfterInsertSounds : Form
         if (NewSounds.Count == 0)
             return;
 
-        Program.MainForm.RegisterNewAction(new FMain.AddSoundsAction(Program.MainForm, NewSounds.ToList()));
+        _main.RegisterNewAction(new FMain.AddSoundsAction(_main, NewSounds.ToList()));
         foreach (var sound in NewSounds) 
             sound.Group.Sounds.Add(sound);
-        Program.MainForm.RefreshSoundViews();
+        _main.RefreshSoundViews();
     }
 
     private void FAfterInsertSounds_FormClosed(object sender, FormClosedEventArgs e)

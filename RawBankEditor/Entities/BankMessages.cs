@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using RawBankEditor.Forms;
-using ToolsCore.Entities;
+using RawBankEditor.Properties;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
-using static RawBankEditor.Entities.BankMessagePaths;
 // ReSharper disable MemberCanBePrivate.Global
 
 namespace RawBankEditor.Entities;
@@ -20,21 +21,17 @@ public interface IRawBankMessage
 
     public abstract string Path { get; }
 
-    public abstract void Resolve();
-
-    public abstract void Show();
-}
-
-/// <summary>
-///     Spolocne pre spravy zoznamu chyb.
-/// </summary>
-internal static class BankMessagePaths
-{
     /// <summary>
-    ///     Cesta vzhladom na priecinok banky (RAWBANK) - rovnako ako pri chybajucich priecinkoch a suboroch.
+    /// Vyriesi problem (Vyriesit v zozname chyb).
     /// </summary>
-    public static string RelativeToBank(string fullPath)
-        => System.IO.Path.GetRelativePath(GlobData.OpenedProject!.AbsPathToBank, fullPath);
+    /// <param name="form">hlavne okno</param>
+    public abstract void Resolve(FMain form);
+
+    /// <summary>
+    /// Ukaze problem v hlavnom okne (vyberie skupinu, zvuk alebo subor).
+    /// </summary>
+    /// <param name="form">hlavne okno</param>
+    public abstract void Show(FMain form);
 }
 
 public enum MessageType
@@ -53,10 +50,10 @@ public class LanguageDirMissing : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Jazyk '{Language.Key}' je definovaný, ale neexistuje v súborovom systéme.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_LanguageMissing, Language.Key);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Vytvoriť priečinok '{Language.RelativePath}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_CreateDir, Language.RelativePath);
 
     /// <inheritdoc />
     public string Path => Language.GetAbsPath("");
@@ -68,13 +65,13 @@ public class LanguageDirMissing : IRawBankMessage
         Language = language;
     }
 
-    public void Resolve()
+    public void Resolve(FMain form)
     {
-        Program.MainForm.CreateLanguageDirectory(Language);
+        form.CreateLanguageDirectory(Language);
     }
 
     /// <inheritdoc />
-    public void Show()
+    public void Show(FMain form)
     {
         // do nothing
     }
@@ -89,10 +86,10 @@ public class GroupDirMissing : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Skupina '{Group.Name}' je definovaná, ale neexistuje v súborovom systéme.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_GroupMissing, Group.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Vytvoriť priečinok '{Group.GetAbsPath("")}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_CreateDir, Group.GetAbsPath(""));
 
     /// <inheritdoc />
     public string Path => Group.GetAbsPath("");
@@ -104,34 +101,20 @@ public class GroupDirMissing : IRawBankMessage
         Group = group;
     }
 
-    public void Resolve()
+    public void Resolve(FMain form)
     {
-        try
-        {
-            var path = Group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank);
-            Program.MainForm.WithoutFileWatcher(() => Directory.CreateDirectory(path));
-        }
-        catch (Exception e)
-        {
-            Utils.ShowError(e.Message);
-            return;
-        }
-
         // priecinok sa prida do prieskumnika a zvuky skupiny sa prepoja s nahravkami, ktore v nom uz su
-        Program.MainForm.LinkGroupDirectory(Group);
-        foreach (var sound in Group.Sounds)
-            Program.MainForm.RelinkSoundFile(sound);
-        Program.MainForm.FillExplorerList(Group.Directory);
+        form.CreateGroupDirectory(Group);
     }
 
     /// <inheritdoc />
-    public void Show()
+    public void Show(FMain form)
     {
-        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(Group);
+        var index = form.CurrentLanguage!.Groups.IndexOf(Group);
         if (index != -1)
         {
-            Program.MainForm.dgvGroups.ClearSelection();
-            Program.MainForm.dgvGroups.Rows[index].Selected = true;
+            form.dgvGroups.ClearSelection();
+            form.dgvGroups.Rows[index].Selected = true;
         }
     }    
 }
@@ -145,10 +128,10 @@ public class SoundFileMissing : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Zvuk '{Sound.Name}' je definovaný, ale neexistuje v súborovom systéme.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_SoundMissing, Sound.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Odstrániť zvuk '{Sound.Name}' zo zoznamu zvukov.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_RemoveSound, Sound.Name);
 
     /// <inheritdoc />
     public string Path => Sound.GetAbsPath("");
@@ -160,27 +143,27 @@ public class SoundFileMissing : IRawBankMessage
         Sound = sound;
     }
 
-    public void Resolve()
+    public void Resolve(FMain form)
     {
-        var action = new FMain.RemovedSoundsAction(Program.MainForm, Sound);
+        var action = new FMain.RemovedSoundsAction(form, Sound);
         action.Apply();
-        Program.MainForm.RegisterNewAction(action);
+        form.RegisterNewAction(action);
     }
 
     /// <inheritdoc />
-    public void Show()
+    public void Show(FMain form)
     {
-        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(Sound.Group);
+        var index = form.CurrentLanguage!.Groups.IndexOf(Sound.Group);
         if (index == -1) 
             return;
 
-        Program.MainForm.dgvGroups.ClearSelection();
-        var i = Program.MainForm.SelectSound(Sound);
+        form.dgvGroups.ClearSelection();
+        var i = form.SelectSound(Sound);
         if (i != 0 && i != -1)
         {
-            Program.MainForm.DoNotChangeSoundsSelection = true;
-            Program.MainForm.dgvSounds.Rows[0].Selected = false;
-            Program.MainForm.DoNotChangeSoundsSelection = false;
+            form.DoNotChangeSoundsSelection = true;
+            form.dgvSounds.Rows[0].Selected = false;
+            form.DoNotChangeSoundsSelection = false;
         }
     }
 }
@@ -194,54 +177,60 @@ public class SoundDataMissing : IRawBankMessage
     public MessageType Type => MessageType.Warning;
 
     /// <inheritdoc />
-    public string Message => $"Zvuk '{File.Name}' existuje v súborovom systéme, ale nie je definovaný.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_SoundUndefined, File.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Pridať dáta o zvuku '{File.Name}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_AddSoundData, File.Name);
 
     /// <inheritdoc />
-    public string Path => RelativeToBank(File.FileInfo.FullName);
+    public string Path => System.IO.Path.GetRelativePath(PathToBank, File.FileInfo.FullName);
 
     public SoundFileElement File { get; }
 
-    public SoundDataMissing(SoundFileElement file)
+    /// <summary>
+    /// Priecinok RAWBANK - cesta suboru sa ukazuje vzhladom na neho, rovnako ako pri chybajucich priecinkoch a suboroch.
+    /// </summary>
+    private string PathToBank { get; }
+
+    public SoundDataMissing(SoundFileElement file, string pathToBank)
     {
         File = file;
+        PathToBank = pathToBank;
     }
     
-    public void Resolve()
+    public void Resolve(FMain form)
     {
         var group = File.Parent?.Group;
         if (group is null)
         {
-            Utils.ShowError($"Súbor '{File.Name}' nie je v priečinku žiadnej skupiny zvukov, údaje o zvuku sa nedajú pridať.");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Msg_FileNotInGroup, File.Name));
             return;
         }
 
-        var form = new FAddSound(group, File);
-        if (form.ShowDialog() == DialogResult.OK)
+        var dialog = new FAddSound(group, form.PathToBank, File);
+        if (dialog.ShowDialog(form) == DialogResult.OK)
         {
-            Program.MainForm.RegisterNewAction(new FMain.AddSoundAction(Program.MainForm, form.Sound));
-            group.Sounds.Add(form.Sound);
-            Program.MainForm.RefreshSoundViews();
+            form.RegisterNewAction(new FMain.AddSoundAction(form, dialog.Sound));
+            group.Sounds.Add(dialog.Sound);
+            form.RefreshSoundViews();
         }
     }
 
     /// <inheritdoc />
-    public void Show()
+    public void Show(FMain form)
     {
         var grp = File.Parent!.Group;
-        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(grp);
+        var index = form.CurrentLanguage!.Groups.IndexOf(grp);
         if (index != -1)
         {
-            Program.MainForm.dgvGroups.ClearSelection();
-            Program.MainForm.dgvGroups.Rows[index].Selected = true;
-            Program.MainForm.SelectElement = File;
+            form.dgvGroups.ClearSelection();
+            form.dgvGroups.Rows[index].Selected = true;
+            form.SelectElement = File;
         }
         else
         {
-            Program.MainForm.SelectElement = File;
-            Program.MainForm.FillExplorerList(File.Parent);
+            form.SelectElement = File;
+            form.FillExplorerList(File.Parent);
         }
     }
 }
@@ -255,23 +244,29 @@ public class InvalidSoundFile : IRawBankMessage
     public MessageType Type => MessageType.Error;
 
     /// <inheritdoc />
-    public string Message => $"Súbor '{File.Name}' nie je platná nahrávka WAV.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_InvalidWav, File.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Presunúť súbor '{File.Name}' do koša.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_RecycleFile, File.Name);
 
     /// <inheritdoc />
-    public string Path => RelativeToBank(File.FileInfo.FullName);
+    public string Path => System.IO.Path.GetRelativePath(PathToBank, File.FileInfo.FullName);
 
     public SoundFileElement File { get; }
 
-    public InvalidSoundFile(SoundFileElement file)
+    /// <summary>
+    /// Priecinok RAWBANK - cesta suboru sa ukazuje vzhladom na neho, rovnako ako pri chybajucich priecinkoch a suboroch.
+    /// </summary>
+    private string PathToBank { get; }
+
+    public InvalidSoundFile(SoundFileElement file, string pathToBank)
     {
         File = file;
+        PathToBank = pathToBank;
     }    
 
     /// <inheritdoc />
-    public void Resolve()
+    public void Resolve(FMain form)
     {
         // zvuk, ktoremu subor patril, ostane bez suboru
         if (File.Sound is { } sound && ReferenceEquals(sound.File, File))
@@ -280,31 +275,31 @@ public class InvalidSoundFile : IRawBankMessage
             File.Sound = null!;
         }
 
-        Program.MainForm.RecycleElement(File);
-        Program.MainForm.FillExplorerList(Program.MainForm.CurrentDirectory);
+        form.RecycleElement(File);
+        form.FillExplorerList(form.CurrentDirectory);
     }
 
     /// <inheritdoc />
-    public void Show()
+    public void Show(FMain form)
     {
         var grp = File.Parent!.Group;
-        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(grp);
+        var index = form.CurrentLanguage!.Groups.IndexOf(grp);
         if (index != -1)
         {
-            Program.MainForm.dgvGroups.ClearSelection();
-            Program.MainForm.dgvGroups.Rows[index].Selected = true;
+            form.dgvGroups.ClearSelection();
+            form.dgvGroups.Rows[index].Selected = true;
         }
         else
         {
-            Program.MainForm.FillExplorerList(File.Parent);
+            form.FillExplorerList(File.Parent);
         }
 
-        index = Program.MainForm.ExplorerContent.IndexOf(File);
+        index = form.ExplorerContent.IndexOf(File);
         if (index == -1)
             return;
 
-        Program.MainForm.dgvExplorer.ClearSelection();
-        Program.MainForm.dgvExplorer.Rows[index].Selected = true;
+        form.dgvExplorer.ClearSelection();
+        form.dgvExplorer.Rows[index].Selected = true;
     }
 }
 
@@ -317,10 +312,10 @@ public class EmptyGroup : IRawBankMessage
     public MessageType Type => MessageType.Info;
 
     /// <inheritdoc />
-    public string Message => $"Skupina '{Group.Name}' je prázdna.";
+    public string Message => string.Format(CultureInfo.CurrentCulture, Resources.Msg_GroupEmpty, Group.Name);
 
     /// <inheritdoc />
-    public string ResolveMessage => $"Odstrániť skupinu '{Group.Name}'.";
+    public string ResolveMessage => string.Format(CultureInfo.CurrentCulture, Resources.Msg_RemoveGroup, Group.Name);
 
     /// <inheritdoc />
     public string Path => Group.GetAbsPath("");
@@ -333,22 +328,22 @@ public class EmptyGroup : IRawBankMessage
     }
 
     /// <inheritdoc />
-    public void Resolve()
+    public void Resolve(FMain form)
     {
         // priecinok ide do kosa len prazdny - nahravky bez udajov o zvuku by sa inak stratili nepozorovane
-        var directory = FMain.GroupDirectoryPath(Group);
+        var directory = form.GroupDirectoryPath(Group);
         var emptyDirectory = Directory.Exists(directory) && !Directory.EnumerateFileSystemEntries(directory).Any();
-        Program.MainForm.RemoveGroup(Group, emptyDirectory);
+        form.RemoveGroup(Group, emptyDirectory);
     }
 
     /// <inheritdoc />
-    public void Show()
+    public void Show(FMain form)
     {
-        var index = Program.MainForm.CurrentLanguage!.Groups.IndexOf(Group);
+        var index = form.CurrentLanguage!.Groups.IndexOf(Group);
         if (index != -1)
         {
-            Program.MainForm.dgvGroups.ClearSelection();
-            Program.MainForm.dgvGroups.Rows[index].Selected = true;
+            form.dgvGroups.ClearSelection();
+            form.dgvGroups.Rows[index].Selected = true;
         }
     }
 }

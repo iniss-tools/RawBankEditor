@@ -4112,4 +4112,143 @@
         AAAAAAAAAAAA/w==
 </value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="exGroupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="exGroupBox2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="exGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="exGroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 101</value>
+  </data>
+  <data name="exGroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="exGroupBox2.Text" xml:space="preserve">
+    <value>Program</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.Name" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.Parent" xml:space="preserve">
+    <value>pConcreteGeneral</value>
+  </data>
+  <data name="&gt;&gt;exGroupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cboxAutoRecalculateSoundDurations.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxAutoRecalculateSoundDurations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 19</value>
+  </data>
+  <data name="cboxAutoRecalculateSoundDurations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 17</value>
+  </data>
+  <data name="cboxAutoRecalculateSoundDurations.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cboxAutoRecalculateSoundDurations.Text" xml:space="preserve">
+    <value>Automaticky prepočítavať dĺžky zvukov</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoRecalculateSoundDurations.Name" xml:space="preserve">
+    <value>cboxAutoRecalculateSoundDurations</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoRecalculateSoundDurations.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoRecalculateSoundDurations.Parent" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoRecalculateSoundDurations.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cboxAutoInsertSoundData.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxAutoInsertSoundData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 42</value>
+  </data>
+  <data name="cboxAutoInsertSoundData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>382, 17</value>
+  </data>
+  <data name="cboxAutoInsertSoundData.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="cboxAutoInsertSoundData.Text" xml:space="preserve">
+    <value>Automaticky vytvárať dáta zvukov pridaných do priečinkov zvukovej banky</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoInsertSoundData.Name" xml:space="preserve">
+    <value>cboxAutoInsertSoundData</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoInsertSoundData.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoInsertSoundData.Parent" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;cboxAutoInsertSoundData.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cboxShowAfterInsertSoundDlg.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxShowAfterInsertSoundDlg.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 65</value>
+  </data>
+  <data name="cboxShowAfterInsertSoundDlg.Size" type="System.Drawing.Size, System.Drawing">
+    <value>390, 17</value>
+  </data>
+  <data name="cboxShowAfterInsertSoundDlg.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cboxShowAfterInsertSoundDlg.Text" xml:space="preserve">
+    <value>Otvoriť dialóg s úpravou dát zvukov pri pridaní do priečinkov zvukovej banky</value>
+  </data>
+  <data name="&gt;&gt;cboxShowAfterInsertSoundDlg.Name" xml:space="preserve">
+    <value>cboxShowAfterInsertSoundDlg</value>
+  </data>
+  <data name="&gt;&gt;cboxShowAfterInsertSoundDlg.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxShowAfterInsertSoundDlg.Parent" xml:space="preserve">
+    <value>exGroupBox2</value>
+  </data>
+  <data name="&gt;&gt;cboxShowAfterInsertSoundDlg.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Name" xml:space="preserve">
+    <value>AutoScaleDimensions</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Type" xml:space="preserve">
+    <value>System.Drawing.SizeF, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Name" xml:space="preserve">
+    <value>ClientSize</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Type" xml:space="preserve">
+    <value>System.Drawing.Size, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="pConcreteGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 270</value>
+  </data>
+  <data name="optionsView.Size" type="System.Drawing.Size, System.Drawing">
+    <value>800, 440</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>800, 475</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FAppSettings</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

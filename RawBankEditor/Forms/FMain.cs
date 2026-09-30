@@ -1,12 +1,14 @@
 ﻿using ExControls;
 using ExControls.Providers;
-using Microsoft.VisualBasic.FileIO;
 using RawBankEditor.Entities;
 using RawBankEditor.Properties;
+using RawBankEditor.Services;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using System.Globalization;
 using ToolsCore;
 using ToolsCore.Forms;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 using ToolsCore.XML;
 
@@ -14,7 +16,11 @@ namespace RawBankEditor.Forms;
 
 public partial class FMain : Form
 {
-    private readonly ExBindingList<IRawBankMessage> _messages = new();
+    private readonly ExBindingList<IRawBankMessage> _messages = [];
+
+    // otvorena banka, nastavenia programu a zurnal zmien na disku
+    private readonly BankEditor _bank;
+    private readonly IDialogService _dialogs;
 
     //ikony
     private readonly Bitmap _error, _warning, _info;
@@ -24,10 +30,10 @@ public partial class FMain : Form
     private string _cellOldValue = null!;
     private string _actualStatusTxt = null!;
     private bool _langAlreadySet;
-    // jazyky pridane v otvorenej banke, ktorym sa este nezapisal FYZZVUK.DAT - otvaraju sa ako prazdne
-    private readonly HashSet<FyzLanguage> _newLanguages = [];
-    // jazyk, ktory nacitava bWorkerReadDat
+    // jazyk, ktory sa nacitava na pozadi (ReadLanguage)
     private FyzLanguage? _loadingLanguage;
+    // prave sa nacitava jazyk
+    private bool _readingLanguage;
     // ci sa CurrentLanguage nacital bez chyby
     private bool _languageLoaded;
     // prave bezi spat/znovu - prepnutie jazyka z akcie sa nepyta na ulozenie a nemaze historiu
@@ -45,26 +51,45 @@ public partial class FMain : Form
     private bool _reorderingGroups;
     private bool _cellUserEditing;
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal bool DoNotChangeSoundsSelection { get; set; }
+
     internal FyzLanguage? CurrentLanguage { get; private set; }
     internal FyzGroup? CurrentGroup { get; private set; }
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal FileSystemElement? SelectElement { get; set; }
 
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal DirectoryElement Root { get; set; } = null!;
+
+    [Browsable(false)]
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     internal DirectoryElement CurrentDirectory { get; set; } = null!;
 
     internal ExBindingList<FyzSound> MenuSounds { get; private set; } = null!;
     internal ExBindingList<FyzGroup> MenuGroups { get; private set; } = null!;
 
-    internal ExBindingList<FileSystemElement> ExplorerContent { get; } = new();
+    internal ExBindingList<FileSystemElement> ExplorerContent { get; } = [];
 
-    internal FMain()
+    /// <summary>
+    /// Priecinok RAWBANK otvorenej banky.
+    /// </summary>
+    internal string PathToBank => _bank.PathToBank;
+
+    /// <param name="bank">otvorena banka a nastavenia programu</param>
+    /// <param name="dialogs">dialogy s hlasenim</param>
+    internal FMain(BankEditor bank, IDialogService dialogs)
     {
+        _bank = bank;
+        _dialogs = dialogs;
         InitializeComponent();
-        tsslStatus.Font = GlobData.Config.Fonts.StateRow;
+        tsslStatus.Font = _bank.Config.Fonts.StateRow;
 
-        switch (GlobData.Config.DesktopMenuMode)
+        switch (_bank.Config.DesktopMenuMode)
         {
             case DesktopMenu.MsTs:
                 menuStripMain.Visible = true;
@@ -82,7 +107,7 @@ public partial class FMain : Form
                 menuStripMain.Items.Remove(tscboxLanguages);
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new UnreachableException();
         }
 
         SetRecentDirs();
@@ -103,51 +128,27 @@ public partial class FMain : Form
         
         _messages.ListChanged += Messages_ListChanged;
 
-        InitShortcuts();
+        CreateCommands();
+        _commands.ApplyShortcuts(_bank.Config.Shortcuts);
         InitColumns();
         SetColumnsAutoWidth();
         
-        dgvSounds.RowHeadersVisible = GlobData.Config.ShowRowsHeader;
+        dgvSounds.RowHeadersVisible = _bank.Config.ShowRowsHeader;
 
         //neviem preco niekedy umiestni stlpec s typom do stredu
         if (cFileType.DisplayIndex != 0) 
             cFileType.DisplayIndex = 0;
 
-        if (GlobData.UsingStyle.HighlightStatusBar)
+        if (_bank.UsingStyle.HighlightStatusBar)
         {
-            statusStripMain.BackColor = GlobData.UsingStyle.ControlsColorScheme.Highlight.BackColor;
-            tsslStatus.ForeColor = GlobData.UsingStyle.ControlsColorScheme.Highlight.ForeColor;
-            tssbErrors.BackColor = GlobData.UsingStyle.ControlsColorScheme.Highlight.BackColor;
+            statusStripMain.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
+            tsslStatus.ForeColor = _bank.UsingStyle.ControlsColorScheme.Highlight.ForeColor;
+            tssbErrors.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
         }
+
+        UpdateCommandStates();
     }
 
-    private void InitShortcuts()
-    {
-        var shortcuts = GlobData.Config.Shortcuts;
-
-        tsmimOpen.ShortcutKeys = shortcuts.Open;
-        tsmimSave.ShortcutKeys = shortcuts.Save;
-        tsmimSaveAll.ShortcutKeys = shortcuts.SaveAll;
-        tsmimUndo.ShortcutKeys = shortcuts.Undo;
-        tsmimRedo.ShortcutKeys = shortcuts.Redo;
-        tsmimAddSound.ShortcutKeys = shortcuts.AddSound;
-        cmiAddSound.ShortcutKeys = shortcuts.AddSound;
-        tsmimDeleteSound.ShortcutKeys = shortcuts.DeleteSounds;
-        cmiDeleteSound.ShortcutKeys = shortcuts.DeleteSounds;
-        tsmimMoveSounds.ShortcutKeys = shortcuts.MoveSounds;
-        cmiMoveSounds.ShortcutKeys = shortcuts.MoveSounds;
-        tsmimRewriteMode.ShortcutKeys = shortcuts.RewriteMode;
-        tsmimWrapTextSoundCol.ShortcutKeys = shortcuts.WrapTextSoundCol;
-        tsmimGoBack.ShortcutKeys = shortcuts.GoBack;
-        tsmimGoForward.ShortcutKeys = shortcuts.GoForward;
-        tsmimSearch.ShortcutKeys = shortcuts.Search;
-        tsmimAddLanguage.ShortcutKeys = shortcuts.AddLanguage;
-        tsmimEditLanguage.ShortcutKeys = shortcuts.EditLanguage;
-        tsmimDeleteLanguage.ShortcutKeys = shortcuts.DeleteLanguage;
-        tsmimAppSettings.ShortcutKeys = shortcuts.AppSettings;
-        cmiHighlightProblem.ShortcutKeys = shortcuts.HighlightProblem;
-        cmiResolveProblem.ShortcutKeys = shortcuts.ResolveProblem;
-    }
 
     private void InitColumns()
     {
@@ -158,7 +159,7 @@ public partial class FMain : Form
             column.DisplayIndex = format.Order;
         }
         
-        var columns = GlobData.Config.DesktopCols;
+        var columns = _bank.Config.DesktopCols;
 
         SetCol(cSoundKey, columns.Key);
         SetCol(cSoundName, columns.Name);
@@ -167,38 +168,38 @@ public partial class FMain : Form
         SetCol(cSoundDuration, columns.Duration);
         SetCol(cSoundText, columns.Text);
 
-        dgvSounds.Columns[dgvSounds.Columns.Count - 1].AutoSizeMode = GlobData.Config.FitLastColumn
+        dgvSounds.Columns[dgvSounds.Columns.Count - 1].AutoSizeMode = _bank.Config.FitLastColumn
             ? DataGridViewAutoSizeColumnMode.Fill
             : DataGridViewAutoSizeColumnMode.None;
 
-        tsmimWrapTextSoundCol.Checked = GlobData.Config.WrapSoundText;
+        tsmimWrapTextSoundCol.Checked = _bank.Config.WrapSoundText;
     }
 
     private void SetSoundTextColumn()
     {
         dgvSounds.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
-        cSoundText.DefaultCellStyle.WrapMode = GlobData.Config.WrapSoundText ? DataGridViewTriState.True : DataGridViewTriState.NotSet;
+        cSoundText.DefaultCellStyle.WrapMode = _bank.Config.WrapSoundText ? DataGridViewTriState.True : DataGridViewTriState.NotSet;
     }
 
     private void UpdateMainUI()
     {
-        var menu = GlobData.Config.DesktopMenuMode;
-        tsslStatus.Font = GlobData.Config.Fonts.StateRow;
+        var menu = _bank.Config.DesktopMenuMode;
+        tsslStatus.Font = _bank.Config.Fonts.StateRow;
         menuStripMain.Visible = menu is DesktopMenu.MsTs or DesktopMenu.MsOnly;
         toolStripMain.Visible = menu is DesktopMenu.MsTs or DesktopMenu.TsOnly;
-        dgvSounds.RowHeadersVisible = GlobData.Config.ShowRowsHeader;
+        dgvSounds.RowHeadersVisible = _bank.Config.ShowRowsHeader;
 
         this.ApplyThemeAndFonts();
         InitColumns();
-        InitShortcuts();
+        _commands.ApplyShortcuts(_bank.Config.Shortcuts);
         SetColumnsAutoWidth();
         Invalidate(true);
-        AppInit.MsgBoxStyleInit(GlobData.UsingStyle, GlobData.Config);
-        if (GlobData.UsingStyle.HighlightStatusBar)
+        AppInit.MsgBoxStyleInit(_bank.UsingStyle, _bank.Config);
+        if (_bank.UsingStyle.HighlightStatusBar)
         {
-            statusStripMain.BackColor = GlobData.UsingStyle.ControlsColorScheme.Highlight.BackColor;
-            tsslStatus.ForeColor = GlobData.UsingStyle.ControlsColorScheme.Highlight.ForeColor;
-            tssbErrors.BackColor = GlobData.UsingStyle.ControlsColorScheme.Highlight.BackColor;
+            statusStripMain.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
+            tsslStatus.ForeColor = _bank.UsingStyle.ControlsColorScheme.Highlight.ForeColor;
+            tssbErrors.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
         }
     }
 
@@ -220,39 +221,39 @@ public partial class FMain : Form
 
         var configsDir = ToolsCore.AppPaths.ConfigDir;
         
-        tsmimShowErrors.Checked = GlobData.Config.ShowErrorsWindow;
+        tsmimShowErrors.Checked = _bank.Config.ShowErrorsWindow;
         splitSoundsErrors.Panel2.VisibleChanged += (_, _) =>
         {
-            GlobData.Config.ShowErrorsWindow = !splitSoundsErrors.Panel2Collapsed;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            _bank.Config.ShowErrorsWindow = !splitSoundsErrors.Panel2Collapsed;
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
-        if (GlobData.Config.LeftPanelWidth != -1) splitContainer1.SplitterDistance = GlobData.Config.LeftPanelWidth;
+        if (_bank.Config.LeftPanelWidth != -1) splitContainer1.SplitterDistance = _bank.Config.LeftPanelWidth;
         splitContainer1.SplitterMoved += (_, _) =>
         {
-            GlobData.Config.LeftPanelWidth = splitContainer1.SplitterDistance;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            _bank.Config.LeftPanelWidth = splitContainer1.SplitterDistance;
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
-        if (GlobData.Config.GroupPanelWidth != -1) splitContainer2.SplitterDistance = GlobData.Config.GroupPanelWidth;
+        if (_bank.Config.GroupPanelWidth != -1) splitContainer2.SplitterDistance = _bank.Config.GroupPanelWidth;
         splitContainer2.SplitterMoved += (_, _) =>
         {
-            GlobData.Config.GroupPanelWidth = splitContainer2.SplitterDistance;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            _bank.Config.GroupPanelWidth = splitContainer2.SplitterDistance;
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
-        if (GlobData.Config.ErrorPanelWidth != -1) splitSoundsErrors.SplitterDistance = splitSoundsErrors.Width - GlobData.Config.ErrorPanelWidth;
+        if (_bank.Config.ErrorPanelWidth != -1) splitSoundsErrors.SplitterDistance = splitSoundsErrors.Width - _bank.Config.ErrorPanelWidth;
         splitSoundsErrors.SplitterMoved += (_, _) =>
         {
-            GlobData.Config.ErrorPanelWidth = splitSoundsErrors.Width - splitSoundsErrors.SplitterDistance;
-            XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+            _bank.Config.ErrorPanelWidth = splitSoundsErrors.Width - splitSoundsErrors.SplitterDistance;
+            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         };
 
         AppRegistry.RegisterJumpList();
 
         //cesta k projektu zadana ako argument ma prednost pred poslednym otvorenym projektom
         var path = Utils.GetProjectPathFromArgs();
-        if (path is null && GlobData.Config.Startup == StartupType.LastProject)
+        if (path is null && _bank.Config.Startup == StartupType.LastProject)
             path = AppRegistry.GetLastProject();
 
         if (Directory.Exists(path))
@@ -277,18 +278,20 @@ public partial class FMain : Form
 
     private void ChangeStatus(string status) => tsslStatus.Text = status;
 
-    private void ChangeStatusReady() => tsslStatus.Text = "Pripravený";
+    private void ChangeStatusReady() => tsslStatus.Text = Resources.FMain_Status_Ready;
 
     /// <summary>
-    ///     Nacita banku a zacne nacitavat vybrany jazyk. Otvorena banka sa nahradi az ked je nova nacitana
-    ///     a jazyk vybrany - pri chybe alebo zruseni vyberu jazyka ostane otvorena povodna.
+    /// Nacita banku a zacne nacitavat vybrany jazyk. Otvorena banka sa nahradi az ked je nova nacitana
+    /// a jazyk vybrany - pri chybe alebo zruseni vyberu jazyka ostane otvorena povodna.
     /// </summary>
     /// <returns><c>true</c>, ak sa banka otvorila.</returns>
     private bool PrepareGlobalData(string dirpath)
     {
-        if (GlobData.OpenedProject is not null && !Saved)
+        // zmeny na disku sa zahodia az pri naozajstnom otvoreni novej banky - pri chybe ostava povodna aj so zmenami
+        var discard = false;
+        if (_bank.Project is not null && !Saved)
         {
-            var result = Utils.ShowQuestion(Resources.FMain_Save_Changes, MessageBoxButtons.YesNoCancel);
+            var result = _dialogs.ShowQuestion(Resources.FMain_Save_Changes, MessageBoxButtons.YesNoCancel);
             switch (result)
             {
                 case DialogResult.Yes:
@@ -296,6 +299,7 @@ public partial class FMain : Form
                         return false;
                     break;
                 case DialogResult.No:
+                    discard = true;
                     break;
                 default:
                     return false;
@@ -303,16 +307,16 @@ public partial class FMain : Form
         }
 
         RawBankProject? project = null;
-        if (GlobData.Config.DebugModeGUI != DebugMode.AppCrash)
+        if (_bank.Config.DebugModeGUI != DebugMode.AppCrash)
             try
             {
-                project = GlobData.LoadProject(dirpath);
+                project = RawBankProject.Load(dirpath);
             }
             catch (Exception exception)
             {
                 Log.Exception(exception);
 
-                switch (GlobData.Config.DebugModeGUI)
+                switch (_bank.Config.DebugModeGUI)
                 {
                     case DebugMode.OnlyMessage:
                         FError.ShowError(exception.Message);
@@ -323,7 +327,7 @@ public partial class FMain : Form
                 }
             }
         else
-            project = GlobData.LoadProject(dirpath);
+            project = RawBankProject.Load(dirpath);
 
         if (project is null)
             return false;
@@ -340,13 +344,15 @@ public partial class FMain : Form
             lang = flang.Selected;
         }
 
-        GlobData.OpenedProject = project;
-        _newLanguages.Clear();
+        CloseBank(discard);
+        var leftovers = _bank.Open(project);
+        if (leftovers.Count > 0)
+            _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.FMain_JournalLeftovers, ListOf(leftovers)));
         dgvErrors.DataSource = null;
-        Text = @$"{Application.ProductName} - {GlobData.OpenedProject!.AbsPathToINISS}";
+        Text = @$"{Application.ProductName} - {_bank.Project!.AbsPathToINISS}";
 
         _langAlreadySet = true;
-        tscboxLanguages.ComboBox.DataSource = GlobData.OpenedProject!.Languages;
+        tscboxLanguages.ComboBox.DataSource = _bank.Project!.Languages;
         _langAlreadySet = false;
         SetComboLanguage(lang);
 
@@ -357,15 +363,15 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Otvori jazyk: zoznam zvukov a subory banky sa nacitaju na pozadi. Bez jazyka (banka nema ziadny) sa okno vycisti.
+    /// Otvori jazyk: zoznam zvukov a subory banky sa nacitaju na pozadi. Bez jazyka (banka nema ziadny) sa okno vycisti.
     /// </summary>
     private void LoadLanguage(FyzLanguage? lang)
     {
         CurrentLanguage = lang;
         _languageLoaded = false;
-        // prieskumnik sa nacitava znova - sleduje sa az po nacitani (bWorkerReadDat_RunWorkerCompleted)
+        // prieskumnik sa nacitava znova - sleduje sa az po nacitani (OnLanguageRead)
         fileSystemWatcher.EnableRaisingEvents = false;
-        SwitchLangSettingsButtons(true);
+        UpdateCommandStates();
 
         if (lang is null)
         {
@@ -373,8 +379,8 @@ public partial class FMain : Form
             return;
         }
 
-        // nacitava sa iny jazyk - po dokonceni sa nacita tento (bWorkerReadDat_RunWorkerCompleted)
-        if (bWorkerReadDat.IsBusy)
+        // nacitava sa iny jazyk - po dokonceni sa nacita tento (OnLanguageRead)
+        if (_readingLanguage)
         {
             _deferredFromUndoRedo = _inUndoRedo;
             return;
@@ -384,20 +390,20 @@ public partial class FMain : Form
         // kde plati stav v pamati, na ktory sa akcie odkazuju
         var keepMemory = _inUndoRedo || _deferredFromUndoRedo;
         _deferredFromUndoRedo = false;
-        var readFile = !_newLanguages.Contains(lang) && !(keepMemory && lang.Groups is not null);
+        var readFile = !_bank.IsNew(lang) && !(keepMemory && lang.Groups is not null);
         if (!readFile)
-            lang.Groups ??= new List<FyzGroup>();
+            lang.Groups ??= [];
 
         _loadingLanguage = lang;
         tscboxLanguages.Enabled = false;
         tspbProgress.Visible = true;
         tspbProgress.Style = ProgressBarStyle.Marquee;
-        ChangeStatus("Načítanie súborov banky");
-        bWorkerReadDat.RunWorkerAsync((lang, readFile));
+        ChangeStatus(Resources.FMain_Status_LoadingFiles);
+        ReadLanguage(lang, readFile);
     }
 
     /// <summary>
-    ///     Vymaze historiu zmien (akcie sa odkazuju na data jazyka, ktore sa znova nacitaju).
+    /// Vymaze historiu zmien (akcie sa odkazuju na data jazyka, ktore sa znova nacitaju).
     /// </summary>
     /// <param name="unsavedChanges">Ci ostali neulozene zmeny, ktore sa uz nedaju vratit (napr. zoznam jazykov).</param>
     private void ResetHistory(bool unsavedChanges)
@@ -410,23 +416,22 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Zisti, ci sa zoznam jazykov lisi od ulozeneho FYZBANK.DAT.
+    /// Zisti, ci sa zoznam jazykov lisi od ulozeneho FYZBANK.DAT.
     /// </summary>
-    private static bool LanguageListChanged()
-        => LanguageRules.BankDiffers(GlobData.OpenedProject!.AbsPathToBank, GlobData.OpenedProject.Languages);
+    private bool LanguageListChanged() => _bank.LanguageListChanged();
 
     /// <summary>
-    ///     Pred odchodom z otvoreneho jazyka sa spyta na neulozene zmeny jeho zoznamu zvukov:
-    ///     Ano ich ulozi, Nie zahodi (jazyk sa pri dalsom otvoreni nacita z disku).
+    /// Pred odchodom z otvoreneho jazyka sa spyta na neulozene zmeny jeho zoznamu zvukov:
+    /// Ano ich ulozi, Nie zahodi (jazyk sa pri dalsom otvoreni nacita z disku).
     /// </summary>
     /// <returns><c>false</c>, ak pouzivatel odchod zrusil.</returns>
     private bool ConfirmLeaveLanguage()
     {
         var lang = CurrentLanguage;
-        if (lang is null || !_languageLoaded || Saved || !LanguageRules.SoundsDiffer(GlobData.OpenedProject!.AbsPathToBank, lang))
+        if (lang is null || !_languageLoaded || Saved || !_bank.SoundsChanged(lang))
             return true;
 
-        var result = Utils.ShowQuestion($"Jazyk {lang.Name} má neuložené zmeny.\n\nUložiť ich pred prepnutím jazyka?", MessageBoxButtons.YesNoCancel);
+        var result = _dialogs.ShowQuestion(string.Format(CultureInfo.CurrentCulture, Resources.FMain_Language_Unsaved, lang.Name), MessageBoxButtons.YesNoCancel);
         switch (result)
         {
             case DialogResult.Yes:
@@ -440,12 +445,43 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Zahodi zoznam zvukov jazyka v pamati - pri dalsom otvoreni sa nacita z disku, novy jazyk bude prazdny.
+    /// Zahodi zmeny zvukov jazyka: jeho zmeny na disku sa vratia a zoznam zvukov sa pri dalsom otvoreni nacita
+    /// z disku, novy jazyk bude prazdny.
     /// </summary>
     private void DiscardLanguage(FyzLanguage lang)
     {
-        lang.Groups = _newLanguages.Contains(lang) ? new List<FyzGroup>() : null!;
+        List<string> errors = [];
+        WithoutFileWatcher(() => errors = _bank.DiscardLanguage(lang));
+        ReportRollbackErrors(errors);
     }
+
+    /// <summary>
+    /// Zatvori otvorenu banku: zmeny na disku potvrdi (ulozena banka), alebo ich pri zahodeni zmien vrati.
+    /// </summary>
+    private void CloseBank(bool discard)
+    {
+        if (_bank.Project is null)
+            return;
+
+        List<string> errors = [];
+        WithoutFileWatcher(() => errors = _bank.Close(discard));
+        if (discard)
+            ReportRollbackErrors(errors);
+        else if (errors.Count > 0)
+            _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.FMain_RecycleFailed, ListOf(errors)));
+    }
+
+    private void ReportRollbackErrors(List<string> errors)
+    {
+        if (errors.Count > 0)
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_RollbackFailed, ListOf(errors)));
+    }
+
+    /// <summary>
+    /// Zoznam poloziek do hlasenia - najviac 10 riadkov.
+    /// </summary>
+    private static string ListOf(IReadOnlyCollection<string> items)
+        => string.Join("\n", items.Take(10)) + (items.Count > 10 ? "\n" + string.Format(CultureInfo.CurrentCulture, Resources.Convert_More, items.Count - 10) : "");
 
     private void SetComboLanguage(FyzLanguage? lang)
     {
@@ -455,7 +491,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Naplní menu naposledy otvorenými projektmi zoradenými od naposledy otvoreného.
+    /// Naplní menu naposledy otvorenými projektmi zoradenými od naposledy otvoreného.
     /// </summary>
     private void SetRecentDirs()
     {
@@ -496,8 +532,12 @@ public partial class FMain : Form
 
         // Odstranit zvuky (bez potvrdenia) len v zozname zvukov - v zozname skupin alebo chyb by Del zmazal
         // zvuky, ktore pouzivatel prave nevidi vybrane
-        if (keyData == (Keys)GlobData.Config.Shortcuts.DeleteSounds && keyData != Keys.None && !dgvSounds.ContainsFocus)
+        if (keyData == _commands[RbeCommands.DeleteSounds.Id].ShortcutKeys && keyData != Keys.None && !dgvSounds.ContainsFocus)
             return false;
+
+        // skratky prikazov - funguju aj pri skrytej ponuke a pri polozkach kontextovych ponuk
+        if (_commands.ProcessShortcut(keyData))
+            return true;
 
         return base.ProcessCmdKey(ref msg, keyData);
     }
@@ -517,7 +557,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Otvorí projekt a zapíše ho do zoznamu naposledy otvorených projektov.
+    /// Otvorí projekt a zapíše ho do zoznamu naposledy otvorených projektov.
     /// </summary>
     /// <param name="dirpath">Cesta k priečinku s projektom.</param>
     private void OpenProject(string dirpath)
@@ -537,95 +577,101 @@ public partial class FMain : Form
         OpenProject(menuItem.Text!);
     }
 
-    private void DoOpenDir(object sender, EventArgs e)
+    private void DoOpenDir()
     {
-        var dialog = new FolderBrowserDialog { Description = "Vyberte priečinok s INISS.exe" };
+        var dialog = new FolderBrowserDialog { Description = Resources.FMain_Vyberte_priecinok_s_INISS };
         if (dialog.ShowDialog(this) == DialogResult.Cancel)
             return;
 
         OpenProject(dialog.SelectedPath);
     }
 
-    private void bWorkerReadDat_DoWork(object sender, DoWorkEventArgs e)
+    /// <summary>
+    /// Nacita jazyk na pozadi: subory banky, FYZZVUK.DAT (ak <paramref name="readFile" />) a ich spojenie.
+    /// Priebeh sa ukazuje v stavovom riadku, vysledok spracuje <see cref="OnLanguageRead" />.
+    /// </summary>
+    private async void ReadLanguage(FyzLanguage lang, bool readFile)
     {
-        //part 1 - read and analyze all files in rawbank
-        var progressFiles = new ProgressStatus("Načítavanie súborového systému", 0);
-        bWorkerReadDat.ReportProgress(-1, progressFiles);
-        Root = RawBankExplorer.ExploreFileSystem();
+        _readingLanguage = true;
+        var project = _bank.Project!;
+        var progress = new Progress<ProgressStatus>(ShowLoadProgress);
+        Exception? error = null;
+        try
+        {
+            Root = await Task.Run(() => ReadLanguage(project, lang, readFile, progress));
+        }
+        catch (Exception exception) when (_bank.Config.DebugModeGUI != DebugMode.AppCrash)
+        {
+            error = exception;
+        }
+        finally
+        {
+            _readingLanguage = false;
+        }
 
-        //part 2 - analyze FYZZVUK.dat file
-        var (lang, readFile) = ((FyzLanguage, bool))e.Argument!;
+        OnLanguageRead(error);
+    }
+
+    private static DirectoryElement ReadLanguage(RawBankProject project, FyzLanguage lang, bool readFile, IProgress<ProgressStatus> progress)
+    {
+        // subory banky
+        progress.Report(new ProgressStatus(Resources.FMain_Progress_FileSystem, 0));
+        var root = RawBankExplorer.ExploreFileSystem(project.AbsPathToBank);
+
+        // zoznam zvukov jazyka z FYZZVUK.DAT
         if (readFile)
-            RawBankParser.ReadFyzZvukFile(GlobData.OpenedProject!.AbsPathToBank, lang, bWorkerReadDat);
+            RawBankParser.ReadFyzZvukFile(project.AbsPathToBank, lang, progress);
 
-        //part 3 - merge physical files and logical data
-        var progressMerge = new ProgressStatus("Spájam načítané dáta so súborovým systémom", 0);
-        bWorkerReadDat.ReportProgress(-1, progressMerge);
-        RawBankExplorer.MergeFilesAndData(Root, lang, GlobData.OpenedProject!.Messages);
-
-        Invoke(() => _messages.Clear());
-
-        foreach (var msg in GlobData.OpenedProject!.Messages[lang])
-        {
-            Invoke(() => _messages.Add(msg));
-        }
+        // spojenie suborov so zoznamom zvukov
+        progress.Report(new ProgressStatus(Resources.FMain_Progress_Merging, 0));
+        RawBankExplorer.MergeFilesAndData(root, lang, project.Messages, project.AbsPathToBank);
+        return root;
     }
 
-    private void bWorkerReadDat_ProgressChanged(object sender, ProgressChangedEventArgs e)
+    private void ShowLoadProgress(ProgressStatus status)
     {
-        if (e.UserState != null)
+        if (status.TotalProgress < 1)
         {
-            var status = (ProgressStatus)e.UserState;
-            if (status.TotalProgress < 1)
-            {
-                tsslStatus.Text = status.ProgressPartName;
-                tspbProgress.Style = ProgressBarStyle.Marquee;
-            }
-            else
-            {
-                tspbProgress.Style = ProgressBarStyle.Continuous;
-                tspbProgress.Maximum = status.TotalProgress;
-                tspbProgress.Value = e.ProgressPercentage;
-                tsslStatus.Text = $@"{status.ProgressPartName} ({(int)(e.ProgressPercentage / (float)status.TotalProgress * 100)}%)";
-            }
-        }
-        else
-        {
+            tsslStatus.Text = status.ProgressPartName;
             tspbProgress.Style = ProgressBarStyle.Marquee;
-            if (e.ProgressPercentage < 0) 
-                tspbProgress.Value = e.ProgressPercentage;
+            return;
         }
+
+        tspbProgress.Style = ProgressBarStyle.Continuous;
+        tspbProgress.Maximum = status.TotalProgress;
+        tspbProgress.Value = Math.Clamp(status.Value, 0, status.TotalProgress);
+        tsslStatus.Text = $@"{status.ProgressPartName} ({(int)(status.Value / (float)status.TotalProgress * 100)}%)";
     }
 
-    private void bWorkerReadDat_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+    private void OnLanguageRead(Exception? error)
     {
         tspbProgress.Visible = false;
 
         // pocas nacitania sa otvoril iny jazyk (spat/znovu, odstranenie jazyka) - vysledok neplati, nacita sa ten
         if (!ReferenceEquals(_loadingLanguage, CurrentLanguage))
         {
-            if (e.Error != null && _loadingLanguage != null)
-                DiscardLanguage(_loadingLanguage);
+            if (error != null && _loadingLanguage != null)
+                _bank.ForgetLanguage(_loadingLanguage);
             _loadingLanguage = null;
             LoadLanguage(CurrentLanguage);
             return;
         }
 
-        if (GlobData.Config.DebugModeGUI != DebugMode.AppCrash && e.Error != null)
+        if (error != null)
         {
             // ciastocne nacitane skupiny sa nesmu zapisat cez Ulozit vsetko
-            DiscardLanguage(CurrentLanguage!);
-            Log.Exception(e.Error);
+            _bank.ForgetLanguage(CurrentLanguage!);
+            Log.Exception(error);
 
-            ChangeStatus("Vznikla chyba pri načítaní banky");
+            ChangeStatus(Resources.FMain_Status_LoadFailed);
 
-            switch (GlobData.Config.DebugModeGUI)
+            switch (_bank.Config.DebugModeGUI)
             {
                 case DebugMode.OnlyMessage:
-                    FError.ShowError(e.Error.Message);
+                    FError.ShowError(error.Message);
                     break;
                 case DebugMode.DetailInfo:
-                    FError.ShowError(e.Error.ToString());
+                    FError.ShowError(error.ToString());
                     break;
             }
 
@@ -634,6 +680,10 @@ public partial class FMain : Form
             ClearAfterLoadError();
             return;
         }
+
+        _messages.Clear();
+        foreach (var msg in _bank.Project!.Messages[CurrentLanguage!])
+            _messages.Add(msg);
 
         _languageLoaded = true;
         _programChange = true;
@@ -648,27 +698,10 @@ public partial class FMain : Form
             new MovePosition(GetSelectedSoundRows(), CurrentLanguage!, CurrentGroup!)));
 
         ChangeStatusReady();
-
-        SwitchAddSoundButtons(true);
-        SwitchRewriteModeButtons(true);
-        SwitchDeleteSoundsButtons(!dgvSounds.IsSelectionEmpty());
-        SwitchMoveSoundsButtons(!dgvSounds.IsSelectionEmpty());
-
-        SwitchAddGroupButtons(true);
-        SwitchEditGroupButtons(true);        
-        SwitchDeleteGroupButtons(true);
-        
-        SwitchLangSettingsButtons(true);
-        SwitchConvertSoundsLangButtons(true);
-        SwitchSearchButtons(true);
-
-        SwitchHighlightProblemButtons(true);
-        SwitchSolveProblemButtons(true);
-
-        SwitchSaveButtons(true);
+        UpdateCommandStates();
 
         dgvErrors.DataSource = _messages;
-        fileSystemWatcher.Path = GlobData.OpenedProject!.AbsPathToBank;
+        fileSystemWatcher.Path = _bank.PathToBank;
         fileSystemWatcher.EnableRaisingEvents = true;
     }
 
@@ -685,42 +718,29 @@ public partial class FMain : Form
         _messages.Clear();
         tscboxLanguages.Enabled = true;
 
-        SwitchAddSoundButtons(false);
-        SwitchRewriteModeButtons(false);
-        SwitchDeleteSoundsButtons(false);
-        SwitchMoveSoundsButtons(false);
-        SwitchAddGroupButtons(false);
-        SwitchEditGroupButtons(false);
-        SwitchDeleteGroupButtons(false);
-        SwitchConvertGroupButtons(false);
-        SwitchConvertSoundsLangButtons(false);
-        SwitchSearchButtons(false);
-        SwitchHighlightProblemButtons(false);
-        SwitchSolveProblemButtons(false);
-        SwitchSaveButtons(false);
-        // jazyk sa da odstranit alebo pridat iny; konverzia jazyka je vypnuta (_languageLoaded)
-        SwitchLangSettingsButtons(true);
+        // jazyk sa da odstranit alebo pridat iny; ukladanie a konverzia jazyka su vypnute (_languageLoaded)
+        UpdateCommandStates();
     }
 
     /// <summary>
-    ///     Banka nema ziadny jazyk: prazdne okno, dostupne je len pridanie jazyka a ulozenie zoznamu jazykov.
+    /// Banka nema ziadny jazyk: prazdne okno, dostupne je len pridanie jazyka a ulozenie zoznamu jazykov.
     /// </summary>
     private void ShowNoLanguage()
     {
         ClearAfterLoadError();
-        tscboxLanguages.Enabled = GlobData.OpenedProject!.Languages.Count > 0;
-        // FYZBANK.DAT sa da ulozit aj bez jazyka, napr. po odstraneni posledneho
-        SwitchSaveButtons(true);
+        tscboxLanguages.Enabled = _bank.Project!.Languages.Count > 0;
+        // FYZBANK.DAT sa da ulozit aj bez jazyka, napr. po odstraneni posledneho (CanSave)
+        UpdateCommandStates();
         tspbProgress.Visible = false;
-        ChangeStatus("Banka neobsahuje žiadny jazyk – pridajte ho cez Nastavenia jazykov");
+        ChangeStatus(Resources.FMain_Status_NoLanguage);
     }
 
     /// <summary>
-    ///     Vlozi jazyk do zoznamu jazykov banky bez prepnutia. V prazdnej banke sa jazyk rovno otvori.
+    /// Vlozi jazyk do zoznamu jazykov banky bez prepnutia. V prazdnej banke sa jazyk rovno otvori.
     /// </summary>
     internal void InsertLanguage(FyzLanguage language, int index)
     {
-        var languages = GlobData.OpenedProject!.Languages;
+        var languages = _bank.Project!.Languages;
         _langAlreadySet = true;
         languages.Insert(Math.Clamp(index, 0, languages.Count), language);
         _langAlreadySet = false;
@@ -735,15 +755,15 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Odstrani jazyk zo zoznamu jazykov banky. Ak bol otvoreny, jeho neulozene zmeny sa zahodia (novy jazyk si ich
-    ///     necha pre vratenie) a otvori sa jazyk na jeho mieste.
+    /// Odstrani jazyk zo zoznamu jazykov banky. Ak bol otvoreny, jeho neulozene zmeny sa zahodia (novy jazyk si ich
+    /// necha pre vratenie) a otvori sa jazyk na jeho mieste.
     /// </summary>
     /// <param name="language">Odstranovany jazyk.</param>
     /// <param name="next">Jazyk, ktory sa ma otvorit namiesto odstraneneho (ak je v banke), inak jazyk na jeho mieste.</param>
     /// <returns>Pozicia, na ktorej jazyk bol, alebo -1.</returns>
     internal int RemoveLanguage(FyzLanguage language, FyzLanguage? next = null)
     {
-        var languages = GlobData.OpenedProject!.Languages;
+        var languages = _bank.Project!.Languages;
         var index = languages.IndexOf(language);
         if (index < 0)
             return -1;
@@ -758,7 +778,7 @@ public partial class FMain : Form
             return index;
         }
 
-        if (!_newLanguages.Contains(language))
+        if (!_bank.IsNew(language))
             DiscardLanguage(language);
 
         if (next is null || !languages.Contains(next))
@@ -769,34 +789,44 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Presunie priecinok jazyka do kosa. Zmazanie sa v prieskumniku nespracuva - jazyk sa zaroven zatvara.
+    /// Odstrani priecinok jazyka (do Kosa pojde pri ulozeni). Zmazanie sa v prieskumniku nespracuva - jazyk sa
+    /// zaroven zatvara.
     /// </summary>
-    internal void DeleteLanguageDirectory(string directory)
+    /// <returns><see langword="false" />, ak sa priecinok nepodarilo odstranit.</returns>
+    internal bool DeleteLanguageDirectory(string directory)
     {
         if (!Directory.Exists(directory))
-            return;
+            return true;
 
-        var watching = fileSystemWatcher.EnableRaisingEvents;
-        fileSystemWatcher.EnableRaisingEvents = false;
-        RawBankExplorer.ConvertSoundIsHandled = true;
         try
         {
-            Utils.DeleteDirectoryToRecycleBin(directory, true);
+            WithoutFileWatcher(() => _bank.Journal.Delete(directory, null));
+            return true;
         }
-        finally
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
-            fileSystemWatcher.EnableRaisingEvents = watching;
-            // udalosti, ktore watcher zaradil do fronty okna este pred vypnutim, sa spracuju az po tomto
-            BeginInvoke(() => RawBankExplorer.ConvertSoundIsHandled = false);
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirDeleteFailed, directory, ex.Message));
+            return false;
         }
     }
 
     /// <summary>
-    ///     Obnovi zobrazenie jazyka v poli Jazyk po zmene nazvu.
+    /// Vrati odstraneny priecinok jazyka (zo zalohy zurnalu, po ulozeni z Kosa).
+    /// </summary>
+    internal void RestoreLanguageDirectory(string directory)
+    {
+        var restored = false;
+        WithoutFileWatcher(() => restored = _bank.Journal.Restore(directory, null));
+        if (!restored)
+            _dialogs.ShowError(Resources.Action_LanguageRestoreFailed);
+    }
+
+    /// <summary>
+    /// Obnovi zobrazenie jazyka v poli Jazyk po zmene nazvu.
     /// </summary>
     internal void RefreshLanguage(FyzLanguage language)
     {
-        var languages = GlobData.OpenedProject!.Languages;
+        var languages = _bank.Project!.Languages;
         var index = languages.IndexOf(language);
         if (index < 0)
             return;
@@ -808,8 +838,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Obnovi tabulku zvukov a pocty zvukov v skupinach po zmene zoznamu zvukov priamo vo FyzGroup.Sounds
-    ///     - BindingList MenuSounds (a dgvSounds.ResetBindings) o takej zmene nevie a riadky by ostali stare.
+    /// Obnovi tabulku zvukov a pocty zvukov v skupinach po zmene zoznamu zvukov priamo vo FyzGroup.Sounds
+    /// - BindingList MenuSounds (a dgvSounds.ResetBindings) o takej zmene nevie a riadky by ostali stare.
     /// </summary>
     internal void RefreshSoundViews()
     {
@@ -843,42 +873,22 @@ public partial class FMain : Form
 
     #region MainMenu
 
-    private void DoSave(object sender, EventArgs e) => SaveBank(false);
-
-    private void DoSaveAll(object sender, EventArgs e) => SaveBank(true);
-
     /// <summary>
-    ///     Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov,
-    ///     aby FYZBANK.DAT neodkazoval na chybajuci subor.
+    /// Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov,
+    /// aby FYZBANK.DAT neodkazoval na chybajuci subor, a potvrdi zmeny na disku.
     /// </summary>
     /// <returns><c>false</c>, ak zapis zlyhal - zmeny ostavaju neulozene.</returns>
     private bool SaveBank(bool allLanguages)
     {
-        var project = GlobData.OpenedProject!;
-        try
+        var result = _bank.Save(allLanguages, _languageLoaded ? CurrentLanguage : null);
+        if (!result.Saved)
         {
-            RawBankParser.WriteFyzBankFile(project.AbsPathToBank, project.Languages.ToList());
-
-            foreach (var lang in project.Languages)
-            {
-                // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
-                if (lang.Groups is null)
-                    continue;
-                if (!allLanguages && !_newLanguages.Contains(lang) && !(ReferenceEquals(lang, CurrentLanguage) && _languageLoaded))
-                    continue;
-
-                Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
-                RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
-                _newLanguages.Remove(lang);
-            }
-        }
-        catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
-        {
-            // napr. subor len na citanie, bez opravneni na zapis alebo otvoreny inym programom
-            Log.Exception(exception);
-            Utils.ShowError("Uloženie banky zlyhalo, zmeny ostali neuložené.\n\n" + exception.Message);
+            _dialogs.ShowError(result.Error!);
             return false;
         }
+
+        if (result.RecycleErrors.Count > 0)
+            _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.FMain_RecycleFailed, ListOf(result.RecycleErrors)));
 
         _unUndoableUnsavedChanges = false;
         changeManager.SetSavedState();
@@ -886,7 +896,7 @@ public partial class FMain : Form
         return true;
     }
 
-    private void DoUndo(object sender, EventArgs e)
+    private void DoUndo()
     {
         _inUndoRedo = true;
         try
@@ -900,7 +910,7 @@ public partial class FMain : Form
         EnableUndoRedo();
     }
 
-    private void DoRedo(object sender, EventArgs e)
+    private void DoRedo()
     {
         _inUndoRedo = true;
         try
@@ -914,17 +924,9 @@ public partial class FMain : Form
         EnableUndoRedo();
     }
 
-    private void EnableUndoRedo()
-    {
-        SwitchUndoButtons(changeManager.CanUndo);
-        SwitchRedoButtons(changeManager.CanRedo);
-    }
+    private void EnableUndoRedo() => UpdateCommandStates();
 
-    private void EnableGoBackForward()
-    {
-        SwitchGoBackButtons(moveManager.CanBackward);
-        SwitchGoForwardButtons(moveManager.CanForward);
-    }
+    private void EnableGoBackForward() => UpdateCommandStates();
 
     private void RefreshBackButtonDropDown()
     {
@@ -938,7 +940,7 @@ public partial class FMain : Form
             var item = new ToolStripMenuItem(action.CommandName);
             item.Tag = action;
             item.Click += ForwardButtonItemOnClick;
-            item.ForeColor = GlobData.UsingStyle.ControlsColorScheme.Button.ForeColor;
+            item.ForeColor = _bank.UsingStyle.ControlsColorScheme.Button.ForeColor;
             tsbGoBack.DropDownItems.Add(item);
         }
 
@@ -946,7 +948,7 @@ public partial class FMain : Form
         {
             var currentItem = new ToolStripMenuItem(moveManager.CurrentCommand.CommandName);
             currentItem.Checked = true;
-            currentItem.ForeColor = GlobData.UsingStyle.ControlsColorScheme.Button.ForeColor;
+            currentItem.ForeColor = _bank.UsingStyle.ControlsColorScheme.Button.ForeColor;
             tsbGoBack.DropDownItems.Add(currentItem);
         }
 
@@ -958,7 +960,7 @@ public partial class FMain : Form
             var item = new ToolStripMenuItem(action.CommandName);
             item.Tag = action;
             item.Click += BackButtonItemOnClick;
-            item.ForeColor = GlobData.UsingStyle.ControlsColorScheme.Button.ForeColor;
+            item.ForeColor = _bank.UsingStyle.ControlsColorScheme.Button.ForeColor;
             tsbGoBack.DropDownItems.Add(item);
         }
     }
@@ -990,32 +992,32 @@ public partial class FMain : Form
         RefreshBackButtonDropDown();
     }
 
-    private void DoGoBack(object sender, EventArgs e)
+    private void DoGoBack()
     {
         moveManager.Backward();
         EnableGoBackForward();
         RefreshBackButtonDropDown();
     }
 
-    private void DoGoForward(object sender, EventArgs e)
+    private void DoGoForward()
     {
         moveManager.Forward();
         EnableGoBackForward();
         RefreshBackButtonDropDown();
     }
 
-    private void DoSearch(object sender, EventArgs e)
+    private void DoSearch()
     {
-        var fsearch = new FSearch();
+        var fsearch = new FSearch(this);
         fsearch.Show(this);
     }
 
-    private void DoAddSound(object sender, EventArgs e)
+    private void DoAddSound()
     {
         if (CurrentGroup is null)
             return;
 
-        var form = new FAddSound(CurrentGroup);
+        var form = new FAddSound(CurrentGroup, _bank.PathToBank);
         if (form.ShowDialog(this) == DialogResult.OK)
         {
             MenuSounds.Add(form.Sound);
@@ -1024,7 +1026,7 @@ public partial class FMain : Form
         }
     }
 
-    private void DoDeleteSounds(object sender, EventArgs e)
+    private void DoDeleteSounds()
     {
         if (dgvSounds.IsSelectionEmpty() || dgvGroups.IsSelectionEmpty())
             return;
@@ -1050,7 +1052,7 @@ public partial class FMain : Form
         CheckProjectState();
     }
 
-    private void DoMoveSounds(object sender, EventArgs e)
+    private void DoMoveSounds()
     {
         if (dgvSounds.IsSelectionEmpty() || dgvGroups.IsSelectionEmpty())
             return;
@@ -1065,10 +1067,10 @@ public partial class FMain : Form
             return;
 
         var source = CurrentGroup!;
-        var problems = SoundRules.ValidateMove(sounds, form.NewGroup, GlobData.OpenedProject!.AbsPathToBank);
+        var problems = SoundRules.ValidateMove(sounds, form.NewGroup, _bank.PathToBank);
         if (problems.Count > 0)
         {
-            Utils.ShowError("Zvuky sa nepresunuli:\n\n" + string.Join("\n", problems.Take(10)));
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_SoundsNotMoved, string.Join("\n", problems.Take(10))));
             return;
         }
 
@@ -1078,14 +1080,14 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Presunie zvuky do skupiny <paramref name="target" />. Nahravka, ktora lezi priamo v priecinku skupiny,
-    ///     sa presunie do priecinka cielovej skupiny; nahravka s pridavnou cestou ostane na mieste a cesta sa
-    ///     prepocita voci novej skupine (INISS ju berie relativne k priecinku skupiny).
+    /// Presunie zvuky do skupiny <paramref name="target" />. Nahravka, ktora lezi priamo v priecinku skupiny,
+    /// sa presunie do priecinka cielovej skupiny; nahravka s pridavnou cestou ostane na mieste a cesta sa
+    /// prepocita voci novej skupine (INISS ju berie relativne k priecinku skupiny).
     /// </summary>
     /// <returns>Zvuky, ktore sa presunuli - pri chybe suboru sa presun zastavi a zvysne ostanu na mieste.</returns>
     internal List<FyzSound> MoveSoundsToGroup(IList<FyzSound> sounds, FyzGroup target)
     {
-        var pathToBank = GlobData.OpenedProject!.AbsPathToBank;
+        var pathToBank = _bank.PathToBank;
         var targetDir = target.GetAbsPath(pathToBank);
         var moved = new List<FyzSound>();
 
@@ -1101,7 +1103,7 @@ public partial class FMain : Form
                 var newPath = Path.Combine(targetDir, sound.FileName);
 
                 if (moveFile)
-                    File.Move(sourcePath, newPath);
+                    _bank.Journal.Move(sourcePath, newPath, target.Language);
 
                 sound.Group.Sounds.Remove(sound);
                 sound.Group = target;
@@ -1124,7 +1126,7 @@ public partial class FMain : Form
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
             Log.Exception(exception);
-            Utils.ShowError($"Presun zvukov sa zastavil – presunulo sa {moved.Count} z {sounds.Count}.\n\n{exception.Message}");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_MoveStopped, moved.Count, sounds.Count, exception.Message));
         }
         finally
         {
@@ -1139,7 +1141,7 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Presunie prvok suboru v strome prieskumnika do ineho priecinka (subor na disku uz je presunuty).
+    /// Presunie prvok suboru v strome prieskumnika do ineho priecinka (subor na disku uz je presunuty).
     /// </summary>
     private static void MoveFileElement(SoundFileElement file, DirectoryElement? target, string newPath)
     {
@@ -1151,30 +1153,27 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Prida prazdny jazyk (s priecinkom v RAWBANK) a otvori ho. FYZBANK.DAT a jeho FYZZVUK.DAT sa zapisu pri ulozeni.
-    ///     Ak v priecinku FYZZVUK.DAT uz je, jazyk sa nacita z neho.
+    /// Prida prazdny jazyk (s priecinkom v RAWBANK) a otvori ho. FYZBANK.DAT a jeho FYZZVUK.DAT sa zapisu pri ulozeni.
+    /// Ak v priecinku FYZZVUK.DAT uz je, jazyk sa nacita z neho.
     /// </summary>
-    private void DoAddLanguage(object sender, EventArgs e)
+    private void DoAddLanguage()
     {
-        var project = GlobData.OpenedProject!;
+        var project = _bank.Project!;
         var form = new FAddEditLanguage(project.Languages);
         if (form.ShowDialog(this) != DialogResult.OK || !ConfirmLeaveLanguage())
             return;
 
-        var lang = new FyzLanguage(form.LanguageKey, form.LanguageName, form.LanguageRelativePath) { Groups = new List<FyzGroup>() };
+        var lang = new FyzLanguage(form.LanguageKey, form.LanguageName, form.LanguageRelativePath) { Groups = [] };
         var directory = Path.TrimEndingDirectorySeparator(lang.GetAbsPath(project.AbsPathToBank));
         string? createdDirectory = null;
         try
         {
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
+            if (_bank.Journal.CreateDirectory(directory, null))
                 createdDirectory = directory;
-            }
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError($"Priečinok jazyka {directory} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirFailed, directory, ex.Message));
             return;
         }
 
@@ -1184,7 +1183,7 @@ public partial class FMain : Form
         if (File.Exists(LanguageRules.SoundsFile(project.AbsPathToBank, lang)))
             lang.Groups = null!;
         else
-            _newLanguages.Add(lang);
+            _bank.MarkNew(lang);
         var previous = CurrentLanguage;
         var index = project.Languages.Count;
         InsertLanguage(lang, index);
@@ -1198,10 +1197,10 @@ public partial class FMain : Form
         RegisterNewAction(new AddLanguageAction(this, lang, index, previous, createdDirectory));
     }
 
-    private void DoEditLanguage(object sender, EventArgs e)
+    private void DoEditLanguage()
     {
         var language = CurrentLanguage!;
-        var form = new FAddEditLanguage(GlobData.OpenedProject!.Languages, language);
+        var form = new FAddEditLanguage(_bank.Project!.Languages, language);
         if (form.ShowDialog(this) != DialogResult.OK)
             return;
 
@@ -1214,47 +1213,47 @@ public partial class FMain : Form
             RegisterNewAction(action);
     }
 
-    private void DoDeleteLanguage(object sender, EventArgs e)
+    private void DoDeleteLanguage()
     {
-        var result = Utils.ShowWarning("Práve vybraný jazyk sa odstráni.\n\nSte si istý?", MessageBoxButtons.YesNo);
+        var result = _dialogs.ShowWarning(Resources.FMain_DeleteLanguage, MessageBoxButtons.YesNo);
         if (result != DialogResult.Yes)
             return;
 
-        result = Utils.ShowWarning("Vymazať aj priečinok so zvukmi jazyka?\n\nPriečinok sa premiestni do koša.", MessageBoxButtons.YesNoCancel);
+        result = _dialogs.ShowWarning(Resources.FMain_DeleteLanguageDir, MessageBoxButtons.YesNoCancel);
         if (result == DialogResult.Cancel)
             return;
 
         var language = CurrentLanguage!;
         var withData = result == DialogResult.Yes;
-        var directory = Path.TrimEndingDirectorySeparator(language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+        var directory = Path.TrimEndingDirectorySeparator(language.GetAbsPath(_bank.PathToBank));
 
-        // neulozene zmeny zvukov odstraneneho jazyka sa zahodia, zmeny zoznamu jazykov ostavaju neulozene
+        // neulozene zmeny zvukov odstraneneho jazyka sa zahodia (aj na disku), zmeny zoznamu jazykov ostavaju neulozene
         var listChanged = LanguageListChanged();
+        if (!_bank.IsNew(language))
+            DiscardLanguage(language);
         // priecinok sa maze skor, ako sa zacne nacitavat dalsi jazyk (prehliadanie suborov banky na pozadi)
-        if (withData)
-            DeleteLanguageDirectory(directory);
+        if (withData && !DeleteLanguageDirectory(directory))
+            withData = false;
         var index = RemoveLanguage(language);
 
         ResetHistory(listChanged);
         RegisterNewAction(new RemoveLanguageAction(this, language, index, directory, withData));
     }
 
-    private void ShowAppSettings(object sender, EventArgs e)
+    private void ShowAppSettings()
     {
-        var form = new FAppSettings(GlobData.Config, GlobData.Styles);
+        var form = new FAppSettings(_bank.Session);
         if (form.ShowDialog() == DialogResult.OK)
         {
             UpdateMainUI();
         }
     }
 
-    private void ShowInfoApp(object sender, EventArgs e)
+    private void ShowInfoApp()
     {
         var form = new FAboutApp(Resources.AboutAppDescription, Resources.raw);
         form.ShowDialog();
     }
-
-    private void ShowUpdates(object sender, EventArgs e) => Utils.OpenShell(LinkConsts.UPDATE);
 
     private void RewriteModeChanged(object sender, EventArgs e)
     {
@@ -1273,9 +1272,9 @@ public partial class FMain : Form
         else if (sender == tsbWrapTextSoundCol)
             tsmimWrapTextSoundCol.Checked = tsbWrapTextSoundCol.Checked;
 
-        GlobData.Config.WrapSoundText = tsmimWrapTextSoundCol.Checked;
+        _bank.Config.WrapSoundText = tsmimWrapTextSoundCol.Checked;
         var configsDir = ToolsCore.AppPaths.ConfigDir;
-        XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
         SetSoundTextColumn();
     }
 
@@ -1291,22 +1290,22 @@ public partial class FMain : Form
         }
     }
 
-    private void DoFindProblem(object sender, EventArgs e)
+    private void DoFindProblem()
     {
         if (dgvErrors.IsSelectionEmpty())
             return;
 
         var problem = (IRawBankMessage)dgvErrors.SelectedRows[0].DataBoundItem!;
-        problem.Show();
+        problem.Show(this);
     }
 
-    private void DoSolveProblem(object sender, EventArgs e)
+    private void DoSolveProblem()
     {
         if (dgvErrors.IsSelectionEmpty())
             return;
 
         var problem = (IRawBankMessage)dgvErrors.SelectedRows[0].DataBoundItem!;
-        problem.Resolve();
+        problem.Resolve(this);
         CheckProjectState();
     }
 
@@ -1314,7 +1313,7 @@ public partial class FMain : Form
 
     #region ExplorerPanel
 
-    private void DoOpenFileInExplorer(object sender, EventArgs e)
+    private void DoOpenFileInExplorer()
     {
         if (dgvExplorer.IsSelectionEmpty())
             return;
@@ -1338,7 +1337,7 @@ public partial class FMain : Form
         }
     }
 
-    private void DoPlayFile(object sender, EventArgs e)
+    private void DoPlayFile()
     {
         if (dgvExplorer.IsSelectionEmpty())
             return;
@@ -1384,7 +1383,7 @@ public partial class FMain : Form
             return;
         
         _actualStatusTxt = tsslStatus.Text!;
-        tsslStatus.Text = "Otváram skupinu zvukov";
+        tsslStatus.Text = Resources.FMain_Status_OpeningGroup;
         tsslStatus.Invalidate();
         tspbProgress.Visible = true;
         tspbProgress.Style = ProgressBarStyle.Marquee;
@@ -1417,7 +1416,7 @@ public partial class FMain : Form
         tspbProgress.Visible = false;
         tsslStatus.Text = _actualStatusTxt;
 
-        SwitchConvertGroupButtons(!dgvGroups.IsSelectionEmpty());
+        UpdateCommandStates();
     }
 
     private void dgvSounds_SelectionChanged(object sender, EventArgs e)
@@ -1425,8 +1424,7 @@ public partial class FMain : Form
         if (_doNotChangeExplorerSelection || _selectingMoreRows || DoNotChangeSoundsSelection)
             return;
 
-        SwitchDeleteSoundsButtons(!dgvSounds.IsSelectionEmpty());
-        SwitchMoveSoundsButtons(!dgvSounds.IsSelectionEmpty());
+        UpdateCommandStates();
 
         var rows = GetSelectedSoundRows();
         if (rows.Length == 0)
@@ -1477,7 +1475,7 @@ public partial class FMain : Form
     {
         var count = dgvSounds.SelectedRows.Count;
         if (count == 0 || _programChange)
-            return Array.Empty<FyzSound>();
+            return [];
 
         var rows = new FyzSound[count];
 
@@ -1498,173 +1496,6 @@ public partial class FMain : Form
 
     #endregion //SelectionManagement
 
-    #region SwitchButtons
-
-    private void SwitchGoBackButtons(bool enabled)
-    {
-        tsbGoBack.Enabled = enabled;
-        tsmimGoBack.Enabled = enabled;
-    }
-
-    private void SwitchGoForwardButtons(bool enabled)
-    {
-        tsbGoForward.Enabled = enabled;
-        tsmimGoForward.Enabled = enabled;
-    }
-
-    private void SwitchUndoButtons(bool enabled)
-    {
-        tsbUndo.Enabled = enabled;
-        tsmimUndo.Enabled = enabled;
-    }
-
-    private void SwitchRedoButtons(bool enabled)
-    {
-        tsbRedo.Enabled = enabled;
-        tsmimRedo.Enabled = enabled;
-    }
-
-    private void SwitchSaveButtons(bool enabled)
-    {
-        tsbSave.Enabled = enabled;
-        tsmimSave.Enabled = enabled;
-        tsbSaveAll.Enabled = enabled;
-        tsmimSaveAll.Enabled = enabled;
-    }
-
-    private void SwitchLangSettingsButtons(bool enabled)
-    {
-        tsbLangsSettings.Enabled = enabled;
-        tsmimLangsSettings.Enabled = enabled;
-        tsmimAddLanguage.Enabled = enabled;
-        tsmiAddLanguage.Enabled = enabled;
-        tsmimEditLanguage.Enabled = enabled && CurrentLanguage != null;
-        tsmiEditLanguage.Enabled = enabled && CurrentLanguage != null;
-        tsmimDeleteLanguage.Enabled = enabled && CurrentLanguage != null;
-        tsmiDeleteLanguage.Enabled = enabled && CurrentLanguage != null;
-        // konverzia prechadza skupiny jazyka - len nacitany jazyk
-        var convert = enabled && CurrentLanguage != null && _languageLoaded;
-        tsmimConvertLangToEwa.Enabled = convert;
-        tsmimConvertLangToWav.Enabled = convert;
-        tsmiConvertLangToEwa.Enabled = convert;
-        tsmiConvertLangToWav.Enabled = convert;
-    }
-
-    private void SwitchConvertSoundsLangButtons(bool enabled)
-    {
-        tsbConvertSoundsToEwa.Enabled = enabled;
-        tsbConvertSoundsToWav.Enabled = enabled;
-        cmiConvertSoundsToEwa.Enabled = enabled;
-        cmiConvertSoundsToWav.Enabled = enabled;
-        tsmimConvertSoundsToEwa.Enabled = enabled;
-        tsmimConvertSoundsToWav.Enabled = enabled;
-    }
-
-    private void SwitchSearchButtons(bool enabled)
-    {
-        tsbSearch.Enabled = enabled;
-        tsmimSearch.Enabled = enabled;
-    }
-
-    private void SwitchAddSoundButtons(bool enabled)
-    {
-        tsbAddSound.Enabled = enabled;
-        tsmimAddSound.Enabled = enabled;
-        cmiAddSound.Enabled = enabled;
-    }
-
-    private void SwitchDeleteSoundsButtons(bool enabled)
-    {
-        tsbDeleteSound.Enabled = enabled;
-        tsmimDeleteSound.Enabled = enabled;
-        cmiDeleteSound.Enabled = enabled;        
-    }
-
-    private void SwitchMoveSoundsButtons(bool enabled)
-    {
-        tsbMoveSounds.Enabled = enabled;
-        tsmimMoveSounds.Enabled = enabled;
-        cmiMoveSounds.Enabled = enabled;
-    }
-
-    private void SwitchRewriteModeButtons(bool enabled)
-    {
-        tsbRewriteMode.Enabled = enabled;
-        tsmimRewriteMode.Enabled = enabled;
-    }
-
-    private void SwitchAddGroupButtons(bool enabled)
-    {
-        tsbAddGroup.Enabled = enabled;
-        cmiAddGroup.Enabled = enabled;
-    }
-
-    private void SwitchEditGroupButtons(bool enabled)
-    {
-        tsbEditGroup.Enabled = enabled;
-        cmiEditGroup.Enabled = enabled;
-    }
-
-    private void SwitchDeleteGroupButtons(bool enabled)
-    {
-        tsbDeleteGroup.Enabled = enabled;
-        cmiDeleteGroup.Enabled = enabled;        
-    }
-
-    private void SwitchConvertGroupButtons(bool enabled)
-    {
-        tsbConvertGroupToEwa.Enabled = enabled;
-        cmiConvertGroupToEwa.Enabled = enabled;
-        tsbConvertGroupToWav.Enabled = enabled;
-        cmiConvertGroupToWav.Enabled = enabled;
-    }
-
-    private void SwitchOpenInExplorerButtons(bool enabled)
-    {
-        tsbOpenInExplorer.Enabled = enabled;
-        cmiOpenInExplorer.Enabled = enabled;
-    }
-
-    private void SwitchPlayButtons(bool enabled)
-    {
-        tsbPlay.Enabled = enabled;
-        cmiPlay.Enabled = enabled;
-    }
-
-    private void SwitchRenameFileDirButtons(bool enabled)
-    {
-        tsbRenameFileDir.Enabled = enabled;
-        cmiRenameFileDir.Enabled = enabled;
-    }
-
-    private void SwitchDeleteFileDirButtons(bool enabled)
-    {
-        tsbDeleteFileDir.Enabled = enabled;
-        cmiDeleteFileDir.Enabled = enabled;
-    }
-
-    private void SwitchConvertFileButtons(bool enabled)
-    {
-        tsbConvertFilesToEwa.Enabled = enabled;
-        cmiConvertToEwaFile.Enabled = enabled;
-        tsbConvertFilesToWav.Enabled = enabled;
-        cmiConvertToWavFile.Enabled = enabled;
-    }
-
-    private void SwitchHighlightProblemButtons(bool enabled)
-    {
-        tsbHighlightProblem.Enabled = enabled;
-        cmiHighlightProblem.Enabled = enabled;        
-    }
-
-    private void SwitchSolveProblemButtons(bool enabled)
-    {
-        tsbResolveProblem.Enabled = enabled;
-        cmiResolveProblem.Enabled = enabled;        
-    }
-
-    #endregion
-
     private void mmErrors_Click(object sender, EventArgs e) => splitSoundsErrors.Panel2Collapsed = true;
 
     private void tssbErrors_Click(object sender, EventArgs e) => splitSoundsErrors.Panel2Collapsed = !splitSoundsErrors.Panel2Collapsed;
@@ -1673,27 +1504,38 @@ public partial class FMain : Form
 
     private void FMain_FormClosing(object sender, FormClosingEventArgs e)
     {
-        if (GlobData.OpenedProject is null || Saved) 
+        if (_bank.Project is null)
             return;
 
-        var result = Utils.ShowQuestion(Resources.FMain_Save_Changes, MessageBoxButtons.YesNoCancel);
-        switch (result)
+        var discard = false;
+        if (!Saved)
         {
-            case DialogResult.Yes:
-                // neuspesne ulozenie okno nezatvori - zmeny by sa stratili
-                e.Cancel = !SaveBank(false);
-                break;
-            case DialogResult.No:
-                e.Cancel = false;
-                break;
-            default:
-                e.Cancel = true;
-                break;
+            var result = _dialogs.ShowQuestion(Resources.FMain_Save_Changes, MessageBoxButtons.YesNoCancel);
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    // neuspesne ulozenie okno nezatvori - zmeny by sa stratili
+                    if (!SaveBank(false))
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                    break;
+                case DialogResult.No:
+                    discard = true;
+                    break;
+                default:
+                    e.Cancel = true;
+                    return;
+            }
         }
+
+        // zahodenie vrati disk do stavu posledneho ulozenia, inak sa zmeny na disku potvrdia
+        CloseBank(discard);
     }
 
     /// <summary>
-    ///     Mala ikona systemu ako obrazok - vytvara sa raz, nie pri kazdom vykresleni bunky.
+    /// Mala ikona systemu ako obrazok - vytvara sa raz, nie pri kazdom vykresleni bunky.
     /// </summary>
     private static Bitmap StockIcon(ShellIconType type)
     {
@@ -1767,7 +1609,7 @@ public partial class FMain : Form
         if (RawBankExplorer.ConvertSoundIsHandled || RawBankExplorer.MovingSoundIsHandled)
             return;
 
-        var newElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, RawBankExplorer.SearchOperation.Create);
+        var newElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, _bank.PathToBank, RawBankExplorer.SearchOperation.Create);
 
         // subor sa vratil (napr. obnovenim z kosa) - patri zvuku, ktory ho ma v nazve suboru
         var owner = newElement is SoundFileElement returned && returned.Parent?.Group is { } ownerGroup
@@ -1778,7 +1620,7 @@ public partial class FMain : Form
         {
             RelinkSoundFile(owner);
         }
-        else if (newElement is SoundFileElement sfe && GlobData.Config.AutoInsertSoundData && sfe.Parent?.Group is not null)
+        else if (newElement is SoundFileElement sfe && _bank.Config.AutoInsertSoundData && sfe.Parent?.Group is not null)
         {
             var nameWoExt = Path.GetFileNameWithoutExtension(sfe.Name);
             var alreadyDefinedSound = sfe.Parent.Group.Sounds.FirstOrDefault(s => SoundRules.SameText(s.Key, nameWoExt) && s.File == null);
@@ -1791,7 +1633,7 @@ public partial class FMain : Form
                 alreadyDefinedSound.FileName = sfe.Name;
                 alreadyDefinedSound.AdditionalRelativePath = "";
                 sfe.Duration = await SoundUtils.GetSoundDuration(sfe);
-                if (GlobData.Config.AutoRecalculateSoundDuration && sfe.Duration >= 0)
+                if (_bank.Config.AutoRecalculateSoundDuration && sfe.Duration >= 0)
                     alreadyDefinedSound.Duration = sfe.Duration;
             }
             else
@@ -1802,9 +1644,9 @@ public partial class FMain : Form
                     File = sfe
                 };
                 sfe.Sound = sound;
-                if (GlobData.Config.ShowAfterInsertSoundDialog)
+                if (_bank.Config.ShowAfterInsertSoundDialog)
                 {
-                    FAfterInsertSounds.CreateOrUseExistingForm(sound);
+                    FAfterInsertSounds.CreateOrUseExistingForm(this, sound);
                 }
                 else if (SoundRules.ValidateNew([sound]).Count > 0)
                 {
@@ -1814,7 +1656,7 @@ public partial class FMain : Form
                 }
                 else
                 {
-                    Program.MainForm.RegisterNewAction(new AddSoundAction(Program.MainForm, sound));
+                    RegisterNewAction(new AddSoundAction(this, sound));
                     sound.Group.Sounds.Add(sound);
                     RefreshSoundViews();
                 }
@@ -1838,7 +1680,7 @@ public partial class FMain : Form
         if (RawBankExplorer.ConvertSoundIsHandled || RawBankExplorer.MovingSoundIsHandled)
             return;
 
-        RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, RawBankExplorer.SearchOperation.Delete);
+        RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, _bank.PathToBank, RawBankExplorer.SearchOperation.Delete);
 
         if (e.FullPath.StartsWith(CurrentDirectory.DirInfo.FullName, StringComparison.OrdinalIgnoreCase))
             FillExplorerList(CurrentDirectory);
@@ -1854,7 +1696,7 @@ public partial class FMain : Form
         if (CurrentLanguage?.Directory is null)
             return;
 
-        var fileElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory);
+        var fileElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, _bank.PathToBank);
         switch (fileElement)
         {
             case null:
@@ -1867,7 +1709,7 @@ public partial class FMain : Form
                     return;
                 sfe.FileInfo = new FileInfo(e.FullPath);
                 sfe.Duration = await SoundUtils.GetSoundDuration(sfe);
-                if (GlobData.Config.AutoRecalculateSoundDuration && sfe.Sound is not null)
+                if (_bank.Config.AutoRecalculateSoundDuration && sfe.Sound is not null)
                     sfe.Sound.Duration = sfe.Duration;
                 break;
             case FileElement fe:
@@ -1922,7 +1764,7 @@ public partial class FMain : Form
             sfe.Sound = snd;
 
             // pridavna cesta je v INISS relativna k priecinku skupiny (napr. ..\Poz1\), subor priamo v nom ju nema
-            snd.AdditionalRelativePath = SoundRules.AdditionalPathFor(snd.Group, sfe.FileInfo.DirectoryName!, GlobData.OpenedProject!.AbsPathToBank);
+            snd.AdditionalRelativePath = SoundRules.AdditionalPathFor(snd.Group, sfe.FileInfo.DirectoryName!, _bank.PathToBank);
 
             // prepisovaci mod nema akciu spat - zmena sa aspon oznaci ako neulozena
             RegisterNewAction();
@@ -1956,9 +1798,9 @@ public partial class FMain : Form
     private void dgvSounds_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
     {
         var newAdditionalPath = (string)dgvSounds.Rows[e.RowIndex].Cells[nameof(cSoundAdditionalRelativePath)].Value!;
-        if (!string.IsNullOrEmpty(newAdditionalPath) && (!newAdditionalPath.EndsWith("\\") || string.IsNullOrWhiteSpace(newAdditionalPath)))
+        if (!string.IsNullOrEmpty(newAdditionalPath) && (!newAdditionalPath.EndsWith('\\') || string.IsNullOrWhiteSpace(newAdditionalPath)))
         {
-            Utils.ShowError("Prídavná relatívna cesta musí končiť '\\' a nesmie obsahovať iba prázdne znaky.");
+            _dialogs.ShowError(Resources.FMain_InvalidRelativePath);
             e.Cancel = true;
             dgvSounds.Rows[e.RowIndex].Cells[nameof(cSoundAdditionalRelativePath)].Value = "";
             return;
@@ -1966,7 +1808,7 @@ public partial class FMain : Form
         ValidateRow(e.RowIndex, true);
     }
 
-    private void dgvSounds_DataError(object sender, DataGridViewDataErrorEventArgs e) => Utils.ShowError("Tabuľka obsahuje nesprávny údaj: " + e.Exception!.Message);
+    private void dgvSounds_DataError(object sender, DataGridViewDataErrorEventArgs e) => _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_GridDataError, e.Exception!.Message));
 
     private void dgvSounds_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
     {
@@ -1976,8 +1818,8 @@ public partial class FMain : Form
     }
 
     /// <summary>
-    ///     Prepoji zvuk so suborom podla jeho nazvu suboru a pridavnej cesty (po uprave v tabulke, spat a znovu)
-    ///     a zisti dlzku nahravky. Povodny subor ostane bez udajov o zvuku.
+    /// Prepoji zvuk so suborom podla jeho nazvu suboru a pridavnej cesty (po uprave v tabulke, spat a znovu)
+    /// a zisti dlzku nahravky. Povodny subor ostane bez udajov o zvuku.
     /// </summary>
     internal async void RelinkSoundFile(FyzSound sound)
     {
@@ -1985,7 +1827,7 @@ public partial class FMain : Form
             sound.File.Sound = null!;
         sound.File = null!;
 
-        var sfe = SoundUtils.FindSoundFile(sound, GlobData.OpenedProject!.AbsPathToBank);
+        var sfe = SoundUtils.FindSoundFile(sound, _bank.PathToBank);
         if (sfe is null)
             return;
 
@@ -1993,13 +1835,13 @@ public partial class FMain : Form
         sfe.Sound = sound;
         if (sfe.Duration < 0)
             sfe.Duration = await SoundUtils.GetSoundDuration(sfe);
-        if (GlobData.Config.AutoRecalculateSoundDuration && sfe.Duration >= 0)
+        if (_bank.Config.AutoRecalculateSoundDuration && sfe.Duration >= 0)
             sound.Duration = sfe.Duration;
         CheckProjectState();
     }
 
     /// <summary>
-    ///     Kluc a nazov zvuku su povinne a v skupine jedinecne - rovnako ako v okne Pridat zvuk.
+    /// Kluc a nazov zvuku su povinne a v skupine jedinecne - rovnako ako v okne Pridat zvuk.
     /// </summary>
     private void DgvSounds_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
     {
@@ -2014,19 +1856,19 @@ public partial class FMain : Form
         var isKey = column == nameof(cSoundKey);
         string? error = null;
         if (string.IsNullOrWhiteSpace(value))
-            error = isKey ? "Kľúč zvuku je povinný." : "Názov zvuku je povinný.";
+            error = isKey ? Resources.FMain_SoundKeyRequired : Resources.FMain_SoundNameRequired;
         else if (sound.Group.Sounds.Any(s => s != sound && SoundRules.SameText(isKey ? s.Key : s.Name, value)))
-            error = isKey ? $"Kľúč {value} už v skupine {sound.Group.Name} existuje." : $"Názov {value} už v skupine {sound.Group.Name} existuje.";
+            error = string.Format(CultureInfo.CurrentCulture, isKey ? Resources.SoundRules_KeyExists : Resources.SoundRules_NameExists, value, sound.Group.Name);
 
         if (error is null)
             return;
 
-        Utils.ShowError(error + "\n\nOpravte hodnotu alebo úpravu zrušte klávesom Esc.");
+        _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_FixValueOrEsc, error));
         e.Cancel = true;
     }
 
     /// <summary>
-    ///     Kazda upravena bunka je samostatny krok Spat - so stlpcom a hodnotou prave tejto bunky.
+    /// Kazda upravena bunka je samostatny krok Spat - so stlpcom a hodnotou prave tejto bunky.
     /// </summary>
     private void dgvSounds_CellEndEdit(object sender, DataGridViewCellEventArgs e)
     {
@@ -2078,7 +1920,7 @@ public partial class FMain : Form
             e.Value = item switch
             {
                 SoundFileElement se => se.DurationText,
-                DirectoryElement de => de.Children.Count+ " položiek",
+                DirectoryElement de => string.Format(CultureInfo.CurrentCulture, Resources.FMain_ItemCount, de.Children.Count),
                 _ => null
             };
         }
@@ -2086,33 +1928,7 @@ public partial class FMain : Form
 
     private void dgvExplorer_SelectionChanged(object sender, EventArgs e)
     {
-        if (dgvExplorer.SelectedRows.Count == 1)
-        {
-            var item = dgvExplorer.SelectedRows[0].DataBoundItem;
-
-            SwitchOpenInExplorerButtons(true);
-            SwitchPlayButtons(item is SoundFileElement);
-            SwitchRenameFileDirButtons(item is not BackButtonElement);
-            SwitchDeleteFileDirButtons(item is not BackButtonElement);
-            SwitchConvertFileButtons(item is SoundFileElement);
-        }
-        else if (dgvExplorer.IsSelectionEmpty())
-        {
-            SwitchOpenInExplorerButtons(false);
-            SwitchPlayButtons(false);
-            SwitchRenameFileDirButtons(false);
-            SwitchDeleteFileDirButtons(false);
-            SwitchConvertFileButtons(false);
-        }
-        else
-        {
-            var containsBackBtn = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().FirstOrDefault(r => r.DataBoundItem == _explorerBack) != null;
-            SwitchOpenInExplorerButtons(true);
-            SwitchPlayButtons(false);
-            SwitchRenameFileDirButtons(false);
-            SwitchDeleteFileDirButtons(!containsBackBtn);
-            SwitchConvertFileButtons(true);
-        }
+        UpdateCommandStates();
     }
 
     private async void ValidateRow(int row, bool userEditing = false)
@@ -2124,12 +1940,12 @@ public partial class FMain : Form
         var newFileName = (string)dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].Value!;
         var sound = (FyzSound)dgvSounds.Rows[row].DataBoundItem!;
 
-        if (string.IsNullOrWhiteSpace(newFileName) || !Utils.IsFileNameCorrect(sound.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank), newFileName, false))
+        if (string.IsNullOrWhiteSpace(newFileName) || !Utils.IsFileNameCorrect(sound.GetAbsPath(_bank.PathToBank), newFileName, false))
         {
             if (sound.File is not null)
                 sound.File.Sound = null!;
             sound.File = null!;
-            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = "Neplatný názov súboru";
+            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = Resources.FMain_InvalidFileName;
             return;
         }
 
@@ -2142,19 +1958,19 @@ public partial class FMain : Form
 
             var ext = Path.GetExtension(newFileName);
             dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText =
-                ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)
-                    ? "Súbor zvuku v priečinku neexistuje"
-                    : "Neplatný typ súboru";
+                ext.EqualsIgnoreCase(SoundUtils.WAVExt) || ext.EqualsIgnoreCase(SoundUtils.EWAExt)
+                    ? Resources.FMain_SoundFileMissing
+                    : Resources.FMain_InvalidFileType;
             return;
         }
 
         if (sound.File == null || !sound.File.FileInfo.Exists)
         {
-            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = "Súbor zvuku v priečinku neexistuje";
+            dgvSounds.Rows[row].Cells[nameof(cSoundFileName)].ErrorText = Resources.FMain_SoundFileMissing;
         }
     }
 
-    internal async void FillExplorerList(DirectoryElement dir)
+    internal async void FillExplorerList(DirectoryElement? dir)
     {
         var generation = ++_explorerFillGeneration;
         ExplorerContent.Clear();
@@ -2257,18 +2073,18 @@ public partial class FMain : Form
                 {
                     case MessageType.Info:
                         e.Value = _info;
-                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Informácia";
+                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RInfo;
                         break;
                     case MessageType.Warning:
                         e.Value = _warning;
-                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Upozornenie";
+                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RWarning;
                         break;
                     case MessageType.Error:
                         e.Value = _error;
-                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = "Chyba";
+                        dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RError;
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new UnreachableException();
                 }
             }
         }
@@ -2279,7 +2095,7 @@ public partial class FMain : Form
         if (e.RowIndex == -1)
             return;
 
-        ((IRawBankMessage)dgvErrors.Rows[e.RowIndex].DataBoundItem!).Show();
+        ((IRawBankMessage)dgvErrors.Rows[e.RowIndex].DataBoundItem!).Show(this);
     }
 
     private void ChangeManager_UndoRedoStateChanged(object sender, UndoRedoStateEventArgs e)
@@ -2291,15 +2107,21 @@ public partial class FMain : Form
 
     private bool IsRootPath(DirectoryElement dir)
     {
-        return string.Compare(
+        return string.Equals(
             Path.GetFullPath(dir.DirInfo.FullName).TrimEnd('\\'),
-            Path.GetFullPath(GlobData.OpenedProject!.AbsPathToBank + CurrentLanguage!.RelativePath).TrimEnd('\\'),
-            StringComparison.InvariantCultureIgnoreCase) == 0;
+            Path.GetFullPath(_bank.PathToBank + CurrentLanguage!.RelativePath).TrimEnd('\\'),
+            StringComparison.OrdinalIgnoreCase);
     }
 
     // 1 chyba, 2 - 4 chyby, 0 a 5+ chyb
-    private static string CountText(int count, string one, string few, string many)
-        => $"{count} {(count == 1 ? one : count is >= 2 and <= 4 ? few : many)}";
+    /// <summary>
+    /// Pocet s tvarom slova podla poctu; <paramref name="forms" /> su tvary pre 1, 2-4 a 5+ oddelene '|'.
+    /// </summary>
+    private static string CountText(int count, string forms)
+    {
+        var f = forms.Split('|');
+        return $"{count} {(count == 1 ? f[0] : count is >= 2 and <= 4 ? f[1] : f[2])}";
+    }
 
     private void Messages_ListChanged(object? sender, ListChangedEventArgs e)
     {
@@ -2321,27 +2143,27 @@ public partial class FMain : Form
                     errorCount++;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new UnreachableException();
             }
         }
 
         Invoke(() =>
         {
-            tsbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
-            tsbWarnings.Text = CountText(warningCount, "upozornenie", "upozornenia", "upozornení");
-            tsbInfos.Text = CountText(infoCount, "správa", "správy", "správ");
+            tsbErrors.Text = CountText(errorCount, Resources.FMain_Count_Errors);
+            tsbWarnings.Text = CountText(warningCount, Resources.FMain_Count_Warnings);
+            tsbInfos.Text = CountText(infoCount, Resources.FMain_Count_Infos);
 
             if (errorCount != 0)
             {
                 tssbErrors.Image = _error;
-                tssbErrors.Text = CountText(errorCount, "chyba", "chyby", "chýb");
+                tssbErrors.Text = CountText(errorCount, Resources.FMain_Count_Errors);
                 tssbErrors.ForeColor = Color.Red;
             }
             else
             {
                 tssbErrors.Image = GlobalResources.correct;
                 tssbErrors.Text = "";
-                tssbErrors.ForeColor = GlobData.UsingStyle.ControlsColorScheme.Panel.ForeColor;
+                tssbErrors.ForeColor = _bank.UsingStyle.ControlsColorScheme.Panel.ForeColor;
             }
         });
     }
@@ -2379,12 +2201,13 @@ public partial class FMain : Form
 
     private void DgvExplorer_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyData == Keys.F2) 
-            DoRenameFile(dgvExplorer, EventArgs.Empty);
-        if (e.KeyData == Keys.Delete) 
-            DoDeleteFile(dgvExplorer, EventArgs.Empty);
-        if (e.KeyData == Keys.F5) 
-            DoPlayFile(dgvExplorer, EventArgs.Empty);
+        // pevne klavesy prieskumnika - akcie samy preskocia tlacidlo Spat a prvky, na ktore sa nevztahuju
+        if (e.KeyData == Keys.F2)
+            DoRenameFile();
+        if (e.KeyData == Keys.Delete)
+            DoDeleteFile();
+        if (e.KeyData == Keys.F5)
+            DoPlayFile();
     }
 
     private void TimerToCheck_Tick(object sender, EventArgs e)
@@ -2393,15 +2216,15 @@ public partial class FMain : Form
         timerToCheck.Enabled = false;
 
         // jazyk sa nenacital (chyba pri nacitani) - nie je co porovnavat
-        if (CurrentLanguage is null || GlobData.OpenedProject?.Messages.ContainsKey(CurrentLanguage) != true)
+        if (CurrentLanguage is null || _bank.Project?.Messages.ContainsKey(CurrentLanguage) != true)
             return;
 
-        RawBankExplorer.MergeFilesAndData(Root, CurrentLanguage, GlobData.OpenedProject.Messages, true);
+        RawBankExplorer.MergeFilesAndData(Root, CurrentLanguage, _bank.Project.Messages, _bank.PathToBank, true);
 
         _messages.Clear();
         try
         {
-            foreach (var msg in GlobData.OpenedProject!.Messages[CurrentLanguage!])
+            foreach (var msg in _bank.Project!.Messages[CurrentLanguage!])
             {
                 _messages.Add(msg);
             }

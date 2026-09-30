@@ -4,7 +4,7 @@
 namespace RawBankEditor.XML;
 
 /// <summary>
-///     Trieda definujuca farby a pisma pre viacere prvky programu
+/// Trieda definujuca farby a pisma pre viacere prvky programu
 /// </summary>
 public record RawBankEditorStyle : Style
 {

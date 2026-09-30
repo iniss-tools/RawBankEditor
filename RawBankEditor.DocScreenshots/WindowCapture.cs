@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 namespace RawBankEditor.DocScreenshots;
 
 /// <summary>
-///     Snímka okna tak, ako ho vykreslí Windows – vrátane (tmavého) titulku, bez neviditeľných okrajov
-///     a bez zaoblených rohov. DrawToBitmap by titulok vykreslil v klasickom vzhľade a Scintillu vynechal.
+/// Snímka okna tak, ako ho vykreslí Windows – vrátane (tmavého) titulku, bez neviditeľných okrajov
+/// a bez zaoblených rohov. DrawToBitmap by titulok vykreslil v klasickom vzhľade a Scintillu vynechal.
 /// </summary>
 internal static partial class WindowCapture
 {
@@ -49,13 +49,13 @@ internal static partial class WindowCapture
     }
 
     /// <summary>
-    ///     Titulky viditeľných okien tohto procesu – pri zaseknutí ukážu, ktoré modálne okno čaká.
+    /// Titulky viditeľných okien tohto procesu – pri zaseknutí ukážu, ktoré modálne okno čaká.
     /// </summary>
     public static List<string> ProcessWindowTitles()
     {
         var pid = (uint)Environment.ProcessId;
         var titles = new List<string>();
-        EnumWindows((hwnd, _param) =>
+        EnumWindows((hwnd, param) =>
         {
             _ = GetWindowThreadProcessId(hwnd, out var owner);
             if (owner == pid && IsWindowVisible(hwnd))
@@ -71,17 +71,19 @@ internal static partial class WindowCapture
 
     private delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr param);
 
+    // spatne volanie cez delegat [LibraryImport] nepodporuje
     [DllImport("user32.dll")]
     private static extern bool EnumWindows(EnumWindowsProc callback, IntPtr param);
 
-    [DllImport("user32.dll")]
-    private static extern uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
+    [LibraryImport("user32.dll")]
+    private static partial uint GetWindowThreadProcessId(IntPtr hwnd, out uint processId);
 
-    [DllImport("user32.dll")]
-    private static extern bool IsWindowVisible(IntPtr hwnd);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool IsWindowVisible(IntPtr hwnd);
 
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern int GetWindowText(IntPtr hwnd, char[] text, int maxCount);
+    [LibraryImport("user32.dll", EntryPoint = "GetWindowTextW", StringMarshalling = StringMarshalling.Utf16)]
+    private static partial int GetWindowText(IntPtr hwnd, [Out] char[] text, int maxCount);
 
     [StructLayout(LayoutKind.Sequential)]
     private struct Rect
@@ -107,7 +109,7 @@ internal static partial class WindowCapture
 }
 
 /// <summary>
-///     Spracovanie správ okien medzi krokmi, kým harness nemá vlastnú slučku správ.
+/// Spracovanie správ okien medzi krokmi, kým harness nemá vlastnú slučku správ.
 /// </summary>
 internal static class Pump
 {
@@ -121,7 +123,7 @@ internal static class Pump
     }
 
     /// <summary>
-    ///     Spracúva správy, kým neplatí podmienka (napr. kým sa na pozadí nenačíta grafikon).
+    /// Spracúva správy, kým neplatí podmienka (napr. kým sa na pozadí nenačíta grafikon).
     /// </summary>
     public static bool Until(Func<bool> condition, int timeoutMs = 30000)
     {

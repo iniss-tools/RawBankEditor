@@ -2,7 +2,7 @@
 using RawBankEditor.XML;
 using ToolsCore;
 using ToolsCore.Forms;
-using ToolsCore.Tools;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.XML;
 
 namespace RawBankEditor.Forms;
@@ -12,16 +12,20 @@ public partial class FAppSettings : FAppSettingsBase
     public new RawBankEditorConfig Config => (RawBankEditorConfig)base.Config;
     public new Styles<RawBankEditorStyle> Styles => (Styles<RawBankEditorStyle>)base.Styles;
 
-    protected override IList<CmdShortcut> DefaultShortcuts => new AppShortcuts().GetValues();
-    
+    protected override IList<CmdShortcut> DefaultShortcuts => ShortcutMap.DefaultRows(RbeCommands.All);
+
     protected override IList<DesktopColumn> DefaultColumns => new DesktopColumns().GetValues();
 
-    public FAppSettings(RawBankEditorConfig config, Styles<RawBankEditorStyle> styles) 
-        : base(config, new Styles<RawBankEditorStyle>(styles), GlobData.UsingStyle, typeof(RawBankEditorStyle))
+    // nastavenia programu - po ulozeni sa v nich nahradi konfiguracia a styly
+    private readonly AppSession<RawBankEditorConfig, RawBankEditorStyle> _session;
+
+    internal FAppSettings(AppSession<RawBankEditorConfig, RawBankEditorStyle> session)
+        : base(session.Config, new Styles<RawBankEditorStyle>(session.Styles), session.UsingStyle, typeof(RawBankEditorStyle))
     {
+        _session = session;
         InitializeComponent();
-        
-        Shortcuts = new ExBindingList<CmdShortcut>(Config.Shortcuts.GetValues());
+
+        Shortcuts = new ExBindingList<CmdShortcut>(Config.Shortcuts.ToRows(RbeCommands.All));
         Columns = new ExBindingList<DesktopColumn>(Config.DesktopCols.GetValues());
 
         dgvShortcuts.DataSource = Shortcuts;
@@ -39,7 +43,7 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override bool OnSaving()
     {
-        Config.Shortcuts.SetValues(Shortcuts);
+        Config.Shortcuts.SetFromRows(Shortcuts);
         Config.DesktopCols.SetValues(Columns);
         Config.AutoRecalculateSoundDuration = cboxAutoRecalculateSoundDurations.Checked;
         Config.AutoInsertSoundData = cboxAutoInsertSoundData.Checked;
@@ -50,17 +54,16 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override void SaveData()
     {
-        GlobData.Config = Config;
-        GlobData.UsingStyle = (RawBankEditorStyle)UsingStyle;
-        GlobSettings.UsingStyle = UsingStyle;
-        GlobData.Styles = Styles;
-        
+        _session.Config = Config;
+        _session.UsingStyle = (RawBankEditorStyle)UsingStyle;
+        _session.Styles = Styles;
+
         var configsDir = ToolsCore.AppPaths.ConfigDir;
         if (!Directory.Exists(configsDir))
             Directory.CreateDirectory(configsDir);
 
-        Styles<RawBankEditorStyle>.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_STYLES)!, GlobData.Styles);
-        XmlSerialization.WriteData(Utils.CombinePath(configsDir, ToolsCore.FileConsts.FILE_CONFIG)!, GlobData.Config);
+        Styles<RawBankEditorStyle>.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileStyles)!, _session.Styles);
+        XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _session.Config);
     }
 
     /// <inheritdoc />

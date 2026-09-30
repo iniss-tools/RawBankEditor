@@ -1,8 +1,8 @@
 using System.Text;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 
-namespace RawBankEditorTests;
+namespace RawBankEditor.Tests;
 
 [TestClass]
 public class SoundUtilsTests
@@ -13,7 +13,7 @@ public class SoundUtilsTests
     [TestInitialize]
     public void Init()
     {
-        _bank = Path.Combine(Path.GetTempPath(), "RawBankEditorTests_" + Guid.NewGuid().ToString("N")) + "\\";
+        _bank = Path.Combine(Path.GetTempPath(), "RawBankEditor.Tests_" + Guid.NewGuid().ToString("N")) + "\\";
         _groupDir = Path.Combine(_bank, "SK", "R1");
         Directory.CreateDirectory(_groupDir);
     }
@@ -104,6 +104,27 @@ public class SoundUtilsTests
         Assert.AreEqual("A.WAV", sfe.Name);
         Assert.AreEqual("A.WAV", sound.FileName);
         CollectionAssert.AreEqual(original, File.ReadAllBytes(Path.Combine(_groupDir, "A.WAV")));
+    }
+
+    [TestMethod]
+    public void ConvertSoundFiles_SoZurnalom_ZahodenieVratiPovodnySubor()
+    {
+        var original = File.ReadAllBytes(WriteWav("A.WAV"));
+        var (_, dir) = CreateGroup();
+        var backup = Path.Combine(_bank, "_zurnal");
+        var journal = new BankJournal(backup, _ => Assert.Fail("do kosa sa pri zahodeni nic neposiela"), _ => false);
+
+        SoundUtils.ConvertSoundFiles(dir.Children.OfType<SoundFileElement>(), true, journal: journal, scope: "SK");
+
+        // povodny subor je v zalohe zurnalu, nie zmazany
+        Assert.IsFalse(File.Exists(Path.Combine(_groupDir, "A.WAV")));
+        Assert.IsTrue(File.Exists(Path.Combine(_groupDir, "A.EWA")));
+
+        Assert.IsEmpty(journal.Rollback("SK"));
+
+        Assert.IsFalse(File.Exists(Path.Combine(_groupDir, "A.EWA")));
+        CollectionAssert.AreEqual(original, File.ReadAllBytes(Path.Combine(_groupDir, "A.WAV")));
+        Assert.IsFalse(Directory.Exists(backup));
     }
 
     [TestMethod]

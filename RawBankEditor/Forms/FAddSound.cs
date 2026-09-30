@@ -1,5 +1,8 @@
+using System.Globalization;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
@@ -7,6 +10,7 @@ namespace RawBankEditor.Forms;
 public partial class FAddSound : Form
 {
     private bool _autoChangeNameAndFile = true;
+    private readonly string _pathToBank;
 
     public FyzSound Sound { get; private set; } = null!;
     private FyzGroup Group { get; }
@@ -14,11 +18,15 @@ public partial class FAddSound : Form
 
     /// <param name="group">skupina, do ktorej sa zvuk prida (validacia duplicit, pripona a vyhladanie suboru).</param>
     /// <param name="file">
-    ///     existujuci subor bez udajov o zvuku - nazov suboru sa z neho prevezme a nazov suboru
-    ///     ani pridavna cesta sa nedaju menit.
+    /// existujuci subor bez udajov o zvuku - nazov suboru sa z neho prevezme a nazov suboru
+    /// ani pridavna cesta sa nedaju menit.
     /// </param>
-    public FAddSound(FyzGroup group, SoundFileElement? file = null)
+    /// <param name="group">skupina noveho zvuku</param>
+    /// <param name="pathToBank">priecinok RAWBANK - nahravka noveho zvuku sa hlada v nom</param>
+    /// <param name="file">subor bez udajov o zvuku, ku ktoremu sa zvuk pridava</param>
+    public FAddSound(FyzGroup group, string pathToBank, SoundFileElement? file = null)
     {
+        _pathToBank = pathToBank;
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
@@ -43,22 +51,22 @@ public partial class FAddSound : Form
 
         if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(name) || string.IsNullOrEmpty(fileName))
         {
-            Utils.ShowError("Nie sú vyplnené všetky požadované polia.");
+            Utils.ShowError(Resources.FAddSound_FieldsRequired);
             DialogResult = DialogResult.None;
             return;
         }
 
         var ext = Path.GetExtension(fileName);
-        if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || !(ext.EqualsIgnoreCase(SoundUtils.WAV_EXT) || ext.EqualsIgnoreCase(SoundUtils.EWA_EXT)))
+        if (fileName.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || !(ext.EqualsIgnoreCase(SoundUtils.WAVExt) || ext.EqualsIgnoreCase(SoundUtils.EWAExt)))
         {
-            Utils.ShowError($"Názov súboru musí mať príponu {SoundUtils.WAV_EXT} alebo {SoundUtils.EWA_EXT} a nesmie obsahovať cestu ani neplatné znaky.");
+            Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FAddSound_InvalidFileName, SoundUtils.WAVExt, SoundUtils.EWAExt));
             DialogResult = DialogResult.None;
             return;
         }
 
-        if (!string.IsNullOrEmpty(relative) && (!relative.EndsWith("\\") || string.IsNullOrWhiteSpace(relative)))
+        if (!string.IsNullOrEmpty(relative) && (!relative.EndsWith('\\') || string.IsNullOrWhiteSpace(relative)))
         {
-            Utils.ShowError("Prídavná relatívna cesta musí končiť '\\' a nesmie obsahovať iba prázdne znaky.");
+            Utils.ShowError(Resources.FMain_InvalidRelativePath);
             DialogResult = DialogResult.None;
             return;
         }
@@ -67,14 +75,14 @@ public partial class FAddSound : Form
         {
             if (SoundRules.SameText(snd.Key, key))
             {
-                Utils.ShowError("Položka s rovnakým kľúčom už existuje.");
+                Utils.ShowError(Resources.FAddSound_KeyExists);
                 DialogResult = DialogResult.None;
                 return;
             }
 
             if (SoundRules.SameText(snd.Name, name))
             {
-                Utils.ShowError("Položka s rovnakým názvom už existuje.");
+                Utils.ShowError(Resources.FAddSound_NameExists);
                 DialogResult = DialogResult.None;
                 return;
             }
@@ -83,7 +91,7 @@ public partial class FAddSound : Form
         var sound = new FyzSound(Group, key, name, fileName, relative, rtbText.Text, 0);
 
         // prepojenie s existujucim suborom a dlzka zvuku (rovnako ako pri automatickom vkladani)
-        var sfe = File ?? SoundUtils.FindSoundFile(sound, GlobData.OpenedProject!.AbsPathToBank);
+        var sfe = File ?? SoundUtils.FindSoundFile(sound, _pathToBank);
         if (sfe is not null)
         {
             if (sfe.Duration < 0)

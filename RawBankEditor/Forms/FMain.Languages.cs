@@ -1,14 +1,15 @@
-﻿using RawBankEditor.Tools;
-using ToolsCore.Entities;
-using ToolsCore.Tools;
+﻿using System.Globalization;
+using RawBankEditor.Properties;
+using RawBankEditor.Tools;
+using ToolsCore.Iniss.Entities;
 
 namespace RawBankEditor.Forms;
 
 partial class FMain
 {
     /// <summary>
-    ///     Zmeni kluc, nazov a relativnu cestu jazyka. Pri zmene cesty premenuje priecinok jazyka, ak existuje - inak by
-    ///     sa FYZZVUK.DAT pri ulozeni zapisal do noveho prazdneho priecinka a skupiny s nahravkami by ostali v starom.
+    /// Zmeni kluc, nazov a relativnu cestu jazyka. Pri zmene cesty premenuje priecinok jazyka, ak existuje - inak by
+    /// sa FYZZVUK.DAT pri ulozeni zapisal do noveho prazdneho priecinka a skupiny s nahravkami by ostali v starom.
     /// </summary>
     /// <returns><see langword="false" />, ak sa priecinok nepodarilo premenovat - jazyk ostal bez zmeny.</returns>
     internal bool ChangeLanguage(FyzLanguage language, string key, string name, string relativePath)
@@ -24,18 +25,18 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Vytvori chybajuci priecinok jazyka a prepoji ho s jazykom v prieskumniku (zoznam chyb - Vyriesit).
+    /// Vytvori chybajuci priecinok jazyka a prepoji ho s jazykom v prieskumniku (zoznam chyb - Vyriesit).
     /// </summary>
     internal void CreateLanguageDirectory(FyzLanguage language)
     {
-        var path = Path.TrimEndingDirectorySeparator(language.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+        var path = Path.TrimEndingDirectorySeparator(language.GetAbsPath(_bank.PathToBank));
         try
         {
-            WithoutFileWatcher(() => Directory.CreateDirectory(path));
+            WithoutFileWatcher(() => _bank.Journal.CreateDirectory(path, null));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError($"Priečinok jazyka {path} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_LanguageDirFailed, path, ex.Message));
             return;
         }
 
@@ -58,7 +59,7 @@ partial class FMain
 
     private bool MoveLanguageDirectory(FyzLanguage language, string relativePath)
     {
-        var pathToBank = GlobData.OpenedProject!.AbsPathToBank;
+        var pathToBank = _bank.PathToBank;
         var oldRelativePath = language.RelativePath;
         var oldPath = Path.TrimEndingDirectorySeparator(language.GetAbsPath(pathToBank));
         language.RelativePath = relativePath;
@@ -71,13 +72,13 @@ partial class FMain
             string? error = null;
             if (!sameFolder && Directory.Exists(newPath))
             {
-                error = $"Priečinok {newPath} už existuje.";
+                error = string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirExists, newPath);
             }
             else
             {
                 try
                 {
-                    WithoutFileWatcher(() => Directory.Move(oldPath, newPath));
+                    WithoutFileWatcher(() => _bank.Journal.Move(oldPath, newPath, null));
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
                 {
@@ -88,7 +89,7 @@ partial class FMain
             if (error is not null)
             {
                 language.RelativePath = oldRelativePath;
-                Utils.ShowError($"Priečinok jazyka {oldPath} sa nepodarilo premenovať.\n\n{error}");
+                _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Languages_RenameFailed, oldPath, error));
                 return false;
             }
 

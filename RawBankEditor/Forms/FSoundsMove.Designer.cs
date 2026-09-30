@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FSoundsMove));
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbGroups = new ExControls.ExComboBox();
             this.exLabel1 = new ExControls.ExLabel();
@@ -42,23 +43,17 @@
             this.panel1.Controls.Add(this.exLabel1);
             this.panel1.Controls.Add(this.bStorno);
             this.panel1.Controls.Add(this.bOK);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.panel1, "panel1");
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(5);
-            this.panel1.Size = new System.Drawing.Size(328, 93);
-            this.panel1.TabIndex = 0;
             // 
             // cbGroups
             // 
-            this.cbGroups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.cbGroups, "cbGroups");
             this.cbGroups.DropDownSelectedRowBackColor = System.Drawing.SystemColors.Highlight;
             this.cbGroups.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGroups.FormattingEnabled = true;
-            this.cbGroups.Location = new System.Drawing.Point(13, 26);
             this.cbGroups.Name = "cbGroups";
-            this.cbGroups.Size = new System.Drawing.Size(303, 21);
             this.cbGroups.StyleDisabled.ArrowColor = null;
             this.cbGroups.StyleDisabled.BackColor = null;
             this.cbGroups.StyleDisabled.BorderColor = null;
@@ -87,37 +82,24 @@
             this.cbGroups.StyleSelected.ButtonBorderColor = null;
             this.cbGroups.StyleSelected.ButtonRenderFirst = null;
             this.cbGroups.StyleSelected.ForeColor = null;
-            this.cbGroups.TabIndex = 1;
             this.cbGroups.UseDarkScrollBar = false;
             // 
             // exLabel1
             // 
-            this.exLabel1.AutoSize = true;
-            this.exLabel1.Location = new System.Drawing.Point(9, 9);
+            resources.ApplyResources(this.exLabel1, "exLabel1");
             this.exLabel1.Name = "exLabel1";
-            this.exLabel1.Size = new System.Drawing.Size(76, 13);
-            this.exLabel1.TabIndex = 0;
-            this.exLabel1.Text = "Nová skupina:";
             // 
             // bStorno
             // 
-            this.bStorno.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            resources.ApplyResources(this.bStorno, "bStorno");
             this.bStorno.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bStorno.Location = new System.Drawing.Point(245, 62);
             this.bStorno.Name = "bStorno";
-            this.bStorno.Size = new System.Drawing.Size(75, 23);
-            this.bStorno.TabIndex = 3;
-            this.bStorno.Text = "Zrušiť";
             this.bStorno.UseVisualStyleBackColor = true;
             // 
             // bOK
             // 
-            this.bOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bOK.Location = new System.Drawing.Point(164, 62);
+            resources.ApplyResources(this.bOK, "bOK");
             this.bOK.Name = "bOK";
-            this.bOK.Size = new System.Drawing.Size(75, 23);
-            this.bOK.TabIndex = 2;
-            this.bOK.Text = "Vybrať";
             this.bOK.UseVisualStyleBackColor = true;
             this.bOK.Click += new System.EventHandler(this.BOK_Click);
             // 
@@ -127,14 +109,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bStorno;
-            this.ClientSize = new System.Drawing.Size(328, 93);
+            resources.ApplyResources(this, "$this");
             this.Controls.Add(this.panel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FSoundsMove";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Vybrať novú skupinu";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

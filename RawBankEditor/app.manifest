@@ -52,9 +52,9 @@ vyšší DPI. Aplikace WPF (Windows Presentation Foundation) jsou automaticky sc
        
        Umožňuje aplikaci používat dlouhé cesty. Další informace: https://docs.microsoft.com/windows/win32/fileio/maximum-file-path-limitation -->
 
+  <!-- Vedomie o DPI (SystemAware) nastavuje kod cez Application.SetHighDpiMode - nie manifest (WFO0003). -->
   <application xmlns="urn:schemas-microsoft-com:asm.v3">
     <windowsSettings>
-      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true</dpiAware>
       <longPathAware xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">true</longPathAware>
     </windowsSettings>
   </application>

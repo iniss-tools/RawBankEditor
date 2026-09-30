@@ -1,17 +1,17 @@
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
-using ToolsCore.Tools;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 
 namespace RawBankEditor.DocScreenshots;
 
 /// <summary>
-///     Fiktívna inštalácia INISS so zvukovou bankou pre snímky do dokumentácie. Obsah zodpovedá ukážkovej banke
-///     harnessu GVDEditora (stanica Dolné Mesto, stanice 99xxxxx), navyše s nahrávkami na disku: krátke
-///     generované tóny s dĺžkou podľa textu, stanice a názvy vlakov vo formáte .EWA, ostatné .WAV.
+/// Fiktívna inštalácia INISS so zvukovou bankou pre snímky do dokumentácie. Obsah zodpovedá ukážkovej banke
+/// harnessu GVDEditora (stanica Dolné Mesto, stanice 99xxxxx), navyše s nahrávkami na disku: krátke
+/// generované tóny s dĺžkou podľa textu, stanice a názvy vlakov vo formáte .EWA, ostatné .WAV.
 /// </summary>
 /// <remarks>
-///     Banka má zámerne tri nezrovnalosti, aby zoznam chýb nebol prázdny: zvuk bez súboru, súbor bez zvuku
-///     a prázdnu skupinu.
+/// Banka má zámerne tri nezrovnalosti, aby zoznam chýb nebol prázdny: zvuk bez súboru, súbor bez zvuku
+/// a prázdnu skupinu.
 /// </remarks>
 internal static class DemoBank
 {
@@ -42,7 +42,7 @@ internal static class DemoBank
     public const string EmptyGroupKey = "Reklama";
 
     /// <summary>
-    ///     Zostaví inštaláciu do <paramref name="root" /> (existujúci obsah vytvorený harnessom zmaže).
+    /// Zostaví inštaláciu do <paramref name="root" /> (existujúci obsah vytvorený harnessom zmaže).
     /// </summary>
     public static void Build(string root, List<string> log)
     {
@@ -124,7 +124,7 @@ internal static class DemoBank
         var group = new FyzGroup(language, key, key, key + @"\");
         foreach (var (soundKey, text) in sounds)
         {
-            var file = soundKey + (ewa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT);
+            var file = soundKey + (ewa ? SoundUtils.EWAExt : SoundUtils.WAVExt);
             group.Sounds.Add(new FyzSound(group, soundKey, soundKey, file, "", text, DurationOf(text)));
         }
 
@@ -132,18 +132,18 @@ internal static class DemoBank
     }
 
     /// <summary>
-    ///     Dĺžka nahrávky približne ako pri reči - podľa počtu znakov textu.
+    /// Dĺžka nahrávky približne ako pri reči - podľa počtu znakov textu.
     /// </summary>
     private static int DurationOf(string text) => Math.Min(3500, 350 + 65 * text.Length);
 
     /// <summary>
-    ///     Tichý tón s nábehom a doznením (22 050 Hz, 16 bit, mono); .EWA vznikne rovnakou konverziou ako v programe.
+    /// Tichý tón s nábehom a doznením (22 050 Hz, 16 bit, mono); .EWA vznikne rovnakou konverziou ako v programe.
     /// </summary>
     private static void WriteSound(string path, int durationMs)
     {
         const int rate = 22050;
         var samples = rate * durationMs / 1000;
-        var wav = Path.ChangeExtension(path, SoundUtils.WAV_EXT);
+        var wav = Path.ChangeExtension(path, SoundUtils.WAVExt);
 
         using (var writer = new BinaryWriter(File.Create(wav)))
         {
@@ -168,7 +168,7 @@ internal static class DemoBank
             }
         }
 
-        if (!Path.GetExtension(path).Equals(SoundUtils.EWA_EXT, StringComparison.OrdinalIgnoreCase))
+        if (!Path.GetExtension(path).Equals(SoundUtils.EWAExt, StringComparison.OrdinalIgnoreCase))
             return;
 
         SoundUtils.ConvertWAVtoEWA(wav, path);

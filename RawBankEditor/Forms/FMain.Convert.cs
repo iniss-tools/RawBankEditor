@@ -1,35 +1,21 @@
-﻿using RawBankEditor.Properties;
+﻿using System.Globalization;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 partial class FMain
 {
-    private void DoConvertSoundsToEwa(object sender, EventArgs e) => ConvertSelectedSounds(true);
-
-    private void DoConvertSoundsToWav(object sender, EventArgs e) => ConvertSelectedSounds(false);
-
-    private void DoConvertGroupToEwa(object sender, EventArgs e) => ConvertSelectedGroup(true);
-
-    private void DoConvertGroupToWav(object sender, EventArgs e) => ConvertSelectedGroup(false);
-
-    private void DoConvertLangToEwa(object sender, EventArgs e) => ConvertCurrentLanguage(true);
-
-    private void DoConvertLangToWav(object sender, EventArgs e) => ConvertCurrentLanguage(false);
-
-    private void DoConvertFilesToEwa(object sender, EventArgs e) => ConvertSelectedFiles(true);
-
-    private void DoConvertFilesToWav(object sender, EventArgs e) => ConvertSelectedFiles(false);
-
     private void ConvertSelectedSounds(bool toEwa)
     {
         if (!ConfirmConversion(Resources.FMain_DoConvertSounds, toEwa))
             return;
 
         var sounds = dgvSounds.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FyzSound>();
-        StartConversion(FilesOf(sounds), toEwa, "Konvertovanie vybraných zvukov", "Konvertujem vybrané zvuky");
+        StartConversion(FilesOf(sounds), toEwa, Resources.Convert_SoundsTitle, Resources.Convert_SoundsStatus);
     }
 
     private void ConvertSelectedGroup(bool toEwa)
@@ -38,7 +24,7 @@ partial class FMain
             return;
 
         var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
-        StartConversion(FilesOf(group.Sounds), toEwa, "Konvertovanie zvukov skupiny", "Konvertujem skupinu zvukov");
+        StartConversion(FilesOf(group.Sounds), toEwa, Resources.Convert_GroupTitle, Resources.Convert_GroupStatus);
     }
 
     private void ConvertCurrentLanguage(bool toEwa)
@@ -46,7 +32,8 @@ partial class FMain
         if (CurrentLanguage?.Groups is null || !ConfirmConversion(Resources.FMain_DoConvertLang, toEwa))
             return;
 
-        StartConversion(FilesOf(CurrentLanguage.Groups.SelectMany(g => g.Sounds)), toEwa, "Konvertovanie zvukov jazyka", "Konvertujem zvuky jazyka");
+        StartConversion(FilesOf(CurrentLanguage.Groups.SelectMany(g => g.Sounds)), toEwa, Resources.Convert_LanguageTitle,
+            Resources.Convert_LanguageStatus);
     }
 
     private void ConvertSelectedFiles(bool toEwa)
@@ -56,11 +43,11 @@ partial class FMain
 
         var elements = dgvExplorer.SelectedRows.Cast<DataGridViewRow>().Select(r => r.DataBoundItem).OfType<FileSystemElement>()
             .Where(el => el is not BackButtonElement);
-        StartConversion(SoundUtils.SoundFilesIn(elements), toEwa, "Konvertovanie vybraných súborov", "Konvertujem vybrané súbory");
+        StartConversion(SoundUtils.SoundFilesIn(elements), toEwa, Resources.Convert_FilesTitle, Resources.Convert_FilesStatus);
     }
 
-    private static bool ConfirmConversion(string question, bool toEwa)
-        => Utils.ShowQuestion(string.Format(question, toEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT)) == DialogResult.Yes;
+    private bool ConfirmConversion(string question, bool toEwa)
+        => _dialogs.ShowQuestion(string.Format(CultureInfo.CurrentCulture, question, toEwa ? SoundUtils.EWAExt : SoundUtils.WAVExt)) == DialogResult.Yes;
 
     // nahravky zvukov, ktore subor maju
     private static List<SoundFileElement> FilesOf(IEnumerable<FyzSound> sounds)
@@ -75,8 +62,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Skonvertuje subory na pozadi. Sledovanie suborov je pocas konverzie vypnute - prvky prieskumnika aj nazvy
-    ///     suborov zvukov upravi sama konverzia.
+    /// Skonvertuje subory na pozadi. Sledovanie suborov je pocas konverzie vypnute - prvky prieskumnika aj nazvy
+    /// suborov zvukov upravi sama konverzia. Povodne subory sa odstrania cez zurnal banky (zahodenie zmien ich vrati).
     /// </summary>
     internal async Task<SoundUtils.ConvertResult> ConvertInBackground(IReadOnlyCollection<SoundFileElement> files, bool toEwa, string status)
     {
@@ -93,13 +80,15 @@ partial class FMain
         fileSystemWatcher.EnableRaisingEvents = false;
         try
         {
+            var journal = _bank.Journal;
+            var scope = CurrentLanguage;
             result = await Task.Run(() => SoundUtils.ConvertSoundFiles(files, toEwa,
-                () => BeginInvoke(() => tspbProgress.Increment(1))));
+                () => BeginInvoke(() => tspbProgress.Increment(1)), journal, scope));
         }
         catch (Exception ex)
         {
             Log.Exception(ex);
-            Utils.ShowError(ex.Message);
+            _dialogs.ShowError(ex.Message);
         }
         finally
         {
@@ -114,15 +103,12 @@ partial class FMain
         return result;
     }
 
-    private static void ReportConversion(SoundUtils.ConvertResult result, bool toEwa)
+    private void ReportConversion(SoundUtils.ConvertResult result, bool toEwa)
     {
-        var ext = toEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT;
+        var ext = toEwa ? SoundUtils.EWAExt : SoundUtils.WAVExt;
         if (result.Skipped.Count > 0)
-            Utils.ShowWarning($"Niektoré súbory sa neskonvertovali, lebo vedľa nich už je súbor s príponou {ext}:\n\n{List(result.Skipped)}");
+            _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.Convert_Skipped, ext, ListOf(result.Skipped)));
         if (result.Failed.Count > 0)
-            Utils.ShowError($"Niektoré súbory sa nepodarilo skonvertovať:\n\n{List(result.Failed)}");
-
-        static string List(List<string> items)
-            => string.Join("\n", items.Take(10)) + (items.Count > 10 ? $"\n… a ďalšie ({items.Count - 10})" : "");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Convert_Failed, ListOf(result.Failed)));
     }
 }

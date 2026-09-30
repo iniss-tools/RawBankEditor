@@ -1,6 +1,8 @@
-﻿using ExControls.Providers;
+﻿using System.Globalization;
+using ExControls.Providers;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
@@ -17,7 +19,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
+    /// Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
     /// </summary>
     public abstract class Action : IUndoRedoCommand
     {
@@ -40,7 +42,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
+    /// Akcia pri akejkolvek zmene - pridanie, uprava, zmazanie
     /// </summary>
     public abstract class MoveAction : IBackwardForwardCommand
     {
@@ -60,11 +62,11 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri zmene oznacenych buniek v tabulke so zvukmi
+    /// Akcia pri zmene oznacenych buniek v tabulke so zvukmi
     /// </summary>
     public class SelectedCellSoundMoveAction : MoveAction
     {
-        /// <summary>Initializes a new instance of the <see cref="T:System.Object" /> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="System.Object" /> class.</summary>
         public SelectedCellSoundMoveAction(FMain form, MovePosition position) : base(form)
         {
             Position = position;
@@ -79,14 +81,14 @@ partial class FMain
             {
                 var builder = new StringBuilder();
                 if (Position.SelectedItems.Length >= 1) 
-                    builder.Append($" {Position.SelectedItems[0].Name}");
+                    builder.Append(CultureInfo.CurrentCulture, $" {Position.SelectedItems[0].Name}");
                 if (Position.SelectedItems.Length >= 2)
-                    builder.Append($", {Position.SelectedItems[1].Name}");
+                    builder.Append(CultureInfo.CurrentCulture, $", {Position.SelectedItems[1].Name}");
                 if (Position.SelectedItems.Length >= 3)
-                    builder.Append($", {Position.SelectedItems[2].Name}");
+                    builder.Append(CultureInfo.CurrentCulture, $", {Position.SelectedItems[2].Name}");
                 if (Position.SelectedItems.Length >= 4)
-                    builder.Append($",... (+{Position.SelectedItems.Length - 3})");
-                return $"Jazyk: '{Position.Language}', Skupina: {Position.Group}, Zvuky:{builder}";
+                    builder.Append(CultureInfo.CurrentCulture, $",... (+{Position.SelectedItems.Length - 3})");
+                return string.Format(CultureInfo.CurrentCulture, Resources.Action_SoundSelection, Position.Language, Position.Group, builder);
             }
         }
 
@@ -135,7 +137,7 @@ partial class FMain
         public AddSoundAction(FMain form, FyzSound sound) : base(form) => Sound = sound;
 
         /// <inheritdoc />
-        public override string CommandName => "Pridanie zvuku";
+        public override string CommandName => Resources.Action_AddSound;
 
         private FyzSound Sound { get; }
 
@@ -167,7 +169,7 @@ partial class FMain
         public AddSoundsAction(FMain form, IEnumerable<FyzSound> sounds) : base(form) => Sounds = sounds;
 
         /// <inheritdoc />
-        public override string CommandName => "Pridanie zvukov";
+        public override string CommandName => Resources.Action_AddSounds;
 
         private IEnumerable<FyzSound> Sounds { get; }
 
@@ -196,7 +198,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri uprave vlastnosti zvuku
+    /// Akcia pri uprave vlastnosti zvuku
     /// </summary>
     public class EditSoundAction : Action
     {
@@ -206,7 +208,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Zmena dát o zvuku";
+        public override string CommandName => Resources.Action_SoundData;
 
         private FyzSound Sound { get; }
 
@@ -290,7 +292,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Zmena súboru zvuku";
+        public override string CommandName => Resources.Action_SoundFile;
         private FyzSound Sound { get; }
         private SoundFileElement OldFile { get; }
         private SoundFileElement NewFile { get; }
@@ -323,7 +325,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Presun zvukov";
+        public override string CommandName => Resources.Action_MoveSounds;
         private List<FyzSound> Sounds { get; }
         private FyzGroup OldLocation { get; }
         private FyzGroup NewLocation { get; }
@@ -336,8 +338,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Akcia pri odstraneni viacerych (alebo 1) zvukov. Vytvara sa pred odstranenim - pamata si poradie zvukov
-    ///     v skupine, aby ich Spat vratilo na povodne miesta.
+    /// Akcia pri odstraneni viacerych (alebo 1) zvukov. Vytvara sa pred odstranenim - pamata si poradie zvukov
+    /// v skupine, aby ich Spat vratilo na povodne miesta.
     /// </summary>
     public class RemovedSoundsAction : Action
     {
@@ -351,22 +353,22 @@ partial class FMain
         }
 
         /// <summary>Initializes a new instance of the <see cref="RemovedSoundsAction" /> class.</summary>
-        public RemovedSoundsAction(FMain form, FyzSound sound) : this(form, new[] { sound })
+        public RemovedSoundsAction(FMain form, FyzSound sound) : this(form, [sound])
         {
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Odstránenie zvukov";
+        public override string CommandName => Resources.Action_DeleteSounds;
 
         private List<(FyzSound Sound, int Index)> Removed { get; }
 
         /// <summary>
-        ///     Subor zvuku, ktory sa s nim presunul do kosa (odstranenie v prieskumniku) - Spat ho obnovi.
+        /// Subor zvuku, ktory sa s nim odstranil (odstranenie v prieskumniku) - Spat ho obnovi.
         /// </summary>
         public SoundFileElement? RecycledFile { get; init; }
 
         /// <summary>
-        ///     Odstrani zvuky zo skupiny; ich subory ostanu na disku bez udajov o zvuku.
+        /// Odstrani zvuky zo skupiny; ich subory ostanu na disku bez udajov o zvuku.
         /// </summary>
         public void Apply()
         {
@@ -415,7 +417,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Premenovanie suboru alebo priecinka v prieskumniku.
+    /// Premenovanie suboru alebo priecinka v prieskumniku.
     /// </summary>
     public class RenameFileAction : Action
     {
@@ -429,7 +431,7 @@ partial class FMain
         private string NewPath { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Premenovanie súboru";
+        public override string CommandName => Resources.Action_RenameFile;
 
         /// <inheritdoc />
         public override void Undo() => Form.RenameOnDisk(NewPath, OldPath);
@@ -456,7 +458,7 @@ partial class FMain
         private string? CreatedDirectory { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Pridanie skupiny zvukov";
+        public override string CommandName => Resources.Action_AddGroup;
 
         /// <inheritdoc />
         public override void Undo()
@@ -468,7 +470,7 @@ partial class FMain
             if (CreatedDirectory == null || !Directory.Exists(CreatedDirectory) || Directory.EnumerateFileSystemEntries(CreatedDirectory).Any())
                 return;
 
-            Form.WithoutFileWatcher(() => Directory.Delete(CreatedDirectory));
+            Form.WithoutFileWatcher(() => Form._bank.Journal.RemoveEmptyDirectory(CreatedDirectory, Group.Language));
             Group.Directory?.Parent?.Children.Remove(Group.Directory);
             Group.Directory = null!;
             Form.FillExplorerList(Form.CurrentDirectory);
@@ -479,7 +481,7 @@ partial class FMain
         {
             Form.SelectLanguage(Group.Language);
             if (CreatedDirectory != null)
-                Form.WithoutFileWatcher(() => Directory.CreateDirectory(CreatedDirectory));
+                Form.WithoutFileWatcher(() => Form._bank.Journal.CreateDirectory(CreatedDirectory, Group.Language));
             Form.InsertGroup(Group, Index);
         }
     }
@@ -507,7 +509,7 @@ partial class FMain
         private (string oldRPath, string newRPath) RelativePaths { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Úprava skupiny zvukov";
+        public override string CommandName => Resources.Action_EditGroup;
 
         /// <inheritdoc />
         public override void Undo()
@@ -528,13 +530,13 @@ partial class FMain
     {
         /// <param name="form">Hlavne okno.</param>
         /// <param name="grp">Odstranovana skupina (este v zozname skupin - akcia si pamata jej poziciu).</param>
-        /// <param name="withDirectory">Ci sa priecinok skupiny presuva do kosa.</param>
+        /// <param name="withDirectory">Ci sa odstranuje aj priecinok skupiny (do kosa pojde pri ulozeni).</param>
         public RemovedGroupsAction(FMain form, FyzGroup grp, bool withDirectory) : base(form)
         {
             Group = grp;
             Index = grp.Language.Groups.IndexOf(grp);
             WithDirectory = withDirectory;
-            GroupDirectory = GroupDirectoryPath(grp);
+            GroupDirectory = form.GroupDirectoryPath(grp);
         }
 
         private FyzGroup Group { get; }
@@ -543,10 +545,10 @@ partial class FMain
         private string GroupDirectory { get; }
 
         /// <inheritdoc />
-        public override string CommandName => "Odstránenie skupiny zvukov";
+        public override string CommandName => Resources.Action_DeleteGroup;
 
         /// <summary>
-        ///     Odstrani skupinu zo zoznamu, pripadne jej priecinok presunie do kosa.
+        /// Odstrani skupinu zo zoznamu, pripadne aj jej priecinok.
         /// </summary>
         /// <returns><see langword="false" />, ak sa priecinok nepodarilo odstranit - skupina ostala.</returns>
         public bool Apply()
@@ -555,12 +557,11 @@ partial class FMain
             {
                 try
                 {
-                    Form.WithoutFileWatcher(() => Utils.DeleteDirectoryToRecycleBin(GroupDirectory));
+                    Form.WithoutFileWatcher(() => Form._bank.Journal.Delete(GroupDirectory, Group.Language));
                 }
-                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or OperationCanceledException)
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
                 {
-                    if (ex is not OperationCanceledException)
-                        Utils.ShowError($"Priečinok skupiny {GroupDirectory} sa nepodarilo presunúť do koša.\n\n{ex.Message}");
+                    Form._dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Action_GroupToRecycleFailed, GroupDirectory, ex.Message));
                     return false;
                 }
 
@@ -580,9 +581,9 @@ partial class FMain
             if (WithDirectory && !Directory.Exists(GroupDirectory))
             {
                 var restored = false;
-                Form.WithoutFileWatcher(() => restored = Utils.TryRecoverFileOrDirFromBin(GroupDirectory));
+                Form.WithoutFileWatcher(() => restored = Form._bank.Journal.Restore(GroupDirectory, Group.Language));
                 if (!restored)
-                    Utils.ShowError("Nepodarilo sa obnoviť priečinok skupiny z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+                    Form._dialogs.ShowError(Resources.Action_GroupRestoreFailed);
                 else if (Group.Directory is { } directory && Group.Language.Directory is { } languageDir && !languageDir.Children.Contains(directory))
                     languageDir.Children.Add(directory);
             }
@@ -614,7 +615,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Pridanie jazyka";
+        public override string CommandName => Resources.Action_AddLanguage;
 
         private FyzLanguage Language { get; }
         private int Index { get; }
@@ -628,14 +629,14 @@ partial class FMain
 
             // vytvoreny priecinok sa zmaze, len ak v nom nic nie je
             if (CreatedDirectory != null && Directory.Exists(CreatedDirectory) && !Directory.EnumerateFileSystemEntries(CreatedDirectory).Any())
-                Directory.Delete(CreatedDirectory);
+                Form.WithoutFileWatcher(() => Form._bank.Journal.RemoveEmptyDirectory(CreatedDirectory, null));
         }
 
         /// <inheritdoc />
         public override void Redo()
         {
             if (CreatedDirectory != null)
-                Directory.CreateDirectory(CreatedDirectory);
+                Form.WithoutFileWatcher(() => Form._bank.Journal.CreateDirectory(CreatedDirectory, null));
 
             Form.InsertLanguage(Language, Index);
             Form.SelectLanguage(Language);
@@ -657,7 +658,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Úprava jazyka";
+        public override string CommandName => Resources.Action_EditLanguage;
 
         private FyzLanguage Language { get; }
 
@@ -686,7 +687,7 @@ partial class FMain
         /// <param name="lang">Odstraneny jazyk.</param>
         /// <param name="index">Pozicia jazyka v zozname jazykov banky pred odstranenim.</param>
         /// <param name="directory">Priecinok jazyka.</param>
-        /// <param name="removedWithData">Ci sa priecinok jazyka presunul do kosa.</param>
+        /// <param name="removedWithData">Ci sa odstranil aj priecinok jazyka.</param>
         public RemoveLanguageAction(FMain form, FyzLanguage lang, int index, string directory, bool removedWithData) : base(form)
         {
             Language = lang;
@@ -696,7 +697,7 @@ partial class FMain
         }
 
         /// <inheritdoc />
-        public override string CommandName => "Odstránenie jazyka";
+        public override string CommandName => Resources.Action_DeleteLanguage;
 
         private FyzLanguage Language { get; }
         private int Index { get; }
@@ -707,8 +708,8 @@ partial class FMain
         public override void Undo()
         {
             // priecinok sa obnovi pred vlozenim - v prazdnej banke sa jazyk hned nacita
-            if (RemovedWithData && !Utils.TryRecoverFileOrDirFromBin(LanguageDirectory))
-                Utils.ShowError("Nepodarilo sa obnoviť priečinok so zvukmi jazyka z koša.\n\nPravdepodobne bol permanentne vymazaný.");
+            if (RemovedWithData)
+                Form.RestoreLanguageDirectory(LanguageDirectory);
             Form.InsertLanguage(Language, Index);
         }
 
@@ -722,7 +723,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Konverzia nahravok na .EWA alebo .WAV - pamata si len subory, ktore sa naozaj skonvertovali.
+    /// Konverzia nahravok na .EWA alebo .WAV - pamata si len subory, ktore sa naozaj skonvertovali.
     /// </summary>
     public class ConvertFilesAction : Action
     {
@@ -738,12 +739,13 @@ partial class FMain
         private string Name { get; }
 
         /// <inheritdoc />
-        public override string CommandName => $"{Name} na {(ToEwa ? SoundUtils.EWA_EXT : SoundUtils.WAV_EXT)}";
+        public override string CommandName =>
+            string.Format(CultureInfo.CurrentCulture, Resources.Action_Convert, Name, ToEwa ? SoundUtils.EWAExt : SoundUtils.WAVExt);
 
         /// <inheritdoc />
-        public override void Undo() => _ = Form.ConvertInBackground(Files, !ToEwa, "Vraciam konverziu");
+        public override void Undo() => _ = Form.ConvertInBackground(Files, !ToEwa, Resources.Convert_RevertStatus);
 
         /// <inheritdoc />
-        public override void Redo() => _ = Form.ConvertInBackground(Files, ToEwa, "Konvertujem");
+        public override void Redo() => _ = Form.ConvertInBackground(Files, ToEwa, Resources.Convert_RedoStatus);
     }
 }

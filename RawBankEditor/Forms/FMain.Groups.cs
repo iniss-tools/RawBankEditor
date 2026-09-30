@@ -1,13 +1,15 @@
-﻿using ExControls;
+﻿using System.Globalization;
+using ExControls;
+using RawBankEditor.Properties;
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
 partial class FMain
 {
-    private void DoAddGroup(object sender, EventArgs e)
+    private void DoAddGroup()
     {
         var language = CurrentLanguage!;
         var form = new FAddEditGroup(language.Groups);
@@ -16,14 +18,14 @@ partial class FMain
 
         var group = new FyzGroup(language, form.GroupKey, form.GroupName, form.GroupRelativePath);
         var directory = GroupDirectoryPath(group);
-        var created = !Directory.Exists(directory);
+        var created = false;
         try
         {
-            WithoutFileWatcher(() => Directory.CreateDirectory(directory));
+            WithoutFileWatcher(() => created = _bank.Journal.CreateDirectory(directory, language));
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
         {
-            Utils.ShowError($"Priečinok skupiny {directory} sa nepodarilo vytvoriť.\n\n{ex.Message}");
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, directory, ex.Message));
             return;
         }
 
@@ -32,7 +34,7 @@ partial class FMain
         RegisterNewAction(new AddGroupAction(this, group, index, created ? directory : null));
     }
 
-    private void DoEditGroup(object sender, EventArgs e)
+    private void DoEditGroup()
     {
         if (dgvGroups.IsSelectionEmpty())
             return;
@@ -51,15 +53,14 @@ partial class FMain
             RegisterNewAction(action);
     }
 
-    private void DoDeleteGroup(object sender, EventArgs e)
+    private void DoDeleteGroup()
     {
         if (dgvGroups.IsSelectionEmpty())
             return;
 
         var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
-        var result = Utils.ShowWarning(
-            $"Skupina {group.Name} sa odstráni zo zoznamu skupín spolu so svojimi zvukmi ({group.Sounds.Count}).\n\n" +
-            "Premiestniť do koša aj priečinok skupiny s nahrávkami?",
+        var result = _dialogs.ShowWarning(
+            string.Format(CultureInfo.CurrentCulture, Resources.Groups_DeleteConfirm, group.Name, group.Sounds.Count),
             MessageBoxButtons.YesNoCancel);
         if (result == DialogResult.Cancel)
             return;
@@ -68,10 +69,10 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Odstrani skupinu zo zoznamu a zaregistruje akciu spat.
+    /// Odstrani skupinu zo zoznamu a zaregistruje akciu spat.
     /// </summary>
     /// <param name="group">Odstranovana skupina.</param>
-    /// <param name="withDirectory">Ci sa ma do kosa presunut aj priecinok skupiny.</param>
+    /// <param name="withDirectory">Ci sa ma odstranit aj priecinok skupiny (do kosa pojde pri ulozeni).</param>
     internal void RemoveGroup(FyzGroup group, bool withDirectory)
     {
         var action = new RemovedGroupsAction(this, group, withDirectory && Directory.Exists(GroupDirectoryPath(group)));
@@ -80,13 +81,36 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Absolutna cesta k priecinku skupiny bez koncovej lomky.
+    /// Absolutna cesta k priecinku skupiny bez koncovej lomky.
     /// </summary>
-    internal static string GroupDirectoryPath(FyzGroup group)
-        => Path.TrimEndingDirectorySeparator(group.GetAbsPath(GlobData.OpenedProject!.AbsPathToBank));
+    internal string GroupDirectoryPath(FyzGroup group)
+        => Path.TrimEndingDirectorySeparator(group.GetAbsPath(_bank.PathToBank));
 
     /// <summary>
-    ///     Vlozi skupinu do zoznamu skupin jazyka, prepoji ju s priecinkom a vyberie ju.
+    /// Vytvori chybajuci priecinok skupiny a prepoji skupinu s nim aj so zvukmi, ktorych nahravky v nom uz su
+    /// (zoznam chyb - Vyriesit).
+    /// </summary>
+    internal void CreateGroupDirectory(FyzGroup group)
+    {
+        var path = GroupDirectoryPath(group);
+        try
+        {
+            WithoutFileWatcher(() => _bank.Journal.CreateDirectory(path, group.Language));
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+        {
+            _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, path, ex.Message));
+            return;
+        }
+
+        LinkGroupDirectory(group);
+        foreach (var sound in group.Sounds)
+            RelinkSoundFile(sound);
+        FillExplorerList(group.Directory);
+    }
+
+    /// <summary>
+    /// Vlozi skupinu do zoznamu skupin jazyka, prepoji ju s priecinkom a vyberie ju.
     /// </summary>
     internal void InsertGroup(FyzGroup group, int index)
     {
@@ -101,7 +125,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Vyberie skupinu zo zoznamu skupin jazyka; jej priecinok a subory ostanu v prieskumniku bez udajov o skupine a zvukoch.
+    /// Vyberie skupinu zo zoznamu skupin jazyka; jej priecinok a subory ostanu v prieskumniku bez udajov o skupine a zvukoch.
     /// </summary>
     internal void TakeOutGroup(FyzGroup group)
     {
@@ -116,7 +140,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Zmeni kluc, nazov a relativnu cestu skupiny. Pri zmene cesty premenuje priecinok skupiny, ak existuje.
+    /// Zmeni kluc, nazov a relativnu cestu skupiny. Pri zmene cesty premenuje priecinok skupiny, ak existuje.
     /// </summary>
     /// <returns><see langword="false" />, ak sa priecinok nepodarilo premenovat - skupina ostala bez zmeny.</returns>
     internal bool ChangeGroup(FyzGroup group, string key, string name, string relativePath)
@@ -144,13 +168,13 @@ partial class FMain
             string? error = null;
             if (!sameFolder && Directory.Exists(newPath))
             {
-                error = $"Priečinok {newPath} už existuje.";
+                error = string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirExists, newPath);
             }
             else
             {
                 try
                 {
-                    WithoutFileWatcher(() => Directory.Move(oldPath, newPath));
+                    WithoutFileWatcher(() => _bank.Journal.Move(oldPath, newPath, group.Language));
                 }
                 catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
                 {
@@ -161,7 +185,7 @@ partial class FMain
             if (error is not null)
             {
                 group.RelativePath = oldRelativePath;
-                Utils.ShowError($"Priečinok skupiny {oldPath} sa nepodarilo premenovať.\n\n{error}");
+                _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Groups_RenameFailed, oldPath, error));
                 return false;
             }
 
@@ -178,7 +202,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Prepoji skupinu s priecinkom jej relativnej cesty v strome prieskumnika (ak priecinok existuje).
+    /// Prepoji skupinu s priecinkom jej relativnej cesty v strome prieskumnika (ak priecinok existuje).
     /// </summary>
     internal void LinkGroupDirectory(FyzGroup group)
     {
@@ -204,7 +228,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Po premenovani priecinka na disku upravi cesty prvku a vsetkych prvkov v nom.
+    /// Po premenovani priecinka na disku upravi cesty prvku a vsetkych prvkov v nom.
     /// </summary>
     internal static void SetElementPath(DirectoryElement directory, string newPath)
     {
@@ -226,8 +250,8 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Vykona zmenu na disku tak, aby udalosti sledovania suborov nevytvorili ani nezmazali prvky prieskumnika
-    ///     - tie upravi volajuci sam.
+    /// Vykona zmenu na disku (cez zurnal banky) tak, aby udalosti sledovania suborov nevytvorili ani nezmazali prvky
+    /// prieskumnika - tie upravi volajuci sam.
     /// </summary>
     internal void WithoutFileWatcher(System.Action action)
     {
@@ -247,7 +271,7 @@ partial class FMain
     }
 
     /// <summary>
-    ///     Obnovi zoznam skupin, zvukov a prieskumnik po zmene skupin jazyka a vyberie skupinu.
+    /// Obnovi zoznam skupin, zvukov a prieskumnik po zmene skupin jazyka a vyberie skupinu.
     /// </summary>
     private void RefreshGroupViews(FyzGroup? select)
     {
@@ -266,7 +290,7 @@ partial class FMain
         if (dgvGroups.IsSelectionEmpty())
         {
             CurrentGroup = null;
-            MenuSounds = new ExBindingList<FyzSound>(new List<FyzSound>());
+            MenuSounds = new ExBindingList<FyzSound>([]);
             dgvSounds.DataSource = MenuSounds;
             FillExplorerList(CurrentLanguage.Directory);
         }

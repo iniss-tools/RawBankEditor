@@ -129,4 +129,215 @@
   <metadata name="fyzSoundBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="panel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>804, 442</value>
+  </data>
+  <data name="panel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panel1.Name" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;panel1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panel1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bStorno.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="bStorno.Location" type="System.Drawing.Point, System.Drawing">
+    <value>714, 411</value>
+  </data>
+  <data name="bStorno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="bStorno.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="bStorno.Text" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Name" xml:space="preserve">
+    <value>bStorno</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bStorno.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="bOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>633, 411</value>
+  </data>
+  <data name="bOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="bOK.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="bOK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;bOK.Name" xml:space="preserve">
+    <value>bOK</value>
+  </data>
+  <data name="&gt;&gt;bOK.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bOK.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;bOK.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dgvFilesSounds.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="dgvFilesSounds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 52</value>
+  </data>
+  <data name="dgvFilesSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>791, 353</value>
+  </data>
+  <data name="dgvFilesSounds.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;dgvFilesSounds.Name" xml:space="preserve">
+    <value>dgvFilesSounds</value>
+  </data>
+  <data name="&gt;&gt;dgvFilesSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvFilesSounds.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;dgvFilesSounds.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cFilePath.HeaderText" xml:space="preserve">
+    <value>Cesta</value>
+  </data>
+  <data name="&gt;&gt;cFilePath.Name" xml:space="preserve">
+    <value>cFilePath</value>
+  </data>
+  <data name="&gt;&gt;cFilePath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundKey.HeaderText" xml:space="preserve">
+    <value>Kľúč</value>
+  </data>
+  <data name="&gt;&gt;cSoundKey.Name" xml:space="preserve">
+    <value>cSoundKey</value>
+  </data>
+  <data name="&gt;&gt;cSoundKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundName.HeaderText" xml:space="preserve">
+    <value>Názov</value>
+  </data>
+  <data name="&gt;&gt;cSoundName.Name" xml:space="preserve">
+    <value>cSoundName</value>
+  </data>
+  <data name="&gt;&gt;cSoundName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundFileName.HeaderText" xml:space="preserve">
+    <value>Názov súboru</value>
+  </data>
+  <data name="&gt;&gt;cSoundFileName.Name" xml:space="preserve">
+    <value>cSoundFileName</value>
+  </data>
+  <data name="&gt;&gt;cSoundFileName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundDuration.HeaderText" xml:space="preserve">
+    <value>Trvanie</value>
+  </data>
+  <data name="&gt;&gt;cSoundDuration.Name" xml:space="preserve">
+    <value>cSoundDuration</value>
+  </data>
+  <data name="&gt;&gt;cSoundDuration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cSoundText.HeaderText" xml:space="preserve">
+    <value>Text hlásenia</value>
+  </data>
+  <data name="&gt;&gt;cSoundText.Name" xml:space="preserve">
+    <value>cSoundText</value>
+  </data>
+  <data name="&gt;&gt;cSoundText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;fyzSoundBindingSource.Name" xml:space="preserve">
+    <value>fyzSoundBindingSource</value>
+  </data>
+  <data name="&gt;&gt;fyzSoundBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="exLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="exLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 10</value>
+  </data>
+  <data name="exLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 39</value>
+  </data>
+  <data name="exLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;exLabel1.Name" xml:space="preserve">
+    <value>exLabel1</value>
+  </data>
+  <data name="&gt;&gt;exLabel1.Type" xml:space="preserve">
+    <value>ExControls.ExLabel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;exLabel1.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;exLabel1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Name" xml:space="preserve">
+    <value>AutoScaleDimensions</value>
+  </data>
+  <data name="&gt;&gt;AutoScaleDimensions.Type" xml:space="preserve">
+    <value>System.Drawing.SizeF, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Name" xml:space="preserve">
+    <value>ClientSize</value>
+  </data>
+  <data name="&gt;&gt;ClientSize.Type" xml:space="preserve">
+    <value>System.Drawing.Size, RawBankEditor, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>804, 442</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Novopridané súbory</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FAfterInsertSounds</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

@@ -1,4 +1,5 @@
-﻿using ToolsCore.Entities;
+﻿using RawBankEditor.Properties;
+using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
@@ -6,7 +7,7 @@ namespace RawBankEditor.Forms;
 public partial class FSoundsMove : Form
 {
     public FyzGroup NewGroup { get; private set; } = null!;
-    private IList<FyzGroup> GroupsWithoutCurrent { get; }
+    private List<FyzGroup> GroupsWithoutCurrent { get; }
 
     public FSoundsMove(IList<FyzGroup> allGroups, FyzGroup currentGroup)
     {
@@ -23,7 +24,7 @@ public partial class FSoundsMove : Form
         DialogResult = DialogResult.None;
         if (cbGroups.SelectedIndex == -1)
         {
-            Utils.ShowError("Nebola vybratá žiadna skupina.");
+            Utils.ShowError(Resources.FSoundsMove_NoGroup);
             return;
         }
 

@@ -1,8 +1,8 @@
 using RawBankEditor.Tools;
-using ToolsCore.Entities;
-using ToolsCore.Tools;
+using ToolsCore.Iniss.Entities;
+using ToolsCore.Iniss.Tools;
 
-namespace RawBankEditorTests;
+namespace RawBankEditor.Tests;
 
 [TestClass]
 public class LanguageRulesTests
@@ -12,7 +12,7 @@ public class LanguageRulesTests
     [TestInitialize]
     public void Init()
     {
-        _bank = Path.Combine(Path.GetTempPath(), "RawBankEditorTests_" + Guid.NewGuid().ToString("N")) + "\\";
+        _bank = Path.Combine(Path.GetTempPath(), "RawBankEditor.Tests_" + Guid.NewGuid().ToString("N")) + "\\";
         Directory.CreateDirectory(_bank);
     }
 

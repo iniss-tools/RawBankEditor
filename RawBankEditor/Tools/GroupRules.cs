@@ -1,14 +1,15 @@
-using ToolsCore.Entities;
+using RawBankEditor.Properties;
+using ToolsCore.Iniss.Entities;
 
 namespace RawBankEditor.Tools;
 
 /// <summary>
-///     Pravidla pre skupiny zvukov: kontrola okna Pridat/Upravit skupinu.
+/// Pravidla pre skupiny zvukov: kontrola okna Pridat/Upravit skupinu.
 /// </summary>
 public static class GroupRules
 {
     /// <summary>
-    ///     Relativna cesta, ktoru okno skupiny navrhne podla kluca (napr. <c>Slova</c> -> <c>Slova\</c>).
+    /// Relativna cesta, ktoru okno skupiny navrhne podla kluca (napr. <c>Slova</c> -> <c>Slova\</c>).
     /// </summary>
     public static string DefaultRelativePath(string key)
     {
@@ -17,13 +18,13 @@ public static class GroupRules
     }
 
     /// <summary>
-    ///     Nazov priecinka skupiny v priecinku jazyka (relativna cesta bez koncovej lomky).
+    /// Nazov priecinka skupiny v priecinku jazyka (relativna cesta bez koncovej lomky).
     /// </summary>
     public static string FolderName(string relativePath) => relativePath.TrimEnd('\\');
 
     /// <summary>
-    ///     Skontroluje kluc, nazov a relativnu cestu skupiny voci ostatnym skupinam jazyka. Kluce a nazvy sa porovnavaju
-    ///     bez ohladu na velkost pismen - INISS hlada skupinu podla kluca rovnako.
+    /// Skontroluje kluc, nazov a relativnu cestu skupiny voci ostatnym skupinam jazyka. Kluce a nazvy sa porovnavaju
+    /// bez ohladu na velkost pismen - INISS hlada skupinu podla kluca rovnako.
     /// </summary>
     /// <param name="groups">Skupiny jazyka.</param>
     /// <param name="edited">Upravovana skupina (s nou sa neporovnava), pri pridani <see langword="null" />.</param>
@@ -31,13 +32,13 @@ public static class GroupRules
     public static string? Validate(IEnumerable<FyzGroup> groups, FyzGroup? edited, string key, string name, string relativePath)
     {
         if (string.IsNullOrWhiteSpace(key) || string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(relativePath))
-            return "Nie sú vyplnené všetky polia.";
+            return Resources.Rules_AllFieldsRequired;
 
         if (!relativePath.EndsWith('\\'))
-            return "Relatívna cesta musí končiť '\\'.";
+            return Resources.Rules_PathMustEndWithBackslash;
 
         if (!IsValidRelativePath(relativePath))
-            return "Relatívna cesta musí byť názov jedného priečinka v priečinku jazyka, napr. Slova\\.";
+            return Resources.GroupRules_PathSingleDir;
 
         foreach (var grp in groups)
         {
@@ -45,13 +46,13 @@ public static class GroupRules
                 continue;
 
             if (SoundRules.SameText(grp.Key, key))
-                return "Skupina s rovnakým kľúčom už existuje.";
+                return Resources.GroupRules_KeyExists;
 
             if (SoundRules.SameText(grp.Name, name))
-                return "Skupina s rovnakým názvom už existuje.";
+                return Resources.GroupRules_NameExists;
 
             if (SoundRules.SameText(grp.RelativePath, relativePath))
-                return "Skupina s rovnakou relatívnou cestou už existuje.";
+                return Resources.GroupRules_PathExists;
         }
 
         return null;

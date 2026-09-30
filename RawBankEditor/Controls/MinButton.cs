@@ -4,11 +4,11 @@ public partial class MinButton : UserControl
 {
     private bool _hover;
     private readonly ToolTip _toolTip;
-    private Color hoverColor;
-    private Color iconColor;
-    private Color iconHoverColor;
+    private Color _hoverColor;
+    private Color _iconColor;
+    private Color _iconHoverColor;
 
-    private string toolTipText = "";
+    private string _toolTipText = "";
 
     public MinButton()
     {
@@ -20,42 +20,46 @@ public partial class MinButton : UserControl
         _toolTip = new ToolTip();
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public string ToolTipText
     {
-        get => toolTipText;
+        get => _toolTipText;
         set
         {
-            toolTipText = value;
-            _toolTip.SetToolTip(this, toolTipText);
+            _toolTipText = value;
+            _toolTip.SetToolTip(this, _toolTipText);
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Color IconColor
     {
-        get => iconColor;
+        get => _iconColor;
         set
         {
-            iconColor = value;
+            _iconColor = value;
             Invalidate();
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Color IconHoverColor
     {
-        get => iconHoverColor;
+        get => _iconHoverColor;
         set
         {
-            iconHoverColor = value;
+            _iconHoverColor = value;
             Invalidate();
         }
     }
 
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
     public Color HoverColor
     {
-        get => hoverColor;
+        get => _hoverColor;
         set
         {
-            hoverColor = value;
+            _hoverColor = value;
             Invalidate();
         }
     }
