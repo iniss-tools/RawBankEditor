@@ -383,7 +383,7 @@
     <value>lblHint</value>
   </data>
   <data name="&gt;&gt;lblHint.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ExControls.ExLabel, ExControls, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblHint.Parent" xml:space="preserve">
     <value>tlpMain</value>

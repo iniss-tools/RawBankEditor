@@ -38,7 +38,7 @@ namespace RawBankEditor.Forms
             this.cbEncoding = new ExControls.ExComboBox();
             this.cboxFirstHeader = new ExControls.ExCheckBox();
             this.cboxSkipExisting = new ExControls.ExCheckBox();
-            this.lblHint = new System.Windows.Forms.Label();
+            this.lblHint = new ExControls.ExLabel();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.flpButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.bStorno = new ExControls.ExButton();
@@ -210,7 +210,7 @@ namespace RawBankEditor.Forms
         private ExControls.ExComboBox cbEncoding;
         private ExControls.ExCheckBox cboxFirstHeader;
         private ExControls.ExCheckBox cboxSkipExisting;
-        private System.Windows.Forms.Label lblHint;
+        private ExControls.ExLabel lblHint;
         private System.Windows.Forms.DataGridView dgvData;
         private System.Windows.Forms.FlowLayoutPanel flpButtons;
         private ExControls.ExButton bStorno;
