@@ -198,6 +198,12 @@
   <data name="tsmimConvertLangToWav.Text" xml:space="preserve">
     <value>Převést zvuky v jazyce na .&amp;WAV</value>
   </data>
+  <data name="tsmimImportSounds.Text" xml:space="preserve">
+    <value>&amp;Importovat zvuky z tabulky...</value>
+  </data>
+  <data name="tsmimExportIniss2.Text" xml:space="preserve">
+    <value>E&amp;xportovat jazyk pro INISS2...</value>
+  </data>
   <data name="tsmimAppSettings.Text" xml:space="preserve">
     <value>Nastavení &amp;programu</value>
   </data>
@@ -422,6 +428,12 @@
   </data>
   <data name="tsmiConvertLangToWav.Text" xml:space="preserve">
     <value>Převést zvuky v jazyce na .WAV</value>
+  </data>
+  <data name="tsmiImportSounds.Text" xml:space="preserve">
+    <value>Importovat zvuky z tabulky...</value>
+  </data>
+  <data name="tsmiExportIniss2.Text" xml:space="preserve">
+    <value>Exportovat jazyk pro INISS2...</value>
   </data>
   <data name="tsbAppSettings.Text" xml:space="preserve">
     <value>Nastavení programu</value>

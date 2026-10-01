@@ -4641,6 +4641,39 @@
   <data name="&gt;&gt;tsmimConvertLangToWav.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tsmimSepImportExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;tsmimSepImportExport.Name" xml:space="preserve">
+    <value>tsmimSepImportExport</value>
+  </data>
+  <data name="&gt;&gt;tsmimSepImportExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimImportSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimImportSounds.Text" xml:space="preserve">
+    <value>&amp;Importovať zvuky z tabuľky...</value>
+  </data>
+  <data name="&gt;&gt;tsmimImportSounds.Name" xml:space="preserve">
+    <value>tsmimImportSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmimImportSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimExportIniss2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimExportIniss2.Text" xml:space="preserve">
+    <value>E&amp;xportovať jazyk pre INISS2...</value>
+  </data>
+  <data name="&gt;&gt;tsmimExportIniss2.Name" xml:space="preserve">
+    <value>tsmimExportIniss2</value>
+  </data>
+  <data name="&gt;&gt;tsmimExportIniss2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 6</value>
   </data>
@@ -6220,6 +6253,39 @@
     <value>tsmiConvertLangToWav</value>
   </data>
   <data name="&gt;&gt;tsmiConvertLangToWav.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiSepImportExport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;tsmiSepImportExport.Name" xml:space="preserve">
+    <value>tsmiSepImportExport</value>
+  </data>
+  <data name="&gt;&gt;tsmiSepImportExport.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiImportSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiImportSounds.Text" xml:space="preserve">
+    <value>Importovať zvuky z tabuľky...</value>
+  </data>
+  <data name="&gt;&gt;tsmiImportSounds.Name" xml:space="preserve">
+    <value>tsmiImportSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmiImportSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiExportIniss2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiExportIniss2.Text" xml:space="preserve">
+    <value>Exportovať jazyk pre INISS2...</value>
+  </data>
+  <data name="&gt;&gt;tsmiExportIniss2.Name" xml:space="preserve">
+    <value>tsmiExportIniss2</value>
+  </data>
+  <data name="&gt;&gt;tsmiExportIniss2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">

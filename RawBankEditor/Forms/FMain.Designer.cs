@@ -79,6 +79,9 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmimConvertLangToEwa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmimConvertLangToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimSepImportExport = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmimImportSounds = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimExportIniss2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmimAppSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -199,6 +202,9 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiConvertLangToEwa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiConvertLangToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSepImportExport = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiImportSounds = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExportIniss2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAppSettings = new System.Windows.Forms.ToolStripButton();
             this.tsbInfoApp = new System.Windows.Forms.ToolStripButton();
@@ -475,7 +481,10 @@ namespace RawBankEditor.Forms
             this.tsmimDeleteLanguage,
             this.toolStripSeparator6,
             this.tsmimConvertLangToEwa,
-            this.tsmimConvertLangToWav});
+            this.tsmimConvertLangToWav,
+            this.tsmimSepImportExport,
+            this.tsmimImportSounds,
+            this.tsmimExportIniss2});
             this.tsmimLangsSettings.Enabled = false;
             this.tsmimLangsSettings.Image = global::ToolsCore.GlobalResources.global_settings;
             this.tsmimLangsSettings.Name = "tsmimLangsSettings";
@@ -520,6 +529,25 @@ namespace RawBankEditor.Forms
             this.tsmimConvertLangToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.tsmimConvertLangToWav.Name = "tsmimConvertLangToWav";
             resources.ApplyResources(this.tsmimConvertLangToWav, "tsmimConvertLangToWav");
+            // 
+            // tsmimSepImportExport
+            // 
+            this.tsmimSepImportExport.Name = "tsmimSepImportExport";
+            resources.ApplyResources(this.tsmimSepImportExport, "tsmimSepImportExport");
+            // 
+            // tsmimImportSounds
+            // 
+            this.tsmimImportSounds.Enabled = false;
+            this.tsmimImportSounds.Image = global::ToolsCore.GlobalResources.import;
+            this.tsmimImportSounds.Name = "tsmimImportSounds";
+            resources.ApplyResources(this.tsmimImportSounds, "tsmimImportSounds");
+            // 
+            // tsmimExportIniss2
+            // 
+            this.tsmimExportIniss2.Enabled = false;
+            this.tsmimExportIniss2.Image = global::ToolsCore.GlobalResources.export;
+            this.tsmimExportIniss2.Name = "tsmimExportIniss2";
+            resources.ApplyResources(this.tsmimExportIniss2, "tsmimExportIniss2");
             // 
             // toolStripSeparator8
             // 
@@ -1690,7 +1718,10 @@ namespace RawBankEditor.Forms
             this.tsmiDeleteLanguage,
             this.toolStripSeparator5,
             this.tsmiConvertLangToEwa,
-            this.tsmiConvertLangToWav});
+            this.tsmiConvertLangToWav,
+            this.tsmiSepImportExport,
+            this.tsmiImportSounds,
+            this.tsmiExportIniss2});
             this.tsbLangsSettings.Enabled = false;
             this.tsbLangsSettings.Image = global::ToolsCore.GlobalResources.global_settings;
             this.tsbLangsSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -1737,6 +1768,25 @@ namespace RawBankEditor.Forms
             this.tsmiConvertLangToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.tsmiConvertLangToWav.Name = "tsmiConvertLangToWav";
             resources.ApplyResources(this.tsmiConvertLangToWav, "tsmiConvertLangToWav");
+            // 
+            // tsmiSepImportExport
+            // 
+            this.tsmiSepImportExport.Name = "tsmiSepImportExport";
+            resources.ApplyResources(this.tsmiSepImportExport, "tsmiSepImportExport");
+            // 
+            // tsmiImportSounds
+            // 
+            this.tsmiImportSounds.Enabled = false;
+            this.tsmiImportSounds.Image = global::ToolsCore.GlobalResources.import;
+            this.tsmiImportSounds.Name = "tsmiImportSounds";
+            resources.ApplyResources(this.tsmiImportSounds, "tsmiImportSounds");
+            // 
+            // tsmiExportIniss2
+            // 
+            this.tsmiExportIniss2.Enabled = false;
+            this.tsmiExportIniss2.Image = global::ToolsCore.GlobalResources.export;
+            this.tsmiExportIniss2.Name = "tsmiExportIniss2";
+            resources.ApplyResources(this.tsmiExportIniss2, "tsmiExportIniss2");
             // 
             // toolStripSeparator7
             // 
@@ -2096,9 +2146,15 @@ namespace RawBankEditor.Forms
         private ToolStripMenuItem tsmimShowErrors;
         private ToolStripMenuItem tsmimConvertLangToEwa;
         private ToolStripMenuItem tsmimConvertLangToWav;
+        private ToolStripSeparator tsmimSepImportExport;
+        private ToolStripMenuItem tsmimImportSounds;
+        private ToolStripMenuItem tsmimExportIniss2;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem tsmiConvertLangToEwa;
         private ToolStripMenuItem tsmiConvertLangToWav;
+        private ToolStripSeparator tsmiSepImportExport;
+        private ToolStripMenuItem tsmiImportSounds;
+        private ToolStripMenuItem tsmiExportIniss2;
         private ToolStripMenuItem tsmimConvertSoundsToEwa;
         private ToolStripMenuItem tsmimConvertSoundsToWav;
         private ToolStripMenuItem cmiMoveSounds;

@@ -62,6 +62,8 @@ public partial class FMain
             tsmimConvertLangToEwa, tsmiConvertLangToEwa);
         Add(RbeCommands.ConvertLanguageToWav, () => ConvertCurrentLanguage(false), () => LanguageReady && CurrentLanguage != null,
             tsmimConvertLangToWav, tsmiConvertLangToWav);
+        Add(RbeCommands.ImportSounds, DoImportSounds, () => LanguageReady && CurrentLanguage != null, tsmimImportSounds, tsmiImportSounds);
+        Add(RbeCommands.ExportIniss2, DoExportIniss2, () => LanguageReady && CurrentLanguage != null, tsmimExportIniss2, tsmiExportIniss2);
 
         Add(RbeCommands.AddGroup, DoAddGroup, ready, tsbAddGroup, cmiAddGroup);
         Add(RbeCommands.EditGroup, DoEditGroup, ready, tsbEditGroup, cmiEditGroup);

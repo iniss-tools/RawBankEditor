@@ -1602,8 +1602,9 @@ public partial class FMain : Form
 
     private async void fileSystemWatcher_Created(object sender, FileSystemEventArgs e)
     {
-        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
-        if (CurrentLanguage?.Directory is null)
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit; udalost zaradena do fronty
+        // okna este pred zatvorenim banky (napr. zmena priecinka jazyka po pridani skupiny) uz nema banku
+        if (CurrentLanguage?.Directory is null || _bank.Project is null)
             return;
 
         if (RawBankExplorer.ConvertSoundIsHandled || RawBankExplorer.MovingSoundIsHandled)
@@ -1673,8 +1674,9 @@ public partial class FMain : Form
 
     private void fileSystemWatcher_Deleted(object sender, FileSystemEventArgs e)
     {
-        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
-        if (CurrentLanguage?.Directory is null)
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit; udalost zaradena do fronty
+        // okna este pred zatvorenim banky (napr. zmena priecinka jazyka po pridani skupiny) uz nema banku
+        if (CurrentLanguage?.Directory is null || _bank.Project is null)
             return;
 
         if (RawBankExplorer.ConvertSoundIsHandled || RawBankExplorer.MovingSoundIsHandled)
@@ -1692,8 +1694,9 @@ public partial class FMain : Form
 
     private async void fileSystemWatcher_Changed(object sender, FileSystemEventArgs e)
     {
-        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
-        if (CurrentLanguage?.Directory is null)
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit; udalost zaradena do fronty
+        // okna este pred zatvorenim banky (napr. zmena priecinka jazyka po pridani skupiny) uz nema banku
+        if (CurrentLanguage?.Directory is null || _bank.Project is null)
             return;
 
         var fileElement = RawBankExplorer.GetElement(e.FullPath, CurrentLanguage!.Directory, _bank.PathToBank);
@@ -1727,8 +1730,9 @@ public partial class FMain : Form
 
     private void fileSystemWatcher_Renamed(object sender, RenamedEventArgs e)
     {
-        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit
-        if (CurrentLanguage?.Directory is null)
+        // jazyk sa nenacital (chyba pri nacitani) - nie je k comu udalost priradit; udalost zaradena do fronty
+        // okna este pred zatvorenim banky (napr. zmena priecinka jazyka po pridani skupiny) uz nema banku
+        if (CurrentLanguage?.Directory is null || _bank.Project is null)
             return;
 
         if (RawBankExplorer.ConvertSoundIsHandled)

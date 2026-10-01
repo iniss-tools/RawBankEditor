@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tlpMain.ColumnCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tlpMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tlpMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tlpMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>8, 8, 8, 8</value>
+  </data>
+  <data name="tlpMain.RowCount" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="tlpMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>840, 480</value>
+  </data>
+  <data name="tlpMain.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tlpMain.Name" xml:space="preserve">
+    <value>tlpMain</value>
+  </data>
+  <data name="&gt;&gt;tlpMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tlpMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tlpMain.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tlpMain.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="flpSource" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblHint" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="dgvData" Row="2" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="flpButtons" Row="3" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,Percent,100,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="flpSource.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flpSource.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="flpSource.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="flpSource.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 11</value>
+  </data>
+  <data name="flpSource.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 29</value>
+  </data>
+  <data name="flpSource.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;flpSource.Name" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;flpSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flpSource.Parent" xml:space="preserve">
+    <value>tlpMain</value>
+  </data>
+  <data name="&gt;&gt;flpSource.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bClipboard.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bClipboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="bClipboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 23</value>
+  </data>
+  <data name="bClipboard.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="bClipboard.Text" xml:space="preserve">
+    <value>Zo schránky</value>
+  </data>
+  <data name="&gt;&gt;bClipboard.Name" xml:space="preserve">
+    <value>bClipboard</value>
+  </data>
+  <data name="&gt;&gt;bClipboard.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bClipboard.Parent" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;bClipboard.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 3</value>
+  </data>
+  <data name="bFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 23</value>
+  </data>
+  <data name="bFile.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="bFile.Text" xml:space="preserve">
+    <value>Zo súboru...</value>
+  </data>
+  <data name="&gt;&gt;bFile.Name" xml:space="preserve">
+    <value>bFile</value>
+  </data>
+  <data name="&gt;&gt;bFile.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bFile.Parent" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;bFile.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblEncoding.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEncoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 8</value>
+  </data>
+  <data name="lblEncoding.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>15, 8, 3, 0</value>
+  </data>
+  <data name="lblEncoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 13</value>
+  </data>
+  <data name="lblEncoding.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblEncoding.Text" xml:space="preserve">
+    <value>Kódovanie CSV:</value>
+  </data>
+  <data name="&gt;&gt;lblEncoding.Name" xml:space="preserve">
+    <value>lblEncoding</value>
+  </data>
+  <data name="&gt;&gt;lblEncoding.Type" xml:space="preserve">
+    <value>ExControls.ExLabel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblEncoding.Parent" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;lblEncoding.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cbEncoding.Items" xml:space="preserve">
+    <value>UTF-8</value>
+  </data>
+  <data name="cbEncoding.Items1" xml:space="preserve">
+    <value>Windows-1250</value>
+  </data>
+  <data name="cbEncoding.Location" type="System.Drawing.Point, System.Drawing">
+    <value>283, 4</value>
+  </data>
+  <data name="cbEncoding.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 4, 3, 3</value>
+  </data>
+  <data name="cbEncoding.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
+  </data>
+  <data name="cbEncoding.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cbEncoding.Name" xml:space="preserve">
+    <value>cbEncoding</value>
+  </data>
+  <data name="&gt;&gt;cbEncoding.Type" xml:space="preserve">
+    <value>ExControls.ExComboBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cbEncoding.Parent" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;cbEncoding.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboxFirstHeader.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxFirstHeader.Location" type="System.Drawing.Point, System.Drawing">
+    <value>411, 6</value>
+  </data>
+  <data name="cboxFirstHeader.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>15, 6, 3, 3</value>
+  </data>
+  <data name="cboxFirstHeader.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 17</value>
+  </data>
+  <data name="cboxFirstHeader.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cboxFirstHeader.Text" xml:space="preserve">
+    <value>Prvý riadok je hlavička</value>
+  </data>
+  <data name="&gt;&gt;cboxFirstHeader.Name" xml:space="preserve">
+    <value>cboxFirstHeader</value>
+  </data>
+  <data name="&gt;&gt;cboxFirstHeader.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxFirstHeader.Parent" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;cboxFirstHeader.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cboxSkipExisting.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxSkipExisting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>569, 6</value>
+  </data>
+  <data name="cboxSkipExisting.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>15, 6, 3, 3</value>
+  </data>
+  <data name="cboxSkipExisting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 17</value>
+  </data>
+  <data name="cboxSkipExisting.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="cboxSkipExisting.Text" xml:space="preserve">
+    <value>Preskočiť zvuky, ktoré už v skupine sú</value>
+  </data>
+  <data name="&gt;&gt;cboxSkipExisting.Name" xml:space="preserve">
+    <value>cboxSkipExisting</value>
+  </data>
+  <data name="&gt;&gt;cboxSkipExisting.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxSkipExisting.Parent" xml:space="preserve">
+    <value>flpSource</value>
+  </data>
+  <data name="&gt;&gt;cboxSkipExisting.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblHint.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="lblHint.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 46</value>
+  </data>
+  <data name="lblHint.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 6</value>
+  </data>
+  <data name="lblHint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 26</value>
+  </data>
+  <data name="lblHint.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblHint.Text" xml:space="preserve">
+    <value>Typ stĺpca vyberiete kliknutím na jeho hlavičku. Povinné sú kľúč skupiny a kľúč zvuku, ostatné hodnoty sa doplnia podľa kľúčov. Tabuľku môžete aj pretiahnuť do okna.</value>
+  </data>
+  <data name="&gt;&gt;lblHint.Name" xml:space="preserve">
+    <value>lblHint</value>
+  </data>
+  <data name="&gt;&gt;lblHint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblHint.Parent" xml:space="preserve">
+    <value>tlpMain</value>
+  </data>
+  <data name="&gt;&gt;lblHint.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="dgvData.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dgvData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 81</value>
+  </data>
+  <data name="dgvData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 353</value>
+  </data>
+  <data name="dgvData.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;dgvData.Name" xml:space="preserve">
+    <value>dgvData</value>
+  </data>
+  <data name="&gt;&gt;dgvData.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvData.Parent" xml:space="preserve">
+    <value>tlpMain</value>
+  </data>
+  <data name="&gt;&gt;dgvData.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="flpButtons.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="flpButtons.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
+    <value>GrowAndShrink</value>
+  </data>
+  <data name="flpButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="flpButtons.FlowDirection" type="System.Windows.Forms.FlowDirection, System.Windows.Forms">
+    <value>RightToLeft</value>
+  </data>
+  <data name="flpButtons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 440</value>
+  </data>
+  <data name="flpButtons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>818, 29</value>
+  </data>
+  <data name="flpButtons.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;flpButtons.Name" xml:space="preserve">
+    <value>flpButtons</value>
+  </data>
+  <data name="&gt;&gt;flpButtons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.FlowLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;flpButtons.Parent" xml:space="preserve">
+    <value>tlpMain</value>
+  </data>
+  <data name="&gt;&gt;flpButtons.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="bStorno.Location" type="System.Drawing.Point, System.Drawing">
+    <value>740, 3</value>
+  </data>
+  <data name="bStorno.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="bStorno.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="bStorno.Text" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Name" xml:space="preserve">
+    <value>bStorno</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bStorno.Parent" xml:space="preserve">
+    <value>flpButtons</value>
+  </data>
+  <data name="&gt;&gt;bStorno.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bImport.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="bImport.Location" type="System.Drawing.Point, System.Drawing">
+    <value>659, 3</value>
+  </data>
+  <data name="bImport.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="bImport.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="bImport.Text" xml:space="preserve">
+    <value>Importovať</value>
+  </data>
+  <data name="&gt;&gt;bImport.Name" xml:space="preserve">
+    <value>bImport</value>
+  </data>
+  <data name="&gt;&gt;bImport.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bImport.Parent" xml:space="preserve">
+    <value>flpButtons</value>
+  </data>
+  <data name="&gt;&gt;bImport.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="cmsColumns.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="cmsColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="&gt;&gt;cmsColumns.Name" xml:space="preserve">
+    <value>cmsColumns</value>
+  </data>
+  <data name="&gt;&gt;cmsColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="ofdTable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>134, 17</value>
+  </metadata>
+  <data name="ofdTable.Filter" xml:space="preserve">
+    <value>Tabuľky (*.xlsx; *.xls; *.csv; *.txt)|*.xlsx;*.xls;*.csv;*.txt|Všetky súbory (*.*)|*.*</value>
+  </data>
+  <data name="ofdTable.Title" xml:space="preserve">
+    <value>Otvoriť tabuľku so zvukmi</value>
+  </data>
+  <data name="&gt;&gt;ofdTable.Name" xml:space="preserve">
+    <value>ofdTable</value>
+  </data>
+  <data name="&gt;&gt;ofdTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>840, 480</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>576, 359</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Import zvukov do jazyka {0}</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FImportSounds</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+</root>

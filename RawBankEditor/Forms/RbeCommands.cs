@@ -34,6 +34,8 @@ internal static class RbeCommands
     public static CommandInfo ConvertSoundsToWav => Fixed(nameof(ConvertSoundsToWav));
     public static CommandInfo ConvertLanguageToEwa => Fixed(nameof(ConvertLanguageToEwa));
     public static CommandInfo ConvertLanguageToWav => Fixed(nameof(ConvertLanguageToWav));
+    public static CommandInfo ImportSounds => Fixed(nameof(ImportSounds));
+    public static CommandInfo ExportIniss2 => Fixed(nameof(ExportIniss2));
     public static CommandInfo AddGroup => Fixed(nameof(AddGroup));
     public static CommandInfo EditGroup => Fixed(nameof(EditGroup));
     public static CommandInfo DeleteGroup => Fixed(nameof(DeleteGroup));

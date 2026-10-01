@@ -92,6 +92,19 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
             });
             Shot("jazyky/uprava-jazyka", () => new FAddEditLanguage(Program.Bank.Project!.Languages, language), Unselect);
 
+            // tabulka zo schranky - hlavicka sa rozpozna sama, stlpec Poznamka ostane nepouzity
+            Shot("import-a-export/import-zvukov", () => new FImportSounds(language), form =>
+            {
+                form.GetType().GetMethod("LoadText", Any)!.Invoke(form,
+                [
+                    "Skupina\tKľúč zvuku\tText hlásenia\tPoznámka\n" +
+                    "R1\t9900170\tNová Ves\tnová zastávka\n" +
+                    "R1\t9900180\tStará Hora\t\n" +
+                    "Znelky\tgong\tGong\tnová skupina\n"
+                ]);
+                Unselect(form);
+            });
+
             // stránky nastavení programu - rovnaké ako v GVDEditore, stránka Všeobecné má navyše skupinu Program
             foreach (var (slug, panel) in new[]
                      {

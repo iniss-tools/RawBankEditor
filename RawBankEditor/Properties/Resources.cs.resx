@@ -641,4 +641,84 @@ Původní soubory jsou ve složce:
   <data name="Convert_LanguageStatus" xml:space="preserve">
     <value>Převádím zvuky jazyka</value>
   </data>
+  <data name="ImportColumn_None" xml:space="preserve">
+    <value>– nepoužít –</value>
+  </data>
+  <data name="ImportColumn_GroupKey" xml:space="preserve">
+    <value>Klíč skupiny</value>
+  </data>
+  <data name="ImportColumn_GroupName" xml:space="preserve">
+    <value>Název skupiny</value>
+  </data>
+  <data name="ImportColumn_GroupPath" xml:space="preserve">
+    <value>Složka skupiny</value>
+  </data>
+  <data name="ImportColumn_SoundKey" xml:space="preserve">
+    <value>Klíč zvuku</value>
+  </data>
+  <data name="ImportColumn_SoundName" xml:space="preserve">
+    <value>Název zvuku</value>
+  </data>
+  <data name="ImportColumn_FileName" xml:space="preserve">
+    <value>Soubor</value>
+  </data>
+  <data name="ImportColumn_Text" xml:space="preserve">
+    <value>Text hlášení</value>
+  </data>
+  <data name="Import_MissingColumns" xml:space="preserve">
+    <value>Chybí povinné sloupce: {0}. Typ sloupce vyberete kliknutím na jeho záhlaví.</value>
+  </data>
+  <data name="Import_RowError" xml:space="preserve">
+    <value>Řádek {0}: {1}</value>
+  </data>
+  <data name="Import_KeysRequired" xml:space="preserve">
+    <value>Chybí klíč skupiny nebo klíč zvuku.</value>
+  </data>
+  <data name="Import_ReadFailed" xml:space="preserve">
+    <value>Tabulku {0} se nepodařilo načíst.
+
+{1}</value>
+  </data>
+  <data name="Import_NoData" xml:space="preserve">
+    <value>Nejprve načtěte tabulku ze schránky nebo ze souboru.</value>
+  </data>
+  <data name="Import_Errors" xml:space="preserve">
+    <value>Tabulka obsahuje chyby, nic se neimportovalo:
+
+{0}</value>
+  </data>
+  <data name="Import_NothingNew" xml:space="preserve">
+    <value>Všechny zvuky z tabulky už ve skupinách jsou (přeskočených: {0}).</value>
+  </data>
+  <data name="Import_Done" xml:space="preserve">
+    <value>Importované zvuky: {0}, nové skupiny: {1}.</value>
+  </data>
+  <data name="Import_Skipped" xml:space="preserve">
+    <value>Přeskočené zvuky, které už ve skupině byly ({0}):
+{1}</value>
+  </data>
+  <data name="Action_ImportSounds" xml:space="preserve">
+    <value>Import zvuků</value>
+  </data>
+  <data name="Export_Filter" xml:space="preserve">
+    <value>Banka INISS2 (FyzBank.xml)|FyzBank.xml|XML (*.xml)|*.xml</value>
+  </data>
+  <data name="Export_Status" xml:space="preserve">
+    <value>Exportuji jazyk pro INISS2</value>
+  </data>
+  <data name="Export_Failed" xml:space="preserve">
+    <value>Export se nepodařil: {0}</value>
+  </data>
+  <data name="Export_Done" xml:space="preserve">
+    <value>Jazyk byl exportován do {0} (zvuky: {1}).</value>
+  </data>
+  <data name="Export_DoneMissing" xml:space="preserve">
+    <value>Jazyk byl exportován do {0}, ale zvuky bez nahrávky ({1}) INISS2 místo hlášení přehraje jako ticho:
+{2}</value>
+  </data>
+  <data name="Export_IsDefault" xml:space="preserve">
+    <value>Je jazyk {0} v INISS2 výchozí (hlavní)?
+
+INISS2 potřebuje právě jeden výchozí jazyk – při exportu ostatních jazyků odpovězte Ne.</value>
+  </data>
 </root>

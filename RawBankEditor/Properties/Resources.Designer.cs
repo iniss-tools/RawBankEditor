@@ -1452,5 +1452,221 @@ namespace RawBankEditor.Properties {
                 return ResourceManager.GetString("Convert_LanguageStatus", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to – nepoužiť –.
+        /// </summary>
+        internal static string ImportColumn_None {
+            get {
+                return ResourceManager.GetString("ImportColumn_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kľúč skupiny.
+        /// </summary>
+        internal static string ImportColumn_GroupKey {
+            get {
+                return ResourceManager.GetString("ImportColumn_GroupKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Názov skupiny.
+        /// </summary>
+        internal static string ImportColumn_GroupName {
+            get {
+                return ResourceManager.GetString("ImportColumn_GroupName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Priečinok skupiny.
+        /// </summary>
+        internal static string ImportColumn_GroupPath {
+            get {
+                return ResourceManager.GetString("ImportColumn_GroupPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kľúč zvuku.
+        /// </summary>
+        internal static string ImportColumn_SoundKey {
+            get {
+                return ResourceManager.GetString("ImportColumn_SoundKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Názov zvuku.
+        /// </summary>
+        internal static string ImportColumn_SoundName {
+            get {
+                return ResourceManager.GetString("ImportColumn_SoundName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Súbor.
+        /// </summary>
+        internal static string ImportColumn_FileName {
+            get {
+                return ResourceManager.GetString("ImportColumn_FileName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text hlásenia.
+        /// </summary>
+        internal static string ImportColumn_Text {
+            get {
+                return ResourceManager.GetString("ImportColumn_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chýbajú povinné stĺpce: {0}. Typ stĺpca vyberiete kliknutím na jeho hlavičku..
+        /// </summary>
+        internal static string Import_MissingColumns {
+            get {
+                return ResourceManager.GetString("Import_MissingColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Riadok {0}: {1}.
+        /// </summary>
+        internal static string Import_RowError {
+            get {
+                return ResourceManager.GetString("Import_RowError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chýba kľúč skupiny alebo kľúč zvuku..
+        /// </summary>
+        internal static string Import_KeysRequired {
+            get {
+                return ResourceManager.GetString("Import_KeysRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabuľku {0} sa nepodarilo načítať.  {1}.
+        /// </summary>
+        internal static string Import_ReadFailed {
+            get {
+                return ResourceManager.GetString("Import_ReadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Najprv načítajte tabuľku zo schránky alebo zo súboru..
+        /// </summary>
+        internal static string Import_NoData {
+            get {
+                return ResourceManager.GetString("Import_NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabuľka obsahuje chyby, nič sa neimportovalo:  {0}.
+        /// </summary>
+        internal static string Import_Errors {
+            get {
+                return ResourceManager.GetString("Import_Errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všetky zvuky z tabuľky už v skupinách sú (preskočených: {0})..
+        /// </summary>
+        internal static string Import_NothingNew {
+            get {
+                return ResourceManager.GetString("Import_NothingNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importované zvuky: {0}, nové skupiny: {1}..
+        /// </summary>
+        internal static string Import_Done {
+            get {
+                return ResourceManager.GetString("Import_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preskočené zvuky, ktoré už v skupine boli ({0}): {1}.
+        /// </summary>
+        internal static string Import_Skipped {
+            get {
+                return ResourceManager.GetString("Import_Skipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import zvukov.
+        /// </summary>
+        internal static string Action_ImportSounds {
+            get {
+                return ResourceManager.GetString("Action_ImportSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banka INISS2 (FyzBank.xml)|FyzBank.xml|XML (*.xml)|*.xml.
+        /// </summary>
+        internal static string Export_Filter {
+            get {
+                return ResourceManager.GetString("Export_Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exportujem jazyk pre INISS2.
+        /// </summary>
+        internal static string Export_Status {
+            get {
+                return ResourceManager.GetString("Export_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export sa nepodaril: {0}.
+        /// </summary>
+        internal static string Export_Failed {
+            get {
+                return ResourceManager.GetString("Export_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jazyk bol exportovaný do {0} (zvuky: {1})..
+        /// </summary>
+        internal static string Export_Done {
+            get {
+                return ResourceManager.GetString("Export_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jazyk bol exportovaný do {0}, ale zvuky bez nahrávky ({1}) INISS2 namiesto hlásenia prehrá ako ticho: {2}.
+        /// </summary>
+        internal static string Export_DoneMissing {
+            get {
+                return ResourceManager.GetString("Export_DoneMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Je jazyk {0} v INISS2 predvolený (hlavný)?  INISS2 potrebuje práve jeden predvolený jazyk – pri exporte ostatných jazykov odpovedzte Nie..
+        /// </summary>
+        internal static string Export_IsDefault {
+            get {
+                return ResourceManager.GetString("Export_IsDefault", resourceCulture);
+            }
+        }
     }
 }
