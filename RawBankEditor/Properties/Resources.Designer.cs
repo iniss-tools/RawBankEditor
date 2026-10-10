@@ -61,8 +61,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tento program slúži na úpravu binárnych súborov zvukovej banky, ktoré používa program INISS. 
-        ///Program RawBankEditor nie je oficiálna aplikácia spoločnosti CHAPS ani spoločnosti INPROP..
+        ///   Looks up a localized string similar to Tento program slúži na úpravu binárnych súborov zvukovej banky, ktoré používa program INISS. ....
         /// </summary>
         internal static string AboutAppDescription {
             get {
@@ -81,10 +80,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Naozaj si želáte previesť vybrané súbory/priečinky do formátu {0}?
-        ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
-        ///
-        ///Zadaná akcia môže trvať dlhšiu dobu..
+        ///   Looks up a localized string similar to Vybrané súbory a priečinky sa prevedú do formátu {0}. Zvuky, ktoré už sú v tomto formáte, ostanú ....
         /// </summary>
         internal static string FMain_DoConvertFiles {
             get {
@@ -93,10 +89,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Naozaj si želáte previesť všetky zvuky v skupine do formátu {0}?
-        ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
-        ///
-        ///Zadaná akcia môže trvať dlhšiu dobu..
+        ///   Looks up a localized string similar to Všetky zvuky v skupine sa prevedú do formátu {0}. Zvuky, ktoré už sú v tomto formáte, ostanú bez ....
         /// </summary>
         internal static string FMain_DoConvertGroup {
             get {
@@ -105,10 +98,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Naozaj si želáte previesť všetky zvuky v jazyku do formátu {0}?
-        ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
-        ///
-        ///Zadaná akcia môže trvať dlhšiu dobu..
+        ///   Looks up a localized string similar to Všetky zvuky v jazyku sa prevedú do formátu {0}. Zvuky, ktoré už sú v tomto formáte, ostanú bez ....
         /// </summary>
         internal static string FMain_DoConvertLang {
             get {
@@ -117,10 +107,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Naozaj si želáte previesť vybrané zvuky do formátu {0}?
-        ///Tie zvuky, ktoré sú už v tomto formáte, ostanú zachované.
-        ///
-        ///Zadaná akcia môže trvať dlhšiu dobu..
+        ///   Looks up a localized string similar to Vybrané zvuky sa prevedú do formátu {0}. Zvuky, ktoré už sú v tomto formáte, ostanú bez zmeny. Môže ....
         /// </summary>
         internal static string FMain_DoConvertSounds {
             get {
@@ -446,7 +433,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Banka neobsahuje žiadny jazyk – pridajte ho cez Nastavenia jazykov.
+        ///   Looks up a localized string similar to Banka neobsahuje žiadny jazyk, pridajte ho cez Nastavenia jazykov.
         /// </summary>
         internal static string FMain_Status_NoLanguage {
             get {
@@ -455,7 +442,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Presun zvukov sa zastavil – presunulo sa {0} z {1}.  {2}.
+        ///   Looks up a localized string similar to Presun zvukov sa zastavil, presunulo sa {0} z {1}. {2}.
         /// </summary>
         internal static string FMain_MoveStopped {
             get {
@@ -743,7 +730,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vybrané položky sa odstránia, do koša sa presunú pri uložení banky.  Zvuky, ktorým vybrané súbory patria, sa odstránia zo zoznamu zvukov, priečinok skupiny sa odstráni aj so skupinou.  Pokračovať?.
+        ///   Looks up a localized string similar to Vybrané položky sa odstránia a do koša sa presunú pri uložení banky. Zvuky, ktorým vybrané súbory ....
         /// </summary>
         internal static string Explorer_DeleteConfirm {
             get {
@@ -1013,7 +1000,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Priečinok skupiny {0} ({1}) neexistuje – nahrávku {2} nie je kam presunúť..
+        ///   Looks up a localized string similar to Priečinok skupiny {0} ({1}) neexistuje, nahrávku {2} nie je kam presunúť..
         /// </summary>
         internal static string SoundRules_NoGroupDir {
             get {
@@ -1256,7 +1243,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Niektoré zvuky sa nedajú pridať – opravte kľúč alebo názov, alebo riadok odstráňte (Del):  {0}.
+        ///   Looks up a localized string similar to Niektoré zvuky sa nedajú pridať. Opravte kľúč alebo názov, alebo riadok odstráňte (Del): {0}.
         /// </summary>
         internal static string FAfterInsertSounds_Problems {
             get {
@@ -1310,7 +1297,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Niektoré zmeny na disku sa nepodarilo vrátiť – banka im nemusí zodpovedať:  {0}.
+        ///   Looks up a localized string similar to Niektoré zmeny na disku sa nepodarilo vrátiť. Banka im nemusí zodpovedať: {0}.
         /// </summary>
         internal static string FMain_RollbackFailed {
             get {
@@ -1661,7 +1648,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Je jazyk {0} v INISS2 predvolený (hlavný)?  INISS2 potrebuje práve jeden predvolený jazyk – pri exporte ostatných jazykov odpovedzte Nie..
+        ///   Looks up a localized string similar to Je jazyk {0} v INISS2 predvolený (hlavný)? INISS2 potrebuje práve jeden predvolený jazyk. Pri ....
         /// </summary>
         internal static string Export_IsDefault {
             get {

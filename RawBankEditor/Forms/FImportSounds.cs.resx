@@ -133,7 +133,7 @@
     <value>Přeskočit zvuky, které už ve skupině jsou</value>
   </data>
   <data name="lblHint.Text" xml:space="preserve">
-    <value>Typ sloupce vyberete kliknutím na jeho záhlaví. Povinné jsou klíč skupiny a klíč zvuku, ostatní hodnoty se doplní podle klíčů. Tabulku můžete také přetáhnout do okna.</value>
+    <value>Typ sloupce vyberete kliknutím na jeho záhlaví. Povinné jsou klíč skupiny a klíč zvuku. Tabulku můžete také přetáhnout do okna.</value>
   </data>
   <data name="bStorno.Text" xml:space="preserve">
     <value>Zrušit</value>

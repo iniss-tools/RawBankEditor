@@ -377,7 +377,7 @@
     <value>1</value>
   </data>
   <data name="lblHint.Text" xml:space="preserve">
-    <value>Typ stĺpca vyberiete kliknutím na jeho hlavičku. Povinné sú kľúč skupiny a kľúč zvuku, ostatné hodnoty sa doplnia podľa kľúčov. Tabuľku môžete aj pretiahnuť do okna.</value>
+    <value>Typ stĺpca vyberiete kliknutím na jeho hlavičku. Povinné sú kľúč skupiny a kľúč zvuku. Tabuľku môžete aj pretiahnuť do okna.</value>
   </data>
   <data name="&gt;&gt;lblHint.Name" xml:space="preserve">
     <value>lblHint</value>

@@ -138,10 +138,10 @@ Uložit je před přepnutím jazyka?</value>
     <value>Při načítání banky došlo k chybě</value>
   </data>
   <data name="FMain_Status_NoLanguage" xml:space="preserve">
-    <value>Banka neobsahuje žádný jazyk – přidejte ho přes Nastavení jazyků</value>
+    <value>Banka neobsahuje žádný jazyk, přidejte ho přes Nastavení jazyků</value>
   </data>
   <data name="FMain_MoveStopped" xml:space="preserve">
-    <value>Přesun zvuků se zastavil – přesunulo se {0} z {1}.
+    <value>Přesun zvuků se zastavil, přesunulo se {0} z {1}.
 
 {2}</value>
   </data>
@@ -257,9 +257,9 @@ Opravte název nebo přejmenování zrušte klávesou Esc.</value>
 {1}</value>
   </data>
   <data name="Explorer_DeleteConfirm" xml:space="preserve">
-    <value>Vybrané položky budou odstraněny, do koše se přesunou při uložení banky.
+    <value>Vybrané položky budou odstraněny a do koše se přesunou při uložení banky.
 
-Zvuky, kterým vybrané soubory patří, budou odstraněny ze seznamu zvuků, složka skupiny bude odstraněna i se skupinou.
+Zvuky, kterým vybrané soubory patří, budou odstraněny ze seznamu zvuků. Složka skupiny bude odstraněna i se skupinou.
 
 Pokračovat?</value>
   </data>
@@ -367,7 +367,7 @@ Odstranit i složku skupiny s nahrávkami? Do koše se přesune při uložení b
     <value>Název {0} už ve skupině {1} existuje.</value>
   </data>
   <data name="SoundRules_NoGroupDir" xml:space="preserve">
-    <value>Složka skupiny {0} ({1}) neexistuje – nahrávku {2} není kam přesunout.</value>
+    <value>Složka skupiny {0} ({1}) neexistuje, nahrávku {2} není kam přesunout.</value>
   </data>
   <data name="SoundRules_FileExists" xml:space="preserve">
     <value>Ve složce skupiny {0} už je soubor {1}.</value>
@@ -448,7 +448,7 @@ Odstranit i složku skupiny s nahrávkami? Do koše se přesune při uložení b
     <value>Nebyla vybrána žádná skupina.</value>
   </data>
   <data name="FAfterInsertSounds_Problems" xml:space="preserve">
-    <value>Některé zvuky nelze přidat – opravte klíč nebo název, nebo řádek odstraňte (Del):
+    <value>Některé zvuky nelze přidat. Opravte klíč nebo název, nebo řádek odstraňte (Del):
 
 {0}</value>
   </data>
@@ -462,7 +462,7 @@ Odstranit i složku skupiny s nahrávkami? Do koše se přesune při uložení b
     <value>Přidat</value>
   </data>
   <data name="AboutAppDescription" xml:space="preserve">
-    <value>Tento program slouží k úpravě binárních souborů zvukové banky, které používá program INISS. 
+    <value>Tento program slouží k úpravě binárních souborů zvukové banky, které používá program INISS.
 Program RawBankEditor není oficiální aplikace společnosti CHAPS ani společnosti INPROP.</value>
   </data>
   <data name="FMain_Save_Changes" xml:space="preserve">
@@ -481,28 +481,24 @@ Program RawBankEditor není oficiální aplikace společnosti CHAPS ani společn
     <value>Upozornění</value>
   </data>
   <data name="FMain_DoConvertLang" xml:space="preserve">
-    <value>Opravdu chcete převést všechny zvuky v jazyce do formátu {0}?
-Zvuky, které už jsou v tomto formátu, zůstanou zachovány.
+    <value>Všechny zvuky v jazyce se převedou do formátu {0}. Zvuky, které už jsou v tomto formátu, zůstanou beze změny. Může to chvíli trvat.
 
-Tato akce může trvat delší dobu.</value>
+Pokračovat?</value>
   </data>
   <data name="FMain_DoConvertGroup" xml:space="preserve">
-    <value>Opravdu chcete převést všechny zvuky ve skupině do formátu {0}?
-Zvuky, které už jsou v tomto formátu, zůstanou zachovány.
+    <value>Všechny zvuky ve skupině se převedou do formátu {0}. Zvuky, které už jsou v tomto formátu, zůstanou beze změny. Může to chvíli trvat.
 
-Tato akce může trvat delší dobu.</value>
+Pokračovat?</value>
   </data>
   <data name="FMain_DoConvertSounds" xml:space="preserve">
-    <value>Opravdu chcete převést vybrané zvuky do formátu {0}?
-Zvuky, které už jsou v tomto formátu, zůstanou zachovány.
+    <value>Vybrané zvuky se převedou do formátu {0}. Zvuky, které už jsou v tomto formátu, zůstanou beze změny. Může to chvíli trvat.
 
-Tato akce může trvat delší dobu.</value>
+Pokračovat?</value>
   </data>
   <data name="FMain_DoConvertFiles" xml:space="preserve">
-    <value>Opravdu chcete převést vybrané soubory/složky do formátu {0}?
-Zvuky, které už jsou v tomto formátu, zůstanou zachovány.
+    <value>Vybrané soubory a složky se převedou do formátu {0}. Zvuky, které už jsou v tomto formátu, zůstanou beze změny. Může to chvíli trvat.
 
-Tato akce může trvat delší dobu.</value>
+Pokračovat?</value>
   </data>
   <data name="FMain_Save_Failed" xml:space="preserve">
     <value>Uložení banky selhalo, soubory banky byly vráceny do původního stavu a změny zůstaly neuložené.
@@ -588,7 +584,7 @@ Původní soubory jsou ve složce:
 {0}</value>
   </data>
   <data name="FMain_RollbackFailed" xml:space="preserve">
-    <value>Některé změny na disku se nepodařilo vrátit – banka jim nemusí odpovídat:
+    <value>Některé změny na disku se nepodařilo vrátit. Banka jim nemusí odpovídat:
 
 {0}</value>
   </data>
@@ -719,6 +715,6 @@ Původní soubory jsou ve složce:
   <data name="Export_IsDefault" xml:space="preserve">
     <value>Je jazyk {0} v INISS2 výchozí (hlavní)?
 
-INISS2 potřebuje právě jeden výchozí jazyk – při exportu ostatních jazyků odpovězte Ne.</value>
+INISS2 potřebuje právě jeden výchozí jazyk. Při exportu ostatních jazyků odpovězte Ne.</value>
   </data>
 </root>
