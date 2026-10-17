@@ -4239,11 +4239,35 @@
     <value>17, 99</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="titleBar.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="titleBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1095, 32</value>
+  </data>
+  <data name="titleBar.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;titleBar.Name" xml:space="preserve">
+    <value>titleBar</value>
+  </data>
+  <data name="&gt;&gt;titleBar.Type" xml:space="preserve">
+    <value>ExControls.ExTitleBar, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;titleBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;titleBar.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="menuStripMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="menuStripMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>36, 0</value>
+  </data>
   <data name="menuStripMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1095, 24</value>
+    <value>320, 32</value>
   </data>
   <data name="menuStripMain.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4258,10 +4282,10 @@
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;menuStripMain.Parent" xml:space="preserve">
-    <value>$this</value>
+    <value>titleBar</value>
   </data>
   <data name="&gt;&gt;menuStripMain.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -5914,10 +5938,10 @@
     <value>Fill</value>
   </data>
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 51</value>
+    <value>0, 59</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1095, 532</value>
+    <value>1095, 524</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -5998,7 +6022,7 @@
     <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="toolStripMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+    <value>0, 32</value>
   </data>
   <data name="toolStripMain.Size" type="System.Drawing.Size, System.Drawing">
     <value>1095, 27</value>

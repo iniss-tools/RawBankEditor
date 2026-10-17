@@ -45,6 +45,7 @@ namespace RawBankEditor.Forms
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.titleBar = new ExControls.ExTitleBar();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmimOpen = new System.Windows.Forms.ToolStripMenuItem();
@@ -224,6 +225,7 @@ namespace RawBankEditor.Forms
             this.moveManager = new ExControls.Providers.BackwardForwardProvider();
             this.changeManager = new ExControls.Providers.UndoRedoManager();
             this.timerToCheck = new System.Windows.Forms.Timer(this.components);
+            this.titleBar.SuspendLayout();
             this.menuStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -261,6 +263,12 @@ namespace RawBankEditor.Forms
             this.toolStripMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher)).BeginInit();
             this.SuspendLayout();
+            // 
+            // titleBar
+            // 
+            this.titleBar.Controls.Add(this.menuStripMain);
+            resources.ApplyResources(this.titleBar, "titleBar");
+            this.titleBar.Name = "titleBar";
             // 
             // menuStripMain
             // 
@@ -1941,14 +1949,17 @@ namespace RawBankEditor.Forms
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.toolStripMain);
-            this.Controls.Add(this.menuStripMain);
+            this.Controls.Add(this.titleBar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStripMain;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FMain";
+            this.UseCompositedPainting = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FMain_FormClosed);
+            this.titleBar.ResumeLayout(false);
+            this.titleBar.PerformLayout();
             this.menuStripMain.ResumeLayout(false);
             this.menuStripMain.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -2003,6 +2014,7 @@ namespace RawBankEditor.Forms
 
         #endregion
 
+        private ExControls.ExTitleBar titleBar;
         private System.Windows.Forms.MenuStrip menuStripMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiEdit;

@@ -14,7 +14,7 @@ using ToolsCore.XML;
 
 namespace RawBankEditor.Forms;
 
-public partial class FMain : Form
+public partial class FMain : ExForm
 {
     private readonly ExBindingList<IRawBankMessage> _messages = [];
 
