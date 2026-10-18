@@ -163,51 +163,6 @@
     <value>541, 25</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tsbErrors.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="tsbWarnings.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="tsbInfos.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIDSURBVDhPpZLrS5NhGMb3j4SWh0oRQVExD4gonkDpg4hG
-        YKxG6WBogkMZKgPNCEVJFBGdGETEvgwyO9DJE5syZw3PIlPEE9pgBCLZ5XvdMB8Ew8gXbl54nuf63dd9
-        0OGSnwCahxbPRNPAPMw9Xpg6ZmF46kZZ0xSKzJPIrhpDWsVnpBhGkKx3nAX8Pv7z1zg8OoY/cITdn4fw
-        bf/C0kYAN3Ma/w3gWfZL5kzTKBxjWyK2DftwI9tyMYCZKXbNHaD91bLYJrDXsYbrWfUKwJrPE9M2M1Oc
-        VzOOpHI7Jr376Hi9ogHqFIANO0/MmmmbmSmm9a8ze+I4MrNWAdjtoJgWcx+PSzg166yZZ8xM8XvXDix9
-        c4jIqFYAjoriBV9AhEPv1mH/sonogha0afbZMMZz+yreTGyhpusHwtNNCsA5U1zS4BLxzJIfg299qO32
-        Ir7UJtZfftyATqeT+8o2D8JSjQrAJblrncYL7ZJ2+bfaFnC/1S1NjL3diRat7qrO7wLRP3HjWsojBeCo
-        mDEo5mNjuweFGvjWg2EBhCbpkW78htSHHwRyNdmgAFzPEee2iFkzayy2OLXzT4gr6UdUnlXrullsxxQ+
-        kx0g8BTA3aZlButjSTyjODq/WcQcW/B/Je4OQhLvKQDnzN1mp0nnkvAhR8VuMzNrpm1mpjgkoVwB/v8D
-        TgDQASA1MVpwzwAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="cMsgCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -4309,7 +4264,7 @@
     <value>tsmimOpen</value>
   </data>
   <data name="&gt;&gt;tsmimOpen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimRecent.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 22</value>
@@ -4321,7 +4276,7 @@
     <value>tsmimRecent</value>
   </data>
   <data name="&gt;&gt;tsmimRecent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>139, 6</value>
@@ -4342,7 +4297,7 @@
     <value>tsmimSave</value>
   </data>
   <data name="&gt;&gt;tsmimSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimSaveAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 22</value>
@@ -4354,7 +4309,7 @@
     <value>tsmimSaveAll</value>
   </data>
   <data name="&gt;&gt;tsmimSaveAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiEdit.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
@@ -4378,7 +4333,7 @@
     <value>tsmimUndo</value>
   </data>
   <data name="&gt;&gt;tsmimUndo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimRedo.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4390,7 +4345,7 @@
     <value>tsmimRedo</value>
   </data>
   <data name="&gt;&gt;tsmimRedo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -4411,7 +4366,7 @@
     <value>tsmimAddSound</value>
   </data>
   <data name="&gt;&gt;tsmimAddSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimDeleteSound.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4423,7 +4378,7 @@
     <value>tsmimDeleteSound</value>
   </data>
   <data name="&gt;&gt;tsmimDeleteSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimMoveSounds.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4435,7 +4390,7 @@
     <value>tsmimMoveSounds</value>
   </data>
   <data name="&gt;&gt;tsmimMoveSounds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimConvertSoundsToEwa.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4447,7 +4402,7 @@
     <value>tsmimConvertSoundsToEwa</value>
   </data>
   <data name="&gt;&gt;tsmimConvertSoundsToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimConvertSoundsToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4459,7 +4414,7 @@
     <value>tsmimConvertSoundsToWav</value>
   </data>
   <data name="&gt;&gt;tsmimConvertSoundsToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator26.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -4480,7 +4435,7 @@
     <value>tsmimRewriteMode</value>
   </data>
   <data name="&gt;&gt;tsmimRewriteMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimWrapTextSoundCol.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4492,7 +4447,7 @@
     <value>tsmimWrapTextSoundCol</value>
   </data>
   <data name="&gt;&gt;tsmimWrapTextSoundCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiShow.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
@@ -4516,7 +4471,7 @@
     <value>tsmimGoBack</value>
   </data>
   <data name="&gt;&gt;tsmimGoBack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimGoForward.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -4528,7 +4483,7 @@
     <value>tsmimGoForward</value>
   </data>
   <data name="&gt;&gt;tsmimGoForward.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
@@ -4549,7 +4504,7 @@
     <value>tsmimSearch</value>
   </data>
   <data name="&gt;&gt;tsmimSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 6</value>
@@ -4570,7 +4525,7 @@
     <value>tsmimShowErrors</value>
   </data>
   <data name="&gt;&gt;tsmimShowErrors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiTools.Size" type="System.Drawing.Size, System.Drawing">
     <value>63, 20</value>
@@ -4594,7 +4549,7 @@
     <value>tsmimLangsSettings</value>
   </data>
   <data name="&gt;&gt;tsmimLangsSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimAddLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4606,7 +4561,7 @@
     <value>tsmimAddLanguage</value>
   </data>
   <data name="&gt;&gt;tsmimAddLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimEditLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4618,7 +4573,7 @@
     <value>tsmimEditLanguage</value>
   </data>
   <data name="&gt;&gt;tsmimEditLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimDeleteLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4630,7 +4585,7 @@
     <value>tsmimDeleteLanguage</value>
   </data>
   <data name="&gt;&gt;tsmimDeleteLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -4651,7 +4606,7 @@
     <value>tsmimConvertLangToEwa</value>
   </data>
   <data name="&gt;&gt;tsmimConvertLangToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimConvertLangToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4663,7 +4618,7 @@
     <value>tsmimConvertLangToWav</value>
   </data>
   <data name="&gt;&gt;tsmimConvertLangToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimSepImportExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -4684,7 +4639,7 @@
     <value>tsmimImportSounds</value>
   </data>
   <data name="&gt;&gt;tsmimImportSounds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimExportIniss2.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -4696,7 +4651,7 @@
     <value>tsmimExportIniss2</value>
   </data>
   <data name="&gt;&gt;tsmimExportIniss2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 6</value>
@@ -4717,7 +4672,7 @@
     <value>tsmimAppSettings</value>
   </data>
   <data name="&gt;&gt;tsmimAppSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 20</value>
@@ -4741,7 +4696,7 @@
     <value>tsmimInfoApp</value>
   </data>
   <data name="&gt;&gt;tsmimInfoApp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmimUpdates.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 22</value>
@@ -4879,7 +4834,7 @@
     <value>tsbAddGroup</value>
   </data>
   <data name="&gt;&gt;tsbAddGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbEditGroup.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -4891,7 +4846,7 @@
     <value>tsbEditGroup</value>
   </data>
   <data name="&gt;&gt;tsbEditGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbDeleteGroup.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -4903,7 +4858,7 @@
     <value>tsbDeleteGroup</value>
   </data>
   <data name="&gt;&gt;tsbDeleteGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -4924,7 +4879,7 @@
     <value>tsbConvertGroupToEwa</value>
   </data>
   <data name="&gt;&gt;tsbConvertGroupToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbConvertGroupToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -4936,7 +4891,7 @@
     <value>tsbConvertGroupToWav</value>
   </data>
   <data name="&gt;&gt;tsbConvertGroupToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dgvGroups.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -5008,7 +4963,7 @@
     <value>cmiAddGroup</value>
   </data>
   <data name="&gt;&gt;cmiAddGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiEditGroup.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 26</value>
@@ -5020,7 +4975,7 @@
     <value>cmiEditGroup</value>
   </data>
   <data name="&gt;&gt;cmiEditGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiDeleteGroup.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 26</value>
@@ -5032,7 +4987,7 @@
     <value>cmiDeleteGroup</value>
   </data>
   <data name="&gt;&gt;cmiDeleteGroup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 6</value>
@@ -5053,7 +5008,7 @@
     <value>cmiConvertGroupToEwa</value>
   </data>
   <data name="&gt;&gt;cmiConvertGroupToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiConvertGroupToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 26</value>
@@ -5065,7 +5020,7 @@
     <value>cmiConvertGroupToWav</value>
   </data>
   <data name="&gt;&gt;cmiConvertGroupToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fyzGroupBindingSource.Name" xml:space="preserve">
     <value>fyzGroupBindingSource</value>
@@ -5173,7 +5128,7 @@
     <value>cmiOpenInExplorer</value>
   </data>
   <data name="&gt;&gt;cmiOpenInExplorer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiPlay.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
@@ -5185,7 +5140,7 @@
     <value>cmiPlay</value>
   </data>
   <data name="&gt;&gt;cmiPlay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
@@ -5206,7 +5161,7 @@
     <value>cmiRenameFileDir</value>
   </data>
   <data name="&gt;&gt;cmiRenameFileDir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiDeleteFileDir.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
@@ -5218,7 +5173,7 @@
     <value>cmiDeleteFileDir</value>
   </data>
   <data name="&gt;&gt;cmiDeleteFileDir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 6</value>
@@ -5239,7 +5194,7 @@
     <value>cmiConvertToEwaFile</value>
   </data>
   <data name="&gt;&gt;cmiConvertToEwaFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiConvertToWavFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>228, 22</value>
@@ -5251,7 +5206,7 @@
     <value>cmiConvertToWavFile</value>
   </data>
   <data name="&gt;&gt;cmiConvertToWavFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fileSystemElementBindingSource.Name" xml:space="preserve">
     <value>fileSystemElementBindingSource</value>
@@ -5323,7 +5278,7 @@
     <value>tsbOpenInExplorer</value>
   </data>
   <data name="&gt;&gt;tsbOpenInExplorer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator16.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -5344,7 +5299,7 @@
     <value>tsbPlay</value>
   </data>
   <data name="&gt;&gt;tsbPlay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -5365,7 +5320,7 @@
     <value>tsbRenameFileDir</value>
   </data>
   <data name="&gt;&gt;tsbRenameFileDir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbDeleteFileDir.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -5377,7 +5332,7 @@
     <value>tsbDeleteFileDir</value>
   </data>
   <data name="&gt;&gt;tsbDeleteFileDir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -5398,7 +5353,7 @@
     <value>tsbConvertFilesToEwa</value>
   </data>
   <data name="&gt;&gt;tsbConvertFilesToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbConvertFilesToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -5410,7 +5365,7 @@
     <value>tsbConvertFilesToWav</value>
   </data>
   <data name="&gt;&gt;tsbConvertFilesToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="splitSoundsErrors.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -5539,7 +5494,7 @@
     <value>cmiAddSound</value>
   </data>
   <data name="&gt;&gt;cmiAddSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiDeleteSound.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 26</value>
@@ -5551,7 +5506,7 @@
     <value>cmiDeleteSound</value>
   </data>
   <data name="&gt;&gt;cmiDeleteSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiMoveSounds.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 26</value>
@@ -5563,7 +5518,7 @@
     <value>cmiMoveSounds</value>
   </data>
   <data name="&gt;&gt;cmiMoveSounds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 6</value>
@@ -5584,7 +5539,7 @@
     <value>cmiConvertSoundsToEwa</value>
   </data>
   <data name="&gt;&gt;cmiConvertSoundsToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiConvertSoundsToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>223, 26</value>
@@ -5596,7 +5551,7 @@
     <value>cmiConvertSoundsToWav</value>
   </data>
   <data name="&gt;&gt;cmiConvertSoundsToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;fyzSoundBindingSource.Name" xml:space="preserve">
     <value>fyzSoundBindingSource</value>
@@ -5662,7 +5617,7 @@
     <value>tsbErrors</value>
   </data>
   <data name="&gt;&gt;tsbErrors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator13.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -5683,7 +5638,7 @@
     <value>tsbWarnings</value>
   </data>
   <data name="&gt;&gt;tsbWarnings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -5704,7 +5659,7 @@
     <value>tsbInfos</value>
   </data>
   <data name="&gt;&gt;tsbInfos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbResolveProblem.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -5716,7 +5671,7 @@
     <value>tsbResolveProblem</value>
   </data>
   <data name="&gt;&gt;tsbResolveProblem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbHighlightProblem.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -5728,7 +5683,7 @@
     <value>tsbHighlightProblem</value>
   </data>
   <data name="&gt;&gt;tsbHighlightProblem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="dgvErrors.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -5830,7 +5785,7 @@
     <value>cmiHighlightProblem</value>
   </data>
   <data name="&gt;&gt;cmiHighlightProblem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="cmiResolveProblem.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 22</value>
@@ -5842,7 +5797,7 @@
     <value>cmiResolveProblem</value>
   </data>
   <data name="&gt;&gt;cmiResolveProblem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;rawBankMessageBindingSource.Name" xml:space="preserve">
     <value>rawBankMessageBindingSource</value>
@@ -6019,7 +5974,7 @@
     <value>tssbErrors</value>
   </data>
   <data name="&gt;&gt;tssbErrors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripDropDownButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 32</value>
@@ -6055,7 +6010,7 @@
     <value>tsbOpen</value>
   </data>
   <data name="&gt;&gt;tsbOpen.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbRecent.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 24</value>
@@ -6067,7 +6022,7 @@
     <value>tsbRecent</value>
   </data>
   <data name="&gt;&gt;tsbRecent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripDropDownButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator25.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6088,7 +6043,7 @@
     <value>tsbSave</value>
   </data>
   <data name="&gt;&gt;tsbSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbSaveAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6100,7 +6055,7 @@
     <value>tsbSaveAll</value>
   </data>
   <data name="&gt;&gt;tsbSaveAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6121,7 +6076,7 @@
     <value>tsbGoBack</value>
   </data>
   <data name="&gt;&gt;tsbGoBack.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSplitButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripSplitButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbGoForward.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6133,7 +6088,7 @@
     <value>tsbGoForward</value>
   </data>
   <data name="&gt;&gt;tsbGoForward.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6154,7 +6109,7 @@
     <value>tsbUndo</value>
   </data>
   <data name="&gt;&gt;tsbUndo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbRedo.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6166,7 +6121,7 @@
     <value>tsbRedo</value>
   </data>
   <data name="&gt;&gt;tsbRedo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6208,7 +6163,7 @@
     <value>tsbLangsSettings</value>
   </data>
   <data name="&gt;&gt;tsbLangsSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripDropDownButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiAddLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -6220,7 +6175,7 @@
     <value>tsmiAddLanguage</value>
   </data>
   <data name="&gt;&gt;tsmiAddLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiEditLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -6232,7 +6187,7 @@
     <value>tsmiEditLanguage</value>
   </data>
   <data name="&gt;&gt;tsmiEditLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiDeleteLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -6244,7 +6199,7 @@
     <value>tsmiDeleteLanguage</value>
   </data>
   <data name="&gt;&gt;tsmiDeleteLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -6265,7 +6220,7 @@
     <value>tsmiConvertLangToEwa</value>
   </data>
   <data name="&gt;&gt;tsmiConvertLangToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiConvertLangToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -6277,7 +6232,7 @@
     <value>tsmiConvertLangToWav</value>
   </data>
   <data name="&gt;&gt;tsmiConvertLangToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiSepImportExport.Size" type="System.Drawing.Size, System.Drawing">
     <value>261, 6</value>
@@ -6298,7 +6253,7 @@
     <value>tsmiImportSounds</value>
   </data>
   <data name="&gt;&gt;tsmiImportSounds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsmiExportIniss2.Size" type="System.Drawing.Size, System.Drawing">
     <value>264, 22</value>
@@ -6310,7 +6265,7 @@
     <value>tsmiExportIniss2</value>
   </data>
   <data name="&gt;&gt;tsmiExportIniss2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6331,7 +6286,7 @@
     <value>tsbAppSettings</value>
   </data>
   <data name="&gt;&gt;tsbAppSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbInfoApp.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6343,7 +6298,7 @@
     <value>tsbInfoApp</value>
   </data>
   <data name="&gt;&gt;tsbInfoApp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6364,7 +6319,7 @@
     <value>tsbAddSound</value>
   </data>
   <data name="&gt;&gt;tsbAddSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbMoveSounds.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6376,7 +6331,7 @@
     <value>tsbMoveSounds</value>
   </data>
   <data name="&gt;&gt;tsbMoveSounds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbDeleteSound.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6388,7 +6343,7 @@
     <value>tsbDeleteSound</value>
   </data>
   <data name="&gt;&gt;tsbDeleteSound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator24.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6409,7 +6364,7 @@
     <value>tsbConvertSoundsToEwa</value>
   </data>
   <data name="&gt;&gt;tsbConvertSoundsToEwa.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbConvertSoundsToWav.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6421,7 +6376,7 @@
     <value>tsbConvertSoundsToWav</value>
   </data>
   <data name="&gt;&gt;tsbConvertSoundsToWav.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 27</value>
@@ -6442,7 +6397,7 @@
     <value>tsbSearch</value>
   </data>
   <data name="&gt;&gt;tsbSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbWrapTextSoundCol.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6454,7 +6409,7 @@
     <value>tsbWrapTextSoundCol</value>
   </data>
   <data name="&gt;&gt;tsbWrapTextSoundCol.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="tsbRewriteMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>24, 24</value>
@@ -6466,7 +6421,7 @@
     <value>tsbRewriteMode</value>
   </data>
   <data name="&gt;&gt;tsbRewriteMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="undoActionChooser.Size" type="System.Drawing.Size, System.Drawing">
     <value>2, 31</value>

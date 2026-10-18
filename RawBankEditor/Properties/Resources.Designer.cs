@@ -68,16 +68,7 @@ namespace RawBankEditor.Properties {
                 return ResourceManager.GetString("AboutAppDescription", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ewa {
-            get {
-                object obj = ResourceManager.GetObject("ewa", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
+
         
         /// <summary>
         ///   Looks up a localized string similar to Vybrané súbory a priečinky sa prevedú do formátu {0}. Zvuky, ktoré už sú v tomto formáte, ostanú ....
@@ -187,16 +178,7 @@ namespace RawBankEditor.Properties {
                 return ResourceManager.GetString("RWarning", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap wav {
-            get {
-                object obj = ResourceManager.GetObject("wav", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
+
         
         /// <summary>
         ///   Looks up a localized string similar to Otvoriť banku.

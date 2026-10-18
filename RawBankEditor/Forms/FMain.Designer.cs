@@ -3,6 +3,7 @@ using ExControls;
 using RawBankEditor.Entities;
 using RawBankEditor.Tools;
 using ToolsCore.Iniss.Entities;
+using ToolsCore.Icons;
 
 namespace RawBankEditor.Forms
 {
@@ -48,68 +49,68 @@ namespace RawBankEditor.Forms
             this.titleBar = new ExControls.ExTitleBar();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimRecent = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimOpen = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimRecent = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimSaveAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimSave = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimSaveAll = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimUndo = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimRedo = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimUndo = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimRedo = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimAddSound = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimDeleteSound = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimMoveSounds = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimConvertSoundsToEwa = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimConvertSoundsToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimAddSound = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimDeleteSound = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimMoveSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimConvertSoundsToEwa = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimConvertSoundsToWav = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator26 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimRewriteMode = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimWrapTextSoundCol = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimRewriteMode = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimWrapTextSoundCol = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiShow = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimGoBack = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimGoForward = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimGoBack = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimGoForward = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimSearch = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimShowErrors = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimShowErrors = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimLangsSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimAddLanguage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimEditLanguage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimDeleteLanguage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimLangsSettings = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimAddLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimEditLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimDeleteLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimConvertLangToEwa = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimConvertLangToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimConvertLangToEwa = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimConvertLangToWav = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimSepImportExport = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimImportSounds = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimExportIniss2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimImportSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimExportIniss2 = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmimAppSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimAppSettings = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmimInfoApp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimInfoApp = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new ExControls.ExTableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.toolStripGroups = new System.Windows.Forms.ToolStrip();
-            this.tsbAddGroup = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditGroup = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteGroup = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddGroup = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbEditGroup = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbDeleteGroup = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbConvertGroupToEwa = new System.Windows.Forms.ToolStripButton();
-            this.tsbConvertGroupToWav = new System.Windows.Forms.ToolStripButton();
+            this.tsbConvertGroupToEwa = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbConvertGroupToWav = new ToolsCore.Icons.IconToolStripButton();
             this.dgvGroups = new System.Windows.Forms.DataGridView();
             this.cGroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cGroupRelativePath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cGroupCountSounds = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuGroups = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmiAddGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiEditGroup = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiDeleteGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiAddGroup = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiEditGroup = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiDeleteGroup = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmiConvertGroupToEwa = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiConvertGroupToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiConvertGroupToEwa = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiConvertGroupToWav = new ToolsCore.Icons.IconToolStripMenuItem();
             this.fyzGroupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel3 = new ExControls.ExTableLayoutPanel();
             this.dgvExplorer = new System.Windows.Forms.DataGridView();
@@ -117,26 +118,26 @@ namespace RawBankEditor.Forms
             this.cFileType = new System.Windows.Forms.DataGridViewImageColumn();
             this.cFileDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuExplorer = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmiOpenInExplorer = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiPlay = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiOpenInExplorer = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiPlay = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmiRenameFileDir = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiDeleteFileDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiRenameFileDir = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiDeleteFileDir = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmiConvertToEwaFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiConvertToWavFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiConvertToEwaFile = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiConvertToWavFile = new ToolsCore.Icons.IconToolStripMenuItem();
             this.fileSystemElementBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.toolStripExplorer = new System.Windows.Forms.ToolStrip();
-            this.tsbOpenInExplorer = new System.Windows.Forms.ToolStripButton();
+            this.tsbOpenInExplorer = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbPlay = new System.Windows.Forms.ToolStripButton();
+            this.tsbPlay = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbRenameFileDir = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteFileDir = new System.Windows.Forms.ToolStripButton();
+            this.tsbRenameFileDir = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbDeleteFileDir = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbConvertFilesToEwa = new System.Windows.Forms.ToolStripButton();
-            this.tsbConvertFilesToWav = new System.Windows.Forms.ToolStripButton();
+            this.tsbConvertFilesToEwa = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbConvertFilesToWav = new ToolsCore.Icons.IconToolStripButton();
             this.splitSoundsErrors = new System.Windows.Forms.SplitContainer();
             this.dgvSounds = new System.Windows.Forms.DataGridView();
             this.cSoundKey = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -146,22 +147,22 @@ namespace RawBankEditor.Forms
             this.cSoundDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cSoundText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuSounds = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmiAddSound = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiDeleteSound = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiMoveSounds = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiAddSound = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiDeleteSound = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiMoveSounds = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.cmiConvertSoundsToEwa = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiConvertSoundsToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiConvertSoundsToEwa = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiConvertSoundsToWav = new ToolsCore.Icons.IconToolStripMenuItem();
             this.fyzSoundBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel4 = new ExControls.ExTableLayoutPanel();
             this.toolStripErrors = new System.Windows.Forms.ToolStrip();
-            this.tsbErrors = new System.Windows.Forms.ToolStripButton();
+            this.tsbErrors = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbWarnings = new System.Windows.Forms.ToolStripButton();
+            this.tsbWarnings = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbInfos = new System.Windows.Forms.ToolStripButton();
-            this.tsbResolveProblem = new System.Windows.Forms.ToolStripButton();
-            this.tsbHighlightProblem = new System.Windows.Forms.ToolStripButton();
+            this.tsbInfos = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbResolveProblem = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbHighlightProblem = new ToolsCore.Icons.IconToolStripButton();
             this.dgvErrors = new System.Windows.Forms.DataGridView();
             this.cMsgType = new System.Windows.Forms.DataGridViewImageColumn();
             this.cMsgCode = new System.Windows.Forms.DataGridViewLinkColumn();
@@ -169,8 +170,8 @@ namespace RawBankEditor.Forms
             this.cMsgResolve = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMsgPath = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuErrors = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmiHighlightProblem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmiResolveProblem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmiHighlightProblem = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiResolveProblem = new ToolsCore.Icons.IconToolStripMenuItem();
             this.rawBankMessageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel5 = new ExControls.ExTableLayoutPanel();
             this.mmErrors = new RawBankEditor.Controls.MinButton();
@@ -180,46 +181,46 @@ namespace RawBankEditor.Forms
             this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.tspbProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tssbErrors = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tssbErrors = new ToolsCore.Icons.IconToolStripDropDownButton();
             this.toolStripMain = new System.Windows.Forms.ToolStrip();
-            this.tsbOpen = new System.Windows.Forms.ToolStripButton();
-            this.tsbRecent = new System.Windows.Forms.ToolStripDropDownButton();
+            this.tsbOpen = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbRecent = new ToolsCore.Icons.IconToolStripDropDownButton();
             this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSave = new System.Windows.Forms.ToolStripButton();
-            this.tsbSaveAll = new System.Windows.Forms.ToolStripButton();
+            this.tsbSave = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbSaveAll = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbGoBack = new System.Windows.Forms.ToolStripSplitButton();
-            this.tsbGoForward = new System.Windows.Forms.ToolStripButton();
+            this.tsbGoBack = new ToolsCore.Icons.IconToolStripSplitButton();
+            this.tsbGoForward = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbUndo = new System.Windows.Forms.ToolStripButton();
-            this.tsbRedo = new System.Windows.Forms.ToolStripButton();
+            this.tsbUndo = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbRedo = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tscboxLanguages = new ExControls.ExToolStripComboBox();
-            this.tsbLangsSettings = new System.Windows.Forms.ToolStripDropDownButton();
-            this.tsmiAddLanguage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEditLanguage = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiDeleteLanguage = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbLangsSettings = new ToolsCore.Icons.IconToolStripDropDownButton();
+            this.tsmiAddLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmiEditLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmiDeleteLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiConvertLangToEwa = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiConvertLangToWav = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiConvertLangToEwa = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmiConvertLangToWav = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiSepImportExport = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmiImportSounds = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiExportIniss2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiImportSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmiExportIniss2 = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbAppSettings = new System.Windows.Forms.ToolStripButton();
-            this.tsbInfoApp = new System.Windows.Forms.ToolStripButton();
+            this.tsbAppSettings = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbInfoApp = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbAddSound = new System.Windows.Forms.ToolStripButton();
-            this.tsbMoveSounds = new System.Windows.Forms.ToolStripButton();
-            this.tsbDeleteSound = new System.Windows.Forms.ToolStripButton();
+            this.tsbAddSound = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbMoveSounds = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbDeleteSound = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbConvertSoundsToEwa = new System.Windows.Forms.ToolStripButton();
-            this.tsbConvertSoundsToWav = new System.Windows.Forms.ToolStripButton();
+            this.tsbConvertSoundsToEwa = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbConvertSoundsToWav = new ToolsCore.Icons.IconToolStripButton();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSearch = new System.Windows.Forms.ToolStripButton();
-            this.tsbWrapTextSoundCol = new System.Windows.Forms.ToolStripButton();
-            this.tsbRewriteMode = new System.Windows.Forms.ToolStripButton();
+            this.tsbSearch = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbWrapTextSoundCol = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbRewriteMode = new ToolsCore.Icons.IconToolStripButton();
             this.undoActionChooser = new ExControls.ToolStripUndoRedoActionChooser();
             this.fileSystemWatcher = new System.IO.FileSystemWatcher();
             this.moveManager = new ExControls.Providers.BackwardForwardProvider();
@@ -298,14 +299,14 @@ namespace RawBankEditor.Forms
             // 
             // tsmimOpen
             // 
-            this.tsmimOpen.Image = global::ToolsCore.GlobalResources.open;
             this.tsmimOpen.Name = "tsmimOpen";
+            this.tsmimOpen.IconName = "folder-open";
             resources.ApplyResources(this.tsmimOpen, "tsmimOpen");
             // 
             // tsmimRecent
             // 
-            this.tsmimRecent.Image = global::ToolsCore.GlobalResources.recent_gvds;
             this.tsmimRecent.Name = "tsmimRecent";
+            this.tsmimRecent.IconName = "history";
             resources.ApplyResources(this.tsmimRecent, "tsmimRecent");
             // 
             // toolStripSeparator2
@@ -316,15 +317,15 @@ namespace RawBankEditor.Forms
             // tsmimSave
             // 
             this.tsmimSave.Enabled = false;
-            this.tsmimSave.Image = global::ToolsCore.GlobalResources.save;
             this.tsmimSave.Name = "tsmimSave";
+            this.tsmimSave.IconName = "save";
             resources.ApplyResources(this.tsmimSave, "tsmimSave");
             // 
             // tsmimSaveAll
             // 
             this.tsmimSaveAll.Enabled = false;
-            this.tsmimSaveAll.Image = global::ToolsCore.GlobalResources.save_all;
             this.tsmimSaveAll.Name = "tsmimSaveAll";
+            this.tsmimSaveAll.IconName = "save-all";
             resources.ApplyResources(this.tsmimSaveAll, "tsmimSaveAll");
             // 
             // tsmiEdit
@@ -347,15 +348,15 @@ namespace RawBankEditor.Forms
             // tsmimUndo
             // 
             this.tsmimUndo.Enabled = false;
-            this.tsmimUndo.Image = global::ToolsCore.GlobalResources.undo;
             this.tsmimUndo.Name = "tsmimUndo";
+            this.tsmimUndo.IconName = "undo";
             resources.ApplyResources(this.tsmimUndo, "tsmimUndo");
             // 
             // tsmimRedo
             // 
             this.tsmimRedo.Enabled = false;
-            this.tsmimRedo.Image = global::ToolsCore.GlobalResources.redo;
             this.tsmimRedo.Name = "tsmimRedo";
+            this.tsmimRedo.IconName = "redo";
             resources.ApplyResources(this.tsmimRedo, "tsmimRedo");
             // 
             // toolStripSeparator11
@@ -366,36 +367,36 @@ namespace RawBankEditor.Forms
             // tsmimAddSound
             // 
             this.tsmimAddSound.Enabled = false;
-            this.tsmimAddSound.Image = global::ToolsCore.GlobalResources.add;
             this.tsmimAddSound.Name = "tsmimAddSound";
+            this.tsmimAddSound.IconName = "add";
             resources.ApplyResources(this.tsmimAddSound, "tsmimAddSound");
             // 
             // tsmimDeleteSound
             // 
             this.tsmimDeleteSound.Enabled = false;
-            this.tsmimDeleteSound.Image = global::ToolsCore.GlobalResources.delete;
             this.tsmimDeleteSound.Name = "tsmimDeleteSound";
+            this.tsmimDeleteSound.IconName = "delete";
             resources.ApplyResources(this.tsmimDeleteSound, "tsmimDeleteSound");
             // 
             // tsmimMoveSounds
             // 
             this.tsmimMoveSounds.Enabled = false;
-            this.tsmimMoveSounds.Image = global::ToolsCore.GlobalResources.move;
             this.tsmimMoveSounds.Name = "tsmimMoveSounds";
+            this.tsmimMoveSounds.IconName = "move";
             resources.ApplyResources(this.tsmimMoveSounds, "tsmimMoveSounds");
             // 
             // tsmimConvertSoundsToEwa
             // 
             this.tsmimConvertSoundsToEwa.Enabled = false;
-            this.tsmimConvertSoundsToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.tsmimConvertSoundsToEwa.Name = "tsmimConvertSoundsToEwa";
+            this.tsmimConvertSoundsToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.tsmimConvertSoundsToEwa, "tsmimConvertSoundsToEwa");
             // 
             // tsmimConvertSoundsToWav
             // 
             this.tsmimConvertSoundsToWav.Enabled = false;
-            this.tsmimConvertSoundsToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.tsmimConvertSoundsToWav.Name = "tsmimConvertSoundsToWav";
+            this.tsmimConvertSoundsToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsmimConvertSoundsToWav, "tsmimConvertSoundsToWav");
             // 
             // toolStripSeparator26
@@ -407,16 +408,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsmimRewriteMode.CheckOnClick = true;
             this.tsmimRewriteMode.Enabled = false;
-            this.tsmimRewriteMode.Image = global::ToolsCore.GlobalResources.convert;
             this.tsmimRewriteMode.Name = "tsmimRewriteMode";
+            this.tsmimRewriteMode.IconName = "link";
             resources.ApplyResources(this.tsmimRewriteMode, "tsmimRewriteMode");
             this.tsmimRewriteMode.CheckedChanged += new System.EventHandler(this.RewriteModeChanged);
             // 
             // tsmimWrapTextSoundCol
             // 
             this.tsmimWrapTextSoundCol.CheckOnClick = true;
-            this.tsmimWrapTextSoundCol.Image = global::ToolsCore.GlobalResources.textbox;
             this.tsmimWrapTextSoundCol.Name = "tsmimWrapTextSoundCol";
+            this.tsmimWrapTextSoundCol.IconName = "text-wrap";
             resources.ApplyResources(this.tsmimWrapTextSoundCol, "tsmimWrapTextSoundCol");
             this.tsmimWrapTextSoundCol.CheckedChanged += new System.EventHandler(this.WrapSoundTextChanged);
             // 
@@ -435,15 +436,15 @@ namespace RawBankEditor.Forms
             // tsmimGoBack
             // 
             this.tsmimGoBack.Enabled = false;
-            this.tsmimGoBack.Image = global::ToolsCore.GlobalResources.back;
             this.tsmimGoBack.Name = "tsmimGoBack";
+            this.tsmimGoBack.IconName = "back";
             resources.ApplyResources(this.tsmimGoBack, "tsmimGoBack");
             // 
             // tsmimGoForward
             // 
             this.tsmimGoForward.Enabled = false;
-            this.tsmimGoForward.Image = global::ToolsCore.GlobalResources.forward;
             this.tsmimGoForward.Name = "tsmimGoForward";
+            this.tsmimGoForward.IconName = "forward";
             resources.ApplyResources(this.tsmimGoForward, "tsmimGoForward");
             // 
             // toolStripSeparator18
@@ -454,8 +455,8 @@ namespace RawBankEditor.Forms
             // tsmimSearch
             // 
             this.tsmimSearch.Enabled = false;
-            this.tsmimSearch.Image = global::ToolsCore.GlobalResources.search;
             this.tsmimSearch.Name = "tsmimSearch";
+            this.tsmimSearch.IconName = "search";
             resources.ApplyResources(this.tsmimSearch, "tsmimSearch");
             // 
             // toolStripSeparator3
@@ -469,6 +470,7 @@ namespace RawBankEditor.Forms
             this.tsmimShowErrors.CheckOnClick = true;
             this.tsmimShowErrors.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tsmimShowErrors.Name = "tsmimShowErrors";
+            this.tsmimShowErrors.IconName = "status-error";
             resources.ApplyResources(this.tsmimShowErrors, "tsmimShowErrors");
             this.tsmimShowErrors.CheckedChanged += new System.EventHandler(this.TsmimShowErrors_CheckedChanged);
             // 
@@ -494,29 +496,29 @@ namespace RawBankEditor.Forms
             this.tsmimImportSounds,
             this.tsmimExportIniss2});
             this.tsmimLangsSettings.Enabled = false;
-            this.tsmimLangsSettings.Image = global::ToolsCore.GlobalResources.global_settings;
             this.tsmimLangsSettings.Name = "tsmimLangsSettings";
+            this.tsmimLangsSettings.IconName = "local-language";
             resources.ApplyResources(this.tsmimLangsSettings, "tsmimLangsSettings");
             // 
             // tsmimAddLanguage
             // 
             this.tsmimAddLanguage.Enabled = false;
-            this.tsmimAddLanguage.Image = global::ToolsCore.GlobalResources.add;
             this.tsmimAddLanguage.Name = "tsmimAddLanguage";
+            this.tsmimAddLanguage.IconName = "add";
             resources.ApplyResources(this.tsmimAddLanguage, "tsmimAddLanguage");
             // 
             // tsmimEditLanguage
             // 
             this.tsmimEditLanguage.Enabled = false;
-            this.tsmimEditLanguage.Image = global::ToolsCore.GlobalResources.edit;
             this.tsmimEditLanguage.Name = "tsmimEditLanguage";
+            this.tsmimEditLanguage.IconName = "edit";
             resources.ApplyResources(this.tsmimEditLanguage, "tsmimEditLanguage");
             // 
             // tsmimDeleteLanguage
             // 
             this.tsmimDeleteLanguage.Enabled = false;
-            this.tsmimDeleteLanguage.Image = global::ToolsCore.GlobalResources.delete;
             this.tsmimDeleteLanguage.Name = "tsmimDeleteLanguage";
+            this.tsmimDeleteLanguage.IconName = "delete";
             resources.ApplyResources(this.tsmimDeleteLanguage, "tsmimDeleteLanguage");
             // 
             // toolStripSeparator6
@@ -527,15 +529,15 @@ namespace RawBankEditor.Forms
             // tsmimConvertLangToEwa
             // 
             this.tsmimConvertLangToEwa.Enabled = false;
-            this.tsmimConvertLangToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.tsmimConvertLangToEwa.Name = "tsmimConvertLangToEwa";
+            this.tsmimConvertLangToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.tsmimConvertLangToEwa, "tsmimConvertLangToEwa");
             // 
             // tsmimConvertLangToWav
             // 
             this.tsmimConvertLangToWav.Enabled = false;
-            this.tsmimConvertLangToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.tsmimConvertLangToWav.Name = "tsmimConvertLangToWav";
+            this.tsmimConvertLangToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsmimConvertLangToWav, "tsmimConvertLangToWav");
             // 
             // tsmimSepImportExport
@@ -546,15 +548,15 @@ namespace RawBankEditor.Forms
             // tsmimImportSounds
             // 
             this.tsmimImportSounds.Enabled = false;
-            this.tsmimImportSounds.Image = global::ToolsCore.GlobalResources.import;
             this.tsmimImportSounds.Name = "tsmimImportSounds";
+            this.tsmimImportSounds.IconName = "import";
             resources.ApplyResources(this.tsmimImportSounds, "tsmimImportSounds");
             // 
             // tsmimExportIniss2
             // 
             this.tsmimExportIniss2.Enabled = false;
-            this.tsmimExportIniss2.Image = global::ToolsCore.GlobalResources.export;
             this.tsmimExportIniss2.Name = "tsmimExportIniss2";
+            this.tsmimExportIniss2.IconName = "export";
             resources.ApplyResources(this.tsmimExportIniss2, "tsmimExportIniss2");
             // 
             // toolStripSeparator8
@@ -564,8 +566,8 @@ namespace RawBankEditor.Forms
             // 
             // tsmimAppSettings
             // 
-            this.tsmimAppSettings.Image = global::ToolsCore.GlobalResources.app_settings;
             this.tsmimAppSettings.Name = "tsmimAppSettings";
+            this.tsmimAppSettings.IconName = "settings";
             resources.ApplyResources(this.tsmimAppSettings, "tsmimAppSettings");
             // 
             // tsmiHelp
@@ -578,8 +580,8 @@ namespace RawBankEditor.Forms
             // 
             // tsmimInfoApp
             // 
-            this.tsmimInfoApp.Image = global::ToolsCore.GlobalResources.info_app;
             this.tsmimInfoApp.Name = "tsmimInfoApp";
+            this.tsmimInfoApp.IconName = "info";
             resources.ApplyResources(this.tsmimInfoApp, "tsmimInfoApp");
             // 
             // tsmimUpdates
@@ -671,27 +673,24 @@ namespace RawBankEditor.Forms
             // 
             this.tsbAddGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbAddGroup.Enabled = false;
-            this.tsbAddGroup.Image = global::ToolsCore.GlobalResources.add;
-            this.tsbAddGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAddGroup.Name = "tsbAddGroup";
+            this.tsbAddGroup.IconName = "add";
             resources.ApplyResources(this.tsbAddGroup, "tsbAddGroup");
             // 
             // tsbEditGroup
             // 
             this.tsbEditGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbEditGroup.Enabled = false;
-            this.tsbEditGroup.Image = global::ToolsCore.GlobalResources.edit;
-            this.tsbEditGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditGroup.Name = "tsbEditGroup";
+            this.tsbEditGroup.IconName = "edit";
             resources.ApplyResources(this.tsbEditGroup, "tsbEditGroup");
             // 
             // tsbDeleteGroup
             // 
             this.tsbDeleteGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbDeleteGroup.Enabled = false;
-            this.tsbDeleteGroup.Image = global::ToolsCore.GlobalResources.delete;
-            this.tsbDeleteGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDeleteGroup.Name = "tsbDeleteGroup";
+            this.tsbDeleteGroup.IconName = "delete";
             resources.ApplyResources(this.tsbDeleteGroup, "tsbDeleteGroup");
             // 
             // toolStripSeparator21
@@ -703,18 +702,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsbConvertGroupToEwa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbConvertGroupToEwa.Enabled = false;
-            this.tsbConvertGroupToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
-            this.tsbConvertGroupToEwa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConvertGroupToEwa.Name = "tsbConvertGroupToEwa";
+            this.tsbConvertGroupToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.tsbConvertGroupToEwa, "tsbConvertGroupToEwa");
             // 
             // tsbConvertGroupToWav
             // 
             this.tsbConvertGroupToWav.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbConvertGroupToWav.Enabled = false;
-            this.tsbConvertGroupToWav.Image = global::RawBankEditor.Properties.Resources.wav;
-            this.tsbConvertGroupToWav.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConvertGroupToWav.Name = "tsbConvertGroupToWav";
+            this.tsbConvertGroupToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsbConvertGroupToWav, "tsbConvertGroupToWav");
             // 
             // dgvGroups
@@ -778,22 +775,22 @@ namespace RawBankEditor.Forms
             // cmiAddGroup
             // 
             this.cmiAddGroup.Enabled = false;
-            this.cmiAddGroup.Image = global::ToolsCore.GlobalResources.add;
             this.cmiAddGroup.Name = "cmiAddGroup";
+            this.cmiAddGroup.IconName = "add";
             resources.ApplyResources(this.cmiAddGroup, "cmiAddGroup");
             // 
             // cmiEditGroup
             // 
             this.cmiEditGroup.Enabled = false;
-            this.cmiEditGroup.Image = global::ToolsCore.GlobalResources.edit;
             this.cmiEditGroup.Name = "cmiEditGroup";
+            this.cmiEditGroup.IconName = "edit";
             resources.ApplyResources(this.cmiEditGroup, "cmiEditGroup");
             // 
             // cmiDeleteGroup
             // 
             this.cmiDeleteGroup.Enabled = false;
-            this.cmiDeleteGroup.Image = global::ToolsCore.GlobalResources.delete;
             this.cmiDeleteGroup.Name = "cmiDeleteGroup";
+            this.cmiDeleteGroup.IconName = "delete";
             resources.ApplyResources(this.cmiDeleteGroup, "cmiDeleteGroup");
             // 
             // toolStripSeparator4
@@ -804,15 +801,15 @@ namespace RawBankEditor.Forms
             // cmiConvertGroupToEwa
             // 
             this.cmiConvertGroupToEwa.Enabled = false;
-            this.cmiConvertGroupToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.cmiConvertGroupToEwa.Name = "cmiConvertGroupToEwa";
+            this.cmiConvertGroupToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.cmiConvertGroupToEwa, "cmiConvertGroupToEwa");
             // 
             // cmiConvertGroupToWav
             // 
             this.cmiConvertGroupToWav.Enabled = false;
-            this.cmiConvertGroupToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.cmiConvertGroupToWav.Name = "cmiConvertGroupToWav";
+            this.cmiConvertGroupToWav.IconName = "file-wav";
             resources.ApplyResources(this.cmiConvertGroupToWav, "cmiConvertGroupToWav");
             // 
             // fyzGroupBindingSource
@@ -900,7 +897,7 @@ namespace RawBankEditor.Forms
             // cFileType
             // 
             resources.ApplyResources(this.cFileType, "cFileType");
-            this.cFileType.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
+            this.cFileType.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Normal;
             this.cFileType.MinimumWidth = 50;
             this.cFileType.Name = "cFileType";
             this.cFileType.ReadOnly = true;
@@ -930,15 +927,15 @@ namespace RawBankEditor.Forms
             // cmiOpenInExplorer
             // 
             this.cmiOpenInExplorer.Enabled = false;
-            this.cmiOpenInExplorer.Image = global::ToolsCore.GlobalResources.folder;
             this.cmiOpenInExplorer.Name = "cmiOpenInExplorer";
+            this.cmiOpenInExplorer.IconName = "folder-open";
             resources.ApplyResources(this.cmiOpenInExplorer, "cmiOpenInExplorer");
             // 
             // cmiPlay
             // 
             this.cmiPlay.Enabled = false;
-            this.cmiPlay.Image = global::ToolsCore.GlobalResources.sound;
             this.cmiPlay.Name = "cmiPlay";
+            this.cmiPlay.IconName = "speaker";
             this.cmiPlay.ShortcutKeyDisplayString = "F5";
             resources.ApplyResources(this.cmiPlay, "cmiPlay");
             // 
@@ -950,16 +947,16 @@ namespace RawBankEditor.Forms
             // cmiRenameFileDir
             // 
             this.cmiRenameFileDir.Enabled = false;
-            this.cmiRenameFileDir.Image = global::ToolsCore.GlobalResources.rename;
             this.cmiRenameFileDir.Name = "cmiRenameFileDir";
+            this.cmiRenameFileDir.IconName = "rename";
             this.cmiRenameFileDir.ShortcutKeyDisplayString = "F2";
             resources.ApplyResources(this.cmiRenameFileDir, "cmiRenameFileDir");
             // 
             // cmiDeleteFileDir
             // 
             this.cmiDeleteFileDir.Enabled = false;
-            this.cmiDeleteFileDir.Image = global::ToolsCore.GlobalResources.delete;
             this.cmiDeleteFileDir.Name = "cmiDeleteFileDir";
+            this.cmiDeleteFileDir.IconName = "delete";
             this.cmiDeleteFileDir.ShortcutKeyDisplayString = "Del";
             resources.ApplyResources(this.cmiDeleteFileDir, "cmiDeleteFileDir");
             // 
@@ -971,15 +968,15 @@ namespace RawBankEditor.Forms
             // cmiConvertToEwaFile
             // 
             this.cmiConvertToEwaFile.Enabled = false;
-            this.cmiConvertToEwaFile.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.cmiConvertToEwaFile.Name = "cmiConvertToEwaFile";
+            this.cmiConvertToEwaFile.IconName = "file-ewa";
             resources.ApplyResources(this.cmiConvertToEwaFile, "cmiConvertToEwaFile");
             // 
             // cmiConvertToWavFile
             // 
             this.cmiConvertToWavFile.Enabled = false;
-            this.cmiConvertToWavFile.Image = global::RawBankEditor.Properties.Resources.wav;
             this.cmiConvertToWavFile.Name = "cmiConvertToWavFile";
+            this.cmiConvertToWavFile.IconName = "file-wav";
             resources.ApplyResources(this.cmiConvertToWavFile, "cmiConvertToWavFile");
             // 
             // fileSystemElementBindingSource
@@ -1017,9 +1014,8 @@ namespace RawBankEditor.Forms
             // 
             this.tsbOpenInExplorer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbOpenInExplorer.Enabled = false;
-            this.tsbOpenInExplorer.Image = global::ToolsCore.GlobalResources.folder;
-            this.tsbOpenInExplorer.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOpenInExplorer.Name = "tsbOpenInExplorer";
+            this.tsbOpenInExplorer.IconName = "folder-open";
             resources.ApplyResources(this.tsbOpenInExplorer, "tsbOpenInExplorer");
             // 
             // toolStripSeparator16
@@ -1031,9 +1027,8 @@ namespace RawBankEditor.Forms
             // 
             this.tsbPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbPlay.Enabled = false;
-            this.tsbPlay.Image = global::ToolsCore.GlobalResources.sound;
-            this.tsbPlay.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPlay.Name = "tsbPlay";
+            this.tsbPlay.IconName = "speaker";
             resources.ApplyResources(this.tsbPlay, "tsbPlay");
             // 
             // toolStripSeparator17
@@ -1045,18 +1040,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsbRenameFileDir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbRenameFileDir.Enabled = false;
-            this.tsbRenameFileDir.Image = global::ToolsCore.GlobalResources.rename;
-            this.tsbRenameFileDir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRenameFileDir.Name = "tsbRenameFileDir";
+            this.tsbRenameFileDir.IconName = "rename";
             resources.ApplyResources(this.tsbRenameFileDir, "tsbRenameFileDir");
             // 
             // tsbDeleteFileDir
             // 
             this.tsbDeleteFileDir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbDeleteFileDir.Enabled = false;
-            this.tsbDeleteFileDir.Image = global::ToolsCore.GlobalResources.delete;
-            this.tsbDeleteFileDir.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDeleteFileDir.Name = "tsbDeleteFileDir";
+            this.tsbDeleteFileDir.IconName = "delete";
             resources.ApplyResources(this.tsbDeleteFileDir, "tsbDeleteFileDir");
             // 
             // toolStripSeparator22
@@ -1068,18 +1061,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsbConvertFilesToEwa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbConvertFilesToEwa.Enabled = false;
-            this.tsbConvertFilesToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
-            this.tsbConvertFilesToEwa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConvertFilesToEwa.Name = "tsbConvertFilesToEwa";
+            this.tsbConvertFilesToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.tsbConvertFilesToEwa, "tsbConvertFilesToEwa");
             // 
             // tsbConvertFilesToWav
             // 
             this.tsbConvertFilesToWav.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbConvertFilesToWav.Enabled = false;
-            this.tsbConvertFilesToWav.Image = global::RawBankEditor.Properties.Resources.wav;
-            this.tsbConvertFilesToWav.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConvertFilesToWav.Name = "tsbConvertFilesToWav";
+            this.tsbConvertFilesToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsbConvertFilesToWav, "tsbConvertFilesToWav");
             // 
             // splitSoundsErrors
@@ -1222,22 +1213,22 @@ namespace RawBankEditor.Forms
             // cmiAddSound
             // 
             this.cmiAddSound.Enabled = false;
-            this.cmiAddSound.Image = global::ToolsCore.GlobalResources.add;
             this.cmiAddSound.Name = "cmiAddSound";
+            this.cmiAddSound.IconName = "add";
             resources.ApplyResources(this.cmiAddSound, "cmiAddSound");
             // 
             // cmiDeleteSound
             // 
             this.cmiDeleteSound.Enabled = false;
-            this.cmiDeleteSound.Image = global::ToolsCore.GlobalResources.delete;
             this.cmiDeleteSound.Name = "cmiDeleteSound";
+            this.cmiDeleteSound.IconName = "delete";
             resources.ApplyResources(this.cmiDeleteSound, "cmiDeleteSound");
             // 
             // cmiMoveSounds
             // 
             this.cmiMoveSounds.Enabled = false;
-            this.cmiMoveSounds.Image = global::ToolsCore.GlobalResources.move;
             this.cmiMoveSounds.Name = "cmiMoveSounds";
+            this.cmiMoveSounds.IconName = "move";
             resources.ApplyResources(this.cmiMoveSounds, "cmiMoveSounds");
             // 
             // toolStripSeparator19
@@ -1248,15 +1239,15 @@ namespace RawBankEditor.Forms
             // cmiConvertSoundsToEwa
             // 
             this.cmiConvertSoundsToEwa.Enabled = false;
-            this.cmiConvertSoundsToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.cmiConvertSoundsToEwa.Name = "cmiConvertSoundsToEwa";
+            this.cmiConvertSoundsToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.cmiConvertSoundsToEwa, "cmiConvertSoundsToEwa");
             // 
             // cmiConvertSoundsToWav
             // 
             this.cmiConvertSoundsToWav.Enabled = false;
-            this.cmiConvertSoundsToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.cmiConvertSoundsToWav.Name = "cmiConvertSoundsToWav";
+            this.cmiConvertSoundsToWav.IconName = "file-wav";
             resources.ApplyResources(this.cmiConvertSoundsToWav, "cmiConvertSoundsToWav");
             // 
             // fyzSoundBindingSource
@@ -1302,9 +1293,8 @@ namespace RawBankEditor.Forms
             this.tsbErrors.Checked = true;
             this.tsbErrors.CheckOnClick = true;
             this.tsbErrors.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsbErrors.Image = ((System.Drawing.Image)(resources.GetObject("tsbErrors.Image")));
-            this.tsbErrors.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbErrors.Name = "tsbErrors";
+            this.tsbErrors.IconName = "status-error";
             resources.ApplyResources(this.tsbErrors, "tsbErrors");
             this.tsbErrors.CheckedChanged += new System.EventHandler(this.tsbErrors_CheckedChanged);
             // 
@@ -1318,9 +1308,8 @@ namespace RawBankEditor.Forms
             this.tsbWarnings.Checked = true;
             this.tsbWarnings.CheckOnClick = true;
             this.tsbWarnings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsbWarnings.Image = ((System.Drawing.Image)(resources.GetObject("tsbWarnings.Image")));
-            this.tsbWarnings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWarnings.Name = "tsbWarnings";
+            this.tsbWarnings.IconName = "status-warning";
             resources.ApplyResources(this.tsbWarnings, "tsbWarnings");
             this.tsbWarnings.CheckedChanged += new System.EventHandler(this.tsbWarnings_CheckedChanged);
             // 
@@ -1334,9 +1323,8 @@ namespace RawBankEditor.Forms
             this.tsbInfos.Checked = true;
             this.tsbInfos.CheckOnClick = true;
             this.tsbInfos.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.tsbInfos.Image = ((System.Drawing.Image)(resources.GetObject("tsbInfos.Image")));
-            this.tsbInfos.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbInfos.Name = "tsbInfos";
+            this.tsbInfos.IconName = "status-info";
             resources.ApplyResources(this.tsbInfos, "tsbInfos");
             this.tsbInfos.CheckedChanged += new System.EventHandler(this.tsbInfos_CheckedChanged);
             // 
@@ -1345,9 +1333,8 @@ namespace RawBankEditor.Forms
             this.tsbResolveProblem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsbResolveProblem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbResolveProblem.Enabled = false;
-            this.tsbResolveProblem.Image = global::ToolsCore.GlobalResources.correct;
-            this.tsbResolveProblem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbResolveProblem.Name = "tsbResolveProblem";
+            this.tsbResolveProblem.IconName = "wrench";
             resources.ApplyResources(this.tsbResolveProblem, "tsbResolveProblem");
             // 
             // tsbHighlightProblem
@@ -1355,9 +1342,8 @@ namespace RawBankEditor.Forms
             this.tsbHighlightProblem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsbHighlightProblem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbHighlightProblem.Enabled = false;
-            this.tsbHighlightProblem.Image = global::ToolsCore.GlobalResources.analyze;
-            this.tsbHighlightProblem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHighlightProblem.Name = "tsbHighlightProblem";
+            this.tsbHighlightProblem.IconName = "search";
             resources.ApplyResources(this.tsbHighlightProblem, "tsbHighlightProblem");
             // 
             // dgvErrors
@@ -1470,15 +1456,15 @@ namespace RawBankEditor.Forms
             // cmiHighlightProblem
             // 
             this.cmiHighlightProblem.Enabled = false;
-            this.cmiHighlightProblem.Image = global::ToolsCore.GlobalResources.analyze;
             this.cmiHighlightProblem.Name = "cmiHighlightProblem";
+            this.cmiHighlightProblem.IconName = "search";
             resources.ApplyResources(this.cmiHighlightProblem, "cmiHighlightProblem");
             // 
             // cmiResolveProblem
             // 
             this.cmiResolveProblem.Enabled = false;
-            this.cmiResolveProblem.Image = global::ToolsCore.GlobalResources.correct;
             this.cmiResolveProblem.Name = "cmiResolveProblem";
+            this.cmiResolveProblem.IconName = "wrench";
             resources.ApplyResources(this.cmiResolveProblem, "cmiResolveProblem");
             // 
             // rawBankMessageBindingSource
@@ -1565,8 +1551,6 @@ namespace RawBankEditor.Forms
             // 
             // tssbErrors
             // 
-            this.tssbErrors.Image = global::ToolsCore.GlobalResources.correct;
-            this.tssbErrors.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tssbErrors.Name = "tssbErrors";
             this.tssbErrors.ShowDropDownArrow = false;
             resources.ApplyResources(this.tssbErrors, "tssbErrors");
@@ -1613,17 +1597,15 @@ namespace RawBankEditor.Forms
             // tsbOpen
             // 
             this.tsbOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbOpen.Image = global::ToolsCore.GlobalResources.open;
-            this.tsbOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOpen.Name = "tsbOpen";
+            this.tsbOpen.IconName = "folder-open";
             resources.ApplyResources(this.tsbOpen, "tsbOpen");
             // 
             // tsbRecent
             // 
             this.tsbRecent.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRecent.Image = global::ToolsCore.GlobalResources.recent_gvds;
-            this.tsbRecent.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRecent.Name = "tsbRecent";
+            this.tsbRecent.IconName = "history";
             resources.ApplyResources(this.tsbRecent, "tsbRecent");
             // 
             // toolStripSeparator25
@@ -1635,18 +1617,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbSave.Enabled = false;
-            this.tsbSave.Image = global::ToolsCore.GlobalResources.save;
-            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
+            this.tsbSave.IconName = "save";
             resources.ApplyResources(this.tsbSave, "tsbSave");
             // 
             // tsbSaveAll
             // 
             this.tsbSaveAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbSaveAll.Enabled = false;
-            this.tsbSaveAll.Image = global::ToolsCore.GlobalResources.save_all;
-            this.tsbSaveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSaveAll.Name = "tsbSaveAll";
+            this.tsbSaveAll.IconName = "save-all";
             resources.ApplyResources(this.tsbSaveAll, "tsbSaveAll");
             // 
             // toolStripSeparator1
@@ -1660,18 +1640,16 @@ namespace RawBankEditor.Forms
             this.tsbGoBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbGoBack.DropDownButtonWidth = 15;
             this.tsbGoBack.Enabled = false;
-            this.tsbGoBack.Image = global::ToolsCore.GlobalResources.back;
-            this.tsbGoBack.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGoBack.Name = "tsbGoBack";
+            this.tsbGoBack.IconName = "back";
             resources.ApplyResources(this.tsbGoBack, "tsbGoBack");
             // 
             // tsbGoForward
             // 
             this.tsbGoForward.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbGoForward.Enabled = false;
-            this.tsbGoForward.Image = global::ToolsCore.GlobalResources.forward;
-            this.tsbGoForward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbGoForward.Name = "tsbGoForward";
+            this.tsbGoForward.IconName = "forward";
             resources.ApplyResources(this.tsbGoForward, "tsbGoForward");
             // 
             // toolStripSeparator9
@@ -1683,18 +1661,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsbUndo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbUndo.Enabled = false;
-            this.tsbUndo.Image = global::ToolsCore.GlobalResources.undo;
-            this.tsbUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbUndo.Name = "tsbUndo";
+            this.tsbUndo.IconName = "undo";
             resources.ApplyResources(this.tsbUndo, "tsbUndo");
             // 
             // tsbRedo
             // 
             this.tsbRedo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbRedo.Enabled = false;
-            this.tsbRedo.Image = global::ToolsCore.GlobalResources.redo;
-            this.tsbRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRedo.Name = "tsbRedo";
+            this.tsbRedo.IconName = "redo";
             resources.ApplyResources(this.tsbRedo, "tsbRedo");
             // 
             // toolStripSeparator10
@@ -1731,31 +1707,30 @@ namespace RawBankEditor.Forms
             this.tsmiImportSounds,
             this.tsmiExportIniss2});
             this.tsbLangsSettings.Enabled = false;
-            this.tsbLangsSettings.Image = global::ToolsCore.GlobalResources.global_settings;
-            this.tsbLangsSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbLangsSettings.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.tsbLangsSettings.Name = "tsbLangsSettings";
+            this.tsbLangsSettings.IconName = "local-language";
             resources.ApplyResources(this.tsbLangsSettings, "tsbLangsSettings");
             // 
             // tsmiAddLanguage
             // 
             this.tsmiAddLanguage.Enabled = false;
-            this.tsmiAddLanguage.Image = global::ToolsCore.GlobalResources.add;
             this.tsmiAddLanguage.Name = "tsmiAddLanguage";
+            this.tsmiAddLanguage.IconName = "add";
             resources.ApplyResources(this.tsmiAddLanguage, "tsmiAddLanguage");
             // 
             // tsmiEditLanguage
             // 
             this.tsmiEditLanguage.Enabled = false;
-            this.tsmiEditLanguage.Image = global::ToolsCore.GlobalResources.edit;
             this.tsmiEditLanguage.Name = "tsmiEditLanguage";
+            this.tsmiEditLanguage.IconName = "edit";
             resources.ApplyResources(this.tsmiEditLanguage, "tsmiEditLanguage");
             // 
             // tsmiDeleteLanguage
             // 
             this.tsmiDeleteLanguage.Enabled = false;
-            this.tsmiDeleteLanguage.Image = global::ToolsCore.GlobalResources.delete;
             this.tsmiDeleteLanguage.Name = "tsmiDeleteLanguage";
+            this.tsmiDeleteLanguage.IconName = "delete";
             resources.ApplyResources(this.tsmiDeleteLanguage, "tsmiDeleteLanguage");
             // 
             // toolStripSeparator5
@@ -1766,15 +1741,15 @@ namespace RawBankEditor.Forms
             // tsmiConvertLangToEwa
             // 
             this.tsmiConvertLangToEwa.Enabled = false;
-            this.tsmiConvertLangToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
             this.tsmiConvertLangToEwa.Name = "tsmiConvertLangToEwa";
+            this.tsmiConvertLangToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.tsmiConvertLangToEwa, "tsmiConvertLangToEwa");
             // 
             // tsmiConvertLangToWav
             // 
             this.tsmiConvertLangToWav.Enabled = false;
-            this.tsmiConvertLangToWav.Image = global::RawBankEditor.Properties.Resources.wav;
             this.tsmiConvertLangToWav.Name = "tsmiConvertLangToWav";
+            this.tsmiConvertLangToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsmiConvertLangToWav, "tsmiConvertLangToWav");
             // 
             // tsmiSepImportExport
@@ -1785,15 +1760,15 @@ namespace RawBankEditor.Forms
             // tsmiImportSounds
             // 
             this.tsmiImportSounds.Enabled = false;
-            this.tsmiImportSounds.Image = global::ToolsCore.GlobalResources.import;
             this.tsmiImportSounds.Name = "tsmiImportSounds";
+            this.tsmiImportSounds.IconName = "import";
             resources.ApplyResources(this.tsmiImportSounds, "tsmiImportSounds");
             // 
             // tsmiExportIniss2
             // 
             this.tsmiExportIniss2.Enabled = false;
-            this.tsmiExportIniss2.Image = global::ToolsCore.GlobalResources.export;
             this.tsmiExportIniss2.Name = "tsmiExportIniss2";
+            this.tsmiExportIniss2.IconName = "export";
             resources.ApplyResources(this.tsmiExportIniss2, "tsmiExportIniss2");
             // 
             // toolStripSeparator7
@@ -1804,17 +1779,15 @@ namespace RawBankEditor.Forms
             // tsbAppSettings
             // 
             this.tsbAppSettings.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbAppSettings.Image = global::ToolsCore.GlobalResources.app_settings;
-            this.tsbAppSettings.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAppSettings.Name = "tsbAppSettings";
+            this.tsbAppSettings.IconName = "settings";
             resources.ApplyResources(this.tsbAppSettings, "tsbAppSettings");
             // 
             // tsbInfoApp
             // 
             this.tsbInfoApp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbInfoApp.Image = global::ToolsCore.GlobalResources.info_app;
-            this.tsbInfoApp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbInfoApp.Name = "tsbInfoApp";
+            this.tsbInfoApp.IconName = "info";
             resources.ApplyResources(this.tsbInfoApp, "tsbInfoApp");
             // 
             // toolStripSeparator12
@@ -1826,27 +1799,24 @@ namespace RawBankEditor.Forms
             // 
             this.tsbAddSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbAddSound.Enabled = false;
-            this.tsbAddSound.Image = global::ToolsCore.GlobalResources.add;
-            this.tsbAddSound.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAddSound.Name = "tsbAddSound";
+            this.tsbAddSound.IconName = "add";
             resources.ApplyResources(this.tsbAddSound, "tsbAddSound");
             // 
             // tsbMoveSounds
             // 
             this.tsbMoveSounds.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbMoveSounds.Enabled = false;
-            this.tsbMoveSounds.Image = global::ToolsCore.GlobalResources.move;
-            this.tsbMoveSounds.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbMoveSounds.Name = "tsbMoveSounds";
+            this.tsbMoveSounds.IconName = "move";
             resources.ApplyResources(this.tsbMoveSounds, "tsbMoveSounds");
             // 
             // tsbDeleteSound
             // 
             this.tsbDeleteSound.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbDeleteSound.Enabled = false;
-            this.tsbDeleteSound.Image = global::ToolsCore.GlobalResources.delete;
-            this.tsbDeleteSound.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDeleteSound.Name = "tsbDeleteSound";
+            this.tsbDeleteSound.IconName = "delete";
             resources.ApplyResources(this.tsbDeleteSound, "tsbDeleteSound");
             // 
             // toolStripSeparator24
@@ -1858,18 +1828,16 @@ namespace RawBankEditor.Forms
             // 
             this.tsbConvertSoundsToEwa.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbConvertSoundsToEwa.Enabled = false;
-            this.tsbConvertSoundsToEwa.Image = global::RawBankEditor.Properties.Resources.ewa;
-            this.tsbConvertSoundsToEwa.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConvertSoundsToEwa.Name = "tsbConvertSoundsToEwa";
+            this.tsbConvertSoundsToEwa.IconName = "file-ewa";
             resources.ApplyResources(this.tsbConvertSoundsToEwa, "tsbConvertSoundsToEwa");
             // 
             // tsbConvertSoundsToWav
             // 
             this.tsbConvertSoundsToWav.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbConvertSoundsToWav.Enabled = false;
-            this.tsbConvertSoundsToWav.Image = global::RawBankEditor.Properties.Resources.wav;
-            this.tsbConvertSoundsToWav.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbConvertSoundsToWav.Name = "tsbConvertSoundsToWav";
+            this.tsbConvertSoundsToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsbConvertSoundsToWav, "tsbConvertSoundsToWav");
             // 
             // toolStripSeparator15
@@ -1881,9 +1849,8 @@ namespace RawBankEditor.Forms
             // 
             this.tsbSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbSearch.Enabled = false;
-            this.tsbSearch.Image = global::ToolsCore.GlobalResources.search;
-            this.tsbSearch.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSearch.Name = "tsbSearch";
+            this.tsbSearch.IconName = "search";
             resources.ApplyResources(this.tsbSearch, "tsbSearch");
             // 
             // tsbWrapTextSoundCol
@@ -1891,10 +1858,9 @@ namespace RawBankEditor.Forms
             this.tsbWrapTextSoundCol.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsbWrapTextSoundCol.CheckOnClick = true;
             this.tsbWrapTextSoundCol.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbWrapTextSoundCol.Image = global::ToolsCore.GlobalResources.textbox;
-            this.tsbWrapTextSoundCol.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbWrapTextSoundCol.Margin = new System.Windows.Forms.Padding(0, 1, 4, 2);
             this.tsbWrapTextSoundCol.Name = "tsbWrapTextSoundCol";
+            this.tsbWrapTextSoundCol.IconName = "text-wrap";
             resources.ApplyResources(this.tsbWrapTextSoundCol, "tsbWrapTextSoundCol");
             this.tsbWrapTextSoundCol.CheckedChanged += new System.EventHandler(this.WrapSoundTextChanged);
             // 
@@ -1904,9 +1870,8 @@ namespace RawBankEditor.Forms
             this.tsbRewriteMode.CheckOnClick = true;
             this.tsbRewriteMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbRewriteMode.Enabled = false;
-            this.tsbRewriteMode.Image = global::ToolsCore.GlobalResources.convert;
-            this.tsbRewriteMode.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRewriteMode.Name = "tsbRewriteMode";
+            this.tsbRewriteMode.IconName = "link";
             resources.ApplyResources(this.tsbRewriteMode, "tsbRewriteMode");
             this.tsbRewriteMode.CheckedChanged += new System.EventHandler(this.RewriteModeChanged);
             // 
@@ -1957,7 +1922,6 @@ namespace RawBankEditor.Forms
             this.UseCompositedPainting = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FMain_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FMain_FormClosed);
             this.titleBar.ResumeLayout(false);
             this.titleBar.PerformLayout();
             this.menuStripMain.ResumeLayout(false);
@@ -2028,157 +1992,157 @@ namespace RawBankEditor.Forms
         private ExTableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.StatusStrip statusStripMain;
         private System.Windows.Forms.ToolStrip toolStripMain;
-        private System.Windows.Forms.ToolStripButton tsbOpen;
+        private ToolsCore.Icons.IconToolStripButton tsbOpen;
         private ExTableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label2;
         private ExControls.ExToolStripComboBox tscboxLanguages;
-        private System.Windows.Forms.ToolStripMenuItem tsmimOpen;
-        private System.Windows.Forms.ToolStripMenuItem tsmimRecent;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimOpen;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimRecent;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem tsmimSave;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimSave;
         private System.Windows.Forms.ToolStripMenuItem tsmiTools;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.ToolStripButton tsbEditGroup;
-        private System.Windows.Forms.ToolStripButton tsbDeleteGroup;
-        private System.Windows.Forms.ToolStripMenuItem tsmimInfoApp;
-        private System.Windows.Forms.ToolStripButton tsbSave;
-        private System.Windows.Forms.ToolStripButton tsbInfoApp;
+        private ToolsCore.Icons.IconToolStripButton tsbEditGroup;
+        private ToolsCore.Icons.IconToolStripButton tsbDeleteGroup;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimInfoApp;
+        private ToolsCore.Icons.IconToolStripButton tsbSave;
+        private ToolsCore.Icons.IconToolStripButton tsbInfoApp;
         private System.Windows.Forms.ToolStripStatusLabel tsslStatus;
         private System.Windows.Forms.ToolStripProgressBar tspbProgress;
-        private System.Windows.Forms.ToolStripMenuItem tsmimLangsSettings;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimLangsSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
-        private System.Windows.Forms.ToolStripMenuItem tsmimAppSettings;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimAppSettings;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripButton tsbAppSettings;
+        private ToolsCore.Icons.IconToolStripButton tsbAppSettings;
         private System.Windows.Forms.ContextMenuStrip contextMenuGroups;
-        private System.Windows.Forms.ToolStripMenuItem cmiAddGroup;
-        private System.Windows.Forms.ToolStripMenuItem cmiEditGroup;
-        private System.Windows.Forms.ToolStripMenuItem cmiDeleteGroup;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiAddGroup;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiEditGroup;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiDeleteGroup;
         private System.Windows.Forms.ContextMenuStrip contextMenuSounds;
         private System.Windows.Forms.ToolStrip toolStripExplorer;
-        private System.Windows.Forms.ToolStripButton tsbGoForward;
+        private ToolsCore.Icons.IconToolStripButton tsbGoForward;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
-        private System.Windows.Forms.ToolStripButton tsbRedo;
+        private ToolsCore.Icons.IconToolStripButton tsbRedo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
-        private System.Windows.Forms.ToolStripMenuItem tsmimUndo;
-        private System.Windows.Forms.ToolStripMenuItem tsmimRedo;
-        private System.Windows.Forms.ToolStripMenuItem tsmimGoBack;
-        private System.Windows.Forms.ToolStripMenuItem tsmimGoForward;
-        private System.Windows.Forms.ToolStripDropDownButton tsbRecent;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimUndo;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimRedo;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimGoBack;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimGoForward;
+        private ToolsCore.Icons.IconToolStripDropDownButton tsbRecent;
         private System.Windows.Forms.ToolStripMenuItem tsmimUpdates;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripMenuItem tsmimAddSound;
-        private System.Windows.Forms.ToolStripMenuItem tsmimDeleteSound;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimAddSound;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimDeleteSound;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator12;
-        private System.Windows.Forms.ToolStripButton tsbAddSound;
-        private System.Windows.Forms.ToolStripButton tsbDeleteSound;
-        private System.Windows.Forms.ToolStripButton tsbAddGroup;
+        private ToolsCore.Icons.IconToolStripButton tsbAddSound;
+        private ToolsCore.Icons.IconToolStripButton tsbDeleteSound;
+        private ToolsCore.Icons.IconToolStripButton tsbAddGroup;
         private System.Windows.Forms.BindingSource fyzSoundBindingSource;
-        private System.Windows.Forms.ToolStripButton tsbConvertSoundsToEwa;
-        private System.Windows.Forms.ToolStripMenuItem cmiAddSound;
-        private System.Windows.Forms.ToolStripMenuItem cmiDeleteSound;
+        private ToolsCore.Icons.IconToolStripButton tsbConvertSoundsToEwa;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiAddSound;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiDeleteSound;
         private System.IO.FileSystemWatcher fileSystemWatcher;
         private System.Windows.Forms.SplitContainer splitSoundsErrors;
         private ExTableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ToolStrip toolStripErrors;
-        private System.Windows.Forms.ToolStripButton tsbErrors;
-        private System.Windows.Forms.ToolStripButton tsbWarnings;
-        private System.Windows.Forms.ToolStripButton tsbInfos;
+        private ToolsCore.Icons.IconToolStripButton tsbErrors;
+        private ToolsCore.Icons.IconToolStripButton tsbWarnings;
+        private ToolsCore.Icons.IconToolStripButton tsbInfos;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
         internal System.Windows.Forms.DataGridView dgvErrors;
-        private System.Windows.Forms.ToolStripButton tsbOpenInExplorer;
-        private System.Windows.Forms.ToolStripButton tsbPlay;
+        private ToolsCore.Icons.IconToolStripButton tsbOpenInExplorer;
+        private ToolsCore.Icons.IconToolStripButton tsbPlay;
         private ExTableLayoutPanel tableLayoutPanel5;
         private Controls.MinButton mmErrors;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator17;
-        private System.Windows.Forms.ToolStripMenuItem tsmimMoveSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimMoveSounds;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
-        private System.Windows.Forms.ToolStripButton tsbSearch;
+        private ToolsCore.Icons.IconToolStripButton tsbSearch;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator18;
-        private System.Windows.Forms.ToolStripMenuItem tsmimSearch;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimSearch;
         internal System.Windows.Forms.DataGridView dgvExplorer;
-        private System.Windows.Forms.ToolStripButton tsbMoveSounds;
+        private ToolsCore.Icons.IconToolStripButton tsbMoveSounds;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.BindingSource fileSystemElementBindingSource;
-        private System.Windows.Forms.ToolStripButton tsbRenameFileDir;
-        private System.Windows.Forms.ToolStripButton tsbDeleteFileDir;
+        private ToolsCore.Icons.IconToolStripButton tsbRenameFileDir;
+        private ToolsCore.Icons.IconToolStripButton tsbDeleteFileDir;
         private System.Windows.Forms.BindingSource rawBankMessageBindingSource;
-        private System.Windows.Forms.ToolStripDropDownButton tssbErrors;
+        private ToolsCore.Icons.IconToolStripDropDownButton tssbErrors;
         private ToolStripSeparator toolStripSeparator19;
-        private ToolStripMenuItem cmiConvertSoundsToWav;
-        private ToolStripMenuItem cmiConvertSoundsToEwa;
+        private IconToolStripMenuItem cmiConvertSoundsToWav;
+        private IconToolStripMenuItem cmiConvertSoundsToEwa;
         internal DataGridView dgvGroups;
         internal DataGridView dgvSounds;
         private ContextMenuStrip contextMenuExplorer;
-        private ToolStripMenuItem cmiOpenInExplorer;
-        private ToolStripMenuItem cmiPlay;
+        private IconToolStripMenuItem cmiOpenInExplorer;
+        private IconToolStripMenuItem cmiPlay;
         private ToolStripSeparator toolStripSeparator20;
-        private ToolStripMenuItem cmiRenameFileDir;
-        private ToolStripMenuItem cmiDeleteFileDir;
+        private IconToolStripMenuItem cmiRenameFileDir;
+        private IconToolStripMenuItem cmiDeleteFileDir;
         private ContextMenuStrip contextMenuErrors;
-        private ToolStripMenuItem cmiHighlightProblem;
-        private ToolStripMenuItem cmiResolveProblem;
-        private ToolStripButton tsbResolveProblem;
-        private ToolStripButton tsbHighlightProblem;
+        private IconToolStripMenuItem cmiHighlightProblem;
+        private IconToolStripMenuItem cmiResolveProblem;
+        private IconToolStripButton tsbResolveProblem;
+        private IconToolStripButton tsbHighlightProblem;
         private BindingSource fyzGroupBindingSource;
         private ToolStripSeparator toolStripSeparator4;
-        private ToolStripMenuItem cmiConvertGroupToWav;
-        private ToolStripMenuItem cmiConvertGroupToEwa;
+        private IconToolStripMenuItem cmiConvertGroupToWav;
+        private IconToolStripMenuItem cmiConvertGroupToEwa;
         private ToolStripSeparator toolStripSeparator21;
-        private ToolStripButton tsbConvertGroupToEwa;
-        private ToolStripButton tsbConvertGroupToWav;
-        private ToolStripButton tsbConvertSoundsToWav;
+        private IconToolStripButton tsbConvertGroupToEwa;
+        private IconToolStripButton tsbConvertGroupToWav;
+        private IconToolStripButton tsbConvertSoundsToWav;
         private ToolStripSeparator toolStripSeparator22;
-        private ToolStripButton tsbConvertFilesToEwa;
-        private ToolStripButton tsbConvertFilesToWav;
+        private IconToolStripButton tsbConvertFilesToEwa;
+        private IconToolStripButton tsbConvertFilesToWav;
         private ToolStripSeparator toolStripSeparator23;
-        private ToolStripMenuItem cmiConvertToEwaFile;
-        private ToolStripMenuItem cmiConvertToWavFile;
+        private IconToolStripMenuItem cmiConvertToEwaFile;
+        private IconToolStripMenuItem cmiConvertToWavFile;
         private ExControls.Providers.BackwardForwardProvider moveManager;
         internal ExControls.Providers.UndoRedoManager changeManager;
-        private ToolStripMenuItem tsmimSaveAll;
-        private ToolStripButton tsbSaveAll;
+        private IconToolStripMenuItem tsmimSaveAll;
+        private IconToolStripButton tsbSaveAll;
         private ToolStripSeparator toolStripSeparator25;
         private System.Windows.Forms.Timer timerToCheck;
         private ToolStripSeparator toolStripSeparator26;
-        private ToolStripMenuItem tsmimRewriteMode;
-        private ToolStripButton tsbRewriteMode;
-        private ToolStripMenuItem tsmimAddLanguage;
-        private ToolStripMenuItem tsmimEditLanguage;
-        private ToolStripMenuItem tsmimDeleteLanguage;
-        private ToolStripDropDownButton tsbLangsSettings;
-        private ToolStripMenuItem tsmiAddLanguage;
-        private ToolStripMenuItem tsmiEditLanguage;
-        private ToolStripMenuItem tsmiDeleteLanguage;
+        private IconToolStripMenuItem tsmimRewriteMode;
+        private IconToolStripButton tsbRewriteMode;
+        private IconToolStripMenuItem tsmimAddLanguage;
+        private IconToolStripMenuItem tsmimEditLanguage;
+        private IconToolStripMenuItem tsmimDeleteLanguage;
+        private IconToolStripDropDownButton tsbLangsSettings;
+        private IconToolStripMenuItem tsmiAddLanguage;
+        private IconToolStripMenuItem tsmiEditLanguage;
+        private IconToolStripMenuItem tsmiDeleteLanguage;
         private ToolStripSeparator toolStripSeparator3;
-        private ToolStripMenuItem tsmimShowErrors;
-        private ToolStripMenuItem tsmimConvertLangToEwa;
-        private ToolStripMenuItem tsmimConvertLangToWav;
+        private IconToolStripMenuItem tsmimShowErrors;
+        private IconToolStripMenuItem tsmimConvertLangToEwa;
+        private IconToolStripMenuItem tsmimConvertLangToWav;
         private ToolStripSeparator tsmimSepImportExport;
-        private ToolStripMenuItem tsmimImportSounds;
-        private ToolStripMenuItem tsmimExportIniss2;
+        private IconToolStripMenuItem tsmimImportSounds;
+        private IconToolStripMenuItem tsmimExportIniss2;
         private ToolStripSeparator toolStripSeparator5;
-        private ToolStripMenuItem tsmiConvertLangToEwa;
-        private ToolStripMenuItem tsmiConvertLangToWav;
+        private IconToolStripMenuItem tsmiConvertLangToEwa;
+        private IconToolStripMenuItem tsmiConvertLangToWav;
         private ToolStripSeparator tsmiSepImportExport;
-        private ToolStripMenuItem tsmiImportSounds;
-        private ToolStripMenuItem tsmiExportIniss2;
-        private ToolStripMenuItem tsmimConvertSoundsToEwa;
-        private ToolStripMenuItem tsmimConvertSoundsToWav;
-        private ToolStripMenuItem cmiMoveSounds;
+        private IconToolStripMenuItem tsmiImportSounds;
+        private IconToolStripMenuItem tsmiExportIniss2;
+        private IconToolStripMenuItem tsmimConvertSoundsToEwa;
+        private IconToolStripMenuItem tsmimConvertSoundsToWav;
+        private IconToolStripMenuItem cmiMoveSounds;
         private DataGridViewImageColumn cFileType;
         private DataGridViewTextBoxColumn cFileName;
         private DataGridViewTextBoxColumn cFileDuration;
-        private ToolStripButton tsbWrapTextSoundCol;
-        private ToolStripMenuItem tsmimWrapTextSoundCol;
+        private IconToolStripButton tsbWrapTextSoundCol;
+        private IconToolStripMenuItem tsmimWrapTextSoundCol;
         private ToolStripSeparator toolStripSeparator6;
-        private ToolStripSplitButton tsbGoBack;
+        private IconToolStripSplitButton tsbGoBack;
         private ToolStripUndoRedoActionChooser undoActionChooser;
-        private ToolStripButton tsbUndo;
+        private IconToolStripButton tsbUndo;
         private ToolStripSeparator toolStripSeparator24;
         private DataGridViewTextBoxColumn cSoundKey;
         private DataGridViewTextBoxColumn cSoundName;

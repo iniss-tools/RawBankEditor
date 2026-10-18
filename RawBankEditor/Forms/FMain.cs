@@ -7,6 +7,7 @@ using RawBankEditor.Tools;
 using System.Globalization;
 using ToolsCore;
 using ToolsCore.Forms;
+using ToolsCore.Icons;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -21,9 +22,6 @@ public partial class FMain : ExForm
     // otvorena banka, nastavenia programu a zurnal zmien na disku
     private readonly BankEditor _bank;
     private readonly IDialogService _dialogs;
-
-    //ikony
-    private readonly Bitmap _error, _warning, _info;
 
     private BackButtonElement? _explorerBack;
 
@@ -111,15 +109,6 @@ public partial class FMain : ExForm
         }
 
         SetRecentDirs();
-
-        _error = StockIcon(ShellIconType.Error);
-        _warning = StockIcon(ShellIconType.Warning);
-        _info = StockIcon(ShellIconType.Info);
-        
-        tsbErrors.Image = _error;
-        tsbWarnings.Image = _warning;
-        tsbInfos.Image = _info;
-        tsmimShowErrors.Image = _error;
 
         dgvExplorer.DataSource = ExplorerContent;
 
@@ -1534,22 +1523,6 @@ public partial class FMain : ExForm
         CloseBank(discard);
     }
 
-    /// <summary>
-    /// Mala ikona systemu ako obrazok - vytvara sa raz, nie pri kazdom vykresleni bunky.
-    /// </summary>
-    private static Bitmap StockIcon(ShellIconType type)
-    {
-        using var icon = new ShellIcon(type, ShellIconSize.Small);
-        return icon.ToBitmap();
-    }
-
-    private void FMain_FormClosed(object sender, FormClosedEventArgs e)
-    {
-        _error.Dispose();
-        _warning.Dispose();
-        _info.Dispose();
-    }
-
     private void DgvGroups_KeyDown(object sender, KeyEventArgs e)
     {
         if (dgvGroups.IsSelectionEmpty())
@@ -1910,13 +1883,13 @@ public partial class FMain : ExForm
 
         if (dgvExplorer.Columns[nameof(cFileType)] != null && e.ColumnIndex == dgvExplorer.Columns[nameof(cFileType)]!.Index)
         {
-            e.Value = dgvExplorer.Rows[e.RowIndex].DataBoundItem switch
+            e.Value = GridIcon(dgvExplorer, dgvExplorer.Rows[e.RowIndex].DataBoundItem switch
             {
-                BackButtonElement => GlobalResources.back,
-                DirectoryElement => GlobalResources.open,
-                SoundFileElement => GlobalResources.sound,
-                _ => GlobalResources.file
-            };
+                BackButtonElement => "back",
+                DirectoryElement => "folder",
+                SoundFileElement => "speaker",
+                _ => "document"
+            }, ExplorerIconSize);
         }
         else if (dgvExplorer.Columns[nameof(cFileDuration)] != null && e.ColumnIndex == dgvExplorer.Columns[nameof(cFileDuration)]!.Index)
         {
@@ -2076,15 +2049,15 @@ public partial class FMain : ExForm
                 switch (msg.Type)
                 {
                     case MessageType.Info:
-                        e.Value = _info;
+                        e.Value = GridIcon(dgvErrors, "status-info");
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RInfo;
                         break;
                     case MessageType.Warning:
-                        e.Value = _warning;
+                        e.Value = GridIcon(dgvErrors, "status-warning");
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RWarning;
                         break;
                     case MessageType.Error:
-                        e.Value = _error;
+                        e.Value = GridIcon(dgvErrors, "status-error");
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RError;
                         break;
                     default:
@@ -2093,6 +2066,13 @@ public partial class FMain : ExForm
             }
         }
     }
+
+    // vyska riadka prieskumnika je 24 - ikona 20, v zozname chyb 16
+    private const int ExplorerIconSize = 20;
+
+    // ikona v bunke zoznamu - vo velkosti podla DPI a variante podla pozadia zoznamu (bez zvacsovania v bunke)
+    private static Bitmap? GridIcon(DataGridView grid, string name, int size = IconImages.Size) =>
+        AppIcons.Get(name, null, grid.LogicalToDeviceUnits(size), AppIcons.IsDarkBackground(grid.DefaultCellStyle.BackColor));
 
     private void DgvErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
@@ -2159,13 +2139,13 @@ public partial class FMain : ExForm
 
             if (errorCount != 0)
             {
-                tssbErrors.Image = _error;
+                tssbErrors.IconName = "status-error";
                 tssbErrors.Text = CountText(errorCount, Resources.FMain_Count_Errors);
                 tssbErrors.ForeColor = Color.Red;
             }
             else
             {
-                tssbErrors.Image = GlobalResources.correct;
+                tssbErrors.IconName = "status-ok";
                 tssbErrors.Text = "";
                 tssbErrors.ForeColor = _bank.UsingStyle.ControlsColorScheme.Panel.ForeColor;
             }
