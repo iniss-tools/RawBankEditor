@@ -1883,7 +1883,7 @@ public partial class FMain : ExForm
 
         if (dgvExplorer.Columns[nameof(cFileType)] != null && e.ColumnIndex == dgvExplorer.Columns[nameof(cFileType)]!.Index)
         {
-            e.Value = GridIcon(dgvExplorer, dgvExplorer.Rows[e.RowIndex].DataBoundItem switch
+            e.Value = IconImages.For(dgvExplorer, dgvExplorer.Rows[e.RowIndex].DataBoundItem switch
             {
                 BackButtonElement => "back",
                 DirectoryElement => "folder",
@@ -2049,15 +2049,15 @@ public partial class FMain : ExForm
                 switch (msg.Type)
                 {
                     case MessageType.Info:
-                        e.Value = GridIcon(dgvErrors, "status-info");
+                        e.Value = IconImages.For(dgvErrors, "status-info");
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RInfo;
                         break;
                     case MessageType.Warning:
-                        e.Value = GridIcon(dgvErrors, "status-warning");
+                        e.Value = IconImages.For(dgvErrors, "status-warning");
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RWarning;
                         break;
                     case MessageType.Error:
-                        e.Value = GridIcon(dgvErrors, "status-error");
+                        e.Value = IconImages.For(dgvErrors, "status-error");
                         dgvErrors.Rows[e.RowIndex].Cells[nameof(cMsgType)].ToolTipText = Resources.RError;
                         break;
                     default:
@@ -2069,10 +2069,6 @@ public partial class FMain : ExForm
 
     // vyska riadka prieskumnika je 24 - ikona 20, v zozname chyb 16
     private const int ExplorerIconSize = 20;
-
-    // ikona v bunke zoznamu - vo velkosti podla DPI a variante podla pozadia zoznamu (bez zvacsovania v bunke)
-    private static Bitmap? GridIcon(DataGridView grid, string name, int size = IconImages.Size) =>
-        AppIcons.Get(name, null, grid.LogicalToDeviceUnits(size), AppIcons.IsDarkBackground(grid.DefaultCellStyle.BackColor));
 
     private void DgvErrors_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
     {
