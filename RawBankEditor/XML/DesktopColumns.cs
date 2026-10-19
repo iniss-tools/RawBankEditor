@@ -11,16 +11,16 @@ namespace RawBankEditor.XML;
 public record DesktopColumns()
 {
     private static readonly Type ClassType = typeof(DesktopColumns);
-
+    
     [XmlIgnore]
-    private static readonly Dictionary<string, (string name, int order, int minWidth, bool visible)> Props = new()
+    private static readonly Dictionary<string, (Func<string> name, int order, int minWidth, bool visible)> Props = new()
     {
-        [nameof(Key)] = (Resources.Column_Key, 0, 150, true),
-        [nameof(Name)] = (Resources.Column_Name, 1, 150, true),
-        [nameof(RelativePath)] = (Resources.Column_RelativePath, 2, 150, true),
-        [nameof(FileName)] = (Resources.Column_FileName, 3, 150, true),
-        [nameof(Duration)] = (Resources.Column_Duration, 4, 100, true),
-        [nameof(Text)] = (Resources.Column_Text, 5, 200, true)
+        [nameof(Key)] = (() => Resources.Column_Key, 0, 150, true),
+        [nameof(Name)] = (() => Resources.Column_Name, 1, 150, true),
+        [nameof(RelativePath)] = (() => Resources.Column_RelativePath, 2, 150, true),
+        [nameof(FileName)] = (() => Resources.Column_FileName, 3, 150, true),
+        [nameof(Duration)] = (() => Resources.Column_Duration, 4, 100, true),
+        [nameof(Text)] = (() => Resources.Column_Text, 5, 200, true)
     };
 
     #region Properties
@@ -119,6 +119,9 @@ public record DesktopColumns()
     {
         var properties = ClassType.GetProperties(BindingFlags.Instance | BindingFlags.Public);
         var ordered = properties.Select(prop => (DesktopColumn)prop.GetValue(this)!).ToList();
+        // nazvy v aktualnom jazyku programu
+        foreach (var column in ordered)
+            column.Name = Props[column.PropertyName].name();
         return ordered.OrderBy(i => i.Order).ToList();
     }
 
@@ -133,7 +136,7 @@ public record DesktopColumns()
     }
 
     private static DesktopColumn InitColumn(string propname)
-        => new(Props[propname].name, propname, Props[propname].order, Props[propname].minWidth, Props[propname].visible);
+        => new(Props[propname].name(), propname, Props[propname].order, Props[propname].minWidth, Props[propname].visible);
 
     private static void AssignColumnProps(ref DesktopColumn? obj, string propname)
     {
@@ -143,7 +146,7 @@ public record DesktopColumns()
         }
         else
         {
-            obj.Name = Props[propname].name;
+            obj.Name = Props[propname].name();
             obj.PropertyName = propname;
         }
     }
