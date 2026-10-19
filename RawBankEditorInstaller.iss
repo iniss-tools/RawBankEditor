@@ -26,7 +26,13 @@ OutputBaseFilename=rawbankeditor-setup
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
-CreateUninstallRegKey=no
+; program je 64-bitovy (win-x64): instalator sa spusti len na x64 alebo Windows 11 na Arm a pri instalacii
+; pre vsetkych pouzivatelov pouzije 64-bitovy Program Files (nie Program Files (x86)); plati pre Inno Setup 6.3+ aj 7
+ArchitecturesAllowed=x64compatible
+ArchitecturesInstallIn64BitMode=x64compatible
+CreateUninstallRegKey=yes
+; ikona programu v zozname aplikacii Windows
+UninstallDisplayIcon={app}\{#MyAppExeName}
 UpdateUninstallLogAppName=no
 UsePreviousLanguage=no
 
@@ -52,5 +58,5 @@ Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"
-; Flags: nowait postinstall skipifsilent
+; spustenie programu ponukne posledna stranka sprievodcu (zaskrtavacie pole); pri tichej instalacii sa nespusti
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
