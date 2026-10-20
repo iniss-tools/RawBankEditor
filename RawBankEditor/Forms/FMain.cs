@@ -128,13 +128,6 @@ public partial class FMain : ExForm
         if (cFileType.DisplayIndex != 0) 
             cFileType.DisplayIndex = 0;
 
-        if (_bank.UsingStyle.HighlightStatusBar)
-        {
-            statusStripMain.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
-            tsslStatus.ForeColor = _bank.UsingStyle.ControlsColorScheme.Highlight.ForeColor;
-            tssbErrors.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
-        }
-
         UpdateCommandStates();
     }
 
@@ -184,12 +177,6 @@ public partial class FMain : ExForm
         SetColumnsAutoWidth();
         Invalidate(true);
         AppInit.MsgBoxStyleInit(_bank.UsingStyle, _bank.Config);
-        if (_bank.UsingStyle.HighlightStatusBar)
-        {
-            statusStripMain.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
-            tsslStatus.ForeColor = _bank.UsingStyle.ControlsColorScheme.Highlight.ForeColor;
-            tssbErrors.BackColor = _bank.UsingStyle.ControlsColorScheme.Highlight.BackColor;
-        }
     }
 
     private void SetColumnsAutoWidth()
