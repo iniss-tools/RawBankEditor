@@ -1,0 +1,25 @@
+# Vydanie RawBankEditora: znacka vX.Y (git tag -a v1.10 -m "Co je nove" && git push origin v1.10) alebo nove vydanie
+# so znackou vX.Y zalozene na GitHube zostavi instalator a zverejni ho. Postup je v ToolsCore/Installer/README.md.
+name: Vydanie
+
+on:
+  push:
+    tags: ['v[0-9]*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Znacka vydania (v1.10), ktora uz je v repozitari
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    uses: iniss-tools/ToolsCore/.github/workflows/release-app.yml@main
+    with:
+      program: RawBankEditor
+      tag: ${{ inputs.tag || github.ref_name }}
+      project: RawBankEditor/RawBankEditor/RawBankEditor.csproj
+      installer: RawBankEditor/RawBankEditorInstaller.iss
+      dependencies: filif123/ExControls

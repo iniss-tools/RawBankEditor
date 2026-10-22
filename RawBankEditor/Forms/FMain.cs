@@ -11,6 +11,7 @@ using ToolsCore.Icons;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
+using ToolsCore.Updates;
 using ToolsCore.XML;
 
 namespace RawBankEditor.Forms;
@@ -194,6 +195,7 @@ public partial class FMain : ExForm
     protected override void OnLoad(EventArgs e)
     {
         base.OnLoad(e);
+        AppUpdates.CheckOnStartup(this, _bank.Config);
 
         var configsDir = ToolsCore.AppPaths.ConfigDir;
         

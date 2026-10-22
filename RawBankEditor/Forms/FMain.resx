@@ -4710,6 +4710,18 @@
   <data name="&gt;&gt;tsmimUpdates.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tsmimCheckUpdates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="tsmimCheckUpdates.Text" xml:space="preserve">
+    <value>&amp;Skontrolovať aktualizácie...</value>
+  </data>
+  <data name="&gt;&gt;tsmimCheckUpdates.Name" xml:space="preserve">
+    <value>tsmimCheckUpdates</value>
+  </data>
+  <data name="&gt;&gt;tsmimCheckUpdates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="splitContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>

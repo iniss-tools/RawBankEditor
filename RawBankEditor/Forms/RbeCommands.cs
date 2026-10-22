@@ -49,6 +49,7 @@ internal static class RbeCommands
     public static CommandInfo ConvertFilesToWav => Fixed(nameof(ConvertFilesToWav));
     public static CommandInfo InfoApp => Fixed(nameof(InfoApp));
     public static CommandInfo Updates => Fixed(nameof(Updates));
+    public static CommandInfo CheckUpdates => Fixed(nameof(CheckUpdates));
 
     /// <summary>
     /// Prikazy, ktorym sa v nastaveniach da zmenit skratka, v poradi zoznamu v nastaveniach.

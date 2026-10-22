@@ -216,6 +216,9 @@
   <data name="tsmimUpdates.Text" xml:space="preserve">
     <value>&amp;Poznámky k aktualizacím...</value>
   </data>
+  <data name="tsmimCheckUpdates.Text" xml:space="preserve">
+    <value>&amp;Zkontrolovat aktualizace...</value>
+  </data>
   <data name="label1.Text" xml:space="preserve">
     <value>Skupiny zvuků</value>
   </data>

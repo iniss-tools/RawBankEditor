@@ -5,7 +5,11 @@
 		<RootNamespace>RawBankEditor</RootNamespace>
 		<AssemblyName>RawBankEditor</AssemblyName>
 		<UseWindowsForms>true</UseWindowsForms>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<!-- verzia lokalnych zostav; vydanie ju prepise verziou zo znacky vX.Y (ToolsCore\Build\AppRelease.props) -->
+		<Version>1.1</Version>
+		<Description>Úprava zvukovej banky</Description>
+		<Copyright>Copyright © 2022</Copyright>
+		<NeutralLanguage>sk</NeutralLanguage>
 		<StartupObject>RawBankEditor.Program</StartupObject>
 		<ApplicationIcon>raw.ico</ApplicationIcon>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
@@ -39,4 +43,6 @@
 		<ProjectReference Include="..\..\ExControls\ExControls\ExControls.csproj" />
 		<ProjectReference Include="..\..\ToolsCore\ToolsCore\ToolsCore.csproj" />
 	</ItemGroup>
+	<!-- spolocne vlastnosti vydavanych programov: vyrobca, verzia a index aktualizacii z vydania -->
+	<Import Project="..\..\ToolsCore\Build\AppRelease.props" />
 </Project>

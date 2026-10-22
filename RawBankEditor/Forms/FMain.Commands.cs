@@ -1,6 +1,7 @@
 using ToolsCore.Commands;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
+using ToolsCore.Updates;
 
 namespace RawBankEditor.Forms;
 
@@ -90,6 +91,7 @@ public partial class FMain
         Add(RbeCommands.AppSettings, ShowAppSettings, null, tsmimAppSettings, tsbAppSettings);
         Add(RbeCommands.InfoApp, ShowInfoApp, null, tsmimInfoApp, tsbInfoApp);
         Add(RbeCommands.Updates, () => Utils.OpenShell(LinkConsts.Update), null, tsmimUpdates);
+        Add(RbeCommands.CheckUpdates, () => AppUpdates.CheckNow(this), () => AppUpdates.Available, tsmimCheckUpdates);
     }
 
     /// <summary>
