@@ -2,5 +2,5 @@
 
 public static class LinkConsts
 {
-    public const string Update = "http://iniss.6f.sk/docs/rawbankeditor/novinky/";
+    public const string Update = "https://iniss-tools.fvat.sk/docs/rawbankeditor/novinky/";
 }
