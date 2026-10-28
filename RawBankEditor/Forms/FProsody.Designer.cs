@@ -38,8 +38,8 @@
             this.bCancel = new ExControls.ExButton();
             this.cGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cTechnique = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.cPunctuation = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.cTechnique = new ExControls.DataGridViewExComboBoxColumn();
+            this.cPunctuation = new ExControls.DataGridViewExComboBoxColumn();
             this.cBefore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cAfter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).BeginInit();
@@ -139,16 +139,12 @@
             // cTechnique
             // 
             this.cTechnique.DataPropertyName = "Technique";
-            this.cTechnique.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.cTechnique.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             resources.ApplyResources(this.cTechnique, "cTechnique");
             this.cTechnique.Name = "cTechnique";
             // 
             // cPunctuation
             // 
             this.cPunctuation.DataPropertyName = "Punctuation";
-            this.cPunctuation.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.cPunctuation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             resources.ApplyResources(this.cPunctuation, "cPunctuation");
             this.cPunctuation.Name = "cPunctuation";
             // 
@@ -181,8 +177,8 @@
         private ExControls.ExButton bCancel;
         private System.Windows.Forms.DataGridViewTextBoxColumn cGroup;
         private System.Windows.Forms.DataGridViewTextBoxColumn cType;
-        private System.Windows.Forms.DataGridViewComboBoxColumn cTechnique;
-        private System.Windows.Forms.DataGridViewComboBoxColumn cPunctuation;
+        private ExControls.DataGridViewExComboBoxColumn cTechnique;
+        private ExControls.DataGridViewExComboBoxColumn cPunctuation;
         private System.Windows.Forms.DataGridViewTextBoxColumn cBefore;
         private System.Windows.Forms.DataGridViewTextBoxColumn cAfter;
     }

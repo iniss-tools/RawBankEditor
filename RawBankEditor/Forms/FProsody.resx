@@ -344,7 +344,7 @@
     <value>cTechnique</value>
   </data>
   <data name="&gt;&gt;cTechnique.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ExControls.DataGridViewExComboBoxColumn, ExControls</value>
   </data>
   <data name="cPunctuation.HeaderText" xml:space="preserve">
     <value>Interpunkcia</value>
@@ -356,7 +356,7 @@
     <value>cPunctuation</value>
   </data>
   <data name="&gt;&gt;cPunctuation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>ExControls.DataGridViewExComboBoxColumn, ExControls</value>
   </data>
   <data name="cBefore.HeaderText" xml:space="preserve">
     <value>Text pred</value>

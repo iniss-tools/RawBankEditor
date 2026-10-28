@@ -101,7 +101,7 @@ internal static class DemoBank
                 Directory.CreateDirectory(dir);
                 foreach (var sound in group.Sounds.Where(s => s.Key != MissingFileKey))
                 {
-                    WriteSound(Path.Combine(dir, sound.FileName), sound.Duration);
+                    WriteSound(Path.Combine(dir, sound.FileName), sound.Duration, sound.Text);
                     files++;
                 }
             }
@@ -112,7 +112,7 @@ internal static class DemoBank
         RawBankParser.WriteFyzBankFile(bankDir, languages);
 
         // nahrávka novej stanice nakopírovaná do banky bez záznamu v zozname
-        WriteSound(Path.Combine(bankDir, "SK", "R1", UndefinedFile), 900);
+        WriteSound(Path.Combine(bankDir, "SK", "R1", UndefinedFile), 900, "Horná Ves");
         files++;
 
         log.Add($"demo: jazyky {languages.Count}, skupiny {languages.Sum(l => l.Groups.Count)}, " +
@@ -139,10 +139,12 @@ internal static class DemoBank
     /// <summary>
     /// Tichý tón s nábehom a doznením (22 050 Hz, 16 bit, mono); .EWA vznikne rovnakou konverziou ako v programe.
     /// </summary>
-    private static void WriteSound(string path, int durationMs)
+    private static void WriteSound(string path, int durationMs, string text)
     {
         const int rate = 22050;
         var samples = rate * durationMs / 1000;
+        // výška tónu podľa textu - podľa nej „rozumie“ nahrávke prepis v snímkach hlasu AI
+        var frequency = DemoTones.Frequency(text);
         var wav = Path.ChangeExtension(path, SoundUtils.WAVExt);
 
         using (var writer = new BinaryWriter(File.Create(wav)))
@@ -164,7 +166,7 @@ internal static class DemoBank
             for (var i = 0; i < samples; i++)
             {
                 var envelope = Math.Min(1.0, Math.Min(i, samples - i) / (rate * 0.05));
-                writer.Write((short)(Math.Sin(2 * Math.PI * 440 * i / rate) * 3000 * envelope));
+                writer.Write((short)(Math.Sin(2 * Math.PI * frequency * i / rate) * 3000 * envelope));
             }
         }
 

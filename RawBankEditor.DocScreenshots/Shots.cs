@@ -9,7 +9,7 @@ namespace RawBankEditor.DocScreenshots;
 /// Zoznam snímok. Každá snímka je okno uložené ako <c>&lt;priečinok&gt;/&lt;názov&gt;-light.png</c> a <c>-dark.png</c>;
 /// priečinok je názov článku v <c>docs/rawbankeditor</c>.
 /// </summary>
-internal sealed class Shots(Program.Options options, string theme, List<string> log)
+internal sealed partial class Shots(Program.Options options, string theme, List<string> log)
 {
     private const BindingFlags Any = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
@@ -104,6 +104,8 @@ internal sealed class Shots(Program.Options options, string theme, List<string> 
                 ]);
                 Unselect(form);
             });
+
+            RecordingShots(main, language);
 
             // stránky nastavení programu - rovnaké ako v GVDEditore, stránka Všeobecné má navyše skupinu Program
             foreach (var (slug, panel) in new[]
