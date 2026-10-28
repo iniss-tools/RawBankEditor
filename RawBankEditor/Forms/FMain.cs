@@ -1442,10 +1442,10 @@ public partial class FMain : ExForm
                 }
             }
         }
-        //another folder
-        else
+        //another folder - zvuk bez suboru (SoundFileMissing) nema v prieskumnikovi co vybrat
+        else if (item.File is { Parent: { } parent })
         {
-            FillExplorerList(item.File.Parent!);
+            FillExplorerList(parent);
             var index = ExplorerContent.IndexOf(item.File);
             if (index == -1) 
                 return;
