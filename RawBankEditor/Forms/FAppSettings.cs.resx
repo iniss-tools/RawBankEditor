@@ -154,6 +154,66 @@
     <value>Vyčistit</value>
   </data>
   <data name="lSpeechPrivacy.Text" xml:space="preserve">
-    <value>Texty zvuků se při generování posílají službě ElevenLabs. Klíč je v nastavení zašifrovaný pro tohoto uživatele Windows.</value>
+    <value>Texty zvuků se při generování posílají službě hlasu jazyka (ElevenLabs nebo Azure Speech, Piper běží v počítači). Klíče jsou v nastavení zašifrované pro tohoto uživatele Windows.</value>
+  </data>
+  <data name="optionsNodeAzure.Text" xml:space="preserve">
+    <value>Azure Speech</value>
+  </data>
+  <data name="pAzure.NodeText" xml:space="preserve">
+    <value>Azure Speech</value>
+  </data>
+  <data name="gbAzure.Text" xml:space="preserve">
+    <value>Azure Speech</value>
+  </data>
+  <data name="lAzureKey.Text" xml:space="preserve">
+    <value>Klíč:</value>
+  </data>
+  <data name="bAzureVerify.Text" xml:space="preserve">
+    <value>Ověřit</value>
+  </data>
+  <data name="lAzureRegion.Text" xml:space="preserve">
+    <value>Oblast:</value>
+  </data>
+  <data name="llAzure.Text" xml:space="preserve">
+    <value>Klíč a oblast najdete u prostředku Speech na portálu Azure</value>
+  </data>
+  <data name="lAzureInfo.Text" xml:space="preserve">
+    <value>Oblast zadejte jako u prostředku (např. westeurope) nebo jeho adresu. Azure nevrací časy slov, úryvek z nosné věty se proto stříhá podle odhadu.</value>
+  </data>
+  <data name="optionsNodePiper.Text" xml:space="preserve">
+    <value>Piper (offline)</value>
+  </data>
+  <data name="pPiper.NodeText" xml:space="preserve">
+    <value>Piper (offline)</value>
+  </data>
+  <data name="gbPiper.Text" xml:space="preserve">
+    <value>Piper</value>
+  </data>
+  <data name="lPiperPath.Text" xml:space="preserve">
+    <value>Program:</value>
+  </data>
+  <data name="bPiperBrowse.Text" xml:space="preserve">
+    <value>Vybrat…</value>
+  </data>
+  <data name="bPiperVerify.Text" xml:space="preserve">
+    <value>Ověřit</value>
+  </data>
+  <data name="lPiperVoices.Text" xml:space="preserve">
+    <value>Hlasy:</value>
+  </data>
+  <data name="bPiperVoicesBrowse.Text" xml:space="preserve">
+    <value>Vybrat…</value>
+  </data>
+  <data name="bPiperDownload.Text" xml:space="preserve">
+    <value>Stáhnout…</value>
+  </data>
+  <data name="llPiper.Text" xml:space="preserve">
+    <value>Stáhnout Piper pro Windows</value>
+  </data>
+  <data name="llPiperSamples.Text" xml:space="preserve">
+    <value>Ukázky hlasů</value>
+  </data>
+  <data name="lPiperInfo.Text" xml:space="preserve">
+    <value>Piper běží v tomto počítači bez připojení a nic nestojí. Úryvek z nosné věty se stříhá podle odhadu, změnu hlasu, čištění ani přepis Piper neumí.</value>
   </data>
 </root>

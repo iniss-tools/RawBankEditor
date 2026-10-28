@@ -4588,7 +4588,7 @@
     <value>2</value>
   </data>
   <data name="lSpeechPrivacy.Text" xml:space="preserve">
-    <value>Texty zvukov sa pri generovaní posielajú službe ElevenLabs. Kľúč je v nastaveniach zašifrovaný pre tohto používateľa Windows.</value>
+    <value>Texty zvukov sa pri generovaní posielajú službe hlasu jazyka (ElevenLabs alebo Azure Speech, Piper beží v počítači). Kľúče sú v nastaveniach zašifrované pre tohto používateľa Windows.</value>
   </data>
   <data name="&gt;&gt;lSpeechPrivacy.Name" xml:space="preserve">
     <value>lSpeechPrivacy</value>
@@ -4601,6 +4601,672 @@
   </data>
   <data name="&gt;&gt;lSpeechPrivacy.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="optionsNodeAzure.Text" xml:space="preserve">
+    <value>Azure Speech</value>
+  </data>
+  <data name="pAzure.NodeText" xml:space="preserve">
+    <value>Azure Speech</value>
+  </data>
+  <data name="&gt;&gt;pAzure.Name" xml:space="preserve">
+    <value>pAzure</value>
+  </data>
+  <data name="&gt;&gt;pAzure.Type" xml:space="preserve">
+    <value>ExControls.ExOptionsPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="ppAzure.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ppAzure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ppAzure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 400</value>
+  </data>
+  <data name="ppAzure.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ppAzure.Name" xml:space="preserve">
+    <value>ppAzure</value>
+  </data>
+  <data name="&gt;&gt;ppAzure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ppAzure.Parent" xml:space="preserve">
+    <value>pAzure</value>
+  </data>
+  <data name="&gt;&gt;ppAzure.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gbAzure.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbAzure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="gbAzure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 140</value>
+  </data>
+  <data name="gbAzure.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbAzure.Text" xml:space="preserve">
+    <value>Azure Speech</value>
+  </data>
+  <data name="&gt;&gt;gbAzure.Name" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;gbAzure.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbAzure.Parent" xml:space="preserve">
+    <value>ppAzure</value>
+  </data>
+  <data name="&gt;&gt;gbAzure.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lAzureKey.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lAzureKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 24</value>
+  </data>
+  <data name="lAzureKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lAzureKey.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lAzureKey.Text" xml:space="preserve">
+    <value>Kľúč:</value>
+  </data>
+  <data name="&gt;&gt;lAzureKey.Name" xml:space="preserve">
+    <value>lAzureKey</value>
+  </data>
+  <data name="&gt;&gt;lAzureKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lAzureKey.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;lAzureKey.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbAzureKey.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbAzureKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="tbAzureKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 20</value>
+  </data>
+  <data name="tbAzureKey.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbAzureKey.Name" xml:space="preserve">
+    <value>tbAzureKey</value>
+  </data>
+  <data name="&gt;&gt;tbAzureKey.Type" xml:space="preserve">
+    <value>ExControls.ExTextBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbAzureKey.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;tbAzureKey.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bAzureVerify.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bAzureVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>421, 20</value>
+  </data>
+  <data name="bAzureVerify.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="bAzureVerify.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="bAzureVerify.Text" xml:space="preserve">
+    <value>Overiť</value>
+  </data>
+  <data name="&gt;&gt;bAzureVerify.Name" xml:space="preserve">
+    <value>bAzureVerify</value>
+  </data>
+  <data name="&gt;&gt;bAzureVerify.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bAzureVerify.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;bAzureVerify.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lAzureRegion.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lAzureRegion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="lAzureRegion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="lAzureRegion.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lAzureRegion.Text" xml:space="preserve">
+    <value>Oblasť:</value>
+  </data>
+  <data name="&gt;&gt;lAzureRegion.Name" xml:space="preserve">
+    <value>lAzureRegion</value>
+  </data>
+  <data name="&gt;&gt;lAzureRegion.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lAzureRegion.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;lAzureRegion.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tbAzureRegion.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbAzureRegion.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 47</value>
+  </data>
+  <data name="tbAzureRegion.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 20</value>
+  </data>
+  <data name="tbAzureRegion.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tbAzureRegion.Name" xml:space="preserve">
+    <value>tbAzureRegion</value>
+  </data>
+  <data name="&gt;&gt;tbAzureRegion.Type" xml:space="preserve">
+    <value>ExControls.ExTextBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbAzureRegion.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;tbAzureRegion.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lAzureStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lAzureStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lAzureStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 72</value>
+  </data>
+  <data name="lAzureStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 30</value>
+  </data>
+  <data name="lAzureStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lAzureStatus.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;lAzureStatus.Name" xml:space="preserve">
+    <value>lAzureStatus</value>
+  </data>
+  <data name="&gt;&gt;lAzureStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lAzureStatus.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;lAzureStatus.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="llAzure.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="llAzure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 108</value>
+  </data>
+  <data name="llAzure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>330, 13</value>
+  </data>
+  <data name="llAzure.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="llAzure.Text" xml:space="preserve">
+    <value>Kľúč a oblasť nájdete pri prostriedku Speech na portáli Azure</value>
+  </data>
+  <data name="&gt;&gt;llAzure.Name" xml:space="preserve">
+    <value>llAzure</value>
+  </data>
+  <data name="&gt;&gt;llAzure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;llAzure.Parent" xml:space="preserve">
+    <value>gbAzure</value>
+  </data>
+  <data name="&gt;&gt;llAzure.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lAzureInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lAzureInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lAzureInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 154</value>
+  </data>
+  <data name="lAzureInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 45</value>
+  </data>
+  <data name="lAzureInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lAzureInfo.Text" xml:space="preserve">
+    <value>Oblasť zadajte ako pri prostriedku (napr. westeurope) alebo jeho adresu. Azure nevracia časy slov, úryvok z nosnej vety sa preto strihá podľa odhadu.</value>
+  </data>
+  <data name="&gt;&gt;lAzureInfo.Name" xml:space="preserve">
+    <value>lAzureInfo</value>
+  </data>
+  <data name="&gt;&gt;lAzureInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lAzureInfo.Parent" xml:space="preserve">
+    <value>ppAzure</value>
+  </data>
+  <data name="&gt;&gt;lAzureInfo.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="optionsNodePiper.Text" xml:space="preserve">
+    <value>Piper (offline)</value>
+  </data>
+  <data name="pPiper.NodeText" xml:space="preserve">
+    <value>Piper (offline)</value>
+  </data>
+  <data name="&gt;&gt;pPiper.Name" xml:space="preserve">
+    <value>pPiper</value>
+  </data>
+  <data name="&gt;&gt;pPiper.Type" xml:space="preserve">
+    <value>ExControls.ExOptionsPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="ppPiper.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ppPiper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ppPiper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 400</value>
+  </data>
+  <data name="ppPiper.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ppPiper.Name" xml:space="preserve">
+    <value>ppPiper</value>
+  </data>
+  <data name="&gt;&gt;ppPiper.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ppPiper.Parent" xml:space="preserve">
+    <value>pPiper</value>
+  </data>
+  <data name="&gt;&gt;ppPiper.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gbPiper.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbPiper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="gbPiper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 156</value>
+  </data>
+  <data name="gbPiper.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbPiper.Text" xml:space="preserve">
+    <value>Piper</value>
+  </data>
+  <data name="&gt;&gt;gbPiper.Name" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;gbPiper.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbPiper.Parent" xml:space="preserve">
+    <value>ppPiper</value>
+  </data>
+  <data name="&gt;&gt;gbPiper.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lPiperPath.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lPiperPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 24</value>
+  </data>
+  <data name="lPiperPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="lPiperPath.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lPiperPath.Text" xml:space="preserve">
+    <value>Program:</value>
+  </data>
+  <data name="&gt;&gt;lPiperPath.Name" xml:space="preserve">
+    <value>lPiperPath</value>
+  </data>
+  <data name="&gt;&gt;lPiperPath.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lPiperPath.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;lPiperPath.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbPiperPath.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbPiperPath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="tbPiperPath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 20</value>
+  </data>
+  <data name="tbPiperPath.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbPiperPath.Name" xml:space="preserve">
+    <value>tbPiperPath</value>
+  </data>
+  <data name="&gt;&gt;tbPiperPath.Type" xml:space="preserve">
+    <value>ExControls.ExTextBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbPiperPath.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;tbPiperPath.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bPiperBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bPiperBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 20</value>
+  </data>
+  <data name="bPiperBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 23</value>
+  </data>
+  <data name="bPiperBrowse.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="bPiperBrowse.Text" xml:space="preserve">
+    <value>Vybrať…</value>
+  </data>
+  <data name="&gt;&gt;bPiperBrowse.Name" xml:space="preserve">
+    <value>bPiperBrowse</value>
+  </data>
+  <data name="&gt;&gt;bPiperBrowse.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bPiperBrowse.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;bPiperBrowse.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="bPiperVerify.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bPiperVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>421, 20</value>
+  </data>
+  <data name="bPiperVerify.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="bPiperVerify.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="bPiperVerify.Text" xml:space="preserve">
+    <value>Overiť</value>
+  </data>
+  <data name="&gt;&gt;bPiperVerify.Name" xml:space="preserve">
+    <value>bPiperVerify</value>
+  </data>
+  <data name="&gt;&gt;bPiperVerify.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bPiperVerify.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;bPiperVerify.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lPiperVoices.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lPiperVoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 50</value>
+  </data>
+  <data name="lPiperVoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="lPiperVoices.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lPiperVoices.Text" xml:space="preserve">
+    <value>Hlasy:</value>
+  </data>
+  <data name="&gt;&gt;lPiperVoices.Name" xml:space="preserve">
+    <value>lPiperVoices</value>
+  </data>
+  <data name="&gt;&gt;lPiperVoices.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lPiperVoices.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;lPiperVoices.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbPiperVoices.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbPiperVoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 47</value>
+  </data>
+  <data name="tbPiperVoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>233, 20</value>
+  </data>
+  <data name="tbPiperVoices.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;tbPiperVoices.Name" xml:space="preserve">
+    <value>tbPiperVoices</value>
+  </data>
+  <data name="&gt;&gt;tbPiperVoices.Type" xml:space="preserve">
+    <value>ExControls.ExTextBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbPiperVoices.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;tbPiperVoices.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="bPiperVoicesBrowse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bPiperVoicesBrowse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>339, 46</value>
+  </data>
+  <data name="bPiperVoicesBrowse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 23</value>
+  </data>
+  <data name="bPiperVoicesBrowse.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="bPiperVoicesBrowse.Text" xml:space="preserve">
+    <value>Vybrať…</value>
+  </data>
+  <data name="&gt;&gt;bPiperVoicesBrowse.Name" xml:space="preserve">
+    <value>bPiperVoicesBrowse</value>
+  </data>
+  <data name="&gt;&gt;bPiperVoicesBrowse.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bPiperVoicesBrowse.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;bPiperVoicesBrowse.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="bPiperDownload.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bPiperDownload.Location" type="System.Drawing.Point, System.Drawing">
+    <value>421, 46</value>
+  </data>
+  <data name="bPiperDownload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="bPiperDownload.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="bPiperDownload.Text" xml:space="preserve">
+    <value>Stiahnuť…</value>
+  </data>
+  <data name="&gt;&gt;bPiperDownload.Name" xml:space="preserve">
+    <value>bPiperDownload</value>
+  </data>
+  <data name="&gt;&gt;bPiperDownload.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bPiperDownload.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;bPiperDownload.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lPiperStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lPiperStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lPiperStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 72</value>
+  </data>
+  <data name="lPiperStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 30</value>
+  </data>
+  <data name="lPiperStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lPiperStatus.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;lPiperStatus.Name" xml:space="preserve">
+    <value>lPiperStatus</value>
+  </data>
+  <data name="&gt;&gt;lPiperStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lPiperStatus.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;lPiperStatus.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="llPiper.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="llPiper.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 108</value>
+  </data>
+  <data name="llPiper.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 13</value>
+  </data>
+  <data name="llPiper.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="llPiper.Text" xml:space="preserve">
+    <value>Stiahnuť Piper pre Windows</value>
+  </data>
+  <data name="&gt;&gt;llPiper.Name" xml:space="preserve">
+    <value>llPiper</value>
+  </data>
+  <data name="&gt;&gt;llPiper.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;llPiper.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;llPiper.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="llPiperSamples.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="llPiperSamples.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 130</value>
+  </data>
+  <data name="llPiperSamples.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="llPiperSamples.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="llPiperSamples.Text" xml:space="preserve">
+    <value>Ukážky hlasov</value>
+  </data>
+  <data name="&gt;&gt;llPiperSamples.Name" xml:space="preserve">
+    <value>llPiperSamples</value>
+  </data>
+  <data name="&gt;&gt;llPiperSamples.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;llPiperSamples.Parent" xml:space="preserve">
+    <value>gbPiper</value>
+  </data>
+  <data name="&gt;&gt;llPiperSamples.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lPiperInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lPiperInfo.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lPiperInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 170</value>
+  </data>
+  <data name="lPiperInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 45</value>
+  </data>
+  <data name="lPiperInfo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lPiperInfo.Text" xml:space="preserve">
+    <value>Piper beží v tomto počítači bez pripojenia a nič nestojí. Úryvok z nosnej vety sa strihá podľa odhadu, zmenu hlasu, čistenie ani prepis Piper nevie.</value>
+  </data>
+  <data name="&gt;&gt;lPiperInfo.Name" xml:space="preserve">
+    <value>lPiperInfo</value>
+  </data>
+  <data name="&gt;&gt;lPiperInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lPiperInfo.Parent" xml:space="preserve">
+    <value>ppPiper</value>
+  </data>
+  <data name="&gt;&gt;lPiperInfo.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FAppSettings</value>

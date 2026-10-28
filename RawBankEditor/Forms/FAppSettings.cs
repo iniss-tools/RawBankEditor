@@ -48,6 +48,12 @@ public partial class FAppSettings : FAppSettingsBase
         cboxAutoInsertSoundData.Checked = Config.AutoInsertSoundData;
         cboxShowAfterInsertSoundDlg.Checked = Config.ShowAfterInsertSoundDialog;
         tbSpeechKey.Text = Config.Speech.ElevenLabsKey;
+        tbAzureKey.Text = Config.Speech.AzureKey;
+        tbAzureRegion.Text = Config.Speech.AzureRegion;
+        tbPiperPath.Text = Config.Speech.PiperPath;
+        tbPiperVoices.Text = Config.Speech.PiperVoicesFolder;
+        // prazdny priecinok = predvoleny
+        tbPiperVoices.HintText = PiperVoices.DefaultFolder;
         nudSpeechConcurrency.Value = Math.Clamp(Config.Speech.Concurrency, (int)nudSpeechConcurrency.Minimum, (int)nudSpeechConcurrency.Maximum);
         ShowSpeechCacheSize();
     }
@@ -61,6 +67,10 @@ public partial class FAppSettings : FAppSettingsBase
         Config.AutoInsertSoundData = cboxAutoInsertSoundData.Checked;
         Config.ShowAfterInsertSoundDialog = cboxShowAfterInsertSoundDlg.Checked;
         Config.Speech.ElevenLabsKey = tbSpeechKey.Text;
+        Config.Speech.AzureKey = tbAzureKey.Text.Trim();
+        Config.Speech.AzureRegion = tbAzureRegion.Text.Trim();
+        Config.Speech.PiperPath = tbPiperPath.Text.Trim();
+        Config.Speech.PiperVoicesFolder = tbPiperVoices.Text.Trim();
         Config.Speech.Concurrency = decimal.ToInt32(nudSpeechConcurrency.Value);
         return base.OnSaving();
     }
@@ -124,6 +134,117 @@ public partial class FAppSettings : FAppSettingsBase
     }
 
     private void LlSpeechKey_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e) => Utils.OpenShell(ElevenLabsClient.ApiKeysUrl);
+
+    private void LlAzure_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e) => Utils.OpenShell(AzureSpeechClient.PortalUrl);
+
+    private void LlPiper_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e) => Utils.OpenShell(PiperClient.DownloadUrl);
+
+    private void LlPiperSamples_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e) => Utils.OpenShell(PiperVoiceCatalog.SamplesUrl);
+
+    private string PiperVoicesPath => tbPiperVoices.Text.Trim() is { Length: > 0 } folder ? folder : PiperVoices.DefaultFolder;
+
+    /// <summary>
+    /// Overi kluc a oblast Azure nacitanim zoznamu hlasov.
+    /// </summary>
+    private async void BAzureVerify_Click(object? sender, EventArgs e)
+    {
+        var key = tbAzureKey.Text.Trim();
+        var region = tbAzureRegion.Text.Trim();
+        if (key.Length == 0)
+        {
+            lAzureStatus.Text = Resources.FAppSettings_SpeechNoKey;
+            return;
+        }
+
+        if (!SpeechProviders.IsValidAzureRegion(region))
+        {
+            lAzureStatus.Text = Resources.FAppSettings_AzureNoRegion;
+            return;
+        }
+
+        bAzureVerify.Enabled = false;
+        lAzureStatus.Text = Resources.FAppSettings_SpeechVerifying;
+        try
+        {
+            using var client = new AzureSpeechClient(key, region);
+            var voices = await client.GetVoicesAsync(CancellationToken.None);
+            if (!IsDisposed)
+                lAzureStatus.Text = string.Format(CultureInfo.CurrentCulture, Resources.FAppSettings_AzureVerified, voices.Count,
+                    voices.Count(v => v.Speaks("sk")), voices.Count(v => v.Speaks("cs")));
+        }
+        catch (SpeechException ex)
+        {
+            if (!IsDisposed)
+                lAzureStatus.Text = string.Format(CultureInfo.CurrentCulture, Resources.Speech_Error, ex.Message);
+        }
+
+        if (!IsDisposed)
+            bAzureVerify.Enabled = true;
+    }
+
+    private void BPiperBrowse_Click(object? sender, EventArgs e)
+    {
+        using var dialog = new OpenFileDialog
+        {
+            Filter = Resources.FAppSettings_PiperFilter,
+            FileName = tbPiperPath.Text.Trim(),
+            CheckFileExists = true
+        };
+        if (dialog.ShowDialog(this) == DialogResult.OK)
+            tbPiperPath.Text = dialog.FileName;
+    }
+
+    private void BPiperVoicesBrowse_Click(object? sender, EventArgs e)
+    {
+        using var dialog = new FolderBrowserDialog { SelectedPath = PiperVoicesPath, ShowNewFolderButton = true };
+        if (dialog.ShowDialog(this) == DialogResult.OK)
+            tbPiperVoices.Text = string.Equals(dialog.SelectedPath, PiperVoices.DefaultFolder, StringComparison.OrdinalIgnoreCase) ? "" : dialog.SelectedPath;
+    }
+
+    private void BPiperDownload_Click(object? sender, EventArgs e)
+    {
+        using var form = new FPiperVoices(PiperVoicesPath, "");
+        form.ShowDialog(this);
+    }
+
+    /// <summary>
+    /// Overi Piper ukazkou prvym nainstalovanym hlasom.
+    /// </summary>
+    private async void BPiperVerify_Click(object? sender, EventArgs e)
+    {
+        var path = tbPiperPath.Text.Trim();
+        if (!File.Exists(path))
+        {
+            lPiperStatus.Text = Resources.FAppSettings_PiperNoProgram;
+            return;
+        }
+
+        bPiperVerify.Enabled = false;
+        lPiperStatus.Text = Resources.FAppSettings_SpeechVerifying;
+        try
+        {
+            var client = new PiperClient(path, PiperVoicesPath);
+            var voices = await client.GetVoicesAsync(CancellationToken.None);
+            if (voices.Count == 0)
+            {
+                lPiperStatus.Text = Resources.FAppSettings_PiperNoVoices;
+            }
+            else
+            {
+                var sound = await client.SynthesizeAsync(new SpeechRequest("Test.", voices[0].Id, PiperClient.Model), CancellationToken.None);
+                if (!IsDisposed)
+                    lPiperStatus.Text = string.Format(CultureInfo.CurrentCulture, Resources.FAppSettings_PiperVerified, voices.Count, sound.DurationMs);
+            }
+        }
+        catch (SpeechException ex)
+        {
+            if (!IsDisposed)
+                lPiperStatus.Text = string.Format(CultureInfo.CurrentCulture, Resources.Speech_Error, ex.Message);
+        }
+
+        if (!IsDisposed)
+            bPiperVerify.Enabled = true;
+    }
 
     private void BSpeechClearCache_Click(object? sender, EventArgs e)
     {

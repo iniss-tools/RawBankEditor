@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FPronunciation));
             this.lHint = new System.Windows.Forms.Label();
             this.dgvRules = new System.Windows.Forms.DataGridView();
+            this.cboxNumbers = new ExControls.ExCheckBox();
             this.bUp = new ExControls.ExButton();
             this.bDown = new ExControls.ExButton();
             this.lTest = new System.Windows.Forms.Label();
@@ -69,6 +70,14 @@
             this.dgvRules.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvRules_CellEndEdit);
             this.dgvRules.CurrentCellDirtyStateChanged += new System.EventHandler(this.DgvRules_CurrentCellDirtyStateChanged);
             this.dgvRules.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DgvRules_UserDeletedRow);
+            // 
+            // cboxNumbers
+            // 
+            resources.ApplyResources(this.cboxNumbers, "cboxNumbers");
+            this.cboxNumbers.Checked = true;
+            this.cboxNumbers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cboxNumbers.Name = "cboxNumbers";
+            this.cboxNumbers.CheckedChanged += new System.EventHandler(this.CboxNumbers_CheckedChanged);
             // 
             // bUp
             // 
@@ -138,6 +147,7 @@
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.lHint);
             this.Controls.Add(this.dgvRules);
+            this.Controls.Add(this.cboxNumbers);
             this.Controls.Add(this.bUp);
             this.Controls.Add(this.bDown);
             this.Controls.Add(this.lTest);
@@ -195,6 +205,7 @@
 
         private System.Windows.Forms.Label lHint;
         private System.Windows.Forms.DataGridView dgvRules;
+        private ExControls.ExCheckBox cboxNumbers;
         private ExControls.ExButton bUp;
         private ExControls.ExButton bDown;
         private System.Windows.Forms.Label lTest;

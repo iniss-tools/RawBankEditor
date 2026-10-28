@@ -120,6 +120,9 @@
   <data name="lHint.Text" xml:space="preserve">
     <value>Hint</value>
   </data>
+  <data name="cboxNumbers.Text" xml:space="preserve">
+    <value>Číst čísla slovy (data, časy, čísla; dlouhé řady číslic po cifrách)</value>
+  </data>
   <data name="bUp.Text" xml:space="preserve">
     <value>Výše</value>
   </data>

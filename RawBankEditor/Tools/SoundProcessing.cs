@@ -220,6 +220,53 @@ public static class SoundProcessing
     }
 
     /// <summary>
+    /// Cas, ked znie rec - sucet 10 ms okien nad prahom ticha (bez prestavok medzi slovami a vetami).
+    /// </summary>
+    /// <param name="thresholdDb">uroven okna, od ktorej je to rec</param>
+    public static int ActiveSpeechMs(PcmSound sound, double thresholdDb)
+    {
+        ArgumentNullException.ThrowIfNull(sound);
+
+        var window = Math.Max(1, sound.SampleRate * SILENCE_WINDOW_MS / 1000);
+        var threshold = FromDb(thresholdDb);
+        long active = 0;
+        for (var start = 0; start < sound.Samples.Length; start += window)
+        {
+            var length = Math.Min(window, sound.Samples.Length - start);
+            if (Rms(sound.Samples, start, length) >= threshold)
+                active += length;
+        }
+
+        return (int)(active * 1000 / sound.SampleRate);
+    }
+
+    /// <summary>
+    /// Zaciatok a koniec reci (prve a posledne 10 ms okno nad prahom ticha); <see langword="null" />, ak je cely zvuk
+    /// ticho.
+    /// </summary>
+    /// <param name="thresholdDb">uroven okna, od ktorej zacina rec</param>
+    public static (int StartMs, int EndMs)? SpeechBoundsMs(PcmSound sound, double thresholdDb)
+    {
+        ArgumentNullException.ThrowIfNull(sound);
+
+        var window = Math.Max(1, sound.SampleRate * SILENCE_WINDOW_MS / 1000);
+        var threshold = FromDb(thresholdDb);
+        var first = -1;
+        var last = -1;
+        for (var start = 0; start < sound.Samples.Length; start += window)
+        {
+            var length = Math.Min(window, sound.Samples.Length - start);
+            if (Rms(sound.Samples, start, length) < threshold)
+                continue;
+            if (first < 0)
+                first = start;
+            last = start + length;
+        }
+
+        return first < 0 ? null : ((int)((long)first * 1000 / sound.SampleRate), (int)((long)last * 1000 / sound.SampleRate));
+    }
+
+    /// <summary>
     /// Hlasitost reci v dBFS - RMS okien (50 ms) nad prahom ticha a zaroven najviac 10 dB pod hlasitostou tychto okien
     /// (relativne hradlo ako pri merani hlasitosti podla ITU-R BS.1770 - okraje slov a dych vysledok neznizia a meranie
     /// nezavisi od zosilnenia); <see langword="null" />, ak je cely zvuk ticho.

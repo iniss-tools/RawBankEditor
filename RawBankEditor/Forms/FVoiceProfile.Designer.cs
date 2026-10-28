@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FVoiceProfile));
             this.lHint = new System.Windows.Forms.Label();
+            this.lProvider = new System.Windows.Forms.Label();
+            this.cbProvider = new ExControls.ExComboBox();
             this.lModel = new System.Windows.Forms.Label();
             this.cbModel = new ExControls.ExComboBox();
             this.lVoice = new System.Windows.Forms.Label();
@@ -37,6 +39,7 @@
             this.bReload = new ExControls.ExButton();
             this.lLanguage = new System.Windows.Forms.Label();
             this.cbLanguage = new ExControls.ExComboBox();
+            this.bDownloadVoices = new ExControls.ExButton();
             this.gbSettings = new ExControls.ExGroupBox();
             this.lStability = new System.Windows.Forms.Label();
             this.nudStability = new ExControls.ExNumericUpDown();
@@ -68,6 +71,19 @@
             // 
             resources.ApplyResources(this.lHint, "lHint");
             this.lHint.Name = "lHint";
+            // 
+            // lProvider
+            // 
+            resources.ApplyResources(this.lProvider, "lProvider");
+            this.lProvider.Name = "lProvider";
+            // 
+            // cbProvider
+            // 
+            resources.ApplyResources(this.cbProvider, "cbProvider");
+            this.cbProvider.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProvider.FormattingEnabled = true;
+            this.cbProvider.Name = "cbProvider";
+            this.cbProvider.SelectedIndexChanged += new System.EventHandler(this.CbProvider_SelectedIndexChanged);
             // 
             // lModel
             // 
@@ -111,6 +127,14 @@
             this.cbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLanguage.FormattingEnabled = true;
             this.cbLanguage.Name = "cbLanguage";
+            this.cbLanguage.SelectedIndexChanged += new System.EventHandler(this.CbLanguage_SelectedIndexChanged);
+            // 
+            // bDownloadVoices
+            // 
+            resources.ApplyResources(this.bDownloadVoices, "bDownloadVoices");
+            this.bDownloadVoices.UseVisualStyleBackColor = true;
+            this.bDownloadVoices.Name = "bDownloadVoices";
+            this.bDownloadVoices.Click += new System.EventHandler(this.BDownloadVoices_Click);
             // 
             // gbSettings
             // 
@@ -238,12 +262,12 @@
             0,
             131072});
             this.nudSpeed.Maximum = new decimal(new int[] {
-            12,
+            2,
             0,
             0,
-            65536});
+            0});
             this.nudSpeed.Minimum = new decimal(new int[] {
-            7,
+            5,
             0,
             0,
             65536});
@@ -334,6 +358,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this.lHint);
+            this.Controls.Add(this.lProvider);
+            this.Controls.Add(this.cbProvider);
             this.Controls.Add(this.lModel);
             this.Controls.Add(this.cbModel);
             this.Controls.Add(this.lVoice);
@@ -341,6 +367,7 @@
             this.Controls.Add(this.bReload);
             this.Controls.Add(this.lLanguage);
             this.Controls.Add(this.cbLanguage);
+            this.Controls.Add(this.bDownloadVoices);
             this.Controls.Add(this.gbSettings);
             this.Controls.Add(this.lSample);
             this.Controls.Add(this.tbSample);
@@ -371,6 +398,8 @@
         #endregion
 
         private System.Windows.Forms.Label lHint;
+        private System.Windows.Forms.Label lProvider;
+        private ExControls.ExComboBox cbProvider;
         private System.Windows.Forms.Label lModel;
         private ExControls.ExComboBox cbModel;
         private System.Windows.Forms.Label lVoice;
@@ -378,6 +407,7 @@
         private ExControls.ExButton bReload;
         private System.Windows.Forms.Label lLanguage;
         private ExControls.ExComboBox cbLanguage;
+        private ExControls.ExButton bDownloadVoices;
         private ExControls.ExGroupBox gbSettings;
         private System.Windows.Forms.Label lStability;
         private ExControls.ExNumericUpDown nudStability;

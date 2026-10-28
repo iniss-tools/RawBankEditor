@@ -1918,7 +1918,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hlas: {0}, model {1}.
+        ///   Looks up a localized string similar to Hlas: {0}, model {1} ({2}).
         /// </summary>
         internal static string FGenerateSounds_Voice {
             get {
@@ -1963,7 +1963,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Účet nemá žiadny hlas. Pridajte si hlas v knižnici hlasov ElevenLabs..
+        ///   Looks up a localized string similar to Služba nemá žiadny hlas. V ElevenLabs si pridajte hlas v knižnici hlasov..
         /// </summary>
         internal static string FVoiceProfile_NoVoices {
             get {
@@ -2062,7 +2062,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hlasová syntéza nemá zadaný kľúč ElevenLabs. Otvoriť nastavenia?.
+        ///   Looks up a localized string similar to Hlasová syntéza nemá nastavenú žiadnu službu (ElevenLabs, Azure Speech ani Piper). Otvoriť nastav....
         /// </summary>
         internal static string Speech_NoKey {
             get {
@@ -2278,7 +2278,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pravidlá upravia text pred odoslaním službe, v poradí zoznamu. Text zvukov v banke sa nemení..
+        ///   Looks up a localized string similar to Pravidlá upravia text pred odoslaním službe v poradí zoznamu, až potom sa čísla prevedú na slová.....
         /// </summary>
         internal static string FPronunciation_Hint {
             get {
@@ -2305,7 +2305,7 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ukážka potrebuje kľúč ElevenLabs a hlas jazyka..
+        ///   Looks up a localized string similar to Ukážka potrebuje hlas jazyka a nastavenú jeho službu..
         /// </summary>
         internal static string FProsody_NoVoice {
             get {
@@ -2868,6 +2868,249 @@ namespace RawBankEditor.Properties {
         internal static string Match_Duration {
             get {
                 return ResourceManager.GetString("Match_Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zadajte oblasť prostriedku (napr. westeurope) alebo jeho adresu..
+        /// </summary>
+        internal static string FAppSettings_AzureNoRegion {
+            get {
+                return ResourceManager.GetString("FAppSettings_AzureNoRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kľúč platí. Hlasov: {0:N0}, slovenských {1}, českých {2}..
+        /// </summary>
+        internal static string FAppSettings_AzureVerified {
+            get {
+                return ResourceManager.GetString("FAppSettings_AzureVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piper (piper.exe)|piper.exe|Programy (*.exe)|*.exe.
+        /// </summary>
+        internal static string FAppSettings_PiperFilter {
+            get {
+                return ResourceManager.GetString("FAppSettings_PiperFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyberte program piper.exe..
+        /// </summary>
+        internal static string FAppSettings_PiperNoProgram {
+            get {
+                return ResourceManager.GetString("FAppSettings_PiperNoProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piper je nastavený, ale nemá žiadny hlas. Stiahnite hlas..
+        /// </summary>
+        internal static string FAppSettings_PiperNoVoices {
+            get {
+                return ResourceManager.GetString("FAppSettings_PiperNoVoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piper funguje. Hlasov: {0}, ukážka {1} ms..
+        /// </summary>
+        internal static string FAppSettings_PiperVerified {
+            get {
+                return ResourceManager.GetString("FAppSettings_PiperVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasy Piper na stiahnutie. Hlas sa uloží do priečinka {0} a funguje bez pripojenia..
+        /// </summary>
+        internal static string FPiperVoices_Hint {
+            get {
+                return ResourceManager.GetString("FPiperVoices_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všetky jazyky.
+        /// </summary>
+        internal static string FPiperVoices_AllLanguages {
+            get {
+                return ResourceManager.GetString("FPiperVoices_AllLanguages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Načítava sa zoznam hlasov….
+        /// </summary>
+        internal static string FPiperVoices_Loading {
+            get {
+                return ResourceManager.GetString("FPiperVoices_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0:0.0} MB.
+        /// </summary>
+        internal static string FPiperVoices_Size {
+            get {
+                return ResourceManager.GetString("FPiperVoices_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nainštalovaný.
+        /// </summary>
+        internal static string FPiperVoices_Installed {
+            get {
+                return ResourceManager.GetString("FPiperVoices_Installed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sťahuje sa {0}… {1:0} %.
+        /// </summary>
+        internal static string FPiperVoices_Downloading {
+            get {
+                return ResourceManager.GetString("FPiperVoices_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasy sú stiahnuté..
+        /// </summary>
+        internal static string FPiperVoices_Downloaded {
+            get {
+                return ResourceManager.GetString("FPiperVoices_Downloaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas sa nepodarilo stiahnuť: {0}.
+        /// </summary>
+        internal static string FPiperVoices_DownloadFailed {
+            get {
+                return ResourceManager.GetString("FPiperVoices_DownloadFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odstrániť hlasy {0}?.
+        /// </summary>
+        internal static string FPiperVoices_DeleteQuestion {
+            get {
+                return ResourceManager.GetString("FPiperVoices_DeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyššia stabilita dáva jednotvárnejší a stálejší prejav..
+        /// </summary>
+        internal static string FVoiceProfile_SettingsHint {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_SettingsHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Táto služba má len rýchlosť reči. Ostatné nastavenia sú pre ElevenLabs..
+        /// </summary>
+        internal static string FVoiceProfile_SpeedHint {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_SpeedHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Služba {0} nie je v nastaveniach programu. Vyberte inú službu alebo ju nastavte..
+        /// </summary>
+        internal static string FVoiceProfile_ProviderMissing {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_ProviderMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žiadny hlas Piper nie je nainštalovaný. Stiahnite hlas tlačidlom Stiahnuť hlasy..
+        /// </summary>
+        internal static string FVoiceProfile_NoPiperVoices {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_NoPiperVoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Služba hlasu jazyka ({0}) nie je nastavená. Otvoriť nastavenia?.
+        /// </summary>
+        internal static string Speech_ProviderMissing {
+            get {
+                return ResourceManager.GetString("Speech_ProviderMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zmenu hlasu nahrávok vie len ElevenLabs. Hlas jazyka je zo služby {0}..
+        /// </summary>
+        internal static string Speech_OperationUnsupported {
+            get {
+                return ResourceManager.GetString("Speech_OperationUnsupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Čistenie nahrávok vie len ElevenLabs. Zadajte kľúč ElevenLabs v nastaveniach..
+        /// </summary>
+        internal static string Speech_IsolateUnavailable {
+            get {
+                return ResourceManager.GetString("Speech_IsolateUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepis na text vie ElevenLabs alebo Azure Speech. Zadajte kľúč niektorej z nich v nastaveniach..
+        /// </summary>
+        internal static string Speech_TranscribeUnavailable {
+            get {
+                return ResourceManager.GetString("Speech_TranscribeUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasy účtu, knižnica, návrh a klon hlasu sú len v ElevenLabs. Hlasy Piper stiahnete v okne Hlas j....
+        /// </summary>
+        internal static string Speech_VoicesUnavailable {
+            get {
+                return ResourceManager.GetString("Speech_VoicesUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skontrolujte: rýchle tempo ({0:0} %).
+        /// </summary>
+        internal static string Tempo_Fast {
+            get {
+                return ResourceManager.GetString("Tempo_Fast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skontrolujte: pomalé tempo ({0:0} %).
+        /// </summary>
+        internal static string Tempo_Slow {
+            get {
+                return ResourceManager.GetString("Tempo_Slow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tempo reči oproti mediánu nahrávok v okne. Zjednotiť tempo vygeneruje nahrávky mimo ±10 % s uprav....
+        /// </summary>
+        internal static string FGenerateSounds_TempoTooltip {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_TempoTooltip", resourceCulture);
             }
         }
     }

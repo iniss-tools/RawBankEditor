@@ -31,7 +31,6 @@ public sealed class ElevenLabsClient : ISpeechProvider, IVoiceLibrary, IDisposab
     public const string ApiKeysUrl = "https://elevenlabs.io/app/settings/api-keys";
 
     private const string OUTPUT_FORMAT = "pcm_22050";
-    private const int MAX_RETRIES = 3;
     private const int MAX_VOICE_PAGES = 20;
 
     private static readonly Uri BaseAddress = new("https://api.elevenlabs.io/");
@@ -66,6 +65,14 @@ public sealed class ElevenLabsClient : ISpeechProvider, IVoiceLibrary, IDisposab
 
     /// <inheritdoc />
     public string Id => ProviderId;
+
+    /// <inheritdoc />
+    public SpeechFeatures Features =>
+        SpeechFeatures.Timings | SpeechFeatures.VoiceSettings | SpeechFeatures.Seed | SpeechFeatures.ConvertVoice | SpeechFeatures.Isolate
+        | SpeechFeatures.Transcribe | SpeechFeatures.Quota;
+
+    /// <inheritdoc />
+    public string TranscriptionModel => SttModel;
 
     /// <inheritdoc />
     public async Task<IReadOnlyList<SpeechVoice>> GetVoicesAsync(CancellationToken cancel)
@@ -483,58 +490,8 @@ public sealed class ElevenLabsClient : ISpeechProvider, IVoiceLibrary, IDisposab
         }
     }
 
-    /// <summary>
-    /// Posle poziadavku; pri 429 a 5xx ju az <see cref="MAX_RETRIES" />-krat zopakuje (podla Retry-After, inak
-    /// 1, 2, 4 s). Neuspesnu odpoved zmeni na <see cref="SpeechException" /> so spravou sluzby.
-    /// </summary>
-    private async Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> create, CancellationToken cancel)
-    {
-        for (var attempt = 0; ; attempt++)
-        {
-            HttpResponseMessage response;
-            try
-            {
-                using var request = create();
-                response = await _http.SendAsync(request, HttpCompletionOption.ResponseContentRead, cancel).ConfigureAwait(false);
-            }
-            catch (HttpRequestException e)
-            {
-                throw new SpeechException(e.Message, e);
-            }
-            catch (TaskCanceledException e) when (!cancel.IsCancellationRequested)
-            {
-                // vyprsal cas poziadavky, nie zrusenie pouzivatelom
-                throw new SpeechException(e.Message, e);
-            }
-
-            if (response.IsSuccessStatusCode)
-                return response;
-
-            var status = (int)response.StatusCode;
-            if (attempt < MAX_RETRIES && (response.StatusCode == HttpStatusCode.TooManyRequests || status >= 500))
-            {
-                var wait = RetryAfter(response.Headers.RetryAfter) ?? TimeSpan.FromSeconds(1 << attempt);
-                response.Dispose();
-                await Delay(wait, cancel).ConfigureAwait(false);
-                continue;
-            }
-
-            using (response)
-            {
-                var text = await response.Content.ReadAsStringAsync(cancel).ConfigureAwait(false);
-                throw new SpeechException(ErrorMessage(text) ?? $"{status} {response.ReasonPhrase}") { StatusCode = status };
-            }
-        }
-    }
-
-    private static TimeSpan? RetryAfter(RetryConditionHeaderValue? header)
-    {
-        if (header?.Delta is { } delta)
-            return delta;
-        if (header?.Date is { } date)
-            return date - DateTimeOffset.UtcNow;
-        return null;
-    }
+    private Task<HttpResponseMessage> SendAsync(Func<HttpRequestMessage> create, CancellationToken cancel) =>
+        SpeechHttp.SendAsync(_http, create, Delay, ErrorMessage, cancel);
 
     /// <summary>
     /// Sprava z chybovej odpovede: <c>{"detail": {"message": ...}}</c>, <c>{"detail": "..."}</c> alebo zoznam chyb

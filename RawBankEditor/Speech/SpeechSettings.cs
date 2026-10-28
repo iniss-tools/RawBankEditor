@@ -4,7 +4,7 @@ using ToolsCore.Tools;
 namespace RawBankEditor.Speech;
 
 /// <summary>
-/// Nastavenia hlasovej syntezy v konfiguracii programu - kluc ElevenLabs a sposob generovania.
+/// Nastavenia hlasovej syntezy v konfiguracii programu - sluzby (ElevenLabs, Azure Speech, Piper) a sposob generovania.
 /// </summary>
 public sealed class SpeechSettings
 {
@@ -26,6 +26,41 @@ public sealed class SpeechSettings
         set => ProtectedElevenLabsKey = UserSecret.Protect(value, Entropy);
     }
 
+    /// <summary>Kluc Azure Speech sifrovany pre aktualneho pouzivatela Windows (DPAPI).</summary>
+    [XmlAttribute("AzureKey")]
+    public string ProtectedAzureKey { get; set; } = "";
+
+    /// <summary>
+    /// Kluc prostriedku Azure Speech; prazdny = Azure nie je nastavene.
+    /// </summary>
+    [XmlIgnore]
+    public string AzureKey
+    {
+        get => UserSecret.Unprotect(ProtectedAzureKey, AzureEntropy);
+        set => ProtectedAzureKey = UserSecret.Protect(value, AzureEntropy);
+    }
+
+    /// <summary>Oblast prostriedku Azure Speech (napr. <c>westeurope</c>) alebo jeho adresa.</summary>
+    [XmlAttribute("AzureRegion")]
+    [DefaultValue("")]
+    public string AzureRegion { get; set; } = "";
+
+    /// <summary>Program Piper (<c>piper.exe</c>); prazdny = Piper nie je nastaveny.</summary>
+    [XmlAttribute("PiperPath")]
+    [DefaultValue("")]
+    public string PiperPath { get; set; } = "";
+
+    /// <summary>Priecinok hlasov Piper; prazdny = <see cref="PiperVoices.DefaultFolder" />.</summary>
+    [XmlAttribute("PiperVoices")]
+    [DefaultValue("")]
+    public string PiperVoicesFolder { get; set; } = "";
+
+    /// <summary>
+    /// Priecinok hlasov Piper - nastaveny alebo predvoleny.
+    /// </summary>
+    [XmlIgnore]
+    public string PiperVoicesPath => PiperVoicesFolder.Length > 0 ? PiperVoicesFolder : PiperVoices.DefaultFolder;
+
     /// <summary>Pocet sucasnych poziadaviek pri generovani viacerych nahravok.</summary>
     [XmlAttribute("Concurrency")]
     [DefaultValue(2)]
@@ -45,4 +80,5 @@ public sealed class SpeechSettings
     public SpeechSettings Clone() => (SpeechSettings)MemberwiseClone();
 
     private static readonly byte[] Entropy = "RawBankEditor.ElevenLabs.ApiKey"u8.ToArray();
+    private static readonly byte[] AzureEntropy = "RawBankEditor.Azure.ApiKey"u8.ToArray();
 }

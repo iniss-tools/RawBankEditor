@@ -40,6 +40,10 @@ public sealed class ProsodyTests : IDisposable
 
         public string Id => "fake";
 
+        public SpeechFeatures Features => SpeechFeatures.Timings;
+
+        public string TranscriptionModel => "fake-stt";
+
         public Task<IReadOnlyList<SpeechVoice>> GetVoicesAsync(CancellationToken cancel) => Task.FromResult<IReadOnlyList<SpeechVoice>>([]);
 
         public Task<IReadOnlyList<SpeechModel>> GetModelsAsync(CancellationToken cancel) => Task.FromResult<IReadOnlyList<SpeechModel>>([]);

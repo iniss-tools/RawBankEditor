@@ -38,6 +38,7 @@
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.bGenerate = new ExControls.ExButton();
             this.bRegenerate = new ExControls.ExButton();
+            this.bEvenTempo = new ExControls.ExButton();
             this.bPlayOld = new ExControls.ExButton();
             this.bPlayNew = new ExControls.ExButton();
             this.bStop = new ExControls.ExButton();
@@ -51,6 +52,7 @@
             this.cText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cTempo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cOldDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cNewDuration = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
@@ -105,6 +107,7 @@
             this.cText,
             this.cStatus,
             this.cMatch,
+            this.cTempo,
             this.cOldDuration,
             this.cNewDuration});
             resources.ApplyResources(this.dgvItems, "dgvItems");
@@ -135,6 +138,13 @@
             this.bRegenerate.UseVisualStyleBackColor = true;
             this.bRegenerate.Name = "bRegenerate";
             this.bRegenerate.Click += new System.EventHandler(this.BRegenerate_Click);
+            // 
+            // bEvenTempo
+            // 
+            resources.ApplyResources(this.bEvenTempo, "bEvenTempo");
+            this.bEvenTempo.UseVisualStyleBackColor = true;
+            this.bEvenTempo.Name = "bEvenTempo";
+            this.bEvenTempo.Click += new System.EventHandler(this.BEvenTempo_Click);
             // 
             // bPlayOld
             // 
@@ -197,6 +207,7 @@
             this.Controls.Add(this.dgvItems);
             this.Controls.Add(this.bGenerate);
             this.Controls.Add(this.bRegenerate);
+            this.Controls.Add(this.bEvenTempo);
             this.Controls.Add(this.bPlayOld);
             this.Controls.Add(this.bPlayNew);
             this.Controls.Add(this.bStop);
@@ -254,6 +265,13 @@
             resources.ApplyResources(this.cMatch, "cMatch");
             this.cMatch.Name = "cMatch";
             // 
+            // cTempo
+            // 
+            this.cTempo.DataPropertyName = "TempoText";
+            this.cTempo.ReadOnly = true;
+            resources.ApplyResources(this.cTempo, "cTempo");
+            this.cTempo.Name = "cTempo";
+            // 
             // cOldDuration
             // 
             this.cOldDuration.DataPropertyName = "OldDurationText";
@@ -284,6 +302,7 @@
         private System.Windows.Forms.DataGridView dgvItems;
         private ExControls.ExButton bGenerate;
         private ExControls.ExButton bRegenerate;
+        private ExControls.ExButton bEvenTempo;
         private ExControls.ExButton bPlayOld;
         private ExControls.ExButton bPlayNew;
         private ExControls.ExButton bStop;
@@ -297,6 +316,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cText;
         private System.Windows.Forms.DataGridViewTextBoxColumn cStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn cMatch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cTempo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cOldDuration;
         private System.Windows.Forms.DataGridViewTextBoxColumn cNewDuration;
     }

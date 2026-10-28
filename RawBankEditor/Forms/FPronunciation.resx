@@ -155,7 +155,7 @@
     <value>12, 44</value>
   </data>
   <data name="dgvRules.Size" type="System.Drawing.Size, System.Drawing">
-    <value>594, 300</value>
+    <value>594, 274</value>
   </data>
   <data name="dgvRules.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -172,6 +172,36 @@
   <data name="&gt;&gt;dgvRules.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cboxNumbers.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="cboxNumbers.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxNumbers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 327</value>
+  </data>
+  <data name="cboxNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>420, 17</value>
+  </data>
+  <data name="cboxNumbers.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cboxNumbers.Text" xml:space="preserve">
+    <value>Čítať čísla slovami (dátumy, časy, čísla; dlhé rady číslic po cifrách)</value>
+  </data>
+  <data name="&gt;&gt;cboxNumbers.Name" xml:space="preserve">
+    <value>cboxNumbers</value>
+  </data>
+  <data name="&gt;&gt;cboxNumbers.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxNumbers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cboxNumbers.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="bUp.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -182,7 +212,7 @@
     <value>76, 23</value>
   </data>
   <data name="bUp.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="bUp.Text" xml:space="preserve">
     <value>Vyššie</value>
@@ -197,7 +227,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bUp.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="bDown.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -209,7 +239,7 @@
     <value>76, 23</value>
   </data>
   <data name="bDown.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="bDown.Text" xml:space="preserve">
     <value>Nižšie</value>
@@ -224,7 +254,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bDown.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lTest.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -239,7 +269,7 @@
     <value>84, 13</value>
   </data>
   <data name="lTest.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lTest.Text" xml:space="preserve">
     <value>Skúšobný text:</value>
@@ -254,7 +284,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lTest.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="tbTest.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -266,7 +296,7 @@
     <value>496, 20</value>
   </data>
   <data name="tbTest.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tbTest.Name" xml:space="preserve">
     <value>tbTest</value>
@@ -278,7 +308,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbTest.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="bTry.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -290,7 +320,7 @@
     <value>76, 23</value>
   </data>
   <data name="bTry.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="bTry.Text" xml:space="preserve">
     <value>Vyskúšať</value>
@@ -305,7 +335,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bTry.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lResultCaption.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -320,7 +350,7 @@
     <value>66, 13</value>
   </data>
   <data name="lResultCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lResultCaption.Text" xml:space="preserve">
     <value>Vysloví sa:</value>
@@ -335,7 +365,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lResultCaption.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lResult.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -350,7 +380,7 @@
     <value>578, 30</value>
   </data>
   <data name="lResult.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lResult.Text" xml:space="preserve">
     <value></value>
@@ -365,7 +395,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lResult.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -380,7 +410,7 @@
     <value>500, 30</value>
   </data>
   <data name="lStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="lStatus.Text" xml:space="preserve">
     <value></value>
@@ -395,7 +425,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lStatus.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="bOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -407,7 +437,7 @@
     <value>75, 23</value>
   </data>
   <data name="bOK.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="bOK.Text" xml:space="preserve">
     <value>Uložiť</value>
@@ -422,7 +452,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bOK.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="bCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -434,7 +464,7 @@
     <value>75, 23</value>
   </data>
   <data name="bCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="bCancel.Text" xml:space="preserve">
     <value>Zrušiť</value>
@@ -449,7 +479,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bCancel.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="cFind.HeaderText" xml:space="preserve">
     <value>Hľadať</value>
@@ -515,7 +545,7 @@
     <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>500, 320</value>
+    <value>500, 340</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Výslovnosť</value>

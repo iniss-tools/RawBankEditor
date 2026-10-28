@@ -148,17 +148,68 @@
   <data name="&gt;&gt;lHint.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lProvider.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lProvider.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 48</value>
+  </data>
+  <data name="lProvider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 13</value>
+  </data>
+  <data name="lProvider.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lProvider.Text" xml:space="preserve">
+    <value>Služba:</value>
+  </data>
+  <data name="&gt;&gt;lProvider.Name" xml:space="preserve">
+    <value>lProvider</value>
+  </data>
+  <data name="&gt;&gt;lProvider.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lProvider.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lProvider.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cbProvider.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="cbProvider.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 45</value>
+  </data>
+  <data name="cbProvider.Size" type="System.Drawing.Size, System.Drawing">
+    <value>358, 21</value>
+  </data>
+  <data name="cbProvider.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cbProvider.Name" xml:space="preserve">
+    <value>cbProvider</value>
+  </data>
+  <data name="&gt;&gt;cbProvider.Type" xml:space="preserve">
+    <value>ExControls.ExComboBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cbProvider.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cbProvider.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="lModel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 48</value>
+    <value>12, 75</value>
   </data>
   <data name="lModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
   </data>
   <data name="lModel.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="lModel.Text" xml:space="preserve">
     <value>Model:</value>
@@ -173,19 +224,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lModel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cbModel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="cbModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 45</value>
+    <value>110, 72</value>
   </data>
   <data name="cbModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>358, 21</value>
   </data>
   <data name="cbModel.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;cbModel.Name" xml:space="preserve">
     <value>cbModel</value>
@@ -197,19 +248,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbModel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lVoice.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lVoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 75</value>
+    <value>12, 102</value>
   </data>
   <data name="lVoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
   <data name="lVoice.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lVoice.Text" xml:space="preserve">
     <value>Hlas:</value>
@@ -224,19 +275,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lVoice.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cbVoice.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="cbVoice.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 72</value>
+    <value>110, 99</value>
   </data>
   <data name="cbVoice.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 21</value>
   </data>
   <data name="cbVoice.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;cbVoice.Name" xml:space="preserve">
     <value>cbVoice</value>
@@ -248,19 +299,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbVoice.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="bReload.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="bReload.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 71</value>
+    <value>392, 98</value>
   </data>
   <data name="bReload.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 23</value>
   </data>
   <data name="bReload.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="bReload.Text" xml:space="preserve">
     <value>Načítať</value>
@@ -275,19 +326,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bReload.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lLanguage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 102</value>
+    <value>12, 129</value>
   </data>
   <data name="lLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
   </data>
   <data name="lLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lLanguage.Text" xml:space="preserve">
     <value>Jazyk reči:</value>
@@ -302,16 +353,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lLanguage.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cbLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 99</value>
+    <value>110, 126</value>
   </data>
   <data name="cbLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>140, 21</value>
   </data>
   <data name="cbLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;cbLanguage.Name" xml:space="preserve">
     <value>cbLanguage</value>
@@ -323,19 +374,46 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cbLanguage.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
+  </data>
+  <data name="bDownloadVoices.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bDownloadVoices.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 125</value>
+  </data>
+  <data name="bDownloadVoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="bDownloadVoices.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="bDownloadVoices.Text" xml:space="preserve">
+    <value>Stiahnuť hlasy…</value>
+  </data>
+  <data name="&gt;&gt;bDownloadVoices.Name" xml:space="preserve">
+    <value>bDownloadVoices</value>
+  </data>
+  <data name="&gt;&gt;bDownloadVoices.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bDownloadVoices.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bDownloadVoices.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="gbSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="gbSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 128</value>
+    <value>12, 155</value>
   </data>
   <data name="gbSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>456, 150</value>
   </data>
   <data name="gbSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="gbSettings.Text" xml:space="preserve">
     <value>Nastavenia hlasu</value>
@@ -350,7 +428,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;gbSettings.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="lStability.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -650,13 +728,13 @@
     <value>True</value>
   </data>
   <data name="lSample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 290</value>
+    <value>12, 317</value>
   </data>
   <data name="lSample.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 13</value>
   </data>
   <data name="lSample.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="lSample.Text" xml:space="preserve">
     <value>Ukážkový text:</value>
@@ -671,19 +749,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lSample.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="tbSample.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
   <data name="tbSample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 287</value>
+    <value>110, 314</value>
   </data>
   <data name="tbSample.Size" type="System.Drawing.Size, System.Drawing">
     <value>276, 20</value>
   </data>
   <data name="tbSample.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;tbSample.Name" xml:space="preserve">
     <value>tbSample</value>
@@ -695,19 +773,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tbSample.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="bTry.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
   <data name="bTry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>392, 286</value>
+    <value>392, 313</value>
   </data>
   <data name="bTry.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 23</value>
   </data>
   <data name="bTry.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="bTry.Text" xml:space="preserve">
     <value>Vyskúšať</value>
@@ -722,7 +800,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bTry.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="lStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -731,13 +809,13 @@
     <value>False</value>
   </data>
   <data name="lStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 318</value>
+    <value>12, 345</value>
   </data>
   <data name="lStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>456, 66</value>
   </data>
   <data name="lStatus.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="lStatus.Text" xml:space="preserve">
     <value></value>
@@ -752,19 +830,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lStatus.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>15</value>
   </data>
   <data name="bOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="bOK.Location" type="System.Drawing.Point, System.Drawing">
-    <value>312, 395</value>
+    <value>312, 422</value>
   </data>
   <data name="bOK.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="bOK.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="bOK.Text" xml:space="preserve">
     <value>Uložiť</value>
@@ -779,19 +857,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bOK.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>16</value>
   </data>
   <data name="bCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
   </data>
   <data name="bCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>393, 395</value>
+    <value>393, 422</value>
   </data>
   <data name="bCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
   <data name="bCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="bCancel.Text" xml:space="preserve">
     <value>Zrušiť</value>
@@ -806,13 +884,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bCancel.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Hlas jazyka</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>480, 430</value>
+    <value>480, 457</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

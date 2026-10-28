@@ -50,7 +50,9 @@ public sealed class GenerationRow
     [Browsable(false)]
     public SoundOrigin? Origin { get; }
 
-    /// <summary>Prevziat novu nahravku do banky.</summary>
+    /// <summary>
+    /// Vybrany riadok - pred generovanim sa vygeneruje, po nom sa nova nahravka prevezme do banky.
+    /// </summary>
     public bool Accept { get; set; }
 
     /// <summary>Kluc skupiny.</summary>
@@ -92,6 +94,21 @@ public sealed class GenerationRow
     /// <summary>Zhoda v percentach.</summary>
     public string MatchText => Match is { } match ? string.Format(CultureInfo.CurrentCulture, Resources.Match_Percent, match * 100) : "";
 
+    /// <summary>Uprava rychlosti hlasu pre tento uryvok (zjednotenie tempa); 1 = rychlost hlasu jazyka.</summary>
+    [Browsable(false)]
+    public double SpeedFactor { get; set; } = 1;
+
+    /// <summary>Tempo novej nahravky v hlaskach za sekundu (<see cref="SpeechTempo.Rate" />); <see langword="null" /> = nemerane.</summary>
+    [Browsable(false)]
+    public double? Rate { get; set; }
+
+    /// <summary>Tempo oproti medianu nahravok v okne; <see langword="null" />, kym ho nie je s cim porovnat.</summary>
+    [Browsable(false)]
+    public double? TempoRatio { get; set; }
+
+    /// <summary>Tempo v percentach medianu.</summary>
+    public string TempoText => TempoRatio is { } ratio ? string.Format(CultureInfo.CurrentCulture, Resources.Match_Percent, ratio * 100) : "";
+
     /// <summary>Prepis novej nahravky.</summary>
     [Browsable(false)]
     public string Transcript { get; set; } = "";
@@ -109,10 +126,12 @@ public sealed class GenerationRow
     /// </summary>
     public void ClearResult()
     {
+        // vyber riadku ostava - novu nahravku chce pouzivatel stale
         ResultWav = null;
         ResultDuration = 0;
-        Accept = false;
         Match = null;
+        Rate = null;
+        TempoRatio = null;
         Transcript = "";
         Suspicious = false;
         Status = Resources.FGenerateSounds_StatusWaiting;

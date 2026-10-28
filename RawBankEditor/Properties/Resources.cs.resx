@@ -811,7 +811,7 @@ INISS2 potřebuje právě jeden výchozí jazyk. Při exportu ostatních jazyků
     <value>Zrušeno</value>
   </data>
   <data name="FGenerateSounds_Voice" xml:space="preserve">
-    <value>Hlas: {0}, model {1}</value>
+    <value>Hlas: {0}, model {1} ({2})</value>
   </data>
   <data name="FVoiceProfile_Hint" xml:space="preserve">
     <value>Hlas, kterým se generují nahrávky jazyka {0}. Uloží se do složky {1} ve složce INISS.</value>
@@ -826,7 +826,7 @@ INISS2 potřebuje právě jeden výchozí jazyk. Při exportu ostatních jazyků
     <value>Vyberte hlas.</value>
   </data>
   <data name="FVoiceProfile_NoVoices" xml:space="preserve">
-    <value>Účet nemá žádný hlas. Přidejte si hlas v knihovně hlasů ElevenLabs.</value>
+    <value>Služba nemá žádný hlas. V ElevenLabs si přidejte hlas v knihovně hlasů.</value>
   </data>
   <data name="FVoiceProfile_Generating" xml:space="preserve">
     <value>Generuje se ukázka…</value>
@@ -863,7 +863,7 @@ INISS2 potřebuje právě jeden výchozí jazyk. Při exportu ostatních jazyků
     <value>Chyba služby: {0}</value>
   </data>
   <data name="Speech_NoKey" xml:space="preserve">
-    <value>Hlasová syntéza nemá zadaný klíč ElevenLabs. Otevřít nastavení?</value>
+    <value>Hlasová syntéza nemá nastavenou žádnou službu (ElevenLabs, Azure Speech ani Piper). Otevřít nastavení?</value>
   </data>
   <data name="Speech_VoiceSaveFailed" xml:space="preserve">
     <value>Hlas jazyka se nepodařilo uložit: {0}</value>
@@ -938,7 +938,7 @@ Text: {3}</value>
     <value>Text pro syntézu</value>
   </data>
   <data name="FPronunciation_Hint" xml:space="preserve">
-    <value>Pravidla upraví text před odesláním službě, v pořadí seznamu. Text zvuků v bance se nemění.</value>
+    <value>Pravidla upraví text před odesláním službě v pořadí seznamu, až potom se čísla převedou na slova. Text zvuků v bance se nemění.</value>
   </data>
   <data name="FPronunciation_InvalidRegex" xml:space="preserve">
     <value>Pravidlo „{0}“ není platný regulární výraz: {1}</value>
@@ -947,7 +947,7 @@ Text: {3}</value>
     <value>Úryvky se skládají do hlášení, proto se generují s intonací podle místa ve větě. Kontext služba nevysloví, z nosné věty se úryvek vystřihne. Výchozí hodnoty vycházejí z typu skupiny.</value>
   </data>
   <data name="FProsody_NoVoice" xml:space="preserve">
-    <value>Ukázka potřebuje klíč ElevenLabs a hlas jazyka.</value>
+    <value>Ukázka potřebuje hlas jazyka a nastavenou jeho službu.</value>
   </data>
   <data name="Prosody_None" xml:space="preserve">
     <value>Samostatně</value>
@@ -1134,5 +1134,86 @@ Text: {3}</value>
   </data>
   <data name="Match_Duration" xml:space="preserve">
     <value>Zkontrolujte: délka {0:0} % původní</value>
+  </data>
+  <data name="FAppSettings_AzureNoRegion" xml:space="preserve">
+    <value>Zadejte oblast prostředku (např. westeurope) nebo jeho adresu.</value>
+  </data>
+  <data name="FAppSettings_AzureVerified" xml:space="preserve">
+    <value>Klíč je platný. Hlasů: {0:N0}, slovenských {1}, českých {2}.</value>
+  </data>
+  <data name="FAppSettings_PiperFilter" xml:space="preserve">
+    <value>Piper (piper.exe)|piper.exe|Programy (*.exe)|*.exe</value>
+  </data>
+  <data name="FAppSettings_PiperNoProgram" xml:space="preserve">
+    <value>Vyberte program piper.exe.</value>
+  </data>
+  <data name="FAppSettings_PiperNoVoices" xml:space="preserve">
+    <value>Piper je nastavený, ale nemá žádný hlas. Stáhněte hlas.</value>
+  </data>
+  <data name="FAppSettings_PiperVerified" xml:space="preserve">
+    <value>Piper funguje. Hlasů: {0}, ukázka {1} ms.</value>
+  </data>
+  <data name="FPiperVoices_Hint" xml:space="preserve">
+    <value>Hlasy Piper ke stažení. Hlas se uloží do složky {0} a funguje bez připojení.</value>
+  </data>
+  <data name="FPiperVoices_AllLanguages" xml:space="preserve">
+    <value>Všechny jazyky</value>
+  </data>
+  <data name="FPiperVoices_Loading" xml:space="preserve">
+    <value>Načítá se seznam hlasů…</value>
+  </data>
+  <data name="FPiperVoices_Size" xml:space="preserve">
+    <value>{0:0.0} MB</value>
+  </data>
+  <data name="FPiperVoices_Installed" xml:space="preserve">
+    <value>Nainstalovaný</value>
+  </data>
+  <data name="FPiperVoices_Downloading" xml:space="preserve">
+    <value>Stahuje se {0}… {1:0} %</value>
+  </data>
+  <data name="FPiperVoices_Downloaded" xml:space="preserve">
+    <value>Hlasy jsou stažené.</value>
+  </data>
+  <data name="FPiperVoices_DownloadFailed" xml:space="preserve">
+    <value>Hlas se nepodařilo stáhnout: {0}</value>
+  </data>
+  <data name="FPiperVoices_DeleteQuestion" xml:space="preserve">
+    <value>Odstranit hlasy {0}?</value>
+  </data>
+  <data name="FVoiceProfile_SettingsHint" xml:space="preserve">
+    <value>Vyšší stabilita dává jednotvárnější a stálejší projev.</value>
+  </data>
+  <data name="FVoiceProfile_SpeedHint" xml:space="preserve">
+    <value>Tato služba má jen rychlost řeči. Ostatní nastavení jsou pro ElevenLabs.</value>
+  </data>
+  <data name="FVoiceProfile_ProviderMissing" xml:space="preserve">
+    <value>Služba {0} není v nastavení programu. Vyberte jinou službu nebo ji nastavte.</value>
+  </data>
+  <data name="FVoiceProfile_NoPiperVoices" xml:space="preserve">
+    <value>Žádný hlas Piper není nainstalovaný. Stáhněte hlas tlačítkem Stáhnout hlasy.</value>
+  </data>
+  <data name="Speech_ProviderMissing" xml:space="preserve">
+    <value>Služba hlasu jazyka ({0}) není nastavená. Otevřít nastavení?</value>
+  </data>
+  <data name="Speech_OperationUnsupported" xml:space="preserve">
+    <value>Změnu hlasu nahrávek umí jen ElevenLabs. Hlas jazyka je ze služby {0}.</value>
+  </data>
+  <data name="Speech_IsolateUnavailable" xml:space="preserve">
+    <value>Čištění nahrávek umí jen ElevenLabs. Zadejte klíč ElevenLabs v nastavení.</value>
+  </data>
+  <data name="Speech_TranscribeUnavailable" xml:space="preserve">
+    <value>Přepis na text umí ElevenLabs nebo Azure Speech. Zadejte klíč některé z nich v nastavení.</value>
+  </data>
+  <data name="Speech_VoicesUnavailable" xml:space="preserve">
+    <value>Hlasy účtu, knihovna, návrh a klon hlasu jsou jen v ElevenLabs. Hlasy Piper stáhnete v okně Hlas jazyka.</value>
+  </data>
+  <data name="Tempo_Fast" xml:space="preserve">
+    <value>Zkontrolujte: rychlé tempo ({0:0} %)</value>
+  </data>
+  <data name="Tempo_Slow" xml:space="preserve">
+    <value>Zkontrolujte: pomalé tempo ({0:0} %)</value>
+  </data>
+  <data name="FGenerateSounds_TempoTooltip" xml:space="preserve">
+    <value>Tempo řeči oproti mediánu nahrávek v okně. Sjednotit tempo vygeneruje nahrávky mimo ±10 % s upravenou rychlostí hlasu.</value>
   </data>
 </root>

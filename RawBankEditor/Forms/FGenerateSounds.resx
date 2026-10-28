@@ -341,7 +341,7 @@
     <value>118, 410</value>
   </data>
   <data name="bRegenerate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>115, 23</value>
   </data>
   <data name="bRegenerate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -361,11 +361,38 @@
   <data name="&gt;&gt;bRegenerate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="bEvenTempo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="bEvenTempo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>239, 410</value>
+  </data>
+  <data name="bEvenTempo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 23</value>
+  </data>
+  <data name="bEvenTempo.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="bEvenTempo.Text" xml:space="preserve">
+    <value>Zjednotiť tempo</value>
+  </data>
+  <data name="&gt;&gt;bEvenTempo.Name" xml:space="preserve">
+    <value>bEvenTempo</value>
+  </data>
+  <data name="&gt;&gt;bEvenTempo.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bEvenTempo.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bEvenTempo.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="bPlayOld.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="bPlayOld.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 410</value>
+    <value>355, 410</value>
   </data>
   <data name="bPlayOld.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -386,13 +413,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bPlayOld.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="bPlayNew.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="bPlayNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>350, 410</value>
+    <value>461, 410</value>
   </data>
   <data name="bPlayNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 23</value>
@@ -413,16 +440,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bPlayNew.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="bStop.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="bStop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>446, 410</value>
+    <value>557, 410</value>
   </data>
   <data name="bStop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 23</value>
+    <value>70, 23</value>
   </data>
   <data name="bStop.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -440,16 +467,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bStop.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="bPlaySequence.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
   </data>
   <data name="bPlaySequence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>532, 410</value>
+    <value>633, 410</value>
   </data>
   <data name="bPlaySequence.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>115, 23</value>
   </data>
   <data name="bPlaySequence.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -467,7 +494,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bPlaySequence.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="lInfo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
@@ -497,7 +524,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lInfo.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="bOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -524,7 +551,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bOK.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="bCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Right</value>
@@ -551,13 +578,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;bCancel.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="cAccept.HeaderText" xml:space="preserve">
-    <value>Prevziať</value>
+    <value>Vybrať</value>
   </data>
   <data name="cAccept.Width" type="System.Int32, mscorlib">
-    <value>60</value>
+    <value>55</value>
   </data>
   <data name="&gt;&gt;cAccept.Name" xml:space="preserve">
     <value>cAccept</value>
@@ -628,6 +655,18 @@
   <data name="&gt;&gt;cMatch.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="cTempo.HeaderText" xml:space="preserve">
+    <value>Tempo</value>
+  </data>
+  <data name="cTempo.Width" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="&gt;&gt;cTempo.Name" xml:space="preserve">
+    <value>cTempo</value>
+  </data>
+  <data name="&gt;&gt;cTempo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cOldDuration.HeaderText" xml:space="preserve">
     <value>Pôvodná</value>
   </data>
@@ -686,6 +725,9 @@
     <value>True</value>
   </metadata>
   <metadata name="cMatch.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cTempo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="cOldDuration.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

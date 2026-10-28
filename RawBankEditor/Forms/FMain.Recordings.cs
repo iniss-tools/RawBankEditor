@@ -170,19 +170,26 @@ partial class FMain
     }
 
     /// <summary>
-    /// Kluc ElevenLabs - bez neho ponukne nastavenia programu.
+    /// Nastavene sluzby syntezy - bez ziadnej ponukne nastavenia programu. Uvolni ich volajuci.
     /// </summary>
-    /// <returns>kluc alebo <see langword="null" />, ak ho pouzivatel nezadal.</returns>
-    private string? SpeechKey()
+    /// <returns>sluzby alebo <see langword="null" />, ak pouzivatel ziadnu nenastavil.</returns>
+    private SpeechProviders? Providers()
     {
-        if (_bank.Config.Speech.ElevenLabsKey is { Length: > 0 } key)
-            return key;
+        var providers = SpeechProviders.FromSettings(_bank.Config.Speech);
+        if (providers.Any)
+            return providers;
 
+        providers.Dispose();
         if (_dialogs.ShowQuestion(Resources.Speech_NoKey) != DialogResult.Yes)
             return null;
 
         ShowAppSettings(FAppSettings.SpeechPage);
-        return _bank.Config.Speech.ElevenLabsKey is { Length: > 0 } entered ? entered : null;
+        providers = SpeechProviders.FromSettings(_bank.Config.Speech);
+        if (providers.Any)
+            return providers;
+
+        providers.Dispose();
+        return null;
     }
 
     /// <summary>
@@ -195,14 +202,20 @@ partial class FMain
     /// Otvori okno hlasu jazyka a po potvrdeni ulozi hlas do <c>.rbe-ai</c>.
     /// </summary>
     /// <returns>novy hlas alebo <see langword="null" />, ak ho pouzivatel nezmenil alebo sa nedal ulozit.</returns>
-    private VoiceProfile? EditVoice(ISpeechProvider provider, FyzLanguage language, string sampleText)
+    private VoiceProfile? EditVoice(SpeechProviders providers, FyzLanguage language, string sampleText)
     {
         var pathToIniss = _bank.Project!.AbsPathToINISS;
         var data = BankAiFolder.Load(pathToIniss, language.Key);
-        var profile = data.Voice ?? new VoiceProfile { LanguageCode = VoiceProfile.LanguageCodeOf(language.Key) };
+        // novy hlas predvolene v prvej nastavenej sluzbe
+        var profile = data.Voice ?? new VoiceProfile
+        {
+            Provider = providers.Ids[0],
+            ModelId = providers.Ids[0] == ElevenLabsClient.ProviderId ? ElevenLabsClient.DefaultModel : "",
+            LanguageCode = VoiceProfile.LanguageCodeOf(language.Key) };
 
-        using var form = new FVoiceProfile(provider, _speechCache, profile, language.Name, sampleText, _player,
-            _bank.Config.Speech.AdjustSound ? _bank.Config.SoundAdjust : null);
+        using var form = new FVoiceProfile(providers, _speechCache, profile, language.Name, sampleText, _player,
+            _bank.Config.Speech.AdjustSound ? _bank.Config.SoundAdjust : null, _bank.Config.Speech.PiperVoicesPath,
+            data.NumbersLanguage(profile.LanguageCode.Length > 0 ? profile.LanguageCode : VoiceProfile.LanguageCodeOf(language.Key)));
         if (form.ShowDialog(this) != DialogResult.OK)
             return null;
 
@@ -227,11 +240,11 @@ partial class FMain
 
     private void DoVoiceProfile()
     {
-        if (CurrentLanguage is not { } language || SpeechKey() is not { } key)
+        if (CurrentLanguage is not { } language || Providers() is not { } providers)
             return;
 
-        using var provider = new ElevenLabsClient(key);
-        EditVoice(provider, language, SampleText());
+        using (providers)
+            EditVoice(providers, language, SampleText());
     }
 
     /// <summary>
@@ -316,14 +329,20 @@ partial class FMain
         if (CurrentLanguage is not { } language || sounds.Count == 0)
             return;
 
-        if (SpeechKey() is not { } key)
+        if (Providers() is not { } providers)
             return;
 
+        using var disposeProviders = providers;
         var records = _bank.Records(language);
         var rows = sounds.Select(s => new GenerationRow(s, s.File, records.GetOrigin(s), records.GetText(s))).ToList();
-        using var provider = new ElevenLabsClient(key);
         var sample = rows.Select(r => r.Text).FirstOrDefault(t => !string.IsNullOrWhiteSpace(t)) ?? "";
-        if ((LoadVoice(language) ?? EditVoice(provider, language, sample)) is not { } voice)
+        // vycistenie hlas jazyka nepotrebuje
+        var voice = LoadVoice(language);
+        if (operation != SpeechOperation.Isolate)
+            voice ??= EditVoice(providers, language, sample);
+        else
+            voice ??= new VoiceProfile { LanguageCode = VoiceProfile.LanguageCodeOf(language.Key) };
+        if (voice is null || !CanRun(providers, operation, voice))
             return;
 
         var data = BankAiFolder.Load(_bank.Project!.AbsPathToINISS, language.Key);
@@ -331,9 +350,9 @@ partial class FMain
 
         IReadOnlyList<GenerationRow> accepted;
         VoiceProfile profile;
-        using (var form = new FGenerateSounds(provider, _speechCache, voice, () => EditVoice(provider, language, sample), title, rows, skipDone,
+        using (var form = new FGenerateSounds(providers, _speechCache, voice, () => EditVoice(providers, language, sample), title, rows, skipDone,
                    _bank.Config.Speech, _bank.Config.SoundAdjust, _player, _versions, g => ProsodyOf(data, g, languageCode), data.Pronunciation,
-                   operation, languageCode))
+                   operation, languageCode, data.NumbersLanguage(languageCode)))
         {
             var result = form.ShowDialog(this);
             // volba upravy zvuku sa pamata
@@ -370,6 +389,33 @@ partial class FMain
 
         if (failed.Count > 0)
             _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.Recordings_GenerateFailed, ListOf(failed)));
+    }
+
+    /// <summary>
+    /// Nastavene sluzby vedia operaciu s hlasom jazyka - inak povie preco nie.
+    /// </summary>
+    private bool CanRun(SpeechProviders providers, SpeechOperation operation, VoiceProfile voice)
+    {
+        if (providers.For(operation, voice) is not null)
+            return true;
+
+        switch (operation)
+        {
+            case SpeechOperation.Tts:
+                // sluzba hlasu uz nie je nastavena (kluc odstraneny, Piper presunuty)
+                if (_dialogs.ShowQuestion(string.Format(CultureInfo.CurrentCulture, Resources.Speech_ProviderMissing, SpeechProviders.NameOf(voice.Provider)))
+                    == DialogResult.Yes)
+                    ShowAppSettings(FAppSettings.SpeechPage);
+                break;
+            case SpeechOperation.ChangeVoice:
+                _dialogs.ShowInfo(string.Format(CultureInfo.CurrentCulture, Resources.Speech_OperationUnsupported, SpeechProviders.NameOf(voice.Provider)));
+                break;
+            default:
+                _dialogs.ShowInfo(Resources.Speech_IsolateUnavailable);
+                break;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -501,13 +547,19 @@ partial class FMain
         data.Prosody.TryGetValue(group.Key, out var prosody) ? prosody : ProsodyDefaults.For(group.Type, languageCode);
 
     /// <summary>
-    /// Ukazky v oknach intonacie a vyslovnosti - hlas jazyka a kluc, ak su nastavene. Sluzbu uvolni volajuci.
+    /// Ukazky v oknach intonacie a vyslovnosti - hlas jazyka a jeho sluzba, ak su nastavene. Sluzby uvolni volajuci.
     /// </summary>
-    private (ElevenLabsClient Provider, VoiceProfile Voice)? SampleVoice(FyzLanguage language)
+    private (SpeechProviders Providers, ISpeechProvider Provider, VoiceProfile Voice)? SampleVoice(FyzLanguage language)
     {
-        if (_bank.Config.Speech.ElevenLabsKey is not { Length: > 0 } key || LoadVoice(language) is not { } voice)
+        if (LoadVoice(language) is not { } voice)
             return null;
-        return (new ElevenLabsClient(key), voice);
+
+        var providers = SpeechProviders.FromSettings(_bank.Config.Speech);
+        if (providers.Get(voice.Provider) is { } provider)
+            return (providers, provider, voice);
+
+        providers.Dispose();
+        return null;
     }
 
     private SoundAdjustOptions? SampleAdjust => _bank.Config.Speech.AdjustSound ? _bank.Config.SoundAdjust : null;
@@ -529,7 +581,7 @@ partial class FMain
             ? (prosody, group, cancel) =>
             {
                 var text = group.Sounds.Select(records.SpokenText).FirstOrDefault(t => !string.IsNullOrWhiteSpace(t)) ?? group.Name;
-                return new SpeechGenerator(s.Provider, _speechCache, s.Voice, SampleAdjust, data.Pronunciation)
+                return new SpeechGenerator(s.Provider, _speechCache, s.Voice, SampleAdjust, data.Pronunciation, data.NumbersLanguage(languageCode))
                     .GenerateAsync(new SpeechInput(text, prosody), null, cancel);
             }
             : null;
@@ -549,7 +601,7 @@ partial class FMain
         }
         finally
         {
-            sample?.Provider.Dispose();
+            sample?.Providers.Dispose();
         }
     }
 
@@ -564,17 +616,23 @@ partial class FMain
         var pathToIniss = _bank.Project!.AbsPathToINISS;
         var data = BankAiFolder.Load(pathToIniss, language.Key);
         var sample = SampleVoice(language);
-        Func<string, IReadOnlyList<PronunciationRule>, CancellationToken, Task<GeneratedSound>>? trySpeech = sample is { } s
-            ? (text, rules, cancel) => new SpeechGenerator(s.Provider, _speechCache, s.Voice, SampleAdjust, rules).GenerateAsync(text, null, cancel)
+        var languageCode = sample?.Voice.LanguageCode is { Length: > 0 } code ? code : VoiceProfile.LanguageCodeOf(language.Key);
+        Func<string, IReadOnlyList<PronunciationRule>, bool, CancellationToken, Task<GeneratedSound>>? trySpeech = sample is { } s
+            ? (text, rules, numbers, cancel) => new SpeechGenerator(s.Provider, _speechCache, s.Voice, SampleAdjust, rules, numbers ? languageCode : "")
+                .GenerateAsync(text, null, cancel)
             : null;
 
         try
         {
-            using var form = new FPronunciation(data.Pronunciation, SampleText(), trySpeech, _player);
+            using var form = new FPronunciation(data.Pronunciation, data.NumbersAsWords, languageCode, SampleText(), trySpeech, _player);
             if (form.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            BankAiFolder.Update(pathToIniss, language.Key, d => d.Pronunciation = form.Rules);
+            BankAiFolder.Update(pathToIniss, language.Key, d =>
+            {
+                d.Pronunciation = form.Rules;
+                d.NumbersAsWords = form.NumbersAsWords;
+            });
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
@@ -583,7 +641,7 @@ partial class FMain
         }
         finally
         {
-            sample?.Provider.Dispose();
+            sample?.Providers.Dispose();
         }
     }
 
@@ -623,13 +681,20 @@ partial class FMain
     /// </summary>
     private void DoTranscribeSounds()
     {
-        if (ChooseScope(Resources.Cmd_TranscribeSounds) is not var (sounds, title, _) || SpeechKey() is not { } key)
+        if (ChooseScope(Resources.Cmd_TranscribeSounds) is not var (sounds, title, _) || Providers() is not { } providers)
             return;
 
+        using var disposeProviders = providers;
         var language = CurrentLanguage!;
-        var languageCode = LoadVoice(language)?.LanguageCode is { Length: > 0 } code ? code : VoiceProfile.LanguageCodeOf(language.Key);
-        using var client = new ElevenLabsClient(key);
-        using var form = new FTranscribe(new SpeechTranscriber(client, _speechCache), sounds, title, languageCode, _bank.Config.Speech, _player);
+        var voice = LoadVoice(language);
+        if (providers.Transcriber(voice?.Provider ?? "") is not { } transcriber)
+        {
+            _dialogs.ShowInfo(Resources.Speech_TranscribeUnavailable);
+            return;
+        }
+
+        var languageCode = voice?.LanguageCode is { Length: > 0 } code ? code : VoiceProfile.LanguageCodeOf(language.Key);
+        using var form = new FTranscribe(new SpeechTranscriber(transcriber, _speechCache), sounds, title, languageCode, _bank.Config.Speech, _player);
         if (form.ShowDialog(this) != DialogResult.OK || form.Changes.Count == 0)
             return;
 
@@ -697,10 +762,16 @@ partial class FMain
     /// </summary>
     private void DoVoices()
     {
-        if (CurrentLanguage is not { } language || SpeechKey() is not { } key)
+        if (CurrentLanguage is not { } language || Providers() is not { } providers)
             return;
 
-        using var client = new ElevenLabsClient(key);
+        using var disposeProviders = providers;
+        if (providers.Get(ElevenLabsClient.ProviderId) is not ElevenLabsClient client)
+        {
+            _dialogs.ShowInfo(Resources.Speech_VoicesUnavailable);
+            return;
+        }
+
         var voice = LoadVoice(language);
         var languageCode = voice?.LanguageCode is { Length: > 0 } code ? code : VoiceProfile.LanguageCodeOf(language.Key);
         using var form = new FVoices(client, client, _player, languageCode, voice?.VoiceId ?? "", () => CloneVoice(client, language, languageCode));

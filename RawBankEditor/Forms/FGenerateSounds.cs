@@ -19,7 +19,7 @@ public partial class FGenerateSounds : Form
     // pri zmene hlasu a vycisteni nad tolko sekund zvuku
     private const long CONFIRM_SECONDS = 300;
 
-    private readonly ISpeechProvider _provider;
+    private readonly SpeechProviders _providers;
     private readonly SpeechCache _cache;
     private readonly Func<VoiceProfile?> _editVoice;
     private readonly SpeechSettings _settings;
@@ -30,6 +30,7 @@ public partial class FGenerateSounds : Form
     private readonly IReadOnlyList<PronunciationRule> _pronunciation;
     private readonly SpeechOperation _operation;
     private readonly string _languageCode;
+    private readonly string _numbersLanguage;
     // pri zmene hlasu a vycisteni sa dlzka nahravky nema velmi zmenit
     private const double MIN_DURATION_RATIO = 0.6;
     private const double MAX_DURATION_RATIO = 1.6;
@@ -46,7 +47,7 @@ public partial class FGenerateSounds : Form
     private bool _estimateDirty = true;
     private (int Count, long Characters) _estimate;
 
-    /// <param name="provider">sluzba syntezy</param>
+    /// <param name="providers">nastavene sluzby - generuje sluzba hlasu jazyka (<see cref="SpeechProviders.For" />)</param>
     /// <param name="cache">cache vysledkov</param>
     /// <param name="profile">hlas jazyka</param>
     /// <param name="editVoice">otvori okno hlasu jazyka; vrati novy hlas alebo <see langword="null" /> pri zruseni</param>
@@ -61,15 +62,16 @@ public partial class FGenerateSounds : Form
     /// <param name="pronunciation">slovnik vyslovnosti jazyka</param>
     /// <param name="operation">nova nahravka z textu, zmena hlasu alebo vycistenie povodnej nahravky</param>
     /// <param name="languageCode">jazyk reci pre kontrolu prepisom (ISO 639-1); prazdny = zisti sluzba</param>
-    public FGenerateSounds(ISpeechProvider provider, SpeechCache cache, VoiceProfile profile, Func<VoiceProfile?> editVoice, string title,
+    /// <param name="numbersLanguage">jazyk prevodu cisel na slova; prazdny = cisla ostanu</param>
+    public FGenerateSounds(SpeechProviders providers, SpeechCache cache, VoiceProfile profile, Func<VoiceProfile?> editVoice, string title,
         IEnumerable<GenerationRow> rows, bool skipDone, SpeechSettings settings, SoundAdjustOptions adjust, AudioPlayer player, SoundVersions versions,
         Func<FyzGroup, GroupProsody?> prosodyOf, IReadOnlyList<PronunciationRule> pronunciation, SpeechOperation operation = SpeechOperation.Tts,
-        string languageCode = "")
+        string languageCode = "", string numbersLanguage = "")
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
-        _provider = provider;
+        _providers = providers;
         _cache = cache;
         _profile = profile;
         _editVoice = editVoice;
@@ -81,6 +83,7 @@ public partial class FGenerateSounds : Form
         _pronunciation = pronunciation;
         _operation = operation;
         _languageCode = languageCode;
+        _numbersLanguage = numbersLanguage;
         _allRows = rows.ToList();
 
         Text = string.Format(CultureInfo.CurrentCulture, Resources.FGenerateSounds_Title, operation switch
@@ -104,6 +107,7 @@ public partial class FGenerateSounds : Form
         dgvItems.DataSource = _rows;
         cboxAdjust.Checked = settings.AdjustSound;
         cboxVerify.Checked = settings.Verify;
+        ShowVerify();
         dgvItems.CellToolTipTextNeeded += (_, e) =>
         {
             // prepis pri zhode - co nahravka naozaj hovori
@@ -112,6 +116,12 @@ public partial class FGenerateSounds : Form
         };
         cboxSkipDone.Checked = skipDone;
         cboxSkipDone.Enabled = _allRows.Any(r => r.Origin is not null);
+        // na zaciatku vybrane vsetko, co sa da vygenerovat - odznacene riadky sa negeneruju ani neprevezmu
+        foreach (var row in _allRows)
+            row.Accept = CanRun(row);
+        // tempo ma zmysel len pri reci z textu - pri zmene hlasu a vycisteni ostava z povodnej nahravky
+        cTempo.Visible = bEvenTempo.Visible = operation == SpeechOperation.Tts;
+        cTempo.ToolTipText = Resources.FGenerateSounds_TempoTooltip;
         ShowVoice();
         Filter();
 
@@ -138,12 +148,30 @@ public partial class FGenerateSounds : Form
 
     private GenerationRow? CurrentRow => dgvItems.CurrentRow?.DataBoundItem as GenerationRow;
 
-    private SpeechGenerator Generator() => new(_provider, _cache, _profile, cboxAdjust.Checked ? _adjust : null, _pronunciation);
+    /// <summary>
+    /// Sluzba operacie s hlasom jazyka - okno sa otvara a hlas meni len vtedy, ked ju nastavene sluzby maju.
+    /// </summary>
+    private ISpeechProvider Provider => _providers.For(_operation, _profile)!;
+
+    private SpeechGenerator Generator() => new(Provider, _cache, _profile, cboxAdjust.Checked ? _adjust : null, _pronunciation, _numbersLanguage);
+
+    /// <summary>
+    /// Kontrola prepisom len so sluzbou, ktora prepis vie - volba v nastaveniach ostava.
+    /// </summary>
+    private void ShowVerify()
+    {
+        var available = _providers.Transcriber(_profile.Provider) is not null;
+        cboxVerify.CheckedChanged -= CboxVerify_CheckedChanged;
+        cboxVerify.Enabled = available;
+        cboxVerify.Checked = available && _settings.Verify;
+        cboxVerify.CheckedChanged += CboxVerify_CheckedChanged;
+    }
 
     private SpeechInput Input(GenerationRow row) => new(row.Text, _prosodyOf(row.Sound.Group));
 
     private void ShowVoice() =>
-        lVoice.Text = string.Format(CultureInfo.CurrentCulture, Resources.FGenerateSounds_Voice, _profile.VoiceName, _profile.ModelId);
+        lVoice.Text = string.Format(CultureInfo.CurrentCulture, Resources.FGenerateSounds_Voice, _profile.VoiceName, _profile.ModelId,
+            SpeechProviders.NameOf(Provider.Id));
 
     /// <summary>
     /// Zobrazi riadky - pri <see cref="cboxSkipDone" /> bez zvukov, ktorych nahravka uz vznikla tymto hlasom.
@@ -170,7 +198,8 @@ public partial class FGenerateSounds : Form
     {
         _stateDirty = false;
         var busy = _running > 0;
-        bGenerate.Enabled = !busy && _rows.Any(r => r.ResultWav is null);
+        bGenerate.Enabled = !busy && _rows.Any(r => r.Accept && r.ResultWav is null && CanRun(r));
+        bEvenTempo.Enabled = !busy && TempoRows().Any();
         // vycistenie dava vzdy rovnaky vysledok - znova nema zmysel
         bRegenerate.Enabled = !busy && dgvItems.SelectedRows.Count > 0 && _operation != SpeechOperation.Isolate;
         bVoice.Enabled = cboxAdjust.Enabled = !busy;
@@ -193,7 +222,7 @@ public partial class FGenerateSounds : Form
         {
             if (_estimateDirty)
             {
-                _estimate = Estimate(_rows.Where(r => r.ResultWav is null));
+                _estimate = Estimate(_rows.Where(r => r.Accept && r.ResultWav is null));
                 _estimateDirty = false;
             }
 
@@ -235,7 +264,7 @@ public partial class FGenerateSounds : Form
         }
 
         var generator = Generator();
-        var prepared = rows.Where(r => !string.IsNullOrWhiteSpace(r.Text)).Select(r => generator.Prepare(Input(r), r.Seed)).ToList();
+        var prepared = rows.Where(r => !string.IsNullOrWhiteSpace(r.Text)).Select(r => generator.Prepare(Input(r), r.Seed, r.SpeedFactor)).ToList();
         return (prepared.Count, prepared.Where(p => !generator.IsCached(p)).Sum(p => (long)p.Characters));
     }
 
@@ -250,11 +279,24 @@ public partial class FGenerateSounds : Form
         _stateDirty = true;
     }
 
-    private async void FGenerateSounds_Shown(object? sender, EventArgs e)
+    private async void FGenerateSounds_Shown(object? sender, EventArgs e) => await LoadQuotaAsync();
+
+    /// <summary>
+    /// Zostatok predplatneho sluzby, ak ho sluzba uvadza.
+    /// </summary>
+    private async Task LoadQuotaAsync()
     {
+        _quota = null;
+        var provider = Provider;
+        if (!provider.Features.HasFlag(SpeechFeatures.Quota))
+        {
+            UpdateState();
+            return;
+        }
+
         try
         {
-            _quota = await _provider.GetQuotaAsync(_cancel.Token);
+            _quota = await provider.GetQuotaAsync(_cancel.Token);
         }
         catch (OperationCanceledException)
         {
@@ -276,6 +318,10 @@ public partial class FGenerateSounds : Form
     /// </summary>
     private bool ConfirmCost(IEnumerable<GenerationRow> rows)
     {
+        // sluzba v pocitaci nic nestoji
+        if (Provider.Features.HasFlag(SpeechFeatures.Offline))
+            return true;
+
         var (count, characters) = Estimate(rows);
         if (_operation != SpeechOperation.Tts)
             return characters <= CONFIRM_SECONDS
@@ -313,6 +359,7 @@ public partial class FGenerateSounds : Form
         await Task.WhenAll(rows.Select(row => GenerateRowAsync(row, generator, gate, newSeed, cancel)));
 
         _running--;
+        UpdateTempo(rows);
         _estimateDirty = true;
         if (!IsDisposed)
             UpdateState();
@@ -341,15 +388,17 @@ public partial class FGenerateSounds : Form
 
             var input = Input(row);
             var seed = row.Seed;
+            var speedFactor = row.SpeedFactor;
+            var spoken = generator.Prepare(input, seed, speedFactor).SpokenText;
             var versions = _versions;
             var operation = _operation;
             var source = row.File?.FileInfo.FullName;
-            var transcriber = cboxVerify.Checked ? new SpeechTranscriber(_provider, _cache) : null;
+            var transcriber = cboxVerify.Checked && _providers.Transcriber(_profile.Provider) is { } stt ? new SpeechTranscriber(stt, _cache) : null;
             var languageCode = _languageCode;
-            var (wav, duration, fromCache, characters, transcript) = await Task.Run(async () =>
+            var (wav, duration, fromCache, characters, transcript, rate) = await Task.Run(async () =>
             {
                 var result = operation == SpeechOperation.Tts
-                    ? await generator.GenerateAsync(input, seed, cancel)
+                    ? await generator.GenerateAsync(input, seed, speedFactor, cancel)
                     : await generator.ProcessAudioAsync(operation, source!, seed, cancel);
                 string? heard = null;
                 if (transcriber is not null)
@@ -365,7 +414,8 @@ public partial class FGenerateSounds : Form
                     }
                 }
 
-                return (versions.Add(SoundProcessing.ToWav(result.Sound)), result.Sound.DurationMs, result.FromCache, result.Characters, heard);
+                var rate = operation == SpeechOperation.Tts ? SpeechTempo.Rate(result.Sound, spoken) : null;
+                return (versions.Add(SoundProcessing.ToWav(result.Sound)), result.Sound.DurationMs, result.FromCache, result.Characters, heard, rate);
             }, cancel);
             row.Fingerprint = operation switch
             {
@@ -375,7 +425,7 @@ public partial class FGenerateSounds : Form
             };
             row.ResultWav = wav;
             row.ResultDuration = duration;
-            row.Accept = true;
+            row.Rate = rate;
             row.Status = fromCache ? Resources.FGenerateSounds_StatusCached : Resources.FGenerateSounds_StatusDone;
             Check(row, transcript, generator, input);
             _characters += characters;
@@ -432,13 +482,66 @@ public partial class FGenerateSounds : Form
         row.Status = problem;
     }
 
+    /// <summary>
+    /// Tempo nahravok oproti medianu okna. Nove nahravky s velmi odlisnym tempom su podozrive - okno ich neprevezme samo.
+    /// </summary>
+    /// <param name="generated">prave vygenerovane riadky</param>
+    private void UpdateTempo(IReadOnlyCollection<GenerationRow> generated)
+    {
+        if (_operation != SpeechOperation.Tts || IsDisposed)
+            return;
+
+        var median = SpeechTempo.Median(_allRows.Where(r => r.ResultWav is not null).Select(r => r.Rate).OfType<double>());
+        foreach (var row in _allRows)
+        {
+            row.TempoRatio = median is { } m && row.ResultWav is not null && row.Rate is { } rate ? rate / m : null;
+            if (!generated.Contains(row) || row.Suspicious || row.TempoRatio is not { } ratio || ratio is >= SpeechTempo.SuspiciousSlow and <= SpeechTempo.SuspiciousFast)
+                continue;
+
+            row.Suspicious = true;
+            row.Accept = false;
+            row.Status = string.Format(CultureInfo.CurrentCulture, ratio > 1 ? Resources.Tempo_Fast : Resources.Tempo_Slow, ratio * 100);
+        }
+
+        _rows.ResetBindings();
+    }
+
+    /// <summary>
+    /// Riadky, ktorych tempo sa od medianu lisi viac nez o <see cref="SpeechTempo.Tolerance" />.
+    /// </summary>
+    private IEnumerable<GenerationRow> TempoRows() =>
+        // aj podozrive pre tempo (odznacene oknom), nie odznacene pouzivatelom
+        _rows.Where(r => (r.Accept || r.Suspicious) && r.TempoRatio is { } ratio && SpeechTempo.NeedsCorrection(ratio));
+
+    private async void BEvenTempo_Click(object? sender, EventArgs e)
+    {
+        var rows = TempoRows().ToList();
+        if (rows.Count == 0)
+            return;
+
+        // rychlejsi uryvok sa vygeneruje pomalsie a naopak - sluzba dostane upravenu rychlost hlasu
+        var corrected = rows.Select(r => new GenerationRow(r.Sound, r.File, null, r.Text) { Seed = r.Seed, SpeedFactor = SpeechTempo.Corrected(r.SpeedFactor, r.TempoRatio!.Value) })
+            .ToList();
+        if (!ConfirmCost(corrected))
+            return;
+
+        for (var i = 0; i < rows.Count; i++)
+        {
+            rows[i].SpeedFactor = corrected[i].SpeedFactor;
+            rows[i].ClearResult();
+            rows[i].Accept = true;
+        }
+
+        await RunAsync(rows, false);
+    }
+
     private void CboxVerify_CheckedChanged(object? sender, EventArgs e) => _settings.Verify = cboxVerify.Checked;
 
     private void CboxSuspicious_CheckedChanged(object? sender, EventArgs e) => Filter();
 
     private async void BGenerate_Click(object? sender, EventArgs e)
     {
-        var rows = _rows.Where(r => r.ResultWav is null).ToList();
+        var rows = _rows.Where(r => r.Accept && r.ResultWav is null).ToList();
         if (ConfirmCost(rows))
             await RunAsync(rows, false);
     }
@@ -447,14 +550,26 @@ public partial class FGenerateSounds : Form
     {
         var rows = SelectedRows.ToList();
         // novy seed = vzdy nova poziadavka
-        if (ConfirmCost(rows.Select(r => new GenerationRow(r.Sound, r.File, null, r.Text) { Seed = SpeechGenerator.NewSeed() })))
-            await RunAsync(rows, true);
+        if (!ConfirmCost(rows.Select(r => new GenerationRow(r.Sound, r.File, null, r.Text) { Seed = SpeechGenerator.NewSeed(), SpeedFactor = r.SpeedFactor })))
+            return;
+
+        // nahravku generovanu znova chce pouzivatel prevziat
+        foreach (var row in rows)
+            row.Accept = true;
+        await RunAsync(rows, true);
     }
 
-    private void BVoice_Click(object? sender, EventArgs e)
+    private async void BVoice_Click(object? sender, EventArgs e)
     {
         if (_editVoice() is not { } profile)
             return;
+
+        if (_providers.For(_operation, profile) is null)
+        {
+            // napr. zmena hlasu na hlas sluzby, ktora ju nevie
+            Utils.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.Speech_OperationUnsupported, SpeechProviders.NameOf(profile.Provider)));
+            return;
+        }
 
         // nahravky ineho hlasu by sa do banky nehodili
         _profile = profile;
@@ -462,7 +577,9 @@ public partial class FGenerateSounds : Form
             row.ClearResult();
 
         ShowVoice();
+        ShowVerify();
         Filter();
+        await LoadQuotaAsync();
     }
 
     private void CboxSkipDone_CheckedChanged(object? sender, EventArgs e) => Filter();
@@ -533,8 +650,10 @@ public partial class FGenerateSounds : Form
         if (e.ColumnIndex != cText.Index || dgvItems.Rows[e.RowIndex].DataBoundItem is not GenerationRow row || row.Busy)
             return;
 
-        // novy text = nova nahravka
+        // novy text = nova nahravka s rychlostou hlasu; riadok sa vyberie
         row.ClearResult();
+        row.SpeedFactor = 1;
+        row.Accept = CanRun(row);
         _estimateDirty = true;
         Refresh(row);
     }
@@ -551,11 +670,11 @@ public partial class FGenerateSounds : Form
 
     private void DgvItems_KeyDown(object? sender, KeyEventArgs e)
     {
-        // medzernik prepne Prevziat vybranych riadkov s novou nahravkou (mimo upravy textu)
+        // medzernik prepne vyber oznacenych riadkov (mimo upravy textu)
         if (e.KeyCode != Keys.Space || dgvItems.IsCurrentCellInEditMode)
             return;
 
-        var rows = SelectedRows.Where(r => r.ResultWav is not null).ToList();
+        var rows = SelectedRows.Where(r => r.ResultWav is not null || CanRun(r)).ToList();
         if (rows.Count == 0)
             return;
 
@@ -571,12 +690,12 @@ public partial class FGenerateSounds : Form
 
     private void DgvItems_ColumnHeaderMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
     {
-        // klik na hlavicku Prevziat oznaci vsetky vygenerovane, druhy klik ziadnu
+        // klik na hlavicku Vybrat oznaci vsetky riadky, druhy klik ziadny
         if (e.ColumnIndex != cAccept.Index)
             return;
 
         dgvItems.EndEdit();
-        var rows = _rows.Where(r => r.ResultWav is not null).ToList();
+        var rows = _rows.Where(r => r.ResultWav is not null || CanRun(r)).ToList();
         var accept = !rows.All(r => r.Accept);
         foreach (var row in rows)
             row.Accept = accept;

@@ -7,32 +7,41 @@ using ToolsCore.Tools;
 namespace RawBankEditor.Forms;
 
 /// <summary>
-/// Okno slovnika vyslovnosti jazyka - pravidla v poradi uplatnenia a skuska na texte (vysledny text, ukazka hlasom).
+/// Okno slovnika vyslovnosti jazyka - pravidla v poradi uplatnenia, cisla slovami a skuska na texte (vysledny text,
+/// ukazka hlasom).
 /// </summary>
 public partial class FPronunciation : Form
 {
     private readonly BindingList<PronunciationRule> _rules;
-    private readonly Func<string, IReadOnlyList<PronunciationRule>, CancellationToken, Task<GeneratedSound>>? _try;
+    private readonly Func<string, IReadOnlyList<PronunciationRule>, bool, CancellationToken, Task<GeneratedSound>>? _try;
+    private readonly string _languageCode;
     private readonly AudioPlayer _player;
     private readonly CancellationTokenSource _cancel = new();
 
     /// <param name="rules">ulozene pravidla</param>
+    /// <param name="numbersAsWords">cisla citat slovami</param>
+    /// <param name="languageCode">jazyk reci (ISO 639-1) - prevod cisel je len pre slovencinu a cestinu</param>
     /// <param name="sampleText">skusobny text</param>
-    /// <param name="trySpeech">vygeneruje ukazku textu s pravidlami; <see langword="null" />, ak hlas jazyka nie je nastaveny</param>
+    /// <param name="trySpeech">vygeneruje ukazku textu s pravidlami a prevodom cisel; <see langword="null" />, ak hlas jazyka nie je nastaveny</param>
     /// <param name="player">prehravac ukazky</param>
-    public FPronunciation(IEnumerable<PronunciationRule> rules, string sampleText,
-        Func<string, IReadOnlyList<PronunciationRule>, CancellationToken, Task<GeneratedSound>>? trySpeech, AudioPlayer player)
+    public FPronunciation(IEnumerable<PronunciationRule> rules, bool numbersAsWords, string languageCode, string sampleText,
+        Func<string, IReadOnlyList<PronunciationRule>, bool, CancellationToken, Task<GeneratedSound>>? trySpeech, AudioPlayer player)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
         _try = trySpeech;
+        _languageCode = languageCode;
+        NumbersAsWords = numbersAsWords;
         _player = player;
         _rules = new BindingList<PronunciationRule>(rules.Select(r => r.Clone()).ToList()) { AllowNew = true };
         lHint.Text = Resources.FPronunciation_Hint;
         dgvRules.AutoGenerateColumns = false;
         dgvRules.DataSource = _rules;
         tbTest.Text = sampleText;
+        cboxNumbers.Checked = numbersAsWords;
+        // jazyk bez prevodu - volba sa ulozi, ale nic nerobi
+        cboxNumbers.Enabled = NumberWords.Supports(languageCode);
         bTry.Enabled = _try is not null;
         lStatus.Text = _try is null ? Resources.FProsody_NoVoice : "";
         ShowResult();
@@ -48,9 +57,17 @@ public partial class FPronunciation : Form
     /// </summary>
     public List<PronunciationRule> Rules { get; private set; } = [];
 
+    /// <summary>
+    /// Cisla citat slovami po OK.
+    /// </summary>
+    public bool NumbersAsWords { get; private set; }
+
     private List<PronunciationRule> CurrentRules() => _rules.Where(r => r.Find.Length > 0).Select(r => r.Clone()).ToList();
 
-    private void ShowResult() => lResult.Text = Pronunciation.Apply(tbTest.Text, CurrentRules());
+    private void ShowResult() =>
+        lResult.Text = NumberWords.Apply(Pronunciation.Apply(tbTest.Text, CurrentRules()), cboxNumbers.Checked ? _languageCode : "");
+
+    private void CboxNumbers_CheckedChanged(object? sender, EventArgs e) => ShowResult();
 
     private void TbTest_TextChanged(object? sender, EventArgs e) => ShowResult();
 
@@ -98,7 +115,7 @@ public partial class FPronunciation : Form
         lStatus.Text = Resources.FVoiceProfile_Generating;
         try
         {
-            var result = await _try(tbTest.Text, CurrentRules(), _cancel.Token);
+            var result = await _try(tbTest.Text, CurrentRules(), cboxNumbers.Checked, _cancel.Token);
             if (IsDisposed)
                 return;
 
@@ -136,6 +153,7 @@ public partial class FPronunciation : Form
         }
 
         Rules = rules;
+        NumbersAsWords = cboxNumbers.Checked;
         DialogResult = DialogResult.OK;
     }
 }

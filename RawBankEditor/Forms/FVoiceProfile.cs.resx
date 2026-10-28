@@ -120,6 +120,9 @@
   <data name="lHint.Text" xml:space="preserve">
     <value>Hlas, kterým se generují nahrávky jazyka.</value>
   </data>
+  <data name="lProvider.Text" xml:space="preserve">
+    <value>Služba:</value>
+  </data>
   <data name="lModel.Text" xml:space="preserve">
     <value>Model:</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="lLanguage.Text" xml:space="preserve">
     <value>Jazyk řeči:</value>
+  </data>
+  <data name="bDownloadVoices.Text" xml:space="preserve">
+    <value>Stáhnout hlasy…</value>
   </data>
   <data name="gbSettings.Text" xml:space="preserve">
     <value>Nastavení hlasu</value>

@@ -135,6 +135,16 @@ public sealed class LanguageAiData
     /// <summary>Slovnik vyslovnosti jazyka.</summary>
     [JsonPropertyName("pronunciation")]
     public List<PronunciationRule> Pronunciation { get; set; } = [];
+
+    /// <summary>Cisla citat slovami (<see cref="NumberWords" />) - predvolene ano.</summary>
+    [JsonPropertyName("numbersAsWords")]
+    public bool NumbersAsWords { get; set; } = true;
+
+    /// <summary>
+    /// Jazyk prevodu cisel na slova pre generator; prazdny, ak je prevod vypnuty alebo jazyk ho nema.
+    /// </summary>
+    /// <param name="languageCode">jazyk reci (ISO 639-1)</param>
+    public string NumbersLanguage(string languageCode) => NumbersAsWords && NumberWords.Supports(languageCode) ? languageCode : "";
 }
 
 /// <summary>
@@ -218,7 +228,10 @@ public static class BankAiFolder
             if (data.Prosody.Count == 0)
                 data.Prosody = old.Prosody;
             if (data.Pronunciation.Count == 0)
+            {
                 data.Pronunciation = old.Pronunciation;
+                data.NumbersAsWords = old.NumbersAsWords;
+            }
         }
 
         data.Sounds = sounds;

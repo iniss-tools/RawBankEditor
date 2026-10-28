@@ -5,8 +5,42 @@ using RawBankEditor.Tools;
 namespace RawBankEditor.Speech;
 
 /// <summary>
-/// Sluzba hlasovej syntezy (ElevenLabs, neskor dalsie). Vysledok je surovy zvuk - upravu na format banky robi
-/// <see cref="SpeechGenerator" />.
+/// Co sluzba vie okrem prevodu textu na rec.
+/// </summary>
+[Flags]
+public enum SpeechFeatures
+{
+    /// <summary>Len prevod textu na rec.</summary>
+    None = 0,
+
+    /// <summary>Casy znakov textu - uryvok sa z nosnej vety vystrihne presne (bez nich sa hranice odhadnu).</summary>
+    Timings = 1,
+
+    /// <summary>Stabilita, podobnost, styl a zvyraznenie hovoriaceho.</summary>
+    VoiceSettings = 2,
+
+    /// <summary>Seed pre opakovatelny vysledok.</summary>
+    Seed = 4,
+
+    /// <summary>Zmena hlasu nahravky.</summary>
+    ConvertVoice = 8,
+
+    /// <summary>Vycistenie nahravky od sumu.</summary>
+    Isolate = 16,
+
+    /// <summary>Prepis nahravky na text.</summary>
+    Transcribe = 32,
+
+    /// <summary>Predplatne a minute znaky.</summary>
+    Quota = 64,
+
+    /// <summary>Bezi v pocitaci - nic nestoji a texty neodchadzaju do cloudu.</summary>
+    Offline = 128
+}
+
+/// <summary>
+/// Sluzba hlasovej syntezy (ElevenLabs, Azure Speech, Piper). Vysledok je surovy zvuk - upravu na format banky robi
+/// <see cref="SpeechGenerator" />. Co sluzba nevie (<see cref="Features" />), hodi <see cref="NotSupportedException" />.
 /// </summary>
 public interface ISpeechProvider
 {
@@ -14,6 +48,16 @@ public interface ISpeechProvider
     /// Kluc sluzby v profile hlasu a v cache (nemenit).
     /// </summary>
     string Id { get; }
+
+    /// <summary>
+    /// Co sluzba vie okrem prevodu textu na rec.
+    /// </summary>
+    SpeechFeatures Features { get; }
+
+    /// <summary>
+    /// Model prepisu na text - sucast kluca cache prepisov; prazdny, ak sluzba prepis nevie.
+    /// </summary>
+    string TranscriptionModel { get; }
 
     /// <summary>
     /// Hlasy dostupne v ucte.
@@ -100,6 +144,16 @@ public sealed record SpeechVoice(string Id, string Name, string Description)
 
     /// <summary>Adresa ukazky; prazdna = bez ukazky.</summary>
     public string PreviewUrl { get; init; } = "";
+
+    /// <summary>Jazyky, ktore hlas hovori (ISO 639-1); prazdne = hlas sluzba neurcuje (viacjazycny).</summary>
+    public IReadOnlyList<string> Languages { get; init; } = [];
+
+    /// <summary>
+    /// Hlas hovori jazyk; hlas bez urcenych jazykov hovori kazdy.
+    /// </summary>
+    /// <param name="languageCode">kod jazyka (ISO 639-1); prazdny = kazdy hlas</param>
+    public bool Speaks(string languageCode) =>
+        languageCode.Length == 0 || Languages.Count == 0 || Languages.Contains(languageCode, StringComparer.OrdinalIgnoreCase);
 
     /// <inheritdoc />
     public override string ToString() => Description.Length == 0 ? Name : $"{Name} ({Description})";

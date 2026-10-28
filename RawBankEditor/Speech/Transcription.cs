@@ -5,7 +5,7 @@ using RawBankEditor.Tools;
 namespace RawBankEditor.Speech;
 
 /// <summary>
-/// Prepis nahravok na text (Scribe) s cache podla obsahu nahravky - doplnenie textov zvukov a kontrola, ci
+/// Prepis nahravok na text (ElevenLabs Scribe, Azure Speech) s cache podla obsahu nahravky - doplnenie textov zvukov a kontrola, ci
 /// vygenerovana nahravka hovori to, co mala.
 /// </summary>
 /// <param name="provider">sluzba prepisu</param>
@@ -25,7 +25,7 @@ public sealed class SpeechTranscriber(ISpeechProvider provider, SpeechCache cach
 
         var wav = SoundProcessing.ToWav(SoundProcessing.Resample(sound, SoundProcessing.BankSampleRate));
         var key = Convert.ToHexStringLower(SHA256.HashData(Encoding.UTF8.GetBytes(
-            string.Join('|', provider.Id, "stt", ElevenLabsClient.SttModel, languageCode, Convert.ToHexStringLower(SHA256.HashData(wav))))));
+            string.Join('|', provider.Id, "stt", provider.TranscriptionModel, languageCode, Convert.ToHexStringLower(SHA256.HashData(wav))))));
         if (cache.TryGetText(key) is { } cached)
             return (cached, true);
 

@@ -141,6 +141,9 @@
   <data name="bRegenerate.Text" xml:space="preserve">
     <value>Generovat znovu</value>
   </data>
+  <data name="bEvenTempo.Text" xml:space="preserve">
+    <value>Sjednotit tempo</value>
+  </data>
   <data name="bPlayOld.Text" xml:space="preserve">
     <value>Přehrát původní</value>
   </data>
@@ -160,7 +163,7 @@
     <value>Zrušit</value>
   </data>
   <data name="cAccept.HeaderText" xml:space="preserve">
-    <value>Převzít</value>
+    <value>Vybrat</value>
   </data>
   <data name="cGroup.HeaderText" xml:space="preserve">
     <value>Skupina</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="cMatch.HeaderText" xml:space="preserve">
     <value>Shoda</value>
+  </data>
+  <data name="cTempo.HeaderText" xml:space="preserve">
+    <value>Tempo</value>
   </data>
   <data name="cOldDuration.HeaderText" xml:space="preserve">
     <value>Původní</value>
