@@ -28,6 +28,20 @@ internal static class RbeCommands
     public static CommandInfo AppSettings => new("AppSettings", Resources.Cmd_AppSettings, Shortcut.CtrlShiftN);
     public static CommandInfo HighlightProblem => new("HighlightProblem", Resources.Cmd_HighlightProblem, Shortcut.F10);
     public static CommandInfo ResolveProblem => new("ResolveProblem", Resources.Cmd_ResolveProblem, Shortcut.AltF10);
+    public static CommandInfo AdjustSounds => new("AdjustSounds", Resources.Cmd_AdjustSounds, Shortcut.None);
+    public static CommandInfo GenerateSounds => new("GenerateSounds", Resources.Cmd_GenerateSounds, Shortcut.CtrlG);
+    public static CommandInfo GenerateGroup => new("GenerateGroup", Resources.Cmd_GenerateGroup, Shortcut.None);
+    public static CommandInfo GenerateLanguage => new("GenerateLanguage", Resources.Cmd_GenerateLanguage, Shortcut.None);
+    public static CommandInfo GenerateMissing => new("GenerateMissing", Resources.Cmd_GenerateMissing, Shortcut.None);
+    public static CommandInfo VoiceProfile => new("VoiceProfile", Resources.Cmd_VoiceProfile, Shortcut.None);
+    public static CommandInfo StopPlayback => new("StopPlayback", Resources.Cmd_StopPlayback, Shortcut.None);
+    public static CommandInfo PlaySequence => new("PlaySequence", Resources.Cmd_PlaySequence, Shortcut.None);
+    public static CommandInfo ChangeVoice => new("ChangeVoice", Resources.Cmd_ChangeVoice, Shortcut.None);
+    public static CommandInfo IsolateSounds => new("IsolateSounds", Resources.Cmd_IsolateSounds, Shortcut.None);
+    public static CommandInfo TranscribeSounds => new("TranscribeSounds", Resources.Cmd_TranscribeSounds, Shortcut.None);
+    public static CommandInfo Voices => new("Voices", Resources.Cmd_Voices, Shortcut.None);
+    public static CommandInfo Prosody => new("Prosody", Resources.Cmd_Prosody, Shortcut.None);
+    public static CommandInfo Pronunciation => new("Pronunciation", Resources.Cmd_Pronunciation, Shortcut.None);
 
     // prikazy bez nastavitelnej skratky - v prieskumniku a zozname skupin platia pevne klavesy
     public static CommandInfo ConvertSoundsToEwa => Fixed(nameof(ConvertSoundsToEwa));
@@ -50,6 +64,7 @@ internal static class RbeCommands
     public static CommandInfo InfoApp => Fixed(nameof(InfoApp));
     public static CommandInfo Updates => Fixed(nameof(Updates));
     public static CommandInfo CheckUpdates => Fixed(nameof(CheckUpdates));
+    public static CommandInfo GenerateMissingFromErrors => Fixed(nameof(GenerateMissingFromErrors));
 
     /// <summary>
     /// Prikazy, ktorym sa v nastaveniach da zmenit skratka, v poradi zoznamu v nastaveniach.
@@ -57,7 +72,8 @@ internal static class RbeCommands
     public static IReadOnlyList<CommandInfo> All =>
     [
         Open, Save, SaveAll, Undo, Redo, AddSound, DeleteSounds, MoveSounds, RewriteMode, WrapTextSoundCol,
-        GoBack, GoForward, Search, AddLanguage, EditLanguage, DeleteLanguage, AppSettings, HighlightProblem, ResolveProblem
+        GoBack, GoForward, Search, AddLanguage, EditLanguage, DeleteLanguage, AppSettings, HighlightProblem, ResolveProblem,
+        AdjustSounds, GenerateSounds, GenerateGroup, GenerateLanguage, GenerateMissing, ChangeVoice, IsolateSounds, TranscribeSounds, VoiceProfile, Voices, Prosody, Pronunciation, PlaySequence, StopPlayback
     ];
 
     private static CommandInfo Fixed(string id) => new(id, id, Shortcut.None);

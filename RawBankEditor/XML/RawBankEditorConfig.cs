@@ -1,4 +1,6 @@
 ﻿using System.Xml.Serialization;
+using RawBankEditor.Speech;
+using RawBankEditor.Tools;
 using ToolsCore.XML;
 
 namespace RawBankEditor.XML;
@@ -53,6 +55,18 @@ public record RawBankEditorConfig() : ConfigBase
     [DefaultValue(true)]
     public bool WrapSoundText { get; set; } = true;
 
+    /// <summary>
+    /// Uprava zvuku nahravok (okno Upravit zvuk a uprava vygenerovanych nahravok).
+    /// </summary>
+    [XmlElement("SoundAdjust")]
+    public SoundAdjustOptions SoundAdjust { get; set; } = new();
+
+    /// <summary>
+    /// Hlasova synteza (ElevenLabs).
+    /// </summary>
+    [XmlElement("Speech")]
+    public SpeechSettings Speech { get; set; } = new();
+
     /// <inheritdoc />
     public override string LinkAppSettingsGuide => "";
 
@@ -68,5 +82,7 @@ public record RawBankEditorConfig() : ConfigBase
         AutoInsertSoundData = original.AutoInsertSoundData;
         ShowAfterInsertSoundDialog = original.ShowAfterInsertSoundDialog;
         WrapSoundText = original.WrapSoundText;
+        SoundAdjust = original.SoundAdjust.Clone();
+        Speech = original.Speech.Clone();
     }
 }

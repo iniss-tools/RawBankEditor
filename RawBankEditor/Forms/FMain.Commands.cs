@@ -1,3 +1,4 @@
+using RawBankEditor.Entities;
 using ToolsCore.Commands;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
@@ -85,10 +86,28 @@ public partial class FMain
         Add(RbeCommands.ConvertFilesToWav, () => ConvertSelectedFiles(false), () => ExplorerSelection is { Count: > 1 } or [SoundFileElement],
             tsbConvertFilesToWav, cmiConvertToWavFile);
 
+        // nahravky: uprava zvuku a hlas AI
+        Add(RbeCommands.AdjustSounds, DoAdjustSounds, () => LanguageReady && CurrentLanguage != null, tsmimAdjustSounds, tsbAdjustSounds, cmiAdjustSounds);
+        Add(RbeCommands.GenerateSounds, DoGenerateSounds, soundsSelected, tsmimGenerateSounds, tsbGenerateSounds, cmiGenerateSounds);
+        Add(RbeCommands.GenerateGroup, DoGenerateGroup, () => LanguageReady && !dgvGroups.IsSelectionEmpty(), tsbGenerateGroup, cmiGenerateGroup);
+        Add(RbeCommands.GenerateLanguage, DoGenerateLanguage, () => LanguageReady && CurrentLanguage != null, tsmimGenerateLanguage);
+        Add(RbeCommands.GenerateMissing, DoGenerateMissing, () => LanguageReady && CurrentLanguage != null, tsmimGenerateMissing);
+        Add(RbeCommands.GenerateMissingFromErrors, DoGenerateMissingFromErrors, () => LanguageReady && _messages.OfType<SoundFileMissing>().Any(),
+            cmiGenerateMissing);
+        Add(RbeCommands.VoiceProfile, DoVoiceProfile, () => LanguageReady && CurrentLanguage != null, tsmimVoiceProfile);
+        Add(RbeCommands.StopPlayback, () => _player.Stop(), null, tsmimStopPlayback);
+        Add(RbeCommands.PlaySequence, DoPlaySequence, soundsSelected, tsmimPlaySequence, cmiPlaySequence);
+        Add(RbeCommands.ChangeVoice, DoChangeVoice, () => LanguageReady && CurrentLanguage != null, tsmimChangeVoice);
+        Add(RbeCommands.IsolateSounds, DoIsolateSounds, () => LanguageReady && CurrentLanguage != null, tsmimIsolateSounds);
+        Add(RbeCommands.TranscribeSounds, DoTranscribeSounds, () => LanguageReady && CurrentLanguage != null, tsmimTranscribe);
+        Add(RbeCommands.Voices, DoVoices, () => LanguageReady && CurrentLanguage != null, tsmimVoices);
+        Add(RbeCommands.Prosody, DoProsody, () => LanguageReady && CurrentLanguage != null, tsmimProsody);
+        Add(RbeCommands.Pronunciation, DoPronunciation, () => LanguageReady && CurrentLanguage != null, tsmimPronunciation);
+
         Add(RbeCommands.HighlightProblem, DoFindProblem, ready, tsbHighlightProblem, cmiHighlightProblem);
         Add(RbeCommands.ResolveProblem, DoSolveProblem, ready, tsbResolveProblem, cmiResolveProblem);
 
-        Add(RbeCommands.AppSettings, ShowAppSettings, null, tsmimAppSettings, tsbAppSettings);
+        Add(RbeCommands.AppSettings, () => ShowAppSettings(), null, tsmimAppSettings, tsbAppSettings);
         Add(RbeCommands.InfoApp, ShowInfoApp, null, tsmimInfoApp, tsbInfoApp);
         Add(RbeCommands.Updates, () => Utils.OpenShell(LinkConsts.Update), null, tsmimUpdates);
         Add(RbeCommands.CheckUpdates, () => AppUpdates.CheckNow(this), () => AppUpdates.Available, tsmimCheckUpdates);

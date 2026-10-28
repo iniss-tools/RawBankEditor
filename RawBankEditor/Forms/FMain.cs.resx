@@ -468,4 +468,76 @@
   <data name="tsbRewriteMode.Text" xml:space="preserve">
     <value>Režim přepisování</value>
   </data>
+  <data name="tsmiSounds.Text" xml:space="preserve">
+    <value>N&amp;ahrávky</value>
+  </data>
+  <data name="tsmimAdjustSounds.Text" xml:space="preserve">
+    <value>&amp;Upravit zvuk</value>
+  </data>
+  <data name="tsmimGenerateSounds.Text" xml:space="preserve">
+    <value>&amp;Generovat hlasem AI</value>
+  </data>
+  <data name="tsmimVoiceProfile.Text" xml:space="preserve">
+    <value>&amp;Hlas jazyka</value>
+  </data>
+  <data name="tsmimStopPlayback.Text" xml:space="preserve">
+    <value>&amp;Zastavit přehrávání</value>
+  </data>
+  <data name="cmiAdjustSounds.Text" xml:space="preserve">
+    <value>Upravit zvuk</value>
+  </data>
+  <data name="cmiGenerateSounds.Text" xml:space="preserve">
+    <value>Generovat hlasem AI</value>
+  </data>
+  <data name="tsbAdjustSounds.Text" xml:space="preserve">
+    <value>Upravit zvuk nahrávek</value>
+  </data>
+  <data name="tsbGenerateSounds.Text" xml:space="preserve">
+    <value>Generovat nahrávky vybraných zvuků hlasem AI</value>
+  </data>
+  <data name="tsmimGenerateLanguage.Text" xml:space="preserve">
+    <value>Generovat &amp;celý jazyk hlasem AI</value>
+  </data>
+  <data name="tsmimGenerateMissing.Text" xml:space="preserve">
+    <value>Doplnit &amp;chybějící nahrávky hlasem AI</value>
+  </data>
+  <data name="cmiGenerateGroup.Text" xml:space="preserve">
+    <value>Generovat skupinu hlasem AI</value>
+  </data>
+  <data name="tsbGenerateGroup.Text" xml:space="preserve">
+    <value>Generovat nahrávky skupiny hlasem AI</value>
+  </data>
+  <data name="cmiGenerateMissing.Text" xml:space="preserve">
+    <value>Vygenerovat chybějící nahrávky hlasem AI</value>
+  </data>
+  <data name="cSoundOrigin.HeaderText" xml:space="preserve">
+    <value>Původ</value>
+  </data>
+  <data name="tsmimPlaySequence.Text" xml:space="preserve">
+    <value>&amp;Přehrát vybrané za sebou</value>
+  </data>
+  <data name="tsmimProsody.Text" xml:space="preserve">
+    <value>&amp;Intonace skupin</value>
+  </data>
+  <data name="tsmimPronunciation.Text" xml:space="preserve">
+    <value>Výs&amp;lovnost</value>
+  </data>
+  <data name="cmiPlaySequence.Text" xml:space="preserve">
+    <value>Přehrát za sebou</value>
+  </data>
+  <data name="cSoundSynthText.HeaderText" xml:space="preserve">
+    <value>Text pro syntézu</value>
+  </data>
+  <data name="tsmimChangeVoice.Text" xml:space="preserve">
+    <value>&amp;Změnit hlas nahrávek</value>
+  </data>
+  <data name="tsmimIsolateSounds.Text" xml:space="preserve">
+    <value>&amp;Vyčistit nahrávky od šumu</value>
+  </data>
+  <data name="tsmimVoices.Text" xml:space="preserve">
+    <value>Hla&amp;sy</value>
+  </data>
+  <data name="tsmimTranscribe.Text" xml:space="preserve">
+    <value>&amp;Přepsat nahrávky na text</value>
+  </data>
 </root>

@@ -123,6 +123,12 @@
   <metadata name="toolStripGroups.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>402, 20</value>
   </metadata>
+  <metadata name="cSoundOrigin.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cSoundSynthText.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="cGroupCountSounds.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -6563,6 +6569,330 @@
   </data>
   <data name="&gt;&gt;splitSoundsErrors.Panel2.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="tsmiSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="tsmiSounds.Text" xml:space="preserve">
+    <value>N&amp;ahrávky</value>
+  </data>
+  <data name="&gt;&gt;tsmiSounds.Name" xml:space="preserve">
+    <value>tsmiSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmiSounds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimAdjustSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimAdjustSounds.Text" xml:space="preserve">
+    <value>&amp;Upraviť zvuk</value>
+  </data>
+  <data name="&gt;&gt;tsmimAdjustSounds.Name" xml:space="preserve">
+    <value>tsmimAdjustSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmimAdjustSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimGenerateSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimGenerateSounds.Text" xml:space="preserve">
+    <value>&amp;Generovať hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;tsmimGenerateSounds.Name" xml:space="preserve">
+    <value>tsmimGenerateSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmimGenerateSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimVoiceProfile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimVoiceProfile.Text" xml:space="preserve">
+    <value>&amp;Hlas jazyka</value>
+  </data>
+  <data name="&gt;&gt;tsmimVoiceProfile.Name" xml:space="preserve">
+    <value>tsmimVoiceProfile</value>
+  </data>
+  <data name="&gt;&gt;tsmimVoiceProfile.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="toolStripSeparatorPlayback.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorPlayback.Name" xml:space="preserve">
+    <value>toolStripSeparatorPlayback</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorPlayback.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimStopPlayback.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimStopPlayback.Text" xml:space="preserve">
+    <value>&amp;Zastaviť prehrávanie</value>
+  </data>
+  <data name="&gt;&gt;tsmimStopPlayback.Name" xml:space="preserve">
+    <value>tsmimStopPlayback</value>
+  </data>
+  <data name="&gt;&gt;tsmimStopPlayback.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="toolStripSeparatorRecordings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorRecordings.Name" xml:space="preserve">
+    <value>toolStripSeparatorRecordings</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorRecordings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiAdjustSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiAdjustSounds.Text" xml:space="preserve">
+    <value>Upraviť zvuk</value>
+  </data>
+  <data name="&gt;&gt;cmiAdjustSounds.Name" xml:space="preserve">
+    <value>cmiAdjustSounds</value>
+  </data>
+  <data name="&gt;&gt;cmiAdjustSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="cmiGenerateSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiGenerateSounds.Text" xml:space="preserve">
+    <value>Generovať hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;cmiGenerateSounds.Name" xml:space="preserve">
+    <value>cmiGenerateSounds</value>
+  </data>
+  <data name="&gt;&gt;cmiGenerateSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsbAdjustSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbAdjustSounds.Text" xml:space="preserve">
+    <value>Upraviť zvuk nahrávok</value>
+  </data>
+  <data name="&gt;&gt;tsbAdjustSounds.Name" xml:space="preserve">
+    <value>tsbAdjustSounds</value>
+  </data>
+  <data name="&gt;&gt;tsbAdjustSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsbGenerateSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbGenerateSounds.Text" xml:space="preserve">
+    <value>Generovať nahrávky vybraných zvukov hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;tsbGenerateSounds.Name" xml:space="preserve">
+    <value>tsbGenerateSounds</value>
+  </data>
+  <data name="&gt;&gt;tsbGenerateSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimGenerateLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimGenerateLanguage.Text" xml:space="preserve">
+    <value>Generovať &amp;celý jazyk hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;tsmimGenerateLanguage.Name" xml:space="preserve">
+    <value>tsmimGenerateLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmimGenerateLanguage.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimGenerateMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimGenerateMissing.Text" xml:space="preserve">
+    <value>Doplniť &amp;chýbajúce nahrávky hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;tsmimGenerateMissing.Name" xml:space="preserve">
+    <value>tsmimGenerateMissing</value>
+  </data>
+  <data name="&gt;&gt;tsmimGenerateMissing.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="toolStripSeparatorGroupsAi.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorGroupsAi.Name" xml:space="preserve">
+    <value>toolStripSeparatorGroupsAi</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorGroupsAi.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cmiGenerateGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiGenerateGroup.Text" xml:space="preserve">
+    <value>Generovať skupinu hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;cmiGenerateGroup.Name" xml:space="preserve">
+    <value>cmiGenerateGroup</value>
+  </data>
+  <data name="&gt;&gt;cmiGenerateGroup.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsbGenerateGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="tsbGenerateGroup.Text" xml:space="preserve">
+    <value>Generovať nahrávky skupiny hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;tsbGenerateGroup.Name" xml:space="preserve">
+    <value>tsbGenerateGroup</value>
+  </data>
+  <data name="&gt;&gt;tsbGenerateGroup.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripButton, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="cmiGenerateMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiGenerateMissing.Text" xml:space="preserve">
+    <value>Vygenerovať chýbajúce nahrávky hlasom AI</value>
+  </data>
+  <data name="&gt;&gt;cmiGenerateMissing.Name" xml:space="preserve">
+    <value>cmiGenerateMissing</value>
+  </data>
+  <data name="&gt;&gt;cmiGenerateMissing.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="cSoundOrigin.HeaderText" xml:space="preserve">
+    <value>Pôvod</value>
+  </data>
+  <data name="cSoundOrigin.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="&gt;&gt;cSoundOrigin.Name" xml:space="preserve">
+    <value>cSoundOrigin</value>
+  </data>
+  <data name="&gt;&gt;cSoundOrigin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimPlaySequence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimPlaySequence.Text" xml:space="preserve">
+    <value>&amp;Prehrať vybrané za sebou</value>
+  </data>
+  <data name="&gt;&gt;tsmimPlaySequence.Name" xml:space="preserve">
+    <value>tsmimPlaySequence</value>
+  </data>
+  <data name="&gt;&gt;tsmimPlaySequence.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="toolStripSeparatorSpeech.Size" type="System.Drawing.Size, System.Drawing">
+    <value>261, 6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorSpeech.Name" xml:space="preserve">
+    <value>toolStripSeparatorSpeech</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparatorSpeech.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimProsody.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimProsody.Text" xml:space="preserve">
+    <value>&amp;Intonácia skupín</value>
+  </data>
+  <data name="&gt;&gt;tsmimProsody.Name" xml:space="preserve">
+    <value>tsmimProsody</value>
+  </data>
+  <data name="&gt;&gt;tsmimProsody.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimPronunciation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimPronunciation.Text" xml:space="preserve">
+    <value>Výs&amp;lovnosť</value>
+  </data>
+  <data name="&gt;&gt;tsmimPronunciation.Name" xml:space="preserve">
+    <value>tsmimPronunciation</value>
+  </data>
+  <data name="&gt;&gt;tsmimPronunciation.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="cmiPlaySequence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 26</value>
+  </data>
+  <data name="cmiPlaySequence.Text" xml:space="preserve">
+    <value>Prehrať za sebou</value>
+  </data>
+  <data name="&gt;&gt;cmiPlaySequence.Name" xml:space="preserve">
+    <value>cmiPlaySequence</value>
+  </data>
+  <data name="&gt;&gt;cmiPlaySequence.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="cSoundSynthText.HeaderText" xml:space="preserve">
+    <value>Text pre syntézu</value>
+  </data>
+  <data name="cSoundSynthText.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="&gt;&gt;cSoundSynthText.Name" xml:space="preserve">
+    <value>cSoundSynthText</value>
+  </data>
+  <data name="&gt;&gt;cSoundSynthText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimChangeVoice.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimChangeVoice.Text" xml:space="preserve">
+    <value>&amp;Zmeniť hlas nahrávok</value>
+  </data>
+  <data name="&gt;&gt;tsmimChangeVoice.Name" xml:space="preserve">
+    <value>tsmimChangeVoice</value>
+  </data>
+  <data name="&gt;&gt;tsmimChangeVoice.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimIsolateSounds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimIsolateSounds.Text" xml:space="preserve">
+    <value>&amp;Vyčistiť nahrávky od šumu</value>
+  </data>
+  <data name="&gt;&gt;tsmimIsolateSounds.Name" xml:space="preserve">
+    <value>tsmimIsolateSounds</value>
+  </data>
+  <data name="&gt;&gt;tsmimIsolateSounds.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimVoices.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimVoices.Text" xml:space="preserve">
+    <value>Hla&amp;sy</value>
+  </data>
+  <data name="&gt;&gt;tsmimVoices.Name" xml:space="preserve">
+    <value>tsmimVoices</value>
+  </data>
+  <data name="&gt;&gt;tsmimVoices.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimTranscribe.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimTranscribe.Text" xml:space="preserve">
+    <value>&amp;Prepísať nahrávky na text</value>
+  </data>
+  <data name="&gt;&gt;tsmimTranscribe.Name" xml:space="preserve">
+    <value>tsmimTranscribe</value>
+  </data>
+  <data name="&gt;&gt;tsmimTranscribe.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FMain</value>

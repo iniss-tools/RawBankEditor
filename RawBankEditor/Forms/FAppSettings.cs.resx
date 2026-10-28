@@ -126,4 +126,34 @@
   <data name="cboxShowAfterInsertSoundDlg.Text" xml:space="preserve">
     <value>Otevřít dialog s úpravou dat zvuků při přidání do složek zvukové banky</value>
   </data>
+  <data name="optionsNodeSpeech.Text" xml:space="preserve">
+    <value>Hlasová syntéza (AI)</value>
+  </data>
+  <data name="pSpeech.NodeText" xml:space="preserve">
+    <value>Hlasová syntéza (AI)</value>
+  </data>
+  <data name="gbSpeechKey.Text" xml:space="preserve">
+    <value>ElevenLabs</value>
+  </data>
+  <data name="lSpeechKey.Text" xml:space="preserve">
+    <value>Klíč API:</value>
+  </data>
+  <data name="bSpeechVerify.Text" xml:space="preserve">
+    <value>Ověřit</value>
+  </data>
+  <data name="llSpeechKey.Text" xml:space="preserve">
+    <value>Klíč API vytvoříte v nastavení účtu ElevenLabs</value>
+  </data>
+  <data name="lSpeechConcurrency.Text" xml:space="preserve">
+    <value>Souběžné požadavky:</value>
+  </data>
+  <data name="gbSpeechCache.Text" xml:space="preserve">
+    <value>Uložené výsledky</value>
+  </data>
+  <data name="bSpeechClearCache.Text" xml:space="preserve">
+    <value>Vyčistit</value>
+  </data>
+  <data name="lSpeechPrivacy.Text" xml:space="preserve">
+    <value>Texty zvuků se při generování posílají službě ElevenLabs. Klíč je v nastavení zašifrovaný pro tohoto uživatele Windows.</value>
+  </data>
 </root>

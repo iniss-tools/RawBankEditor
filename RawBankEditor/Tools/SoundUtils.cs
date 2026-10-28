@@ -1,5 +1,4 @@
-﻿using System.Media;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -16,40 +15,6 @@ public static class SoundUtils
 
     // -2 = chyba
     internal const int SoundError = -2;
-
-    public static void Play(string soundpath)
-    {
-        if (!File.Exists(soundpath))
-            return;
-        try
-        {
-            switch (Path.GetExtension(soundpath).ToUpperInvariant())
-            {
-                case EWAExt:
-                {
-                    using var fileStream = File.OpenRead(soundpath);
-                    using var memoryStream = new MemoryStream();
-                    EwaCodec.Decode(fileStream, memoryStream);
-
-                    memoryStream.Position = 0;
-                    using var player = new SoundPlayer(memoryStream);
-                
-                    player.Play();
-                    break;
-                }
-                case WAVExt:
-                {
-                    using var player = new SoundPlayer(soundpath);
-                    player.Play();
-                    break;
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            Utils.ShowError(e.Message);
-        }
-    }
 
     /// <summary>
     /// Converts .EWA encoded file to .WAV audio file.

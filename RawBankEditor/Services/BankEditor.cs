@@ -1,6 +1,7 @@
 using System.Globalization;
 using RawBankEditor.Entities;
 using RawBankEditor.Properties;
+using RawBankEditor.Speech;
 using RawBankEditor.Tools;
 using RawBankEditor.XML;
 using ToolsCore;
@@ -23,6 +24,8 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
 
     // jazyky pridane v otvorenej banke, ktorym sa este nezapisal FYZZVUK.DAT - otvaraju sa ako prazdne
     private readonly HashSet<FyzLanguage> _newLanguages = [];
+    // zaznamy povodu nahravok nacitanych jazykov (.rbe-ai) - zapisuju sa pri ulozeni banky
+    private readonly Dictionary<FyzLanguage, SoundRecords> _origins = [];
     private BankJournal? _journal;
 
     /// <summary>
@@ -66,6 +69,7 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         var leftovers = RecycleLeftoverJournals(project.AbsPathToINISS);
         Project = project;
         _newLanguages.Clear();
+        _origins.Clear();
         _journal = new BankJournal(Path.Combine(project.AbsPathToINISS, JOURNAL_PREFIX + Environment.ProcessId.ToString(CultureInfo.InvariantCulture)),
             Recycle, Utils.TryRecoverFileOrDirFromBin);
         return leftovers;
@@ -84,7 +88,26 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         _journal = null;
         Project = null;
         _newLanguages.Clear();
+        _origins.Clear();
         return errors;
+    }
+
+    /// <summary>
+    /// Zaznamy zvukov jazyka (povod nahravok, texty pre syntezu) - pri prvom pouziti sa nacitaju z <c>.rbe-ai</c>.
+    /// </summary>
+    public SoundRecords Records(FyzLanguage language)
+    {
+        ArgumentNullException.ThrowIfNull(language);
+        var project = Project ?? throw new InvalidOperationException("Banka nie je otvorena.");
+
+        if (!_origins.TryGetValue(language, out var origins))
+        {
+            var data = BankAiFolder.Load(project.AbsPathToINISS, language.Key);
+            origins = new SoundRecords(data.Sounds, data.Texts, language.Key);
+            _origins[language] = origins;
+        }
+
+        return origins;
     }
 
     /// <summary>
@@ -124,12 +147,22 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
 
         // FYZBANK.DAT a FYZZVUK.DAT jazykov patria k sebe - pri chybe v polovici sa vratia vsetky,
         // inak by FYZBANK.DAT mohol odkazovat na subor, ktory nevznikol, a INISS by pri starte skoncil
+        // zaznamy povodu: zmenene alebo pri premenovanom jazyku (subor .rbe-ai sa presuva) - disk banky sa pri ulozeni
+        // potvrdzuje za vsetky jazyky, preto aj zaznamy vsetkych jazykov
+        var origins = _origins
+            .Where(o => project.Languages.Contains(o.Key) && o.Key.Groups is not null && (o.Value.Changed || o.Value.LoadedKey != o.Key.Key))
+            .ToList();
+
         FileTransaction transaction;
         try
         {
             transaction = new FileTransaction(
                 languages.Select(lang => RawBankParser.FyzZvukFile(project.AbsPathToBank, lang))
-                    .Prepend(RawBankParser.FyzBankFile(project.AbsPathToBank)));
+                    .Prepend(RawBankParser.FyzBankFile(project.AbsPathToBank))
+                    .Concat(origins.SelectMany(o => new[]
+                    {
+                        BankAiFolder.FileOf(project.AbsPathToINISS, o.Key.Key), BankAiFolder.FileOf(project.AbsPathToINISS, o.Value.LoadedKey)
+                    })));
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
@@ -146,6 +179,9 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
                 Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
                 RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
             }
+
+            foreach (var (lang, records) in origins)
+                BankAiFolder.SaveRecords(project.AbsPathToINISS, lang.Key, records.LoadedKey, records.OriginsForSave(lang), records.TextsForSave(lang));
         }
         catch (Exception exception)
         {
@@ -159,6 +195,11 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         transaction.Commit();
         foreach (var lang in languages)
             _newLanguages.Remove(lang);
+        foreach (var (lang, records) in origins)
+        {
+            records.Changed = false;
+            records.LoadedKey = lang.Key;
+        }
 
         return new BankSaveResult(null, Journal.Commit());
     }
@@ -179,7 +220,11 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
     /// Zabudne zoznam zvukov jazyka v pamati (napr. po chybe nacitania) - disk sa nemeni.
     /// </summary>
     public void ForgetLanguage(FyzLanguage language)
-        => language.Groups = IsNew(language) ? new List<FyzGroup>() : null!;
+    {
+        language.Groups = IsNew(language) ? new List<FyzGroup>() : null!;
+        // zaznamy povodu sa pri dalsom pouziti nacitaju z disku
+        _origins.Remove(language);
+    }
 
     /// <summary>
     /// Presun do Kosa pri potvrdeni zurnalu.

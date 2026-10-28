@@ -1637,5 +1637,1238 @@ namespace RawBankEditor.Properties {
                 return ResourceManager.GetString("Export_IsDefault", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Úprava zvuku nahrávok.
+        /// </summary>
+        internal static string Action_AdjustSounds {
+            get {
+                return ResourceManager.GetString("Action_AdjustSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generovanie nahrávok hlasom AI.
+        /// </summary>
+        internal static string Action_GenerateSounds {
+            get {
+                return ResourceManager.GetString("Action_GenerateSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upraviť zvuk nahrávok.
+        /// </summary>
+        internal static string Cmd_AdjustSounds {
+            get {
+                return ResourceManager.GetString("Cmd_AdjustSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generovať nahrávky hlasom AI.
+        /// </summary>
+        internal static string Cmd_GenerateSounds {
+            get {
+                return ResourceManager.GetString("Cmd_GenerateSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas jazyka.
+        /// </summary>
+        internal static string Cmd_VoiceProfile {
+            get {
+                return ResourceManager.GetString("Cmd_VoiceProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zastaviť prehrávanie.
+        /// </summary>
+        internal static string Cmd_StopPlayback {
+            get {
+                return ResourceManager.GetString("Cmd_StopPlayback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} ms.
+        /// </summary>
+        internal static string Duration_Ms {
+            get {
+                return ResourceManager.GetString("Duration_Ms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vybrané zvuky ({0}).
+        /// </summary>
+        internal static string FAdjustSounds_Selected {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skupina {0} ({1}).
+        /// </summary>
+        internal static string FAdjustSounds_Group {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_Group", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Celý jazyk {0} ({1}).
+        /// </summary>
+        internal static string FAdjustSounds_Language {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meria sa hlasitosť nahrávok….
+        /// </summary>
+        internal static string FAdjustSounds_Measuring {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_Measuring", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasitosť sa nedala zmerať. Nahrávky obsahujú len ticho alebo sa nedajú prečítať..
+        /// </summary>
+        internal static string FAdjustSounds_MeasureFailed {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_MeasureFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typická hlasitosť reči v jazyku je {0:0.0} dBFS..
+        /// </summary>
+        internal static string FAdjustSounds_Measured {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_Measured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie je vybraná žiadna úprava..
+        /// </summary>
+        internal static string FAdjustSounds_Nothing {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_Nothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nahrávku {0} sa nepodarilo upraviť: {1}.
+        /// </summary>
+        internal static string FAdjustSounds_PreviewFailed {
+            get {
+                return ResourceManager.GetString("FAdjustSounds_PreviewFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niektoré uložené výsledky sa nepodarilo zmazať..
+        /// </summary>
+        internal static string FAppSettings_SpeechCacheNotCleared {
+            get {
+                return ResourceManager.GetString("FAppSettings_SpeechCacheNotCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Veľkosť: {0:0.0} MB.
+        /// </summary>
+        internal static string FAppSettings_SpeechCacheSize {
+            get {
+                return ResourceManager.GetString("FAppSettings_SpeechCacheSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zadajte kľúč API..
+        /// </summary>
+        internal static string FAppSettings_SpeechNoKey {
+            get {
+                return ResourceManager.GetString("FAppSettings_SpeechNoKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overuje sa….
+        /// </summary>
+        internal static string FAppSettings_SpeechVerifying {
+            get {
+                return ResourceManager.GetString("FAppSettings_SpeechVerifying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kľúč platí. Predplatné {0}, minuté znaky {1:N0} z {2:N0}..
+        /// </summary>
+        internal static string FAppSettings_SpeechVerified {
+            get {
+                return ResourceManager.GetString("FAppSettings_SpeechVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vygenerované nahrávky sa neprevezmú. Zavrieť okno?.
+        /// </summary>
+        internal static string FGenerateSounds_DiscardQuestion {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_DiscardQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Na vygenerovanie: {0} nahrávok, {1:N0} znakov. Odoslané znaky: {2:N0}..
+        /// </summary>
+        internal static string FGenerateSounds_Estimate {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_Estimate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generuje sa {0} nahrávok. Odoslané znaky: {1:N0}..
+        /// </summary>
+        internal static string FGenerateSounds_Progress {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_Progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zostáva {0:N0} znakov (predplatné {1})..
+        /// </summary>
+        internal static string FGenerateSounds_Quota {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_Quota", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nahrávku {0} sa nepodarilo prečítať: {1}.
+        /// </summary>
+        internal static string FGenerateSounds_PlayFailed {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_PlayFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Čaká.
+        /// </summary>
+        internal static string FGenerateSounds_StatusWaiting {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_StatusWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to V poradí.
+        /// </summary>
+        internal static string FGenerateSounds_StatusQueued {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_StatusQueued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generuje sa….
+        /// </summary>
+        internal static string FGenerateSounds_StatusGenerating {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_StatusGenerating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vygenerovaná.
+        /// </summary>
+        internal static string FGenerateSounds_StatusDone {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_StatusDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Z uložených výsledkov.
+        /// </summary>
+        internal static string FGenerateSounds_StatusCached {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_StatusCached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zrušené.
+        /// </summary>
+        internal static string FGenerateSounds_StatusCanceled {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_StatusCanceled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas: {0}, model {1}.
+        /// </summary>
+        internal static string FGenerateSounds_Voice {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_Voice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas, ktorým sa generujú nahrávky jazyka {0}. Uloží sa do priečinka {1} v priečinku INISS..
+        /// </summary>
+        internal static string FVoiceProfile_Hint {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Automaticky.
+        /// </summary>
+        internal static string FVoiceProfile_LanguageAuto {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_LanguageAuto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Načítavajú sa modely a hlasy….
+        /// </summary>
+        internal static string FVoiceProfile_Loading {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyberte hlas..
+        /// </summary>
+        internal static string FVoiceProfile_NoVoice {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_NoVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Účet nemá žiadny hlas. Pridajte si hlas v knižnici hlasov ElevenLabs..
+        /// </summary>
+        internal static string FVoiceProfile_NoVoices {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_NoVoices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generuje sa ukážka….
+        /// </summary>
+        internal static string FVoiceProfile_Generating {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_Generating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukážka je hotová, odoslané znaky: {0}..
+        /// </summary>
+        internal static string FVoiceProfile_SampleDone {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_SampleDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukážka je z uložených výsledkov..
+        /// </summary>
+        internal static string FVoiceProfile_SampleCached {
+            get {
+                return ResourceManager.GetString("FVoiceProfile_SampleCached", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upravuje sa zvuk nahrávok….
+        /// </summary>
+        internal static string Recordings_AdjustStatus {
+            get {
+                return ResourceManager.GetString("Recordings_AdjustStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niektoré nahrávky sa nepodarilo upraviť: {0}.
+        /// </summary>
+        internal static string Recordings_AdjustFailed {
+            get {
+                return ResourceManager.GetString("Recordings_AdjustFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisujú sa vygenerované nahrávky….
+        /// </summary>
+        internal static string Recordings_GenerateStatus {
+            get {
+                return ResourceManager.GetString("Recordings_GenerateStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vracajú sa pôvodné nahrávky….
+        /// </summary>
+        internal static string Recordings_UndoStatus {
+            get {
+                return ResourceManager.GetString("Recordings_UndoStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisujú sa nové nahrávky….
+        /// </summary>
+        internal static string Recordings_RedoStatus {
+            get {
+                return ResourceManager.GetString("Recordings_RedoStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niektoré nahrávky sa nepodarilo nahradiť: {0}.
+        /// </summary>
+        internal static string Recordings_ReplaceFailed {
+            get {
+                return ResourceManager.GetString("Recordings_ReplaceFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chyba služby: {0}.
+        /// </summary>
+        internal static string Speech_Error {
+            get {
+                return ResourceManager.GetString("Speech_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasová syntéza nemá zadaný kľúč ElevenLabs. Otvoriť nastavenia?.
+        /// </summary>
+        internal static string Speech_NoKey {
+            get {
+                return ResourceManager.GetString("Speech_NoKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas jazyka sa nepodarilo uložiť: {0}.
+        /// </summary>
+        internal static string Speech_VoiceSaveFailed {
+            get {
+                return ResourceManager.GetString("Speech_VoiceSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generovať skupinu hlasom AI.
+        /// </summary>
+        internal static string Cmd_GenerateGroup {
+            get {
+                return ResourceManager.GetString("Cmd_GenerateGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generovať celý jazyk hlasom AI.
+        /// </summary>
+        internal static string Cmd_GenerateLanguage {
+            get {
+                return ResourceManager.GetString("Cmd_GenerateLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Doplniť chýbajúce nahrávky hlasom AI.
+        /// </summary>
+        internal static string Cmd_GenerateMissing {
+            get {
+                return ResourceManager.GetString("Cmd_GenerateMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pôvod.
+        /// </summary>
+        internal static string Column_Origin {
+            get {
+                return ResourceManager.GetString("Column_Origin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: {1}.
+        /// </summary>
+        internal static string FGenerateSounds_Title {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to chýba.
+        /// </summary>
+        internal static string FGenerateSounds_NoRecording {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_NoRecording", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všetky zvuky už majú nahrávku od tohto hlasu..
+        /// </summary>
+        internal static string FGenerateSounds_AllDone {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_AllDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vygeneruje sa {0} nahrávok, službe sa pošle {1:N0} znakov. Pokračovať?.
+        /// </summary>
+        internal static string FGenerateSounds_ConfirmCost {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_ConfirmCost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generovanie potrebuje {0:N0} znakov, predplatnému zostáva {1:N0}. Služba ho môže prerušiť. Pokrač....
+        /// </summary>
+        internal static string FGenerateSounds_OverQuota {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_OverQuota", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všetky zvuky jazyka majú nahrávku..
+        /// </summary>
+        internal static string Generate_NoMissing {
+            get {
+                return ResourceManager.GetString("Generate_NoMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vybrané zvuky ({0}).
+        /// </summary>
+        internal static string Generate_ScopeSelected {
+            get {
+                return ResourceManager.GetString("Generate_ScopeSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to skupina {0}.
+        /// </summary>
+        internal static string Generate_ScopeGroup {
+            get {
+                return ResourceManager.GetString("Generate_ScopeGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to jazyk {0}.
+        /// </summary>
+        internal static string Generate_ScopeLanguage {
+            get {
+                return ResourceManager.GetString("Generate_ScopeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to chýbajúce nahrávky ({0}).
+        /// </summary>
+        internal static string Generate_ScopeMissing {
+            get {
+                return ResourceManager.GetString("Generate_ScopeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AI: {0}.
+        /// </summary>
+        internal static string Origin_Generated {
+            get {
+                return ResourceManager.GetString("Origin_Generated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vygenerované hlasom {0} (model {1}), {2:g} Text: {3}.
+        /// </summary>
+        internal static string Origin_Tooltip {
+            get {
+                return ResourceManager.GetString("Origin_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niektoré nahrávky sa nepodarilo pripraviť: {0}.
+        /// </summary>
+        internal static string Recordings_GenerateFailed {
+            get {
+                return ResourceManager.GetString("Recordings_GenerateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text pre syntézu.
+        /// </summary>
+        internal static string Action_SynthText {
+            get {
+                return ResourceManager.GetString("Action_SynthText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prehrať vybrané za sebou.
+        /// </summary>
+        internal static string Cmd_PlaySequence {
+            get {
+                return ResourceManager.GetString("Cmd_PlaySequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Výslovnosť.
+        /// </summary>
+        internal static string Cmd_Pronunciation {
+            get {
+                return ResourceManager.GetString("Cmd_Pronunciation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intonácia skupín.
+        /// </summary>
+        internal static string Cmd_Prosody {
+            get {
+                return ResourceManager.GetString("Cmd_Prosody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text pre syntézu.
+        /// </summary>
+        internal static string Column_SynthText {
+            get {
+                return ResourceManager.GetString("Column_SynthText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pravidlá upravia text pred odoslaním službe, v poradí zoznamu. Text zvukov v banke sa nemení..
+        /// </summary>
+        internal static string FPronunciation_Hint {
+            get {
+                return ResourceManager.GetString("FPronunciation_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pravidlo „{0}“ nie je platný regulárny výraz: {1}.
+        /// </summary>
+        internal static string FPronunciation_InvalidRegex {
+            get {
+                return ResourceManager.GetString("FPronunciation_InvalidRegex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Úryvky sa skladajú do hlásení, preto sa generujú s intonáciou podľa miesta vo vete. Kontext služb....
+        /// </summary>
+        internal static string FProsody_Hint {
+            get {
+                return ResourceManager.GetString("FProsody_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukážka potrebuje kľúč ElevenLabs a hlas jazyka..
+        /// </summary>
+        internal static string FProsody_NoVoice {
+            get {
+                return ResourceManager.GetString("FProsody_NoVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Samostatne.
+        /// </summary>
+        internal static string Prosody_None {
+            get {
+                return ResourceManager.GetString("Prosody_None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontext.
+        /// </summary>
+        internal static string Prosody_Context {
+            get {
+                return ResourceManager.GetString("Prosody_Context", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nosná veta.
+        /// </summary>
+        internal static string Prosody_Carrier {
+            get {
+                return ResourceManager.GetString("Prosody_Carrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to žiadna.
+        /// </summary>
+        internal static string Prosody_PunctuationNone {
+            get {
+                return ResourceManager.GetString("Prosody_PunctuationNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to čiarka.
+        /// </summary>
+        internal static string Prosody_PunctuationComma {
+            get {
+                return ResourceManager.GetString("Prosody_PunctuationComma", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to bodka.
+        /// </summary>
+        internal static string Prosody_PunctuationPeriod {
+            get {
+                return ResourceManager.GetString("Prosody_PunctuationPeriod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nastavenia jazyka sa nepodarilo uložiť: {0}.
+        /// </summary>
+        internal static string Speech_SettingsSaveFailed {
+            get {
+                return ResourceManager.GetString("Speech_SettingsSaveFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zmena hlasu nahrávok.
+        /// </summary>
+        internal static string Action_ChangeVoice {
+            get {
+                return ResourceManager.GetString("Action_ChangeVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyčistenie nahrávok.
+        /// </summary>
+        internal static string Action_IsolateSounds {
+            get {
+                return ResourceManager.GetString("Action_IsolateSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zmeniť hlas nahrávok.
+        /// </summary>
+        internal static string Cmd_ChangeVoice {
+            get {
+                return ResourceManager.GetString("Cmd_ChangeVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyčistiť nahrávky od šumu.
+        /// </summary>
+        internal static string Cmd_IsolateSounds {
+            get {
+                return ResourceManager.GetString("Cmd_IsolateSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasy.
+        /// </summary>
+        internal static string Cmd_Voices {
+            get {
+                return ResourceManager.GetString("Cmd_Voices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spracuje sa {0} nahrávok, spolu {1:N0} s zvuku. Pokračovať?.
+        /// </summary>
+        internal static string FGenerateSounds_ConfirmAudio {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_ConfirmAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Na spracovanie: {0} nahrávok, {1:N0} s zvuku. Odoslané znaky textu: {2:N0}..
+        /// </summary>
+        internal static string FGenerateSounds_EstimateAudio {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_EstimateAudio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spracovať.
+        /// </summary>
+        internal static string FGenerateSounds_Process {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_Process", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zmena hlasu nahrávok.
+        /// </summary>
+        internal static string FGenerateSounds_TitleChangeVoice {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_TitleChangeVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyčistenie nahrávok od šumu.
+        /// </summary>
+        internal static string FGenerateSounds_TitleIsolate {
+            get {
+                return ResourceManager.GetString("FGenerateSounds_TitleIsolate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pripravujú sa vzorky a vytvára sa hlas….
+        /// </summary>
+        internal static string FVoiceClone_Cloning {
+            get {
+                return ResourceManager.GetString("FVoiceClone_Cloning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Z nahrávok banky vznikne kópia hlasu hlásateľa, napríklad na doplnenie nových staníc. Kopírovať h....
+        /// </summary>
+        internal static string FVoiceClone_Hint {
+            get {
+                return ResourceManager.GetString("FVoiceClone_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potvrďte súhlas hovoriaceho..
+        /// </summary>
+        internal static string FVoiceClone_NoConsent {
+            get {
+                return ResourceManager.GetString("FVoiceClone_NoConsent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyberte zvuky s nahrávkami alebo otvorte skupinu, z ktorej sa hlas naklonuje..
+        /// </summary>
+        internal static string FVoiceClone_NoSounds {
+            get {
+                return ResourceManager.GetString("FVoiceClone_NoSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} nahrávok, spolu {1:0} s reči..
+        /// </summary>
+        internal static string FVoiceClone_Source {
+            get {
+                return ResourceManager.GetString("FVoiceClone_Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Na kvalitný klon odporúčame aspoň minútu reči..
+        /// </summary>
+        internal static string FVoiceClone_TooShort {
+            get {
+                return ResourceManager.GetString("FVoiceClone_TooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navrhujú sa hlasy….
+        /// </summary>
+        internal static string FVoiceDesign_Designing {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_Designing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vyberte ukážku, pomenujte hlas a uložte ho..
+        /// </summary>
+        internal static string FVoiceDesign_Done {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_Done", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zadajte popis hlasu..
+        /// </summary>
+        internal static string FVoiceDesign_NoDescription {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_NoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zadajte názov hlasu..
+        /// </summary>
+        internal static string FVoiceDesign_NoName {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_NoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Služba nevrátila žiadnu ukážku. Skúste upraviť popis..
+        /// </summary>
+        internal static string FVoiceDesign_NoPreviews {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_NoPreviews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukážka {0} ({1:0.0} s).
+        /// </summary>
+        internal static string FVoiceDesign_Preview {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas {0} je uložený v účte..
+        /// </summary>
+        internal static string FVoiceDesign_Saved {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukladá sa hlas….
+        /// </summary>
+        internal static string FVoiceDesign_Saving {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_Saving", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text ukážky musí mať {0} až {1} znakov, má {2}..
+        /// </summary>
+        internal static string FVoiceDesign_TextLength {
+            get {
+                return ResourceManager.GetString("FVoiceDesign_TextLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas {0} pribudol medzi vaše hlasy..
+        /// </summary>
+        internal static string FVoiceLibrary_AddedVoice {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_AddedVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pridáva sa hlas….
+        /// </summary>
+        internal static string FVoiceLibrary_Adding {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_Adding", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všetky.
+        /// </summary>
+        internal static string FVoiceLibrary_All {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to žena.
+        /// </summary>
+        internal static string FVoiceLibrary_Female {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to muž.
+        /// </summary>
+        internal static string FVoiceLibrary_Male {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to neutrálny.
+        /// </summary>
+        internal static string FVoiceLibrary_Neutral {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_Neutral", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nájdené hlasy: {0}.
+        /// </summary>
+        internal static string FVoiceLibrary_Found {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Žiadny hlas nezodpovedá filtru..
+        /// </summary>
+        internal static string FVoiceLibrary_NotFound {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hľadá sa….
+        /// </summary>
+        internal static string FVoiceLibrary_Searching {
+            get {
+                return ResourceManager.GetString("FVoiceLibrary_Searching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Je to hlas jazyka banky..
+        /// </summary>
+        internal static string FVoices_DeleteLanguageVoice {
+            get {
+                return ResourceManager.GetString("FVoices_DeleteLanguageVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odstrániť hlas {0} z účtu ElevenLabs? Vrátiť sa to nedá..
+        /// </summary>
+        internal static string FVoices_DeleteQuestion {
+            get {
+                return ResourceManager.GetString("FVoices_DeleteQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas {0} je odstránený..
+        /// </summary>
+        internal static string FVoices_Deleted {
+            get {
+                return ResourceManager.GetString("FVoices_Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odstraňuje sa hlas….
+        /// </summary>
+        internal static string FVoices_Deleting {
+            get {
+                return ResourceManager.GetString("FVoices_Deleting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sťahuje sa ukážka….
+        /// </summary>
+        internal static string FVoices_Downloading {
+            get {
+                return ResourceManager.GetString("FVoices_Downloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlasy účtu ElevenLabs. Hlas jazyka banky vyberiete v okne Hlas jazyka..
+        /// </summary>
+        internal static string FVoices_Hint {
+            get {
+                return ResourceManager.GetString("FVoices_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hlas zmenený na {0}, {1:g}.
+        /// </summary>
+        internal static string Origin_ConvertedTooltip {
+            get {
+                return ResourceManager.GetString("Origin_ConvertedTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Texty zvukov z prepisu.
+        /// </summary>
+        internal static string Action_SoundTexts {
+            get {
+                return ResourceManager.GetString("Action_SoundTexts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepísať nahrávky na text.
+        /// </summary>
+        internal static string Cmd_TranscribeSounds {
+            get {
+                return ResourceManager.GetString("Cmd_TranscribeSounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zvuky bez textu dostanú prepis nahrávky. Pri zvukoch s textom sa prepis porovná a nezhoda ukáže, ....
+        /// </summary>
+        internal static string FTranscribe_Hint {
+            get {
+                return ResourceManager.GetString("FTranscribe_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepisuje sa {0} nahrávok….
+        /// </summary>
+        internal static string FTranscribe_Progress {
+            get {
+                return ResourceManager.GetString("FTranscribe_Progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zvukov: {0}, prepísaných: {1}, nezhôd: {2}..
+        /// </summary>
+        internal static string FTranscribe_Summary {
+            get {
+                return ResourceManager.GetString("FTranscribe_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepisuje sa….
+        /// </summary>
+        internal static string FTranscribe_StatusRunning {
+            get {
+                return ResourceManager.GetString("FTranscribe_StatusRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nový text.
+        /// </summary>
+        internal static string FTranscribe_StatusNew {
+            get {
+                return ResourceManager.GetString("FTranscribe_StatusNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bez reči.
+        /// </summary>
+        internal static string FTranscribe_StatusEmpty {
+            get {
+                return ResourceManager.GetString("FTranscribe_StatusEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zhoduje sa.
+        /// </summary>
+        internal static string FTranscribe_StatusMatch {
+            get {
+                return ResourceManager.GetString("FTranscribe_StatusMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nezhoduje sa.
+        /// </summary>
+        internal static string FTranscribe_StatusMismatch {
+            get {
+                return ResourceManager.GetString("FTranscribe_StatusMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0:0} %.
+        /// </summary>
+        internal static string Match_Percent {
+            get {
+                return ResourceManager.GetString("Match_Percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prepis: {0}.
+        /// </summary>
+        internal static string Match_Transcript {
+            get {
+                return ResourceManager.GetString("Match_Transcript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skontrolujte: zhoda {0:0} %.
+        /// </summary>
+        internal static string Match_Low {
+            get {
+                return ResourceManager.GetString("Match_Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skontrolujte: dĺžka {0:0} % pôvodnej.
+        /// </summary>
+        internal static string Match_Duration {
+            get {
+                return ResourceManager.GetString("Match_Duration", resourceCulture);
+            }
+        }
     }
 }

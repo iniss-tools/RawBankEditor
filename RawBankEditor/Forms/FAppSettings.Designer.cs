@@ -30,6 +30,21 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAppSettings));
+            ExControls.OptionsNode optionsNodeSpeech = new ExControls.OptionsNode();
+            this.pSpeech = new ExControls.ExOptionsPanel(this.optionsView);
+            this.ppSpeech = new System.Windows.Forms.Panel();
+            this.gbSpeechKey = new ExControls.ExGroupBox();
+            this.lSpeechKey = new System.Windows.Forms.Label();
+            this.tbSpeechKey = new ExControls.ExTextBox();
+            this.bSpeechVerify = new ExControls.ExButton();
+            this.lSpeechStatus = new System.Windows.Forms.Label();
+            this.llSpeechKey = new System.Windows.Forms.LinkLabel();
+            this.lSpeechConcurrency = new System.Windows.Forms.Label();
+            this.nudSpeechConcurrency = new ExControls.ExNumericUpDown();
+            this.gbSpeechCache = new ExControls.ExGroupBox();
+            this.lSpeechCache = new System.Windows.Forms.Label();
+            this.bSpeechClearCache = new ExControls.ExButton();
+            this.lSpeechPrivacy = new System.Windows.Forms.Label();
             this.exGroupBox2 = new ExControls.ExGroupBox();
             this.cboxAutoRecalculateSoundDurations = new ExControls.ExCheckBox();
             this.cboxAutoInsertSoundData = new ExControls.ExCheckBox();
@@ -40,6 +55,11 @@
             this.pDesktopComponents.SuspendLayout();
             this.pLocalization.SuspendLayout();
             this.exGroupBox2.SuspendLayout();
+            this.pSpeech.SuspendLayout();
+            this.ppSpeech.SuspendLayout();
+            this.gbSpeechKey.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpeechConcurrency)).BeginInit();
+            this.gbSpeechCache.SuspendLayout();
             this.SuspendLayout();
             // 
             // pConcreteGeneral
@@ -50,6 +70,7 @@
             // optionsView
             // 
             this.optionsView.HeaderNodeNameVisible = true;
+            this.optionsView.Panels.Add(this.pSpeech);
             this.optionsView.SearchBoxVisible = true;
             resources.ApplyResources(this.optionsView, "optionsView");
             // 
@@ -97,6 +118,117 @@
             this.cboxShowAfterInsertSoundDlg.HighlightColor = System.Drawing.SystemColors.Highlight;
             this.cboxShowAfterInsertSoundDlg.Name = "cboxShowAfterInsertSoundDlg";
             // 
+            // pSpeech
+            // 
+            this.pSpeech.Controls.Add(this.ppSpeech);
+            this.pSpeech.Name = "pSpeech";
+            optionsNodeSpeech.Name = "";
+            optionsNodeSpeech.Text = resources.GetString("optionsNodeSpeech.Text");
+            this.pSpeech.Node = optionsNodeSpeech;
+            this.pSpeech.NodeText = resources.GetString("pSpeech.NodeText");
+            this.pSpeech.ParentNode = null;
+            // 
+            // ppSpeech
+            // 
+            this.ppSpeech.Controls.Add(this.gbSpeechKey);
+            this.ppSpeech.Controls.Add(this.gbSpeechCache);
+            this.ppSpeech.Controls.Add(this.lSpeechPrivacy);
+            resources.ApplyResources(this.ppSpeech, "ppSpeech");
+            this.ppSpeech.Name = "ppSpeech";
+            // 
+            // gbSpeechKey
+            // 
+            this.gbSpeechKey.Controls.Add(this.lSpeechKey);
+            this.gbSpeechKey.Controls.Add(this.tbSpeechKey);
+            this.gbSpeechKey.Controls.Add(this.bSpeechVerify);
+            this.gbSpeechKey.Controls.Add(this.lSpeechStatus);
+            this.gbSpeechKey.Controls.Add(this.llSpeechKey);
+            this.gbSpeechKey.Controls.Add(this.lSpeechConcurrency);
+            this.gbSpeechKey.Controls.Add(this.nudSpeechConcurrency);
+            resources.ApplyResources(this.gbSpeechKey, "gbSpeechKey");
+            this.gbSpeechKey.TabStop = false;
+            this.gbSpeechKey.Name = "gbSpeechKey";
+            // 
+            // lSpeechKey
+            // 
+            resources.ApplyResources(this.lSpeechKey, "lSpeechKey");
+            this.lSpeechKey.Name = "lSpeechKey";
+            // 
+            // tbSpeechKey
+            // 
+            resources.ApplyResources(this.tbSpeechKey, "tbSpeechKey");
+            this.tbSpeechKey.UseSystemPasswordChar = true;
+            this.tbSpeechKey.Name = "tbSpeechKey";
+            // 
+            // bSpeechVerify
+            // 
+            resources.ApplyResources(this.bSpeechVerify, "bSpeechVerify");
+            this.bSpeechVerify.UseVisualStyleBackColor = true;
+            this.bSpeechVerify.Name = "bSpeechVerify";
+            this.bSpeechVerify.Click += new System.EventHandler(this.BSpeechVerify_Click);
+            // 
+            // lSpeechStatus
+            // 
+            resources.ApplyResources(this.lSpeechStatus, "lSpeechStatus");
+            this.lSpeechStatus.Name = "lSpeechStatus";
+            // 
+            // llSpeechKey
+            // 
+            resources.ApplyResources(this.llSpeechKey, "llSpeechKey");
+            this.llSpeechKey.TabStop = true;
+            this.llSpeechKey.Name = "llSpeechKey";
+            this.llSpeechKey.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlSpeechKey_LinkClicked);
+            // 
+            // lSpeechConcurrency
+            // 
+            resources.ApplyResources(this.lSpeechConcurrency, "lSpeechConcurrency");
+            this.lSpeechConcurrency.Name = "lSpeechConcurrency";
+            // 
+            // nudSpeechConcurrency
+            // 
+            resources.ApplyResources(this.nudSpeechConcurrency, "nudSpeechConcurrency");
+            this.nudSpeechConcurrency.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudSpeechConcurrency.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudSpeechConcurrency.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.nudSpeechConcurrency.Name = "nudSpeechConcurrency";
+            // 
+            // gbSpeechCache
+            // 
+            this.gbSpeechCache.Controls.Add(this.lSpeechCache);
+            this.gbSpeechCache.Controls.Add(this.bSpeechClearCache);
+            resources.ApplyResources(this.gbSpeechCache, "gbSpeechCache");
+            this.gbSpeechCache.TabStop = false;
+            this.gbSpeechCache.Name = "gbSpeechCache";
+            // 
+            // lSpeechCache
+            // 
+            resources.ApplyResources(this.lSpeechCache, "lSpeechCache");
+            this.lSpeechCache.Name = "lSpeechCache";
+            // 
+            // bSpeechClearCache
+            // 
+            resources.ApplyResources(this.bSpeechClearCache, "bSpeechClearCache");
+            this.bSpeechClearCache.UseVisualStyleBackColor = true;
+            this.bSpeechClearCache.Name = "bSpeechClearCache";
+            this.bSpeechClearCache.Click += new System.EventHandler(this.BSpeechClearCache_Click);
+            // 
+            // lSpeechPrivacy
+            // 
+            resources.ApplyResources(this.lSpeechPrivacy, "lSpeechPrivacy");
+            this.lSpeechPrivacy.Name = "lSpeechPrivacy";
+            // 
             // FAppSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -115,6 +247,14 @@
             this.pLocalization.PerformLayout();
             this.exGroupBox2.ResumeLayout(false);
             this.exGroupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpeechConcurrency)).EndInit();
+            this.pSpeech.ResumeLayout(false);
+            this.ppSpeech.ResumeLayout(false);
+            this.ppSpeech.PerformLayout();
+            this.gbSpeechKey.ResumeLayout(false);
+            this.gbSpeechKey.PerformLayout();
+            this.gbSpeechCache.ResumeLayout(false);
+            this.gbSpeechCache.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -125,5 +265,19 @@
         private ExControls.ExCheckBox cboxAutoRecalculateSoundDurations;
         private ExControls.ExCheckBox cboxAutoInsertSoundData;
         private ExControls.ExCheckBox cboxShowAfterInsertSoundDlg;
+        private ExControls.ExOptionsPanel pSpeech;
+        private System.Windows.Forms.Panel ppSpeech;
+        private ExControls.ExGroupBox gbSpeechKey;
+        private System.Windows.Forms.Label lSpeechKey;
+        private ExControls.ExTextBox tbSpeechKey;
+        private ExControls.ExButton bSpeechVerify;
+        private System.Windows.Forms.Label lSpeechStatus;
+        private System.Windows.Forms.LinkLabel llSpeechKey;
+        private System.Windows.Forms.Label lSpeechConcurrency;
+        private ExControls.ExNumericUpDown nudSpeechConcurrency;
+        private ExControls.ExGroupBox gbSpeechCache;
+        private System.Windows.Forms.Label lSpeechCache;
+        private ExControls.ExButton bSpeechClearCache;
+        private System.Windows.Forms.Label lSpeechPrivacy;
     }
 }

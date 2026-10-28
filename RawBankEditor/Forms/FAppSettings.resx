@@ -4245,6 +4245,363 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 475</value>
   </data>
+  <data name="optionsNodeSpeech.Text" xml:space="preserve">
+    <value>Hlasová syntéza (AI)</value>
+  </data>
+  <data name="pSpeech.NodeText" xml:space="preserve">
+    <value>Hlasová syntéza (AI)</value>
+  </data>
+  <data name="&gt;&gt;pSpeech.Name" xml:space="preserve">
+    <value>pSpeech</value>
+  </data>
+  <data name="&gt;&gt;pSpeech.Type" xml:space="preserve">
+    <value>ExControls.ExOptionsPanel, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="ppSpeech.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ppSpeech.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ppSpeech.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 400</value>
+  </data>
+  <data name="ppSpeech.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ppSpeech.Name" xml:space="preserve">
+    <value>ppSpeech</value>
+  </data>
+  <data name="&gt;&gt;ppSpeech.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ppSpeech.Parent" xml:space="preserve">
+    <value>pSpeech</value>
+  </data>
+  <data name="&gt;&gt;ppSpeech.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="gbSpeechKey.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbSpeechKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 6</value>
+  </data>
+  <data name="gbSpeechKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 140</value>
+  </data>
+  <data name="gbSpeechKey.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbSpeechKey.Text" xml:space="preserve">
+    <value>ElevenLabs</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechKey.Name" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechKey.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechKey.Parent" xml:space="preserve">
+    <value>ppSpeech</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechKey.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lSpeechKey.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lSpeechKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 24</value>
+  </data>
+  <data name="lSpeechKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lSpeechKey.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lSpeechKey.Text" xml:space="preserve">
+    <value>Kľúč API:</value>
+  </data>
+  <data name="&gt;&gt;lSpeechKey.Name" xml:space="preserve">
+    <value>lSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;lSpeechKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lSpeechKey.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;lSpeechKey.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbSpeechKey.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="tbSpeechKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="tbSpeechKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 20</value>
+  </data>
+  <data name="tbSpeechKey.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbSpeechKey.Name" xml:space="preserve">
+    <value>tbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;tbSpeechKey.Type" xml:space="preserve">
+    <value>ExControls.ExTextBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;tbSpeechKey.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;tbSpeechKey.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bSpeechVerify.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bSpeechVerify.Location" type="System.Drawing.Point, System.Drawing">
+    <value>421, 20</value>
+  </data>
+  <data name="bSpeechVerify.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="bSpeechVerify.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="bSpeechVerify.Text" xml:space="preserve">
+    <value>Overiť</value>
+  </data>
+  <data name="&gt;&gt;bSpeechVerify.Name" xml:space="preserve">
+    <value>bSpeechVerify</value>
+  </data>
+  <data name="&gt;&gt;bSpeechVerify.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bSpeechVerify.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;bSpeechVerify.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lSpeechStatus.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lSpeechStatus.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lSpeechStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 46</value>
+  </data>
+  <data name="lSpeechStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>411, 30</value>
+  </data>
+  <data name="lSpeechStatus.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lSpeechStatus.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;lSpeechStatus.Name" xml:space="preserve">
+    <value>lSpeechStatus</value>
+  </data>
+  <data name="&gt;&gt;lSpeechStatus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lSpeechStatus.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;lSpeechStatus.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="llSpeechKey.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="llSpeechKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 80</value>
+  </data>
+  <data name="llSpeechKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>270, 13</value>
+  </data>
+  <data name="llSpeechKey.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="llSpeechKey.Text" xml:space="preserve">
+    <value>Kľúč API vytvoríte v nastaveniach účtu ElevenLabs</value>
+  </data>
+  <data name="&gt;&gt;llSpeechKey.Name" xml:space="preserve">
+    <value>llSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;llSpeechKey.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;llSpeechKey.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;llSpeechKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lSpeechConcurrency.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lSpeechConcurrency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 108</value>
+  </data>
+  <data name="lSpeechConcurrency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 13</value>
+  </data>
+  <data name="lSpeechConcurrency.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lSpeechConcurrency.Text" xml:space="preserve">
+    <value>Súčasné požiadavky:</value>
+  </data>
+  <data name="&gt;&gt;lSpeechConcurrency.Name" xml:space="preserve">
+    <value>lSpeechConcurrency</value>
+  </data>
+  <data name="&gt;&gt;lSpeechConcurrency.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lSpeechConcurrency.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;lSpeechConcurrency.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nudSpeechConcurrency.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 106</value>
+  </data>
+  <data name="nudSpeechConcurrency.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 20</value>
+  </data>
+  <data name="nudSpeechConcurrency.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;nudSpeechConcurrency.Name" xml:space="preserve">
+    <value>nudSpeechConcurrency</value>
+  </data>
+  <data name="&gt;&gt;nudSpeechConcurrency.Type" xml:space="preserve">
+    <value>ExControls.ExNumericUpDown, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudSpeechConcurrency.Parent" xml:space="preserve">
+    <value>gbSpeechKey</value>
+  </data>
+  <data name="&gt;&gt;nudSpeechConcurrency.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="gbSpeechCache.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbSpeechCache.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 152</value>
+  </data>
+  <data name="gbSpeechCache.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 56</value>
+  </data>
+  <data name="gbSpeechCache.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="gbSpeechCache.Text" xml:space="preserve">
+    <value>Uložené výsledky</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechCache.Name" xml:space="preserve">
+    <value>gbSpeechCache</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechCache.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechCache.Parent" xml:space="preserve">
+    <value>ppSpeech</value>
+  </data>
+  <data name="&gt;&gt;gbSpeechCache.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lSpeechCache.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lSpeechCache.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 25</value>
+  </data>
+  <data name="lSpeechCache.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="lSpeechCache.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lSpeechCache.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;lSpeechCache.Name" xml:space="preserve">
+    <value>lSpeechCache</value>
+  </data>
+  <data name="&gt;&gt;lSpeechCache.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lSpeechCache.Parent" xml:space="preserve">
+    <value>gbSpeechCache</value>
+  </data>
+  <data name="&gt;&gt;lSpeechCache.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="bSpeechClearCache.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
+  <data name="bSpeechClearCache.Location" type="System.Drawing.Point, System.Drawing">
+    <value>421, 20</value>
+  </data>
+  <data name="bSpeechClearCache.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 23</value>
+  </data>
+  <data name="bSpeechClearCache.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="bSpeechClearCache.Text" xml:space="preserve">
+    <value>Vyčistiť</value>
+  </data>
+  <data name="&gt;&gt;bSpeechClearCache.Name" xml:space="preserve">
+    <value>bSpeechClearCache</value>
+  </data>
+  <data name="&gt;&gt;bSpeechClearCache.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bSpeechClearCache.Parent" xml:space="preserve">
+    <value>gbSpeechCache</value>
+  </data>
+  <data name="&gt;&gt;bSpeechClearCache.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lSpeechPrivacy.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="lSpeechPrivacy.AutoSize" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="lSpeechPrivacy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 216</value>
+  </data>
+  <data name="lSpeechPrivacy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>521, 45</value>
+  </data>
+  <data name="lSpeechPrivacy.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lSpeechPrivacy.Text" xml:space="preserve">
+    <value>Texty zvukov sa pri generovaní posielajú službe ElevenLabs. Kľúč je v nastaveniach zašifrovaný pre tohto používateľa Windows.</value>
+  </data>
+  <data name="&gt;&gt;lSpeechPrivacy.Name" xml:space="preserve">
+    <value>lSpeechPrivacy</value>
+  </data>
+  <data name="&gt;&gt;lSpeechPrivacy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lSpeechPrivacy.Parent" xml:space="preserve">
+    <value>ppSpeech</value>
+  </data>
+  <data name="&gt;&gt;lSpeechPrivacy.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FAppSettings</value>
   </data>

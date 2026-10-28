@@ -717,4 +717,422 @@ Původní soubory jsou ve složce:
 
 INISS2 potřebuje právě jeden výchozí jazyk. Při exportu ostatních jazyků odpovězte Ne.</value>
   </data>
+  <data name="Action_AdjustSounds" xml:space="preserve">
+    <value>Úprava zvuku nahrávek</value>
+  </data>
+  <data name="Action_GenerateSounds" xml:space="preserve">
+    <value>Generování nahrávek hlasem AI</value>
+  </data>
+  <data name="Cmd_AdjustSounds" xml:space="preserve">
+    <value>Upravit zvuk nahrávek</value>
+  </data>
+  <data name="Cmd_GenerateSounds" xml:space="preserve">
+    <value>Generovat nahrávky hlasem AI</value>
+  </data>
+  <data name="Cmd_VoiceProfile" xml:space="preserve">
+    <value>Hlas jazyka</value>
+  </data>
+  <data name="Cmd_StopPlayback" xml:space="preserve">
+    <value>Zastavit přehrávání</value>
+  </data>
+  <data name="Duration_Ms" xml:space="preserve">
+    <value>{0} ms</value>
+  </data>
+  <data name="FAdjustSounds_Selected" xml:space="preserve">
+    <value>Vybrané zvuky ({0})</value>
+  </data>
+  <data name="FAdjustSounds_Group" xml:space="preserve">
+    <value>Skupina {0} ({1})</value>
+  </data>
+  <data name="FAdjustSounds_Language" xml:space="preserve">
+    <value>Celý jazyk {0} ({1})</value>
+  </data>
+  <data name="FAdjustSounds_Measuring" xml:space="preserve">
+    <value>Měří se hlasitost nahrávek…</value>
+  </data>
+  <data name="FAdjustSounds_MeasureFailed" xml:space="preserve">
+    <value>Hlasitost se nepodařilo změřit. Nahrávky obsahují jen ticho nebo je nelze přečíst.</value>
+  </data>
+  <data name="FAdjustSounds_Measured" xml:space="preserve">
+    <value>Typická hlasitost řeči v jazyce je {0:0.0} dBFS.</value>
+  </data>
+  <data name="FAdjustSounds_Nothing" xml:space="preserve">
+    <value>Není vybrána žádná úprava.</value>
+  </data>
+  <data name="FAdjustSounds_PreviewFailed" xml:space="preserve">
+    <value>Nahrávku {0} se nepodařilo upravit: {1}</value>
+  </data>
+  <data name="FAppSettings_SpeechCacheNotCleared" xml:space="preserve">
+    <value>Některé uložené výsledky se nepodařilo smazat.</value>
+  </data>
+  <data name="FAppSettings_SpeechCacheSize" xml:space="preserve">
+    <value>Velikost: {0:0.0} MB</value>
+  </data>
+  <data name="FAppSettings_SpeechNoKey" xml:space="preserve">
+    <value>Zadejte klíč API.</value>
+  </data>
+  <data name="FAppSettings_SpeechVerifying" xml:space="preserve">
+    <value>Ověřuje se…</value>
+  </data>
+  <data name="FAppSettings_SpeechVerified" xml:space="preserve">
+    <value>Klíč je platný. Předplatné {0}, spotřebované znaky {1:N0} z {2:N0}.</value>
+  </data>
+  <data name="FGenerateSounds_DiscardQuestion" xml:space="preserve">
+    <value>Vygenerované nahrávky se nepřevezmou. Zavřít okno?</value>
+  </data>
+  <data name="FGenerateSounds_Estimate" xml:space="preserve">
+    <value>K vygenerování: {0} nahrávek, {1:N0} znaků. Odeslané znaky: {2:N0}.</value>
+  </data>
+  <data name="FGenerateSounds_Progress" xml:space="preserve">
+    <value>Generuje se {0} nahrávek. Odeslané znaky: {1:N0}.</value>
+  </data>
+  <data name="FGenerateSounds_Quota" xml:space="preserve">
+    <value>Zbývá {0:N0} znaků (předplatné {1}).</value>
+  </data>
+  <data name="FGenerateSounds_PlayFailed" xml:space="preserve">
+    <value>Nahrávku {0} se nepodařilo přečíst: {1}</value>
+  </data>
+  <data name="FGenerateSounds_StatusWaiting" xml:space="preserve">
+    <value>Čeká</value>
+  </data>
+  <data name="FGenerateSounds_StatusQueued" xml:space="preserve">
+    <value>Ve frontě</value>
+  </data>
+  <data name="FGenerateSounds_StatusGenerating" xml:space="preserve">
+    <value>Generuje se…</value>
+  </data>
+  <data name="FGenerateSounds_StatusDone" xml:space="preserve">
+    <value>Vygenerována</value>
+  </data>
+  <data name="FGenerateSounds_StatusCached" xml:space="preserve">
+    <value>Z uložených výsledků</value>
+  </data>
+  <data name="FGenerateSounds_StatusCanceled" xml:space="preserve">
+    <value>Zrušeno</value>
+  </data>
+  <data name="FGenerateSounds_Voice" xml:space="preserve">
+    <value>Hlas: {0}, model {1}</value>
+  </data>
+  <data name="FVoiceProfile_Hint" xml:space="preserve">
+    <value>Hlas, kterým se generují nahrávky jazyka {0}. Uloží se do složky {1} ve složce INISS.</value>
+  </data>
+  <data name="FVoiceProfile_LanguageAuto" xml:space="preserve">
+    <value>Automaticky</value>
+  </data>
+  <data name="FVoiceProfile_Loading" xml:space="preserve">
+    <value>Načítají se modely a hlasy…</value>
+  </data>
+  <data name="FVoiceProfile_NoVoice" xml:space="preserve">
+    <value>Vyberte hlas.</value>
+  </data>
+  <data name="FVoiceProfile_NoVoices" xml:space="preserve">
+    <value>Účet nemá žádný hlas. Přidejte si hlas v knihovně hlasů ElevenLabs.</value>
+  </data>
+  <data name="FVoiceProfile_Generating" xml:space="preserve">
+    <value>Generuje se ukázka…</value>
+  </data>
+  <data name="FVoiceProfile_SampleDone" xml:space="preserve">
+    <value>Ukázka je hotová, odeslané znaky: {0}.</value>
+  </data>
+  <data name="FVoiceProfile_SampleCached" xml:space="preserve">
+    <value>Ukázka je z uložených výsledků.</value>
+  </data>
+  <data name="Recordings_AdjustStatus" xml:space="preserve">
+    <value>Upravuje se zvuk nahrávek…</value>
+  </data>
+  <data name="Recordings_AdjustFailed" xml:space="preserve">
+    <value>Některé nahrávky se nepodařilo upravit:
+
+{0}</value>
+  </data>
+  <data name="Recordings_GenerateStatus" xml:space="preserve">
+    <value>Zapisují se vygenerované nahrávky…</value>
+  </data>
+  <data name="Recordings_UndoStatus" xml:space="preserve">
+    <value>Vracejí se původní nahrávky…</value>
+  </data>
+  <data name="Recordings_RedoStatus" xml:space="preserve">
+    <value>Zapisují se nové nahrávky…</value>
+  </data>
+  <data name="Recordings_ReplaceFailed" xml:space="preserve">
+    <value>Některé nahrávky se nepodařilo nahradit:
+
+{0}</value>
+  </data>
+  <data name="Speech_Error" xml:space="preserve">
+    <value>Chyba služby: {0}</value>
+  </data>
+  <data name="Speech_NoKey" xml:space="preserve">
+    <value>Hlasová syntéza nemá zadaný klíč ElevenLabs. Otevřít nastavení?</value>
+  </data>
+  <data name="Speech_VoiceSaveFailed" xml:space="preserve">
+    <value>Hlas jazyka se nepodařilo uložit: {0}</value>
+  </data>
+  <data name="Cmd_GenerateGroup" xml:space="preserve">
+    <value>Generovat skupinu hlasem AI</value>
+  </data>
+  <data name="Cmd_GenerateLanguage" xml:space="preserve">
+    <value>Generovat celý jazyk hlasem AI</value>
+  </data>
+  <data name="Cmd_GenerateMissing" xml:space="preserve">
+    <value>Doplnit chybějící nahrávky hlasem AI</value>
+  </data>
+  <data name="Column_Origin" xml:space="preserve">
+    <value>Původ</value>
+  </data>
+  <data name="FGenerateSounds_Title" xml:space="preserve">
+    <value>{0}: {1}</value>
+  </data>
+  <data name="FGenerateSounds_NoRecording" xml:space="preserve">
+    <value>chybí</value>
+  </data>
+  <data name="FGenerateSounds_AllDone" xml:space="preserve">
+    <value>Všechny zvuky už mají nahrávku od tohoto hlasu.</value>
+  </data>
+  <data name="FGenerateSounds_ConfirmCost" xml:space="preserve">
+    <value>Vygeneruje se {0} nahrávek, službě se pošle {1:N0} znaků. Pokračovat?</value>
+  </data>
+  <data name="FGenerateSounds_OverQuota" xml:space="preserve">
+    <value>Generování potřebuje {0:N0} znaků, předplatnému zbývá {1:N0}. Služba ho může přerušit. Pokračovat?</value>
+  </data>
+  <data name="Generate_NoMissing" xml:space="preserve">
+    <value>Všechny zvuky jazyka mají nahrávku.</value>
+  </data>
+  <data name="Generate_ScopeSelected" xml:space="preserve">
+    <value>vybrané zvuky ({0})</value>
+  </data>
+  <data name="Generate_ScopeGroup" xml:space="preserve">
+    <value>skupina {0}</value>
+  </data>
+  <data name="Generate_ScopeLanguage" xml:space="preserve">
+    <value>jazyk {0}</value>
+  </data>
+  <data name="Generate_ScopeMissing" xml:space="preserve">
+    <value>chybějící nahrávky ({0})</value>
+  </data>
+  <data name="Origin_Generated" xml:space="preserve">
+    <value>AI: {0}</value>
+  </data>
+  <data name="Origin_Tooltip" xml:space="preserve">
+    <value>Vygenerováno hlasem {0} (model {1}), {2:g}
+Text: {3}</value>
+  </data>
+  <data name="Recordings_GenerateFailed" xml:space="preserve">
+    <value>Některé nahrávky se nepodařilo připravit:
+
+{0}</value>
+  </data>
+  <data name="Action_SynthText" xml:space="preserve">
+    <value>Text pro syntézu</value>
+  </data>
+  <data name="Cmd_PlaySequence" xml:space="preserve">
+    <value>Přehrát vybrané za sebou</value>
+  </data>
+  <data name="Cmd_Pronunciation" xml:space="preserve">
+    <value>Výslovnost</value>
+  </data>
+  <data name="Cmd_Prosody" xml:space="preserve">
+    <value>Intonace skupin</value>
+  </data>
+  <data name="Column_SynthText" xml:space="preserve">
+    <value>Text pro syntézu</value>
+  </data>
+  <data name="FPronunciation_Hint" xml:space="preserve">
+    <value>Pravidla upraví text před odesláním službě, v pořadí seznamu. Text zvuků v bance se nemění.</value>
+  </data>
+  <data name="FPronunciation_InvalidRegex" xml:space="preserve">
+    <value>Pravidlo „{0}“ není platný regulární výraz: {1}</value>
+  </data>
+  <data name="FProsody_Hint" xml:space="preserve">
+    <value>Úryvky se skládají do hlášení, proto se generují s intonací podle místa ve větě. Kontext služba nevysloví, z nosné věty se úryvek vystřihne. Výchozí hodnoty vycházejí z typu skupiny.</value>
+  </data>
+  <data name="FProsody_NoVoice" xml:space="preserve">
+    <value>Ukázka potřebuje klíč ElevenLabs a hlas jazyka.</value>
+  </data>
+  <data name="Prosody_None" xml:space="preserve">
+    <value>Samostatně</value>
+  </data>
+  <data name="Prosody_Context" xml:space="preserve">
+    <value>Kontext</value>
+  </data>
+  <data name="Prosody_Carrier" xml:space="preserve">
+    <value>Nosná věta</value>
+  </data>
+  <data name="Prosody_PunctuationNone" xml:space="preserve">
+    <value>žádná</value>
+  </data>
+  <data name="Prosody_PunctuationComma" xml:space="preserve">
+    <value>čárka</value>
+  </data>
+  <data name="Prosody_PunctuationPeriod" xml:space="preserve">
+    <value>tečka</value>
+  </data>
+  <data name="Speech_SettingsSaveFailed" xml:space="preserve">
+    <value>Nastavení jazyka se nepodařilo uložit: {0}</value>
+  </data>
+  <data name="Action_ChangeVoice" xml:space="preserve">
+    <value>Změna hlasu nahrávek</value>
+  </data>
+  <data name="Action_IsolateSounds" xml:space="preserve">
+    <value>Vyčištění nahrávek</value>
+  </data>
+  <data name="Cmd_ChangeVoice" xml:space="preserve">
+    <value>Změnit hlas nahrávek</value>
+  </data>
+  <data name="Cmd_IsolateSounds" xml:space="preserve">
+    <value>Vyčistit nahrávky od šumu</value>
+  </data>
+  <data name="Cmd_Voices" xml:space="preserve">
+    <value>Hlasy</value>
+  </data>
+  <data name="FGenerateSounds_ConfirmAudio" xml:space="preserve">
+    <value>Zpracuje se {0} nahrávek, celkem {1:N0} s zvuku. Pokračovat?</value>
+  </data>
+  <data name="FGenerateSounds_EstimateAudio" xml:space="preserve">
+    <value>Ke zpracování: {0} nahrávek, {1:N0} s zvuku. Odeslané znaky textu: {2:N0}.</value>
+  </data>
+  <data name="FGenerateSounds_Process" xml:space="preserve">
+    <value>Zpracovat</value>
+  </data>
+  <data name="FGenerateSounds_TitleChangeVoice" xml:space="preserve">
+    <value>Změna hlasu nahrávek</value>
+  </data>
+  <data name="FGenerateSounds_TitleIsolate" xml:space="preserve">
+    <value>Vyčištění nahrávek od šumu</value>
+  </data>
+  <data name="FVoiceClone_Cloning" xml:space="preserve">
+    <value>Připravují se vzorky a vytváří se hlas…</value>
+  </data>
+  <data name="FVoiceClone_Hint" xml:space="preserve">
+    <value>Z nahrávek banky vznikne kopie hlasu hlasatele, například pro doplnění nových stanic. Kopírovat hlas smíte jen s jeho souhlasem. Nejlépe poslouží čisté nahrávky celých vět.</value>
+  </data>
+  <data name="FVoiceClone_NoConsent" xml:space="preserve">
+    <value>Potvrďte souhlas mluvčího.</value>
+  </data>
+  <data name="FVoiceClone_NoSounds" xml:space="preserve">
+    <value>Vyberte zvuky s nahrávkami nebo otevřete skupinu, ze které se hlas naklonuje.</value>
+  </data>
+  <data name="FVoiceClone_Source" xml:space="preserve">
+    <value>{0} nahrávek, celkem {1:0} s řeči.</value>
+  </data>
+  <data name="FVoiceClone_TooShort" xml:space="preserve">
+    <value>Pro kvalitní klon doporučujeme alespoň minutu řeči.</value>
+  </data>
+  <data name="FVoiceDesign_Designing" xml:space="preserve">
+    <value>Navrhují se hlasy…</value>
+  </data>
+  <data name="FVoiceDesign_Done" xml:space="preserve">
+    <value>Vyberte ukázku, pojmenujte hlas a uložte ho.</value>
+  </data>
+  <data name="FVoiceDesign_NoDescription" xml:space="preserve">
+    <value>Zadejte popis hlasu.</value>
+  </data>
+  <data name="FVoiceDesign_NoName" xml:space="preserve">
+    <value>Zadejte název hlasu.</value>
+  </data>
+  <data name="FVoiceDesign_NoPreviews" xml:space="preserve">
+    <value>Služba nevrátila žádnou ukázku. Zkuste upravit popis.</value>
+  </data>
+  <data name="FVoiceDesign_Preview" xml:space="preserve">
+    <value>Ukázka {0} ({1:0.0} s)</value>
+  </data>
+  <data name="FVoiceDesign_Saved" xml:space="preserve">
+    <value>Hlas {0} je uložen v účtu.</value>
+  </data>
+  <data name="FVoiceDesign_Saving" xml:space="preserve">
+    <value>Ukládá se hlas…</value>
+  </data>
+  <data name="FVoiceDesign_TextLength" xml:space="preserve">
+    <value>Text ukázky musí mít {0} až {1} znaků, má {2}.</value>
+  </data>
+  <data name="FVoiceLibrary_AddedVoice" xml:space="preserve">
+    <value>Hlas {0} přibyl mezi vaše hlasy.</value>
+  </data>
+  <data name="FVoiceLibrary_Adding" xml:space="preserve">
+    <value>Přidává se hlas…</value>
+  </data>
+  <data name="FVoiceLibrary_All" xml:space="preserve">
+    <value>Všechny</value>
+  </data>
+  <data name="FVoiceLibrary_Female" xml:space="preserve">
+    <value>žena</value>
+  </data>
+  <data name="FVoiceLibrary_Male" xml:space="preserve">
+    <value>muž</value>
+  </data>
+  <data name="FVoiceLibrary_Neutral" xml:space="preserve">
+    <value>neutrální</value>
+  </data>
+  <data name="FVoiceLibrary_Found" xml:space="preserve">
+    <value>Nalezené hlasy: {0}</value>
+  </data>
+  <data name="FVoiceLibrary_NotFound" xml:space="preserve">
+    <value>Žádný hlas neodpovídá filtru.</value>
+  </data>
+  <data name="FVoiceLibrary_Searching" xml:space="preserve">
+    <value>Hledá se…</value>
+  </data>
+  <data name="FVoices_DeleteLanguageVoice" xml:space="preserve">
+    <value>Je to hlas jazyka banky.</value>
+  </data>
+  <data name="FVoices_DeleteQuestion" xml:space="preserve">
+    <value>Odstranit hlas {0} z účtu ElevenLabs? Vrátit to nelze.</value>
+  </data>
+  <data name="FVoices_Deleted" xml:space="preserve">
+    <value>Hlas {0} je odstraněn.</value>
+  </data>
+  <data name="FVoices_Deleting" xml:space="preserve">
+    <value>Odstraňuje se hlas…</value>
+  </data>
+  <data name="FVoices_Downloading" xml:space="preserve">
+    <value>Stahuje se ukázka…</value>
+  </data>
+  <data name="FVoices_Hint" xml:space="preserve">
+    <value>Hlasy účtu ElevenLabs. Hlas jazyka banky vyberete v okně Hlas jazyka.</value>
+  </data>
+  <data name="Origin_ConvertedTooltip" xml:space="preserve">
+    <value>Hlas změněn na {0}, {1:g}</value>
+  </data>
+  <data name="Action_SoundTexts" xml:space="preserve">
+    <value>Texty zvuků z přepisu</value>
+  </data>
+  <data name="Cmd_TranscribeSounds" xml:space="preserve">
+    <value>Přepsat nahrávky na text</value>
+  </data>
+  <data name="FTranscribe_Hint" xml:space="preserve">
+    <value>Zvuky bez textu dostanou přepis nahrávky. U zvuků s textem se přepis porovná a neshoda ukáže, že text nebo nahrávka nesedí.</value>
+  </data>
+  <data name="FTranscribe_Progress" xml:space="preserve">
+    <value>Přepisuje se {0} nahrávek…</value>
+  </data>
+  <data name="FTranscribe_Summary" xml:space="preserve">
+    <value>Zvuků: {0}, přepsaných: {1}, neshod: {2}.</value>
+  </data>
+  <data name="FTranscribe_StatusRunning" xml:space="preserve">
+    <value>Přepisuje se…</value>
+  </data>
+  <data name="FTranscribe_StatusNew" xml:space="preserve">
+    <value>Nový text</value>
+  </data>
+  <data name="FTranscribe_StatusEmpty" xml:space="preserve">
+    <value>Bez řeči</value>
+  </data>
+  <data name="FTranscribe_StatusMatch" xml:space="preserve">
+    <value>Shoduje se</value>
+  </data>
+  <data name="FTranscribe_StatusMismatch" xml:space="preserve">
+    <value>Neshoduje se</value>
+  </data>
+  <data name="Match_Percent" xml:space="preserve">
+    <value>{0:0} %</value>
+  </data>
+  <data name="Match_Transcript" xml:space="preserve">
+    <value>Přepis: {0}</value>
+  </data>
+  <data name="Match_Low" xml:space="preserve">
+    <value>Zkontrolujte: shoda {0:0} %</value>
+  </data>
+  <data name="Match_Duration" xml:space="preserve">
+    <value>Zkontrolujte: délka {0:0} % původní</value>
+  </data>
 </root>

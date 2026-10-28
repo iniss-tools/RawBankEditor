@@ -87,6 +87,34 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmimAppSettings = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimTranscribe = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimChangeVoice = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimIsolateSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimVoices = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimPlaySequence = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.toolStripSeparatorSpeech = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmimProsody = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimPronunciation = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiPlaySequence = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cSoundSynthText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tsmimGenerateLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimGenerateMissing = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.toolStripSeparatorGroupsAi = new System.Windows.Forms.ToolStripSeparator();
+            this.cmiGenerateGroup = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsbGenerateGroup = new ToolsCore.Icons.IconToolStripButton();
+            this.cmiGenerateMissing = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cSoundOrigin = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tsmiSounds = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimAdjustSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimGenerateSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimVoiceProfile = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.toolStripSeparatorPlayback = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmimStopPlayback = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.toolStripSeparatorRecordings = new System.Windows.Forms.ToolStripSeparator();
+            this.cmiAdjustSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.cmiGenerateSounds = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsbAdjustSounds = new ToolsCore.Icons.IconToolStripButton();
+            this.tsbGenerateSounds = new ToolsCore.Icons.IconToolStripButton();
             this.tsmimInfoApp = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmimCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
@@ -281,6 +309,7 @@ namespace RawBankEditor.Forms
             this.tsmiEdit,
             this.tsmiShow,
             this.tsmiTools,
+            this.tsmiSounds,
             this.tsmiHelp});
             resources.ApplyResources(this.menuStripMain, "menuStripMain");
             this.menuStripMain.Name = "menuStripMain";
@@ -571,6 +600,112 @@ namespace RawBankEditor.Forms
             this.tsmimAppSettings.IconName = "settings";
             resources.ApplyResources(this.tsmimAppSettings, "tsmimAppSettings");
             // 
+            // tsmiSounds
+            // 
+            this.tsmiSounds.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmimAdjustSounds,
+            this.tsmimGenerateSounds,
+            this.tsmimGenerateLanguage,
+            this.tsmimGenerateMissing,
+            this.tsmimChangeVoice,
+            this.tsmimIsolateSounds,
+            this.tsmimTranscribe,
+            this.tsmimVoiceProfile,
+            this.tsmimVoices,
+            this.tsmimProsody,
+            this.tsmimPronunciation,
+            this.toolStripSeparatorPlayback,
+            this.tsmimPlaySequence,
+            this.tsmimStopPlayback});
+            this.tsmiSounds.Name = "tsmiSounds";
+            resources.ApplyResources(this.tsmiSounds, "tsmiSounds");
+            // 
+            // tsmimAdjustSounds
+            // 
+            this.tsmimAdjustSounds.Enabled = false;
+            this.tsmimAdjustSounds.Name = "tsmimAdjustSounds";
+            this.tsmimAdjustSounds.IconName = "speaker-edit";
+            resources.ApplyResources(this.tsmimAdjustSounds, "tsmimAdjustSounds");
+            // 
+            // tsmimGenerateSounds
+            // 
+            this.tsmimGenerateSounds.Enabled = false;
+            this.tsmimGenerateSounds.Name = "tsmimGenerateSounds";
+            this.tsmimGenerateSounds.IconName = "sparkle";
+            resources.ApplyResources(this.tsmimGenerateSounds, "tsmimGenerateSounds");
+            // 
+            // tsmimGenerateLanguage
+            // 
+            this.tsmimGenerateLanguage.Enabled = false;
+            this.tsmimGenerateLanguage.Name = "tsmimGenerateLanguage";
+            resources.ApplyResources(this.tsmimGenerateLanguage, "tsmimGenerateLanguage");
+            // 
+            // tsmimGenerateMissing
+            // 
+            this.tsmimGenerateMissing.Enabled = false;
+            this.tsmimGenerateMissing.Name = "tsmimGenerateMissing";
+            resources.ApplyResources(this.tsmimGenerateMissing, "tsmimGenerateMissing");
+            // 
+            // tsmimChangeVoice
+            // 
+            this.tsmimChangeVoice.Enabled = false;
+            this.tsmimChangeVoice.Name = "tsmimChangeVoice";
+            resources.ApplyResources(this.tsmimChangeVoice, "tsmimChangeVoice");
+            // 
+            // tsmimIsolateSounds
+            // 
+            this.tsmimIsolateSounds.Enabled = false;
+            this.tsmimIsolateSounds.Name = "tsmimIsolateSounds";
+            resources.ApplyResources(this.tsmimIsolateSounds, "tsmimIsolateSounds");
+            // 
+            // tsmimTranscribe
+            // 
+            this.tsmimTranscribe.Enabled = false;
+            this.tsmimTranscribe.Name = "tsmimTranscribe";
+            resources.ApplyResources(this.tsmimTranscribe, "tsmimTranscribe");
+            // 
+            // tsmimVoices
+            // 
+            this.tsmimVoices.Enabled = false;
+            this.tsmimVoices.Name = "tsmimVoices";
+            resources.ApplyResources(this.tsmimVoices, "tsmimVoices");
+            // 
+            // tsmimVoiceProfile
+            // 
+            this.tsmimVoiceProfile.Enabled = false;
+            this.tsmimVoiceProfile.Name = "tsmimVoiceProfile";
+            resources.ApplyResources(this.tsmimVoiceProfile, "tsmimVoiceProfile");
+            // 
+            // tsmimProsody
+            // 
+            this.tsmimProsody.Enabled = false;
+            this.tsmimProsody.Name = "tsmimProsody";
+            resources.ApplyResources(this.tsmimProsody, "tsmimProsody");
+            // 
+            // tsmimPronunciation
+            // 
+            this.tsmimPronunciation.Enabled = false;
+            this.tsmimPronunciation.Name = "tsmimPronunciation";
+            resources.ApplyResources(this.tsmimPronunciation, "tsmimPronunciation");
+            // 
+            // tsmimPlaySequence
+            // 
+            this.tsmimPlaySequence.Enabled = false;
+            this.tsmimPlaySequence.Name = "tsmimPlaySequence";
+            this.tsmimPlaySequence.IconName = "run";
+            resources.ApplyResources(this.tsmimPlaySequence, "tsmimPlaySequence");
+            // 
+            // toolStripSeparatorPlayback
+            // 
+            this.toolStripSeparatorPlayback.Name = "toolStripSeparatorPlayback";
+            resources.ApplyResources(this.toolStripSeparatorPlayback, "toolStripSeparatorPlayback");
+            // 
+            // tsmimStopPlayback
+            // 
+            this.tsmimStopPlayback.Name = "tsmimStopPlayback";
+            this.tsmimStopPlayback.IconName = "stop";
+            resources.ApplyResources(this.tsmimStopPlayback, "tsmimStopPlayback");
+            // 
             // tsmiHelp
             // 
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -671,7 +806,8 @@ namespace RawBankEditor.Forms
             this.tsbDeleteGroup,
             this.toolStripSeparator21,
             this.tsbConvertGroupToEwa,
-            this.tsbConvertGroupToWav});
+            this.tsbConvertGroupToWav,
+            this.tsbGenerateGroup});
             resources.ApplyResources(this.toolStripGroups, "toolStripGroups");
             this.toolStripGroups.Margin = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.toolStripGroups.Name = "toolStripGroups";
@@ -720,6 +856,14 @@ namespace RawBankEditor.Forms
             this.tsbConvertGroupToWav.Name = "tsbConvertGroupToWav";
             this.tsbConvertGroupToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsbConvertGroupToWav, "tsbConvertGroupToWav");
+            // 
+            // tsbGenerateGroup
+            // 
+            this.tsbGenerateGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbGenerateGroup.Enabled = false;
+            this.tsbGenerateGroup.Name = "tsbGenerateGroup";
+            this.tsbGenerateGroup.IconName = "sparkle";
+            resources.ApplyResources(this.tsbGenerateGroup, "tsbGenerateGroup");
             // 
             // dgvGroups
             // 
@@ -775,7 +919,9 @@ namespace RawBankEditor.Forms
             this.cmiDeleteGroup,
             this.toolStripSeparator4,
             this.cmiConvertGroupToEwa,
-            this.cmiConvertGroupToWav});
+            this.cmiConvertGroupToWav,
+            this.toolStripSeparatorGroupsAi,
+            this.cmiGenerateGroup});
             this.contextMenuGroups.Name = "contextMenuGroups";
             resources.ApplyResources(this.contextMenuGroups, "contextMenuGroups");
             // 
@@ -818,6 +964,18 @@ namespace RawBankEditor.Forms
             this.cmiConvertGroupToWav.Name = "cmiConvertGroupToWav";
             this.cmiConvertGroupToWav.IconName = "file-wav";
             resources.ApplyResources(this.cmiConvertGroupToWav, "cmiConvertGroupToWav");
+            // 
+            // toolStripSeparatorGroupsAi
+            // 
+            this.toolStripSeparatorGroupsAi.Name = "toolStripSeparatorGroupsAi";
+            resources.ApplyResources(this.toolStripSeparatorGroupsAi, "toolStripSeparatorGroupsAi");
+            // 
+            // cmiGenerateGroup
+            // 
+            this.cmiGenerateGroup.Enabled = false;
+            this.cmiGenerateGroup.Name = "cmiGenerateGroup";
+            this.cmiGenerateGroup.IconName = "sparkle";
+            resources.ApplyResources(this.cmiGenerateGroup, "cmiGenerateGroup");
             // 
             // fyzGroupBindingSource
             // 
@@ -1121,6 +1279,8 @@ namespace RawBankEditor.Forms
             this.cSoundAdditionalRelativePath,
             this.cSoundFileName,
             this.cSoundDuration,
+            this.cSoundOrigin,
+            this.cSoundSynthText,
             this.cSoundText});
             this.dgvSounds.ContextMenuStrip = this.contextMenuSounds;
             this.dgvSounds.DataSource = this.fyzSoundBindingSource;
@@ -1196,6 +1356,21 @@ namespace RawBankEditor.Forms
             this.cSoundDuration.Name = "cSoundDuration";
             this.cSoundDuration.ReadOnly = true;
             // 
+            // cSoundOrigin
+            // 
+            this.cSoundOrigin.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            resources.ApplyResources(this.cSoundOrigin, "cSoundOrigin");
+            this.cSoundOrigin.MinimumWidth = 6;
+            this.cSoundOrigin.Name = "cSoundOrigin";
+            this.cSoundOrigin.ReadOnly = true;
+            // 
+            // cSoundSynthText
+            // 
+            this.cSoundSynthText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            resources.ApplyResources(this.cSoundSynthText, "cSoundSynthText");
+            this.cSoundSynthText.MinimumWidth = 6;
+            this.cSoundSynthText.Name = "cSoundSynthText";
+            // 
             // cSoundText
             // 
             this.cSoundText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -1213,7 +1388,11 @@ namespace RawBankEditor.Forms
             this.cmiMoveSounds,
             this.toolStripSeparator19,
             this.cmiConvertSoundsToEwa,
-            this.cmiConvertSoundsToWav});
+            this.cmiConvertSoundsToWav,
+            this.toolStripSeparatorRecordings,
+            this.cmiAdjustSounds,
+            this.cmiGenerateSounds,
+            this.cmiPlaySequence});
             this.contextMenuSounds.Name = "contextMenuSounds";
             resources.ApplyResources(this.contextMenuSounds, "contextMenuSounds");
             // 
@@ -1256,6 +1435,32 @@ namespace RawBankEditor.Forms
             this.cmiConvertSoundsToWav.Name = "cmiConvertSoundsToWav";
             this.cmiConvertSoundsToWav.IconName = "file-wav";
             resources.ApplyResources(this.cmiConvertSoundsToWav, "cmiConvertSoundsToWav");
+            // 
+            // toolStripSeparatorRecordings
+            // 
+            this.toolStripSeparatorRecordings.Name = "toolStripSeparatorRecordings";
+            resources.ApplyResources(this.toolStripSeparatorRecordings, "toolStripSeparatorRecordings");
+            // 
+            // cmiAdjustSounds
+            // 
+            this.cmiAdjustSounds.Enabled = false;
+            this.cmiAdjustSounds.Name = "cmiAdjustSounds";
+            this.cmiAdjustSounds.IconName = "speaker-edit";
+            resources.ApplyResources(this.cmiAdjustSounds, "cmiAdjustSounds");
+            // 
+            // cmiGenerateSounds
+            // 
+            this.cmiGenerateSounds.Enabled = false;
+            this.cmiGenerateSounds.Name = "cmiGenerateSounds";
+            this.cmiGenerateSounds.IconName = "sparkle";
+            resources.ApplyResources(this.cmiGenerateSounds, "cmiGenerateSounds");
+            // 
+            // cmiPlaySequence
+            // 
+            this.cmiPlaySequence.Enabled = false;
+            this.cmiPlaySequence.Name = "cmiPlaySequence";
+            this.cmiPlaySequence.IconName = "run";
+            resources.ApplyResources(this.cmiPlaySequence, "cmiPlaySequence");
             // 
             // fyzSoundBindingSource
             // 
@@ -1456,7 +1661,8 @@ namespace RawBankEditor.Forms
             // 
             this.contextMenuErrors.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmiHighlightProblem,
-            this.cmiResolveProblem});
+            this.cmiResolveProblem,
+            this.cmiGenerateMissing});
             this.contextMenuErrors.Name = "contextMenuErrors";
             resources.ApplyResources(this.contextMenuErrors, "contextMenuErrors");
             // 
@@ -1473,6 +1679,13 @@ namespace RawBankEditor.Forms
             this.cmiResolveProblem.Name = "cmiResolveProblem";
             this.cmiResolveProblem.IconName = "wrench";
             resources.ApplyResources(this.cmiResolveProblem, "cmiResolveProblem");
+            // 
+            // cmiGenerateMissing
+            // 
+            this.cmiGenerateMissing.Enabled = false;
+            this.cmiGenerateMissing.Name = "cmiGenerateMissing";
+            this.cmiGenerateMissing.IconName = "sparkle";
+            resources.ApplyResources(this.cmiGenerateMissing, "cmiGenerateMissing");
             // 
             // rawBankMessageBindingSource
             // 
@@ -1593,6 +1806,8 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator24,
             this.tsbConvertSoundsToEwa,
             this.tsbConvertSoundsToWav,
+            this.tsbAdjustSounds,
+            this.tsbGenerateSounds,
             this.toolStripSeparator15,
             this.tsbSearch,
             this.tsbWrapTextSoundCol,
@@ -1846,6 +2061,22 @@ namespace RawBankEditor.Forms
             this.tsbConvertSoundsToWav.Name = "tsbConvertSoundsToWav";
             this.tsbConvertSoundsToWav.IconName = "file-wav";
             resources.ApplyResources(this.tsbConvertSoundsToWav, "tsbConvertSoundsToWav");
+            // 
+            // tsbAdjustSounds
+            // 
+            this.tsbAdjustSounds.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbAdjustSounds.Enabled = false;
+            this.tsbAdjustSounds.Name = "tsbAdjustSounds";
+            this.tsbAdjustSounds.IconName = "speaker-edit";
+            resources.ApplyResources(this.tsbAdjustSounds, "tsbAdjustSounds");
+            // 
+            // tsbGenerateSounds
+            // 
+            this.tsbGenerateSounds.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbGenerateSounds.Enabled = false;
+            this.tsbGenerateSounds.Name = "tsbGenerateSounds";
+            this.tsbGenerateSounds.IconName = "sparkle";
+            resources.ApplyResources(this.tsbGenerateSounds, "tsbGenerateSounds");
             // 
             // toolStripSeparator15
             // 
@@ -2166,6 +2397,34 @@ namespace RawBankEditor.Forms
         private DataGridViewTextBoxColumn cGroupName;
         private DataGridViewTextBoxColumn cGroupRelativePath;
         private DataGridViewTextBoxColumn cGroupCountSounds;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimAdjustSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimGenerateSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimVoiceProfile;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorPlayback;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimStopPlayback;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorRecordings;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiAdjustSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiGenerateSounds;
+        private ToolsCore.Icons.IconToolStripButton tsbAdjustSounds;
+        private ToolsCore.Icons.IconToolStripButton tsbGenerateSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimGenerateLanguage;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimGenerateMissing;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorGroupsAi;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiGenerateGroup;
+        private ToolsCore.Icons.IconToolStripButton tsbGenerateGroup;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiGenerateMissing;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cSoundOrigin;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimPlaySequence;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparatorSpeech;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimProsody;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimPronunciation;
+        private ToolsCore.Icons.IconToolStripMenuItem cmiPlaySequence;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cSoundSynthText;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimChangeVoice;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimIsolateSounds;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimVoices;
+        private ToolsCore.Icons.IconToolStripMenuItem tsmimTranscribe;
     }
 }
 

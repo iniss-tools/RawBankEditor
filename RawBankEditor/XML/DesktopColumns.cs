@@ -20,7 +20,9 @@ public record DesktopColumns()
         [nameof(RelativePath)] = (() => Resources.Column_RelativePath, 2, 150, true),
         [nameof(FileName)] = (() => Resources.Column_FileName, 3, 150, true),
         [nameof(Duration)] = (() => Resources.Column_Duration, 4, 100, true),
-        [nameof(Text)] = (() => Resources.Column_Text, 5, 200, true)
+        [nameof(Origin)] = (() => Resources.Column_Origin, 5, 60, true),
+        [nameof(SynthText)] = (() => Resources.Column_SynthText, 6, 150, false),
+        [nameof(Text)] = (() => Resources.Column_Text, 7, 200, true)
     };
 
     #region Properties
@@ -109,6 +111,34 @@ public record DesktopColumns()
         }
     } = InitColumn(nameof(Text));
 
+    /// <summary>
+    /// Povod nahravky (hlas AI).
+    /// </summary>
+    [XmlElement("Origin")]
+    public DesktopColumn Origin
+    {
+        get => field ??= InitColumn(nameof(Origin));
+        set
+        {
+            field = value;
+            AssignColumnProps(ref field, nameof(Origin));
+        }
+    } = InitColumn(nameof(Origin));
+
+    /// <summary>
+    /// Text pre syntezu (hlas AI).
+    /// </summary>
+    [XmlElement("SynthText")]
+    public DesktopColumn SynthText
+    {
+        get => field ??= InitColumn(nameof(SynthText));
+        set
+        {
+            field = value;
+            AssignColumnProps(ref field, nameof(SynthText));
+        }
+    } = InitColumn(nameof(SynthText));
+
     #endregion
 
     /// <summary>
@@ -159,5 +189,7 @@ public record DesktopColumns()
         if (original.FileName != null) FileName = original.FileName with { };
         if (original.Duration != null) Duration = original.Duration with { };
         if (original.Text != null) Text = original.Text with { };
+        if (original.Origin != null) Origin = original.Origin with { };
+        if (original.SynthText != null) SynthText = original.SynthText with { };
     }
 }

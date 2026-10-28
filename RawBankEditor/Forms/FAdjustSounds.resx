@@ -1,0 +1,754 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gbScope.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbScope.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 12</value>
+  </data>
+  <data name="gbScope.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 95</value>
+  </data>
+  <data name="gbScope.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbScope.Text" xml:space="preserve">
+    <value>Nahrávky</value>
+  </data>
+  <data name="&gt;&gt;gbScope.Name" xml:space="preserve">
+    <value>gbScope</value>
+  </data>
+  <data name="&gt;&gt;gbScope.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbScope.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbScope.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbSelected.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbSelected.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="rbSelected.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 17</value>
+  </data>
+  <data name="rbSelected.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbSelected.Text" xml:space="preserve">
+    <value>Vybrané zvuky</value>
+  </data>
+  <data name="&gt;&gt;rbSelected.Name" xml:space="preserve">
+    <value>rbSelected</value>
+  </data>
+  <data name="&gt;&gt;rbSelected.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbSelected.Parent" xml:space="preserve">
+    <value>gbScope</value>
+  </data>
+  <data name="&gt;&gt;rbSelected.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbGroup.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 43</value>
+  </data>
+  <data name="rbGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 17</value>
+  </data>
+  <data name="rbGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbGroup.Text" xml:space="preserve">
+    <value>Skupina</value>
+  </data>
+  <data name="&gt;&gt;rbGroup.Name" xml:space="preserve">
+    <value>rbGroup</value>
+  </data>
+  <data name="&gt;&gt;rbGroup.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbGroup.Parent" xml:space="preserve">
+    <value>gbScope</value>
+  </data>
+  <data name="&gt;&gt;rbGroup.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rbLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 66</value>
+  </data>
+  <data name="rbLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 17</value>
+  </data>
+  <data name="rbLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbLanguage.Text" xml:space="preserve">
+    <value>Celý jazyk</value>
+  </data>
+  <data name="&gt;&gt;rbLanguage.Name" xml:space="preserve">
+    <value>rbLanguage</value>
+  </data>
+  <data name="&gt;&gt;rbLanguage.Type" xml:space="preserve">
+    <value>ExControls.ExRadioButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;rbLanguage.Parent" xml:space="preserve">
+    <value>gbScope</value>
+  </data>
+  <data name="&gt;&gt;rbLanguage.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="gbSilence.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbSilence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 113</value>
+  </data>
+  <data name="gbSilence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 126</value>
+  </data>
+  <data name="gbSilence.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="gbSilence.Text" xml:space="preserve">
+    <value>Ticho na okrajoch</value>
+  </data>
+  <data name="&gt;&gt;gbSilence.Name" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;gbSilence.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbSilence.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbSilence.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="cboxTrim.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxTrim.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="cboxTrim.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 17</value>
+  </data>
+  <data name="cboxTrim.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cboxTrim.Text" xml:space="preserve">
+    <value>Orezať ticho pred rečou a za ňou</value>
+  </data>
+  <data name="&gt;&gt;cboxTrim.Name" xml:space="preserve">
+    <value>cboxTrim</value>
+  </data>
+  <data name="&gt;&gt;cboxTrim.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxTrim.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;cboxTrim.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lLead.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lLead.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 46</value>
+  </data>
+  <data name="lLead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 13</value>
+  </data>
+  <data name="lLead.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lLead.Text" xml:space="preserve">
+    <value>Ponechať na začiatku (ms):</value>
+  </data>
+  <data name="&gt;&gt;lLead.Name" xml:space="preserve">
+    <value>lLead</value>
+  </data>
+  <data name="&gt;&gt;lLead.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lLead.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;lLead.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudLead.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 44</value>
+  </data>
+  <data name="nudLead.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="nudLead.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nudLead.Name" xml:space="preserve">
+    <value>nudLead</value>
+  </data>
+  <data name="&gt;&gt;nudLead.Type" xml:space="preserve">
+    <value>ExControls.ExNumericUpDown, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudLead.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;nudLead.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lTail.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lTail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 72</value>
+  </data>
+  <data name="lTail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>138, 13</value>
+  </data>
+  <data name="lTail.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lTail.Text" xml:space="preserve">
+    <value>Ponechať na konci (ms):</value>
+  </data>
+  <data name="&gt;&gt;lTail.Name" xml:space="preserve">
+    <value>lTail</value>
+  </data>
+  <data name="&gt;&gt;lTail.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lTail.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;lTail.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nudTail.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 70</value>
+  </data>
+  <data name="nudTail.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="nudTail.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;nudTail.Name" xml:space="preserve">
+    <value>nudTail</value>
+  </data>
+  <data name="&gt;&gt;nudTail.Type" xml:space="preserve">
+    <value>ExControls.ExNumericUpDown, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudTail.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;nudTail.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lThreshold.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 98</value>
+  </data>
+  <data name="lThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>108, 13</value>
+  </data>
+  <data name="lThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lThreshold.Text" xml:space="preserve">
+    <value>Prah ticha (dBFS):</value>
+  </data>
+  <data name="&gt;&gt;lThreshold.Name" xml:space="preserve">
+    <value>lThreshold</value>
+  </data>
+  <data name="&gt;&gt;lThreshold.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lThreshold.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;lThreshold.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nudThreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 96</value>
+  </data>
+  <data name="nudThreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="nudThreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;nudThreshold.Name" xml:space="preserve">
+    <value>nudThreshold</value>
+  </data>
+  <data name="&gt;&gt;nudThreshold.Type" xml:space="preserve">
+    <value>ExControls.ExNumericUpDown, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudThreshold.Parent" xml:space="preserve">
+    <value>gbSilence</value>
+  </data>
+  <data name="&gt;&gt;nudThreshold.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="gbLevel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 245</value>
+  </data>
+  <data name="gbLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 76</value>
+  </data>
+  <data name="gbLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="gbLevel.Text" xml:space="preserve">
+    <value>Hlasitosť</value>
+  </data>
+  <data name="&gt;&gt;gbLevel.Name" xml:space="preserve">
+    <value>gbLevel</value>
+  </data>
+  <data name="&gt;&gt;gbLevel.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbLevel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbLevel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="cboxNormalize.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxNormalize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="cboxNormalize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 17</value>
+  </data>
+  <data name="cboxNormalize.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cboxNormalize.Text" xml:space="preserve">
+    <value>Zjednotiť hlasitosť reči na (dBFS):</value>
+  </data>
+  <data name="&gt;&gt;cboxNormalize.Name" xml:space="preserve">
+    <value>cboxNormalize</value>
+  </data>
+  <data name="&gt;&gt;cboxNormalize.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxNormalize.Parent" xml:space="preserve">
+    <value>gbLevel</value>
+  </data>
+  <data name="&gt;&gt;cboxNormalize.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 19</value>
+  </data>
+  <data name="nudLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="nudLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.Name" xml:space="preserve">
+    <value>nudLevel</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.Type" xml:space="preserve">
+    <value>ExControls.ExNumericUpDown, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.Parent" xml:space="preserve">
+    <value>gbLevel</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="bMeasure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>306, 17</value>
+  </data>
+  <data name="bMeasure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 23</value>
+  </data>
+  <data name="bMeasure.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="bMeasure.Text" xml:space="preserve">
+    <value>Zmerať jazyk</value>
+  </data>
+  <data name="&gt;&gt;bMeasure.Name" xml:space="preserve">
+    <value>bMeasure</value>
+  </data>
+  <data name="&gt;&gt;bMeasure.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bMeasure.Parent" xml:space="preserve">
+    <value>gbLevel</value>
+  </data>
+  <data name="&gt;&gt;bMeasure.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lMeasure.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lMeasure.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 48</value>
+  </data>
+  <data name="lMeasure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>10, 13</value>
+  </data>
+  <data name="lMeasure.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lMeasure.Text" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="&gt;&gt;lMeasure.Name" xml:space="preserve">
+    <value>lMeasure</value>
+  </data>
+  <data name="&gt;&gt;lMeasure.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lMeasure.Parent" xml:space="preserve">
+    <value>gbLevel</value>
+  </data>
+  <data name="&gt;&gt;lMeasure.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="gbFormat.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="gbFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 327</value>
+  </data>
+  <data name="gbFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>436, 72</value>
+  </data>
+  <data name="gbFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="gbFormat.Text" xml:space="preserve">
+    <value>Formát</value>
+  </data>
+  <data name="&gt;&gt;gbFormat.Name" xml:space="preserve">
+    <value>gbFormat</value>
+  </data>
+  <data name="&gt;&gt;gbFormat.Type" xml:space="preserve">
+    <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;gbFormat.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbFormat.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cboxConvert.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cboxConvert.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 20</value>
+  </data>
+  <data name="cboxConvert.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 17</value>
+  </data>
+  <data name="cboxConvert.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cboxConvert.Text" xml:space="preserve">
+    <value>Previesť na formát banky (PCM 16 bit, mono, 22 050 Hz)</value>
+  </data>
+  <data name="&gt;&gt;cboxConvert.Name" xml:space="preserve">
+    <value>cboxConvert</value>
+  </data>
+  <data name="&gt;&gt;cboxConvert.Type" xml:space="preserve">
+    <value>ExControls.ExCheckBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboxConvert.Parent" xml:space="preserve">
+    <value>gbFormat</value>
+  </data>
+  <data name="&gt;&gt;cboxConvert.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lFade.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lFade.Location" type="System.Drawing.Point, System.Drawing">
+    <value>28, 46</value>
+  </data>
+  <data name="lFade.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
+  <data name="lFade.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lFade.Text" xml:space="preserve">
+    <value>Nábeh a dobeh (ms):</value>
+  </data>
+  <data name="&gt;&gt;lFade.Name" xml:space="preserve">
+    <value>lFade</value>
+  </data>
+  <data name="&gt;&gt;lFade.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lFade.Parent" xml:space="preserve">
+    <value>gbFormat</value>
+  </data>
+  <data name="&gt;&gt;lFade.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudFade.Location" type="System.Drawing.Point, System.Drawing">
+    <value>230, 44</value>
+  </data>
+  <data name="nudFade.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 20</value>
+  </data>
+  <data name="nudFade.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;nudFade.Name" xml:space="preserve">
+    <value>nudFade</value>
+  </data>
+  <data name="&gt;&gt;nudFade.Type" xml:space="preserve">
+    <value>ExControls.ExNumericUpDown, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nudFade.Parent" xml:space="preserve">
+    <value>gbFormat</value>
+  </data>
+  <data name="&gt;&gt;nudFade.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="bPreview.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Left</value>
+  </data>
+  <data name="bPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 410</value>
+  </data>
+  <data name="bPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 23</value>
+  </data>
+  <data name="bPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="bPreview.Text" xml:space="preserve">
+    <value>Vypočuť ukážku</value>
+  </data>
+  <data name="&gt;&gt;bPreview.Name" xml:space="preserve">
+    <value>bPreview</value>
+  </data>
+  <data name="&gt;&gt;bPreview.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bPreview.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bPreview.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="bOK.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="bOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>292, 410</value>
+  </data>
+  <data name="bOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="bOK.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="bOK.Text" xml:space="preserve">
+    <value>Upraviť</value>
+  </data>
+  <data name="&gt;&gt;bOK.Name" xml:space="preserve">
+    <value>bOK</value>
+  </data>
+  <data name="&gt;&gt;bOK.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bOK.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="bCancel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="bCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>373, 410</value>
+  </data>
+  <data name="bCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="bCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="bCancel.Text" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="&gt;&gt;bCancel.Name" xml:space="preserve">
+    <value>bCancel</value>
+  </data>
+  <data name="&gt;&gt;bCancel.Type" xml:space="preserve">
+    <value>ExControls.ExButton, ExControls, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;bCancel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Upraviť zvuk nahrávok</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>460, 445</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FAdjustSounds</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

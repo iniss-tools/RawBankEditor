@@ -121,6 +121,7 @@ public partial class FMain : ExForm
         CreateCommands();
         _commands.ApplyShortcuts(_bank.Config.Shortcuts);
         InitColumns();
+        InitRecordings();
         SetColumnsAutoWidth();
         
         dgvSounds.RowHeadersVisible = _bank.Config.ShowRowsHeader;
@@ -149,6 +150,8 @@ public partial class FMain : ExForm
         SetCol(cSoundAdditionalRelativePath, columns.RelativePath);
         SetCol(cSoundFileName, columns.FileName);
         SetCol(cSoundDuration, columns.Duration);
+        SetCol(cSoundOrigin, columns.Origin);
+        SetCol(cSoundSynthText, columns.SynthText);
         SetCol(cSoundText, columns.Text);
 
         dgvSounds.Columns[dgvSounds.Columns.Count - 1].AutoSizeMode = _bank.Config.FitLastColumn
@@ -1218,9 +1221,12 @@ public partial class FMain : ExForm
         RegisterNewAction(new RemoveLanguageAction(this, language, index, directory, withData));
     }
 
-    private void ShowAppSettings()
+    /// <param name="page">stranka nastaveni, ktora sa otvori (napr. <see cref="FAppSettings.SpeechPage" />)</param>
+    private void ShowAppSettings(string? page = null)
     {
         var form = new FAppSettings(_bank.Session);
+        if (page is not null)
+            form.PreselectMenuItem(page);
         if (form.ShowDialog() == DialogResult.OK)
         {
             UpdateMainUI();
@@ -1321,7 +1327,7 @@ public partial class FMain : ExForm
             return;
 
         if (dgvExplorer.SelectedRows[0].DataBoundItem is SoundFileElement se)
-            SoundUtils.Play(se.FileInfo.FullName);
+            PlaySoundFile(se.FileInfo.FullName);
     }
 
     #endregion
@@ -1753,7 +1759,7 @@ public partial class FMain : ExForm
                     FillExplorerList(dirinfo);
                 break;
             case SoundFileElement sf:
-                SoundUtils.Play(sf.FileInfo.FullName);
+                PlaySoundFile(sf.FileInfo.FullName);
                 break;
             case DirectoryElement de:
                 FillExplorerList(de);
@@ -1842,6 +1848,13 @@ public partial class FMain : ExForm
             return;
 
         _cellUserEditing = false;
+        // text pre syntezu nie je udaj zvuku - patri do zaznamov .rbe-ai
+        if (e.ColumnIndex == cSoundSynthText.Index)
+        {
+            EndSynthTextEdit(e.RowIndex);
+            return;
+        }
+
         var newval = dgvSounds.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
         var s = newval as string ?? "";
         if (s == _cellOldValue)

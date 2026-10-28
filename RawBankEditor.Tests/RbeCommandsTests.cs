@@ -22,7 +22,8 @@ public class RbeCommandsTests
         ];
 
         var ids = RbeCommands.All.Select(c => c.Id).ToList();
-        CollectionAssert.AreEquivalent(legacy, ids);
+        CollectionAssert.IsSubsetOf(legacy, ids);
+        Assert.HasCount(ids.Count, ids.Distinct().ToList());
         var shortcuts = RbeCommands.All.Where(c => c.DefaultShortcut != Shortcut.None).Select(c => c.DefaultShortcut).ToList();
         Assert.HasCount(shortcuts.Count, shortcuts.Distinct().ToList());
     }
