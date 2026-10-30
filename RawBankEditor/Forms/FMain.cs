@@ -24,6 +24,9 @@ public partial class FMain : ExForm
     private readonly BankEditor _bank;
     private readonly IDialogService _dialogs;
 
+    // poradie vyberu jazyka v paneli nastrojov - bez panela je vyber v ponuke a pri zobrazeni panela sa vrati sem
+    private readonly int _languagesIndex;
+
     private BackButtonElement? _explorerBack;
 
     private string _cellOldValue = null!;
@@ -86,28 +89,9 @@ public partial class FMain : ExForm
         _bank = bank;
         _dialogs = dialogs;
         InitializeComponent();
-        tsslStatus.Font = _bank.Config.Fonts.StateRow;
 
-        switch (_bank.Config.DesktopMenuMode)
-        {
-            case DesktopMenu.MsTs:
-                menuStripMain.Visible = true;
-                toolStripMain.Visible = true;
-                menuStripMain.Items.Remove(tscboxLanguages);
-                break;
-            case DesktopMenu.MsOnly:
-                menuStripMain.Visible = true;
-                toolStripMain.Visible = false;
-                menuStripMain.Items.Add(tscboxLanguages);
-                break;
-            case DesktopMenu.TsOnly:
-                menuStripMain.Visible = false;
-                toolStripMain.Visible = true;
-                menuStripMain.Items.Remove(tscboxLanguages);
-                break;
-            default:
-                throw new UnreachableException();
-        }
+        _languagesIndex = toolStripMain.Items.IndexOf(tscboxLanguages);
+        ApplyToolbar();
 
         SetRecentDirs();
 
@@ -123,8 +107,6 @@ public partial class FMain : ExForm
         InitColumns();
         InitRecordings();
         SetColumnsAutoWidth();
-        
-        dgvSounds.RowHeadersVisible = _bank.Config.ShowRowsHeader;
 
         //neviem preco niekedy umiestni stlpec s typom do stredu
         if (cFileType.DisplayIndex != 0) 
@@ -154,9 +136,7 @@ public partial class FMain : ExForm
         SetCol(cSoundSynthText, columns.SynthText);
         SetCol(cSoundText, columns.Text);
 
-        dgvSounds.Columns[dgvSounds.Columns.Count - 1].AutoSizeMode = _bank.Config.FitLastColumn
-            ? DataGridViewAutoSizeColumnMode.Fill
-            : DataGridViewAutoSizeColumnMode.None;
+        dgvSounds.FillLastVisibleColumn();
 
         tsmimWrapTextSoundCol.Checked = _bank.Config.WrapSoundText;
     }
@@ -167,13 +147,28 @@ public partial class FMain : ExForm
         cSoundText.DefaultCellStyle.WrapMode = _bank.Config.WrapSoundText ? DataGridViewTriState.True : DataGridViewTriState.NotSet;
     }
 
+    /// <summary>
+    /// Zobrazi panel nastrojov podla nastaveni (ponuka je vzdy). Bez panela nastrojov sa vyber jazyka presunie do ponuky.
+    /// </summary>
+    private void ApplyToolbar()
+    {
+        toolStripMain.Visible = _bank.Config.ShowToolbar;
+
+        // polozka moze byt len v jednom ToolStripe - pridanie do jedneho ju z druheho odoberie
+        if (!_bank.Config.ShowToolbar)
+        {
+            if (!menuStripMain.Items.Contains(tscboxLanguages))
+                menuStripMain.Items.Add(tscboxLanguages);
+        }
+        else if (!toolStripMain.Items.Contains(tscboxLanguages))
+        {
+            toolStripMain.Items.Insert(Math.Min(_languagesIndex, toolStripMain.Items.Count), tscboxLanguages);
+        }
+    }
+
     private void UpdateMainUI()
     {
-        var menu = _bank.Config.DesktopMenuMode;
-        tsslStatus.Font = _bank.Config.Fonts.StateRow;
-        menuStripMain.Visible = menu is DesktopMenu.MsTs or DesktopMenu.MsOnly;
-        toolStripMain.Visible = menu is DesktopMenu.MsTs or DesktopMenu.TsOnly;
-        dgvSounds.RowHeadersVisible = _bank.Config.ShowRowsHeader;
+        ApplyToolbar();
 
         this.ApplyThemeAndFonts();
         InitColumns();
@@ -185,12 +180,15 @@ public partial class FMain : ExForm
 
     private void SetColumnsAutoWidth()
     {
-        for (var i = 0; i < dgvSounds.Columns.Count - 1; i++)
+        var fill = dgvSounds.LastVisibleColumn();
+        foreach (DataGridViewColumn column in dgvSounds.Columns)
         {
-            dgvSounds.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            var widthCol = dgvSounds.Columns[i].Width;
-            dgvSounds.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            dgvSounds.Columns[i].Width = widthCol;
+            if (column == fill)
+                continue;
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            var widthCol = column.Width;
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            column.Width = widthCol;
         }
     }
 
@@ -288,27 +286,14 @@ public partial class FMain : ExForm
         }
 
         RawBankProject? project = null;
-        if (_bank.Config.DebugModeGUI != DebugMode.AppCrash)
-            try
-            {
-                project = RawBankProject.Load(dirpath);
-            }
-            catch (Exception exception)
-            {
-                Log.Exception(exception);
-
-                switch (_bank.Config.DebugModeGUI)
-                {
-                    case DebugMode.OnlyMessage:
-                        FError.ShowError(exception.Message);
-                        break;
-                    case DebugMode.DetailInfo:
-                        FError.ShowError(exception.ToString());
-                        break;
-                }
-            }
-        else
+        try
+        {
             project = RawBankProject.Load(dirpath);
+        }
+        catch (Exception exception) when (ErrorReport.CatchErrors)
+        {
+            ErrorReport.Show(exception, this);
+        }
 
         if (project is null)
             return false;
@@ -581,7 +566,7 @@ public partial class FMain : ExForm
         {
             Root = await Task.Run(() => ReadLanguage(project, lang, readFile, progress));
         }
-        catch (Exception exception) when (_bank.Config.DebugModeGUI != DebugMode.AppCrash)
+        catch (Exception exception) when (ErrorReport.CatchErrors)
         {
             error = exception;
         }
@@ -642,19 +627,9 @@ public partial class FMain : ExForm
         {
             // ciastocne nacitane skupiny sa nesmu zapisat cez Ulozit vsetko
             _bank.ForgetLanguage(CurrentLanguage!);
-            Log.Exception(error);
 
             ChangeStatus(Resources.FMain_Status_LoadFailed);
-
-            switch (_bank.Config.DebugModeGUI)
-            {
-                case DebugMode.OnlyMessage:
-                    FError.ShowError(error.Message);
-                    break;
-                case DebugMode.DetailInfo:
-                    FError.ShowError(error.ToString());
-                    break;
-            }
+            ErrorReport.Show(error, this);
 
             // jazyk nema nacitane skupiny - v okne nesmu ostat skupiny a zvuky predchadzajucej banky ani jazyka
             // a nic sa nesmie ulozit; vyber jazyka ostava, aby sa dalo prepnut na iny
@@ -1224,7 +1199,7 @@ public partial class FMain : ExForm
     /// <param name="page">stranka nastaveni, ktora sa otvori (napr. <see cref="FAppSettings.SpeechPage" />)</param>
     private void ShowAppSettings(string? page = null)
     {
-        var form = new FAppSettings(_bank.Session);
+        var form = new FAppSettings(_bank.Session, _commands);
         if (page is not null)
             form.PreselectMenuItem(page);
         if (form.ShowDialog() == DialogResult.OK)

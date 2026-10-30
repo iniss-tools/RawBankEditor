@@ -4,6 +4,7 @@ using RawBankEditor.Properties;
 using RawBankEditor.Speech;
 using RawBankEditor.XML;
 using ToolsCore;
+using ToolsCore.Commands;
 using ToolsCore.Forms;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -21,23 +22,28 @@ public partial class FAppSettings : FAppSettingsBase
     public new RawBankEditorConfig Config => (RawBankEditorConfig)base.Config;
     public new Styles<RawBankEditorStyle> Styles => (Styles<RawBankEditorStyle>)base.Styles;
 
-    protected override IList<CmdShortcut> DefaultShortcuts => ShortcutMap.DefaultRows(RbeCommands.All);
 
     protected override IList<DesktopColumn> DefaultColumns => new DesktopColumns().GetValues();
+
+    /// <inheritdoc />
+    protected override string ReopenLastText => Resources.Settings_ReopenLast;
+
+    /// <inheritdoc />
+    protected override string ColumnsPageText => Resources.Settings_ColumnsPage;
 
     // nastavenia programu - po ulozeni sa v nich nahradi konfiguracia a styly
     private readonly AppSession<RawBankEditorConfig, RawBankEditorStyle> _session;
 
-    internal FAppSettings(AppSession<RawBankEditorConfig, RawBankEditorStyle> session)
+    /// <param name="session">nastavenia programu</param>
+    /// <param name="commands">prikazy hlavneho okna - strom skratiek podla jeho ponuky; null = podla katalogu</param>
+    internal FAppSettings(AppSession<RawBankEditorConfig, RawBankEditorStyle> session, IEnumerable<AppCommand>? commands = null)
         : base(session.Config, new Styles<RawBankEditorStyle>(session.Styles), session.UsingStyle, typeof(RawBankEditorStyle))
     {
         _session = session;
         InitializeComponent();
 
-        Shortcuts = new ExBindingList<CmdShortcut>(Config.Shortcuts.ToRows(RbeCommands.All));
+        SetCommands(RbeCommands.All, commands);
         Columns = new ExBindingList<DesktopColumn>(Config.DesktopCols.GetValues());
-
-        dgvShortcuts.DataSource = Shortcuts;
         dgvColumns.DataSource = Columns;
     }
 
@@ -61,7 +67,6 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override bool OnSaving()
     {
-        Config.Shortcuts.SetFromRows(Shortcuts);
         Config.DesktopCols.SetValues(Columns);
         Config.AutoRecalculateSoundDuration = cboxAutoRecalculateSoundDurations.Checked;
         Config.AutoInsertSoundData = cboxAutoInsertSoundData.Checked;

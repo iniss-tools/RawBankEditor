@@ -540,4 +540,7 @@
   <data name="tsmimTranscribe.Text" xml:space="preserve">
     <value>&amp;Přepsat nahrávky na text</value>
   </data>
+  <data name="tsmimShowLogs.Text" xml:space="preserve">
+    <value>Otevřít složku s logy</value>
+  </data>
 </root>

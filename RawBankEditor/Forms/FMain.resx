@@ -6900,4 +6900,16 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="tsmimShowLogs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="tsmimShowLogs.Text" xml:space="preserve">
+    <value>Otvoriť priečinok s logmi</value>
+  </data>
+  <data name="&gt;&gt;tsmimShowLogs.Name" xml:space="preserve">
+    <value>tsmimShowLogs</value>
+  </data>
+  <data name="&gt;&gt;tsmimShowLogs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

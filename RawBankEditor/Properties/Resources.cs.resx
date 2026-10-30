@@ -1216,4 +1216,19 @@ Text: {3}</value>
   <data name="FGenerateSounds_TempoTooltip" xml:space="preserve">
     <value>Tempo řeči oproti mediánu nahrávek v okně. Sjednotit tempo vygeneruje nahrávky mimo ±10 % s upravenou rychlostí hlasu.</value>
   </data>
+  <data name="Settings_ReopenLast" xml:space="preserve">
+    <value>Při spuštění otevřít naposledy otevřenou banku zvuků</value>
+  </data>
+  <data name="Settings_ColumnsPage" xml:space="preserve">
+    <value>Tabulka zvuků</value>
+  </data>
+  <data name="Cmd_Group_Groups" xml:space="preserve">
+    <value>Skupiny zvuků</value>
+  </data>
+  <data name="Cmd_Group_Explorer" xml:space="preserve">
+    <value>Průzkumník souborů</value>
+  </data>
+  <data name="Cmd_Group_Errors" xml:space="preserve">
+    <value>Seznam chyb</value>
+  </data>
 </root>

@@ -80,8 +80,6 @@
             this.pGeneral.SuspendLayout();
             this.pConcreteGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.optionsView)).BeginInit();
-            this.pDesktopComponents.SuspendLayout();
-            this.pLocalization.SuspendLayout();
             this.exGroupBox2.SuspendLayout();
             this.pSpeech.SuspendLayout();
             this.pPiper.SuspendLayout();
@@ -458,10 +456,6 @@
             this.pConcreteGeneral.ResumeLayout(false);
             this.pConcreteGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.optionsView)).EndInit();
-            this.pDesktopComponents.ResumeLayout(false);
-            this.pDesktopComponents.PerformLayout();
-            this.pLocalization.ResumeLayout(false);
-            this.pLocalization.PerformLayout();
             this.exGroupBox2.ResumeLayout(false);
             this.exGroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeechConcurrency)).EndInit();

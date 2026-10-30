@@ -111,13 +111,11 @@ internal sealed partial class Shots(Program.Options options, string theme, List<
             foreach (var (slug, panel) in new[]
                      {
                          ("nastavenia-programu", ""),
-                         ("komponenty", "pDesktopComponents"),
+                         ("vzhlad", "pAppearance"),
                          ("stlpce", "pDesktopColumns"),
-                         ("lokalizacia", "pLocalization"),
                          ("klavesove-skratky", "pShortcuts"),
                          ("styly", "pStyles"),
                          ("pisma", "pFonts"),
-                         ("logovanie", "pLogging"),
                      })
             {
                 Shot($"nastavenia-programu/{slug}", () =>

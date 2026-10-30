@@ -111,6 +111,7 @@ public partial class FMain
         Add(RbeCommands.InfoApp, ShowInfoApp, null, tsmimInfoApp, tsbInfoApp);
         Add(RbeCommands.Updates, () => Utils.OpenShell(LinkConsts.Update), null, tsmimUpdates);
         Add(RbeCommands.CheckUpdates, () => AppUpdates.CheckNow(this), () => AppUpdates.Available, tsmimCheckUpdates);
+        Add(RbeCommands.ShowLogs, ErrorReport.OpenLogFolder, null, tsmimShowLogs);
     }
 
     /// <summary>

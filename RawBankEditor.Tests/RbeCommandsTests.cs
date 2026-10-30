@@ -24,7 +24,7 @@ public class RbeCommandsTests
         var ids = RbeCommands.All.Select(c => c.Id).ToList();
         CollectionAssert.IsSubsetOf(legacy, ids);
         Assert.HasCount(ids.Count, ids.Distinct().ToList());
-        var shortcuts = RbeCommands.All.Where(c => c.DefaultShortcut != Shortcut.None).Select(c => c.DefaultShortcut).ToList();
+        var shortcuts = RbeCommands.All.Where(c => c.DefaultKeys != Keys.None).Select(c => c.DefaultKeys).ToList();
         Assert.HasCount(shortcuts.Count, shortcuts.Distinct().ToList());
     }
 
@@ -43,8 +43,8 @@ public class RbeCommandsTests
         using var reader = new StringReader(xml);
         var config = (RawBankEditorConfig)new XmlSerializer(typeof(RawBankEditorConfig)).Deserialize(XmlReader.Create(reader))!;
 
-        Assert.AreEqual(Shortcut.CtrlShiftL, config.Shortcuts.Get(RbeCommands.AddLanguage));
-        Assert.AreEqual(Shortcut.None, config.Shortcuts.Get(RbeCommands.DeleteSounds));
-        Assert.AreEqual(Shortcut.CtrlS, config.Shortcuts.Get(RbeCommands.Save));
+        Assert.AreEqual((Keys)Shortcut.CtrlShiftL, config.Shortcuts.Get(RbeCommands.AddLanguage));
+        Assert.AreEqual((Keys)Shortcut.None, config.Shortcuts.Get(RbeCommands.DeleteSounds));
+        Assert.AreEqual((Keys)Shortcut.CtrlS, config.Shortcuts.Get(RbeCommands.Save));
     }
 }

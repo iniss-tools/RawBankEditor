@@ -3113,5 +3113,50 @@ namespace RawBankEditor.Properties {
                 return ResourceManager.GetString("FGenerateSounds_TempoTooltip", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pri spustení otvoriť naposledy otvorenú banku zvukov.
+        /// </summary>
+        internal static string Settings_ReopenLast {
+            get {
+                return ResourceManager.GetString("Settings_ReopenLast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tabuľka zvukov.
+        /// </summary>
+        internal static string Settings_ColumnsPage {
+            get {
+                return ResourceManager.GetString("Settings_ColumnsPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skupiny zvukov.
+        /// </summary>
+        internal static string Cmd_Group_Groups {
+            get {
+                return ResourceManager.GetString("Cmd_Group_Groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prieskumník súborov.
+        /// </summary>
+        internal static string Cmd_Group_Explorer {
+            get {
+                return ResourceManager.GetString("Cmd_Group_Explorer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoznam chýb.
+        /// </summary>
+        internal static string Cmd_Group_Errors {
+            get {
+                return ResourceManager.GetString("Cmd_Group_Errors", resourceCulture);
+            }
+        }
     }
 }

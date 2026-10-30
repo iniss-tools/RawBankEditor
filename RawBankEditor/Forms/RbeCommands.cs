@@ -26,11 +26,11 @@ internal static class RbeCommands
     public static CommandInfo EditLanguage => new("EditLang", Resources.Cmd_EditLanguage, Shortcut.None);
     public static CommandInfo DeleteLanguage => new("DeleteLang", Resources.Cmd_DeleteLanguage, Shortcut.None);
     public static CommandInfo AppSettings => new("AppSettings", Resources.Cmd_AppSettings, Shortcut.CtrlShiftN);
-    public static CommandInfo HighlightProblem => new("HighlightProblem", Resources.Cmd_HighlightProblem, Shortcut.F10);
-    public static CommandInfo ResolveProblem => new("ResolveProblem", Resources.Cmd_ResolveProblem, Shortcut.AltF10);
+    public static CommandInfo HighlightProblem => new("HighlightProblem", Resources.Cmd_HighlightProblem, Shortcut.F10, Resources.Cmd_Group_Errors);
+    public static CommandInfo ResolveProblem => new("ResolveProblem", Resources.Cmd_ResolveProblem, Shortcut.AltF10, Resources.Cmd_Group_Errors);
     public static CommandInfo AdjustSounds => new("AdjustSounds", Resources.Cmd_AdjustSounds, Shortcut.None);
     public static CommandInfo GenerateSounds => new("GenerateSounds", Resources.Cmd_GenerateSounds, Shortcut.CtrlG);
-    public static CommandInfo GenerateGroup => new("GenerateGroup", Resources.Cmd_GenerateGroup, Shortcut.None);
+    public static CommandInfo GenerateGroup => new("GenerateGroup", Resources.Cmd_GenerateGroup, Shortcut.None, Resources.Cmd_Group_Groups);
     public static CommandInfo GenerateLanguage => new("GenerateLanguage", Resources.Cmd_GenerateLanguage, Shortcut.None);
     public static CommandInfo GenerateMissing => new("GenerateMissing", Resources.Cmd_GenerateMissing, Shortcut.None);
     public static CommandInfo VoiceProfile => new("VoiceProfile", Resources.Cmd_VoiceProfile, Shortcut.None);
@@ -43,38 +43,43 @@ internal static class RbeCommands
     public static CommandInfo Prosody => new("Prosody", Resources.Cmd_Prosody, Shortcut.None);
     public static CommandInfo Pronunciation => new("Pronunciation", Resources.Cmd_Pronunciation, Shortcut.None);
 
-    // prikazy bez nastavitelnej skratky - v prieskumniku a zozname skupin platia pevne klavesy
+    // prikazy bez predvolenej skratky; v prieskumniku a zozname skupin navyse platia pevne klavesy (F2, F5, Del, PageUp/PageDown)
     public static CommandInfo ConvertSoundsToEwa => Fixed(nameof(ConvertSoundsToEwa));
     public static CommandInfo ConvertSoundsToWav => Fixed(nameof(ConvertSoundsToWav));
     public static CommandInfo ConvertLanguageToEwa => Fixed(nameof(ConvertLanguageToEwa));
     public static CommandInfo ConvertLanguageToWav => Fixed(nameof(ConvertLanguageToWav));
     public static CommandInfo ImportSounds => Fixed(nameof(ImportSounds));
     public static CommandInfo ExportIniss2 => Fixed(nameof(ExportIniss2));
-    public static CommandInfo AddGroup => Fixed(nameof(AddGroup));
-    public static CommandInfo EditGroup => Fixed(nameof(EditGroup));
-    public static CommandInfo DeleteGroup => Fixed(nameof(DeleteGroup));
-    public static CommandInfo ConvertGroupToEwa => Fixed(nameof(ConvertGroupToEwa));
-    public static CommandInfo ConvertGroupToWav => Fixed(nameof(ConvertGroupToWav));
-    public static CommandInfo OpenInExplorer => Fixed(nameof(OpenInExplorer));
-    public static CommandInfo PlayFile => Fixed(nameof(PlayFile));
-    public static CommandInfo RenameFile => Fixed(nameof(RenameFile));
-    public static CommandInfo DeleteFile => Fixed(nameof(DeleteFile));
-    public static CommandInfo ConvertFilesToEwa => Fixed(nameof(ConvertFilesToEwa));
-    public static CommandInfo ConvertFilesToWav => Fixed(nameof(ConvertFilesToWav));
+    public static CommandInfo AddGroup => Fixed(nameof(AddGroup), Resources.Cmd_Group_Groups);
+    public static CommandInfo EditGroup => Fixed(nameof(EditGroup), Resources.Cmd_Group_Groups);
+    public static CommandInfo DeleteGroup => Fixed(nameof(DeleteGroup), Resources.Cmd_Group_Groups);
+    public static CommandInfo ConvertGroupToEwa => Fixed(nameof(ConvertGroupToEwa), Resources.Cmd_Group_Groups);
+    public static CommandInfo ConvertGroupToWav => Fixed(nameof(ConvertGroupToWav), Resources.Cmd_Group_Groups);
+    public static CommandInfo OpenInExplorer => Fixed(nameof(OpenInExplorer), Resources.Cmd_Group_Explorer);
+    public static CommandInfo PlayFile => Fixed(nameof(PlayFile), Resources.Cmd_Group_Explorer);
+    public static CommandInfo RenameFile => Fixed(nameof(RenameFile), Resources.Cmd_Group_Explorer);
+    public static CommandInfo DeleteFile => Fixed(nameof(DeleteFile), Resources.Cmd_Group_Explorer);
+    public static CommandInfo ConvertFilesToEwa => Fixed(nameof(ConvertFilesToEwa), Resources.Cmd_Group_Explorer);
+    public static CommandInfo ConvertFilesToWav => Fixed(nameof(ConvertFilesToWav), Resources.Cmd_Group_Explorer);
     public static CommandInfo InfoApp => Fixed(nameof(InfoApp));
     public static CommandInfo Updates => Fixed(nameof(Updates));
     public static CommandInfo CheckUpdates => Fixed(nameof(CheckUpdates));
-    public static CommandInfo GenerateMissingFromErrors => Fixed(nameof(GenerateMissingFromErrors));
+    public static CommandInfo ShowLogs => Fixed(nameof(ShowLogs));
+    public static CommandInfo GenerateMissingFromErrors => Fixed(nameof(GenerateMissingFromErrors), Resources.Cmd_Group_Errors);
 
     /// <summary>
-    /// Prikazy, ktorym sa v nastaveniach da zmenit skratka, v poradi zoznamu v nastaveniach.
+    /// Vsetky prikazy hlavneho okna pre nastavenia skratiek (strom ich zoradi podla ponuky okna).
     /// </summary>
     public static IReadOnlyList<CommandInfo> All =>
     [
         Open, Save, SaveAll, Undo, Redo, AddSound, DeleteSounds, MoveSounds, RewriteMode, WrapTextSoundCol,
         GoBack, GoForward, Search, AddLanguage, EditLanguage, DeleteLanguage, AppSettings, HighlightProblem, ResolveProblem,
-        AdjustSounds, GenerateSounds, GenerateGroup, GenerateLanguage, GenerateMissing, ChangeVoice, IsolateSounds, TranscribeSounds, VoiceProfile, Voices, Prosody, Pronunciation, PlaySequence, StopPlayback
+        AdjustSounds, GenerateSounds, GenerateGroup, GenerateLanguage, GenerateMissing, ChangeVoice, IsolateSounds, TranscribeSounds, VoiceProfile, Voices, Prosody, Pronunciation, PlaySequence, StopPlayback,
+        ConvertSoundsToEwa, ConvertSoundsToWav, ConvertLanguageToEwa, ConvertLanguageToWav, ImportSounds, ExportIniss2,
+        AddGroup, EditGroup, DeleteGroup, ConvertGroupToEwa, ConvertGroupToWav, OpenInExplorer, PlayFile, RenameFile, DeleteFile,
+        ConvertFilesToEwa, ConvertFilesToWav, GenerateMissingFromErrors, InfoApp, Updates, CheckUpdates, ShowLogs
     ];
 
-    private static CommandInfo Fixed(string id) => new(id, id, Shortcut.None);
+    // text = identifikator: v strome skratiek sa ukaze text polozky, na ktoru je prikaz naviazany
+    private static CommandInfo Fixed(string id, string? group = null) => new(id, id, Shortcut.None, group);
 }

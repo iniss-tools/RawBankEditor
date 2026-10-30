@@ -16,6 +16,6 @@ internal static class Program
         var bank = new BankEditor(AppInit.Initialization<RawBankEditorConfig, RawBankEditorStyle>());
         var dialogs = new DialogService();
 
-        AppInit.Run(bank.Config, () => new FMain(bank, dialogs));
+        AppInit.Run(() => new FMain(bank, dialogs));
     }
 }

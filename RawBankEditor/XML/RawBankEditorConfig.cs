@@ -17,11 +17,6 @@ public record RawBankEditorConfig() : ConfigBase
     [XmlElement("DesktopCols")] 
     public DesktopColumns DesktopCols { get; set; } = new();
 
-    /// <summary>
-    /// Klávesové skratky pre akcie na pracovnej ploche programu.
-    /// </summary>
-    [XmlElement("Shortcuts")] 
-    public ShortcutMap Shortcuts { get; set; } = new();
 
     [XmlElement("ShowErrorsWindow")]
     [DefaultValue(true)]
@@ -68,12 +63,11 @@ public record RawBankEditorConfig() : ConfigBase
     public SpeechSettings Speech { get; set; } = new();
 
     /// <inheritdoc />
-    public override string LinkAppSettingsGuide => "";
+    public override string LinkAppSettingsGuide => LinkConsts.AppSettings;
 
     protected RawBankEditorConfig(RawBankEditorConfig original) : base(original)
     {
         DesktopCols = original.DesktopCols with { };
-        Shortcuts = original.Shortcuts.Clone();
         ShowErrorsWindow = original.ShowErrorsWindow;
         LeftPanelWidth = original.LeftPanelWidth;
         GroupPanelWidth = original.GroupPanelWidth;

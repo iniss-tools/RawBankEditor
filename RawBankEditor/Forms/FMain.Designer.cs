@@ -118,6 +118,7 @@ namespace RawBankEditor.Forms
             this.tsmimInfoApp = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmimCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmimShowLogs = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new ExControls.ExTableLayoutPanel();
@@ -711,7 +712,8 @@ namespace RawBankEditor.Forms
             this.tsmiHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmimInfoApp,
             this.tsmimUpdates,
-            this.tsmimCheckUpdates});
+            this.tsmimCheckUpdates,
+            this.tsmimShowLogs});
             this.tsmiHelp.Name = "tsmiHelp";
             resources.ApplyResources(this.tsmiHelp, "tsmiHelp");
             // 
@@ -730,6 +732,11 @@ namespace RawBankEditor.Forms
             //
             this.tsmimCheckUpdates.Name = "tsmimCheckUpdates";
             resources.ApplyResources(this.tsmimCheckUpdates, "tsmimCheckUpdates");
+            //
+            // tsmimShowLogs
+            //
+            this.tsmimShowLogs.Name = "tsmimShowLogs";
+            resources.ApplyResources(this.tsmimShowLogs, "tsmimShowLogs");
             //
             // splitContainer1
             // 
@@ -2270,6 +2277,7 @@ namespace RawBankEditor.Forms
         private ToolsCore.Icons.IconToolStripDropDownButton tsbRecent;
         private System.Windows.Forms.ToolStripMenuItem tsmimUpdates;
         private System.Windows.Forms.ToolStripMenuItem tsmimCheckUpdates;
+        private System.Windows.Forms.ToolStripMenuItem tsmimShowLogs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
         private ToolsCore.Icons.IconToolStripMenuItem tsmimAddSound;
         private ToolsCore.Icons.IconToolStripMenuItem tsmimDeleteSound;
