@@ -23,13 +23,9 @@ public partial class FAppSettings : FAppSettingsBase
     public new Styles<RawBankEditorStyle> Styles => (Styles<RawBankEditorStyle>)base.Styles;
 
 
-    protected override IList<DesktopColumn> DefaultColumns => new DesktopColumns().GetValues();
-
     /// <inheritdoc />
     protected override string ReopenLastText => Resources.Settings_ReopenLast;
 
-    /// <inheritdoc />
-    protected override string ColumnsPageText => Resources.Settings_ColumnsPage;
 
     // nastavenia programu - po ulozeni sa v nich nahradi konfiguracia a styly
     private readonly AppSession<RawBankEditorConfig, RawBankEditorStyle> _session;
@@ -37,14 +33,12 @@ public partial class FAppSettings : FAppSettingsBase
     /// <param name="session">nastavenia programu</param>
     /// <param name="commands">prikazy hlavneho okna - strom skratiek podla jeho ponuky; null = podla katalogu</param>
     internal FAppSettings(AppSession<RawBankEditorConfig, RawBankEditorStyle> session, IEnumerable<AppCommand>? commands = null)
-        : base(session.Config, new Styles<RawBankEditorStyle>(session.Styles), session.UsingStyle, typeof(RawBankEditorStyle))
+        : base(session.Config, new Styles<RawBankEditorStyle>(session.Styles), session.UsingStyle)
     {
         _session = session;
         InitializeComponent();
 
         SetCommands(RbeCommands.All, commands);
-        Columns = new ExBindingList<DesktopColumn>(Config.DesktopCols.GetValues());
-        dgvColumns.DataSource = Columns;
     }
 
     protected override void OnLoad()
@@ -67,7 +61,6 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override bool OnSaving()
     {
-        Config.DesktopCols.SetValues(Columns);
         Config.AutoRecalculateSoundDuration = cboxAutoRecalculateSoundDurations.Checked;
         Config.AutoInsertSoundData = cboxAutoInsertSoundData.Checked;
         Config.ShowAfterInsertSoundDialog = cboxShowAfterInsertSoundDlg.Checked;
@@ -83,9 +76,10 @@ public partial class FAppSettings : FAppSettingsBase
     /// <inheritdoc />
     protected override void SaveData()
     {
-        _session.Config = Config;
-        _session.UsingStyle = (RawBankEditorStyle)UsingStyle;
-        _session.Styles = Styles;
+        // kopie - okno po Pouzit ostava otvorene a dalsie upravy v nom nesmu menit nastavenia programu
+        _session.Config = Config with { };
+        _session.Styles = new Styles<RawBankEditorStyle>(Styles);
+        _session.UsingStyle = _session.Styles[UsingStyle.Name];
 
         var configsDir = ToolsCore.AppPaths.ConfigDir;
         if (!Directory.Exists(configsDir))
@@ -94,12 +88,6 @@ public partial class FAppSettings : FAppSettingsBase
         Styles<RawBankEditorStyle>.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileStyles)!, _session.Styles);
         XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _session.Config);
     }
-
-    /// <inheritdoc />
-    protected override Style CreateStyleInstance(string name) => new RawBankEditorStyle {Name = name};
-
-    /// <inheritdoc />
-    protected override Style OnResetStyle(bool darkMode) => Styles<RawBankEditorStyle>.GetDefaultStyle(darkMode);
 
     private void CboxAutoInsertSoundData_CheckedChanged(object sender, EventArgs e)
     {

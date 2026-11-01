@@ -4303,7 +4303,7 @@
     <value>ExControls.ExGroupBox, ExControls, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gbSpeechKey.Parent" xml:space="preserve">
-    <value>ppSpeech</value>
+    <value>ppElevenLabs</value>
   </data>
   <data name="&gt;&gt;gbSpeechKey.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -4495,7 +4495,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="gbSpeechCache.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 152</value>
+    <value>0, 6</value>
   </data>
   <data name="gbSpeechCache.Size" type="System.Drawing.Size, System.Drawing">
     <value>521, 56</value>
@@ -4516,7 +4516,7 @@
     <value>ppSpeech</value>
   </data>
   <data name="&gt;&gt;gbSpeechCache.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="lSpeechCache.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4579,7 +4579,7 @@
     <value>False</value>
   </data>
   <data name="lSpeechPrivacy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 216</value>
+    <value>0, 70</value>
   </data>
   <data name="lSpeechPrivacy.Size" type="System.Drawing.Size, System.Drawing">
     <value>521, 45</value>
@@ -4600,7 +4600,7 @@
     <value>ppSpeech</value>
   </data>
   <data name="&gt;&gt;lSpeechPrivacy.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="optionsNodeAzure.Text" xml:space="preserve">
     <value>Azure Speech</value>
@@ -5274,4 +5274,34 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="optionsNodeElevenLabs.Text" xml:space="preserve">
+    <value>ElevenLabs</value>
+  </data>
+  <data name="pElevenLabs.NodeText" xml:space="preserve">
+    <value>ElevenLabs</value>
+  </data>
+  <data name="ppElevenLabs.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="ppElevenLabs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="ppElevenLabs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>560, 400</value>
+  </data>
+  <data name="ppElevenLabs.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ppElevenLabs.Name" xml:space="preserve">
+    <value>ppElevenLabs</value>
+  </data>
+  <data name="&gt;&gt;ppElevenLabs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ppElevenLabs.Parent" xml:space="preserve">
+    <value>pElevenLabs</value>
+  </data>
+  <data name="&gt;&gt;ppElevenLabs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
 </root>

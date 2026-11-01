@@ -3124,15 +3124,6 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tabuľka zvukov.
-        /// </summary>
-        internal static string Settings_ColumnsPage {
-            get {
-                return ResourceManager.GetString("Settings_ColumnsPage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Skupiny zvukov.
         /// </summary>
         internal static string Cmd_Group_Groups {

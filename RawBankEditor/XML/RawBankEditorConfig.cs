@@ -11,11 +11,6 @@ namespace RawBankEditor.XML;
 [XmlRoot("CONFIG")]
 public record RawBankEditorConfig() : ConfigBase
 {
-    /// <summary>
-    /// Stlpce zobrazujuce sa v tabulke na pracovnej ploche programu.
-    /// </summary>
-    [XmlElement("DesktopCols")] 
-    public DesktopColumns DesktopCols { get; set; } = new();
 
 
     [XmlElement("ShowErrorsWindow")]
@@ -67,7 +62,6 @@ public record RawBankEditorConfig() : ConfigBase
 
     protected RawBankEditorConfig(RawBankEditorConfig original) : base(original)
     {
-        DesktopCols = original.DesktopCols with { };
         ShowErrorsWindow = original.ShowErrorsWindow;
         LeftPanelWidth = original.LeftPanelWidth;
         GroupPanelWidth = original.GroupPanelWidth;

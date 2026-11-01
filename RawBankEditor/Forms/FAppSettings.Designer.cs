@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FAppSettings));
             ExControls.OptionsNode optionsNodeSpeech = new ExControls.OptionsNode();
+            ExControls.OptionsNode optionsNodeElevenLabs = new ExControls.OptionsNode();
+            this.pElevenLabs = new ExControls.ExOptionsPanel(this.optionsView);
+            this.ppElevenLabs = new System.Windows.Forms.Panel();
             this.pSpeech = new ExControls.ExOptionsPanel(this.optionsView);
             ExControls.OptionsNode optionsNodePiper = new ExControls.OptionsNode();
             this.pPiper = new ExControls.ExOptionsPanel(this.optionsView);
@@ -82,6 +85,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.optionsView)).BeginInit();
             this.exGroupBox2.SuspendLayout();
             this.pSpeech.SuspendLayout();
+            this.pElevenLabs.SuspendLayout();
+            this.ppElevenLabs.SuspendLayout();
             this.pPiper.SuspendLayout();
             this.ppPiper.SuspendLayout();
             this.gbPiper.SuspendLayout();
@@ -103,6 +108,7 @@
             // 
             this.optionsView.HeaderNodeNameVisible = true;
             this.optionsView.Panels.Add(this.pSpeech);
+            this.optionsView.Panels.Add(this.pElevenLabs);
             this.optionsView.Panels.Add(this.pAzure);
             this.optionsView.Panels.Add(this.pPiper);
             this.optionsView.SearchBoxVisible = true;
@@ -164,11 +170,26 @@
             // 
             // ppSpeech
             // 
-            this.ppSpeech.Controls.Add(this.gbSpeechKey);
             this.ppSpeech.Controls.Add(this.gbSpeechCache);
             this.ppSpeech.Controls.Add(this.lSpeechPrivacy);
             resources.ApplyResources(this.ppSpeech, "ppSpeech");
             this.ppSpeech.Name = "ppSpeech";
+            //
+            // pElevenLabs
+            //
+            this.pElevenLabs.Controls.Add(this.ppElevenLabs);
+            this.pElevenLabs.Name = "pElevenLabs";
+            optionsNodeElevenLabs.Name = "";
+            optionsNodeElevenLabs.Text = resources.GetString("optionsNodeElevenLabs.Text");
+            this.pElevenLabs.Node = optionsNodeElevenLabs;
+            this.pElevenLabs.NodeText = resources.GetString("pElevenLabs.NodeText");
+            this.pElevenLabs.ParentNode = optionsNodeSpeech;
+            //
+            // ppElevenLabs
+            //
+            this.ppElevenLabs.Controls.Add(this.gbSpeechKey);
+            resources.ApplyResources(this.ppElevenLabs, "ppElevenLabs");
+            this.ppElevenLabs.Name = "ppElevenLabs";
             // 
             // gbSpeechKey
             // 
@@ -471,6 +492,8 @@
             this.gbAzure.ResumeLayout(false);
             this.gbAzure.PerformLayout();
             this.ppSpeech.ResumeLayout(false);
+            this.pElevenLabs.ResumeLayout(false);
+            this.ppElevenLabs.ResumeLayout(false);
             this.ppSpeech.PerformLayout();
             this.gbSpeechKey.ResumeLayout(false);
             this.gbSpeechKey.PerformLayout();
@@ -488,6 +511,8 @@
         private ExControls.ExCheckBox cboxShowAfterInsertSoundDlg;
         private ExControls.ExOptionsPanel pSpeech;
         private System.Windows.Forms.Panel ppSpeech;
+        private ExControls.ExOptionsPanel pElevenLabs;
+        private System.Windows.Forms.Panel ppElevenLabs;
         private ExControls.ExGroupBox gbSpeechKey;
         private System.Windows.Forms.Label lSpeechKey;
         private ExControls.ExTextBox tbSpeechKey;

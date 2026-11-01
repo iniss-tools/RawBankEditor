@@ -104,39 +104,27 @@ public partial class FMain : ExForm
 
         CreateCommands();
         _commands.ApplyShortcuts(_bank.Config.Shortcuts);
+        //neviem preco niekedy umiestni stlpec s typom do stredu - pred zapamatanim predvoleneho poradia
+        if (cFileType.DisplayIndex != 0)
+            cFileType.DisplayIndex = 0;
         InitColumns();
         InitRecordings();
         SetColumnsAutoWidth();
-
-        //neviem preco niekedy umiestni stlpec s typom do stredu
-        if (cFileType.DisplayIndex != 0) 
-            cFileType.DisplayIndex = 0;
 
         UpdateCommandStates();
     }
 
 
+    /// <summary>
+    /// Tabulky hlavneho okna si pamataju poradie, sirku a viditelnost stlpcov (tahanie hlavicky, ponuka na hlavicke).
+    /// </summary>
     private void InitColumns()
     {
-        static void SetCol(DataGridViewColumn column, DesktopColumn format)
-        {
-            column.Visible = format.Visible;
-            column.MinimumWidth = format.MinWidth;
-            column.DisplayIndex = format.Order;
-        }
-        
-        var columns = _bank.Config.DesktopCols;
-
-        SetCol(cSoundKey, columns.Key);
-        SetCol(cSoundName, columns.Name);
-        SetCol(cSoundAdditionalRelativePath, columns.RelativePath);
-        SetCol(cSoundFileName, columns.FileName);
-        SetCol(cSoundDuration, columns.Duration);
-        SetCol(cSoundOrigin, columns.Origin);
-        SetCol(cSoundSynthText, columns.SynthText);
-        SetCol(cSoundText, columns.Text);
-
-        dgvSounds.FillLastVisibleColumn();
+        _soundColumns = GridColumns.Attach(dgvSounds, "Sounds", () => _bank.Config, SaveConfig, cSoundSynthText.Name);
+        _soundColumns.Reset += (_, _) => SetColumnsAutoWidth();
+        GridColumns.Attach(dgvGroups, "Groups", () => _bank.Config, SaveConfig);
+        GridColumns.Attach(dgvExplorer, "Explorer", () => _bank.Config, SaveConfig);
+        GridColumns.Attach(dgvErrors, "Errors", () => _bank.Config, SaveConfig);
 
         tsmimWrapTextSoundCol.Checked = _bank.Config.WrapSoundText;
     }
@@ -171,7 +159,7 @@ public partial class FMain : ExForm
         ApplyToolbar();
 
         this.ApplyThemeAndFonts();
-        InitColumns();
+        tsmimWrapTextSoundCol.Checked = _bank.Config.WrapSoundText;
         _commands.ApplyShortcuts(_bank.Config.Shortcuts);
         SetColumnsAutoWidth();
         Invalidate(true);
@@ -183,7 +171,7 @@ public partial class FMain : ExForm
         var fill = dgvSounds.LastVisibleColumn();
         foreach (DataGridViewColumn column in dgvSounds.Columns)
         {
-            if (column == fill)
+            if (column == fill || _soundColumns.HasUserWidth(column))
                 continue;
             column.AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
             var widthCol = column.Width;
@@ -1199,13 +1187,12 @@ public partial class FMain : ExForm
     /// <param name="page">stranka nastaveni, ktora sa otvori (napr. <see cref="FAppSettings.SpeechPage" />)</param>
     private void ShowAppSettings(string? page = null)
     {
-        var form = new FAppSettings(_bank.Session, _commands);
+        using var form = new FAppSettings(_bank.Session, _commands);
         if (page is not null)
             form.PreselectMenuItem(page);
-        if (form.ShowDialog() == DialogResult.OK)
-        {
-            UpdateMainUI();
-        }
+        // po kazdom ulozeni (aj tlacidlom Pouzit pri otvorenom okne)
+        form.Applied += (_, _) => UpdateMainUI();
+        form.ShowDialog();
     }
 
     private void ShowInfoApp()

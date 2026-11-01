@@ -5,6 +5,7 @@ using RawBankEditor.Forms;
 using RawBankEditor.Services;
 using RawBankEditor.XML;
 using ToolsCore;
+using ToolsCore.XML;
 using ToolsCore.Tools;
 
 namespace RawBankEditor.DocScreenshots;
@@ -128,7 +129,10 @@ internal static class Program
 
     private static void SetTheme(string theme)
     {
-        var style = theme == "dark" ? RawBankEditorStyle.DefaultDarkStyle : RawBankEditorStyle.DefaultLightStyle;
+        // zabudovana schema harnessu (svetla alebo tmava), zvolena aj na stranke Vzhlad
+        var style = Session.Styles[theme == "dark" ? StyleNames.Dark : StyleNames.Light];
+        Session.Styles.Active = style.Name;
+        Session.Styles.FollowSystem = false;
         Session.UsingStyle = style;
         AppInit.MsgBoxStyleInit(style, Session.Config);
     }

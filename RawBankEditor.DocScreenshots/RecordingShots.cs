@@ -55,7 +55,7 @@ internal sealed partial class Shots
             speechConfig.PiperPath = @"C:\Programy\piper\piper.exe";
             // priečinok hlasov mimo profilu používateľa - na snímke nemá byť meno počítača ani používateľa
             speechConfig.PiperVoicesFolder = PiperFolder;
-            foreach (var (slug, page) in new[] { ("elevenlabs", FAppSettings.SpeechPage), ("azure", "pAzure"), ("piper", "pPiper") })
+            foreach (var (slug, page) in new[] { ("elevenlabs", "pElevenLabs"), ("azure", "pAzure"), ("piper", "pPiper") })
             {
                 Shot($"sluzby-hlasu/nastavenia-{slug}", () =>
                 {

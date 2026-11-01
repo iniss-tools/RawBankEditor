@@ -1223,9 +1223,6 @@ Text: {3}</value>
   <data name="Settings_ReopenLast" xml:space="preserve">
     <value>Pri spustení otvoriť naposledy otvorenú banku zvukov</value>
   </data>
-  <data name="Settings_ColumnsPage" xml:space="preserve">
-    <value>Tabuľka zvukov</value>
-  </data>
   <data name="Cmd_Group_Groups" xml:space="preserve">
     <value>Skupiny zvukov</value>
   </data>

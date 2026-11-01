@@ -6,7 +6,7 @@
 		<AssemblyName>RawBankEditor</AssemblyName>
 		<UseWindowsForms>true</UseWindowsForms>
 		<!-- verzia lokalnych zostav; vydanie ju prepise verziou zo znacky vX.Y (ToolsCore\Build\AppRelease.props) -->
-		<Version>1.1</Version>
+		<Version>1.2</Version>
 		<Description>Úprava zvukovej banky</Description>
 		<Copyright>Copyright © 2022</Copyright>
 		<NeutralLanguage>sk</NeutralLanguage>

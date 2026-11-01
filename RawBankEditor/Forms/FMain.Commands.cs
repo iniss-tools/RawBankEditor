@@ -9,6 +9,7 @@ namespace RawBankEditor.Forms;
 public partial class FMain
 {
     private readonly CommandSet _commands = [];
+    private GridColumns _soundColumns = null!;
 
     private bool ProjectOpen => _bank.Project is not null;
 

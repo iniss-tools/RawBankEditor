@@ -1,27 +1,12 @@
 ﻿using ToolsCore.XML;
-// ReSharper disable UnusedMember.Global
 
 namespace RawBankEditor.XML;
 
 /// <summary>
-/// Trieda definujuca farby a pisma pre viacere prvky programu
+/// Farebna schema RawBankEditora (len ovladacie prvky).
 /// </summary>
-public record RawBankEditorStyle : Style
+public class RawBankEditorStyle : Style
 {
     /// <inheritdoc />
-    public RawBankEditorStyle()
-    {
-    }
-
-    /// <inheritdoc />
-    public RawBankEditorStyle(Style original) : base(original)
-    {
-    }
-    
-    public new static RawBankEditorStyle DefaultLightStyle => new(Style.DefaultLightStyle);
-
-    public new static RawBankEditorStyle DefaultDarkStyle => new(Style.DefaultDarkStyle);
-
-    /// <inheritdoc />
-    public override string ToString() => Name;
+    protected override Style CreateEmpty() => new RawBankEditorStyle();
 }
