@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Text.Json;
 using RawBankEditor.Tools;
+using Serilog;
 
 namespace RawBankEditor.Speech;
 
@@ -93,7 +94,10 @@ public sealed class PiperClient : ISpeechProvider
             // text na jeden riadok - kazdy riadok je pre Piper samostatna veta
             var result = await Run(new PiperRun(_executable, arguments, request.Text.ReplaceLineEndings(" ")), cancel).ConfigureAwait(false);
             if (result.ExitCode != 0 || !File.Exists(output))
+            {
+                Log.Warning("Piper skoncil s kodom {ExitCode} (vystup {Exists}): {Error}", result.ExitCode, File.Exists(output), result.Error);
                 throw new SpeechException(result.Error.Length > 0 ? result.Error : $"Piper exited with code {result.ExitCode}.");
+            }
 
             return SoundProcessing.ReadWav(await File.ReadAllBytesAsync(output, cancel).ConfigureAwait(false));
         }
@@ -189,6 +193,7 @@ public sealed class PiperClient : ISpeechProvider
         }
         catch (Exception e) when (e is Win32Exception or InvalidOperationException)
         {
+            Log.Error(e, "Program Piper {Executable} sa nepodarilo spustit", run.Executable);
             throw new SpeechException(e.Message, e);
         }
 
@@ -217,6 +222,7 @@ public sealed class PiperClient : ISpeechProvider
 
             if (cancel.IsCancellationRequested)
                 throw;
+            Log.Warning("Piper neskoncil do {Timeout} - proces ukonceny", Timeout);
             throw new SpeechException("Piper did not finish in time.");
         }
         catch (IOException e)
@@ -300,7 +306,7 @@ public static class PiperVoices
             }
             catch (Exception e) when (e is IOException or JsonException or UnauthorizedAccessException)
             {
-                ToolsCore.Iniss.Tools.Log.Exception(e);
+                Log.Warning(e, "Nastavenie hlasu Piper {File} je poskodene - hlas sa vynecha", model + ".json");
             }
         }
 

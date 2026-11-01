@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -83,7 +84,7 @@ public partial class FImportSounds : Form
         catch (Exception ex)
         {
             // poskodeny alebo neznamy subor (ExcelDataReader ma vlastne vynimky), zamknuty subor a pod.
-            Log.Exception(ex);
+            Log.Warning(ex, "Subor na import {File} sa nepodarilo nacitat", path);
             Utils.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Import_ReadFailed, path, ex.Message));
         }
     }

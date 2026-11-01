@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using RawBankEditor.Tools;
+using Serilog;
 using ToolsCore.Iniss.Tools;
 
 namespace RawBankEditor.Speech;
@@ -48,7 +49,7 @@ public sealed class SpeechCache(string root)
         }
         catch (Exception e) when (e is IOException or JsonException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Warning(e, "Vyrovnavacia pamat reci: casovanie {File} sa nepodarilo precitat", TimingsOf(key));
             return null;
         }
     }
@@ -68,7 +69,7 @@ public sealed class SpeechCache(string root)
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Warning(e, "Vyrovnavacia pamat reci: casovanie {File} sa nepodarilo zapisat", TimingsOf(key));
         }
     }
 
@@ -83,7 +84,7 @@ public sealed class SpeechCache(string root)
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Warning(e, "Vyrovnavacia pamat reci: text {File} sa nepodarilo precitat", TextOf(key));
             return null;
         }
     }
@@ -101,7 +102,7 @@ public sealed class SpeechCache(string root)
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Warning(e, "Vyrovnavacia pamat reci: text {File} sa nepodarilo zapisat", TextOf(key));
         }
     }
 
@@ -120,7 +121,7 @@ public sealed class SpeechCache(string root)
         }
         catch (Exception e) when (e is IOException or InvalidDataException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Warning(e, "Vyrovnavacia pamat reci: nahravku {File} sa nepodarilo precitat", path);
             return null;
         }
     }
@@ -140,7 +141,7 @@ public sealed class SpeechCache(string root)
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Warning(e, "Vyrovnavacia pamat reci: nahravku {File} sa nepodarilo zapisat", PathOf(key));
         }
     }
 

@@ -3,6 +3,7 @@ using RawBankEditor.Entities;
 using RawBankEditor.Properties;
 using RawBankEditor.Speech;
 using RawBankEditor.Tools;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -226,7 +227,7 @@ partial class FMain
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Error(e, "Hlas jazyka {Language} sa nepodarilo ulozit", language.Key);
             _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Speech_VoiceSaveFailed, e.Message));
             return null;
         }
@@ -596,7 +597,7 @@ partial class FMain
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Error(e, "Intonaciu jazyka {Language} sa nepodarilo ulozit", language.Key);
             _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Speech_SettingsSaveFailed, e.Message));
         }
         finally
@@ -636,7 +637,7 @@ partial class FMain
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Error(e, "Vyslovnost jazyka {Language} sa nepodarilo ulozit", language.Key);
             _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Speech_SettingsSaveFailed, e.Message));
         }
         finally

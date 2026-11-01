@@ -2,6 +2,7 @@ using System.Globalization;
 using RawBankEditor.Properties;
 using RawBankEditor.Speech;
 using RawBankEditor.Tools;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Tools;
 
@@ -410,7 +411,7 @@ public partial class FGenerateSounds : Form
                     catch (SpeechException e)
                     {
                         // nahravka je v poriadku, len sa neda skontrolovat
-                        ToolsCore.Iniss.Tools.Log.Exception(e);
+                        Log.Warning(e, "Kontrolny prepis nahravky {Key} zlyhal - nahravka ostava", row.Key);
                     }
                 }
 
@@ -436,6 +437,7 @@ public partial class FGenerateSounds : Form
         }
         catch (Exception ex) when (ex is SpeechException or InvalidDataException or IOException)
         {
+            Log.Warning(ex, "Generovanie nahravky {Key} zlyhalo", row.Key);
             row.ClearResult();
             row.Status = string.Format(CultureInfo.CurrentCulture, Resources.Speech_Error, ex.Message);
         }

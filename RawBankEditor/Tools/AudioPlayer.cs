@@ -1,4 +1,5 @@
 using NAudio.Wave;
+using Serilog;
 
 namespace RawBankEditor.Tools;
 
@@ -52,8 +53,9 @@ public sealed class AudioPlayer : IDisposable
         {
             output.Init(reader);
         }
-        catch
+        catch (Exception e)
         {
+            Log.Error(e, "Zvukove zariadenie sa nepodarilo pripravit na prehravanie");
             output.Dispose();
             reader.Dispose();
             throw;
@@ -95,6 +97,8 @@ public sealed class AudioPlayer : IDisposable
         if (!ReferenceEquals(sender, _output))
             return;
 
+        if (e.Exception is not null)
+            Log.Warning(e.Exception, "Prehravanie skoncilo chybou zvukoveho zariadenia");
         Release();
         Stopped?.Invoke(this, EventArgs.Empty);
     }

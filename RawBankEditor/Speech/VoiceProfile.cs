@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Serilog;
 using ToolsCore.Iniss.Tools;
 
 namespace RawBankEditor.Speech;
@@ -184,7 +185,7 @@ public static class BankAiFolder
         }
         catch (Exception e) when (e is IOException or JsonException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Error(e, "Udaje AI jazyka {File} sa nepodarilo precitat - pouziju sa prazdne", path);
             return new LanguageAiData();
         }
     }

@@ -1,3 +1,5 @@
+using Serilog;
+
 namespace RawBankEditor.Tools;
 
 /// <summary>
@@ -126,7 +128,10 @@ public sealed class BankJournal(string backupRoot, Action<string> recycle, Func<
         }
 
         if (!restoreFromRecycleBin(path))
+        {
+            Log.Warning("Zurnal: {Path} sa nepodarilo obnovit zo zalohy ani z Kosa", path);
             return false;
+        }
 
         Add(new Entry(Kind.RestoredFromRecycleBin, path, null, scope));
         return true;
@@ -150,6 +155,7 @@ public sealed class BankJournal(string backupRoot, Action<string> recycle, Func<
                     }
                     catch (Exception e) when (e is IOException or UnauthorizedAccessException or OperationCanceledException)
                     {
+                        Log.Warning(e, "Zurnal: {Item} sa nepodarilo presunut do Kosa - ostava v zaloznom priecinku", item);
                         errors.Add($"{item}: {e.Message}");
                     }
 
@@ -189,6 +195,7 @@ public sealed class BankJournal(string backupRoot, Action<string> recycle, Func<
                 }
                 catch (Exception e) when (e is IOException or UnauthorizedAccessException or OperationCanceledException)
                 {
+                    Log.Error(e, "Zurnal: operaciu {Kind} s {Path} sa nepodarilo vratit", entry.Kind, path);
                     errors.Add($"{path}: {e.Message}");
                 }
 

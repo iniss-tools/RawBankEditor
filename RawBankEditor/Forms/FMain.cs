@@ -5,6 +5,7 @@ using RawBankEditor.Properties;
 using RawBankEditor.Services;
 using RawBankEditor.Tools;
 using System.Globalization;
+using Serilog;
 using ToolsCore;
 using ToolsCore.Forms;
 using ToolsCore.Icons;
@@ -1069,7 +1070,7 @@ public partial class FMain : ExForm
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(exception);
+            Log.Warning(exception, "Presun nahravok zastaveny po {Moved} z {Total}", moved.Count, sounds.Count);
             _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.FMain_MoveStopped, moved.Count, sounds.Count, exception.Message));
         }
         finally

@@ -4,6 +4,7 @@ using RawBankEditor.Properties;
 using RawBankEditor.Speech;
 using RawBankEditor.Tools;
 using RawBankEditor.XML;
+using Serilog;
 using ToolsCore;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
@@ -72,6 +73,7 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         _origins.Clear();
         _journal = new BankJournal(Path.Combine(project.AbsPathToINISS, JOURNAL_PREFIX + Environment.ProcessId.ToString(CultureInfo.InvariantCulture)),
             Recycle, Utils.TryRecoverFileOrDirFromBin);
+        Log.Information("Banka {Path} otvorena ({Languages} jazykov)", project.AbsPathToBank, project.Languages.Count);
         return leftovers;
     }
 
@@ -85,6 +87,9 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
             return [];
 
         var errors = discardChanges ? _journal.Rollback() : _journal.Commit();
+        Log.Information("Banka {Path} zatvorena, zmeny na disku {Action}", Project?.AbsPathToBank, discardChanges ? "vratene" : "potvrdene");
+        if (errors.Count > 0)
+            Log.Warning("Pri zatvoreni banky sa nepodarilo {Count} operacii na disku: {Errors}", errors.Count, errors);
         _journal = null;
         Project = null;
         _newLanguages.Clear();
@@ -166,7 +171,7 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         }
         catch (Exception exception) when (exception is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(exception);
+            Log.Error(exception, "Zalohu suborov banky {Path} pred ulozenim sa nepodarilo vytvorit", project.AbsPathToBank);
             return BankSaveResult.Failed(string.Format(CultureInfo.CurrentCulture, Resources.FMain_Save_Failed, exception.Message));
         }
 
@@ -186,7 +191,8 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         catch (Exception exception)
         {
             // napr. subor len na citanie, bez opravneni na zapis, otvoreny inym programom alebo pridlhy text
-            Log.Exception(exception);
+            Log.Error(exception, "Banku {Path} sa nepodarilo ulozit (jazyky {Languages}) - subory sa vracaju do stavu pred ulozenim", project.AbsPathToBank,
+                languages.Select(lang => lang.Key));
             return BankSaveResult.Failed(transaction.TryRollback()
                 ? string.Format(CultureInfo.CurrentCulture, Resources.FMain_Save_Failed, exception.Message)
                 : string.Format(CultureInfo.CurrentCulture, Resources.FMain_Save_Failed_Rollback, exception.Message, transaction.BackupPath));
@@ -201,7 +207,11 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
             records.LoadedKey = lang.Key;
         }
 
-        return new BankSaveResult(null, Journal.Commit());
+        Log.Information("Banka {Path} ulozena (jazyky {Languages})", project.AbsPathToBank, languages.Select(lang => lang.Key));
+        var errors = Journal.Commit();
+        if (errors.Count > 0)
+            Log.Warning("Pri ulozeni banky sa {Count} odstranenych poloziek nepodarilo presunut do Kosa: {Errors}", errors.Count, errors);
+        return new BankSaveResult(null, errors);
     }
 
     /// <summary>
@@ -212,6 +222,9 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
     public List<string> DiscardLanguage(FyzLanguage language)
     {
         var errors = _journal?.Rollback(language) ?? [];
+        Log.Information("Zmeny jazyka {Language} zahodene", language.Key);
+        if (errors.Count > 0)
+            Log.Warning("Pri zahodeni zmien jazyka {Language} sa nepodarilo vratit {Count} operacii: {Errors}", language.Key, errors.Count, errors);
         ForgetLanguage(language);
         return errors;
     }
@@ -259,11 +272,11 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
                 {
                     Recycle(item);
                     recycled.Add(item);
-                    Log.Warning(string.Format(CultureInfo.InvariantCulture, "Zurnal: {0} z neukonceneho behu presunuty do Kosa", item));
+                    Log.Warning("Zurnal: {Item} z neukonceneho behu presunuty do Kosa", item);
                 }
                 catch (Exception e) when (e is IOException or UnauthorizedAccessException or OperationCanceledException)
                 {
-                    Log.Exception(e);
+                    Log.Warning(e, "Zurnal: {Item} z neukonceneho behu sa nepodarilo presunut do Kosa", item);
                 }
             }
 
@@ -274,7 +287,7 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
             }
             catch (Exception e) when (e is IOException or UnauthorizedAccessException)
             {
-                Log.Exception(e);
+                Log.Warning(e, "Zalozny priecinok zurnalu {Directory} sa nepodarilo zmazat", dir);
             }
         }
 

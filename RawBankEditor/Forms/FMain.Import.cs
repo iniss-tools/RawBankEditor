@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Xml;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -56,7 +57,7 @@ partial class FMain
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
             {
                 // zoznam chyb ponukne chybajuci priecinok vytvorit
-                Log.Exception(ex);
+                Log.Warning(ex, "Priecinok skupiny {Directory} sa pri importe nepodarilo vytvorit", directory);
                 dirErrors.Add(string.Format(CultureInfo.CurrentCulture, Resources.Groups_DirFailed, directory, ex.Message));
             }
 
@@ -130,11 +131,12 @@ partial class FMain
         }
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or XmlException or ArgumentException)
         {
-            Log.Exception(ex);
+            Log.Error(ex, "Export jazyka {Language} do {File} zlyhal", language.Key, file);
             _dialogs.ShowError(string.Format(CultureInfo.CurrentCulture, Resources.Export_Failed, ex.Message));
             return;
         }
 
+        Log.Information("Jazyk {Language} exportovany do {File} (chyba {Missing} nahravok)", language.Key, file, missing.Count);
         if (missing.Count > 0)
             _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.Export_DoneMissing, file, missing.Count, ListOf(missing)));
         else

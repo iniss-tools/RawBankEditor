@@ -1,4 +1,5 @@
 ﻿using NAudio.Wave;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -255,6 +256,7 @@ public static class SoundUtils
             }
             catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
             {
+                Log.Warning(ex, "Nahravku {Path} sa nepodarilo previest", sfe.FileInfo.FullName);
                 result.Failed.Add($"{sfe.Name}: {ex.Message}");
                 // nedokonceny cielovy subor sa zmaze, povodny ostava
                 if (created && newPath is not null && File.Exists(newPath) && File.Exists(sfe.FileInfo.FullName))

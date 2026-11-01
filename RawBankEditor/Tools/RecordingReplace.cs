@@ -1,4 +1,5 @@
 using RawBankEditor.Speech;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 
@@ -153,6 +154,7 @@ public static class RecordingReplace
             }
             catch (Exception e) when (e is IOException or UnauthorizedAccessException)
             {
+                Log.Warning(e, "Nahravku {Path} sa nepodarilo nahradit", path);
                 errors.Add($"{change.File.Name}: {e.Message}");
                 // nedokonceny zapis sa zmaze a vrati sa subor, ktory tam bol
                 if (removed)
@@ -216,7 +218,7 @@ public static class RecordingReplace
         }
         catch (Exception e) when (e is IOException or UnauthorizedAccessException)
         {
-            Log.Exception(e);
+            Log.Error(e, "Povodnu nahravku {Path} sa po chybe zapisu nepodarilo obnovit", path);
         }
     }
 }

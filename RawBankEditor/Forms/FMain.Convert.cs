@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using RawBankEditor.Properties;
 using RawBankEditor.Tools;
+using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
 using ToolsCore.Tools;
@@ -87,7 +88,7 @@ partial class FMain
         }
         catch (Exception ex)
         {
-            Log.Exception(ex);
+            Log.Error(ex, "Prevod {Count} nahravok na {Format} zlyhal", files.Count, toEwa ? "EWA" : "WAV");
             _dialogs.ShowError(ex.Message);
         }
         finally
