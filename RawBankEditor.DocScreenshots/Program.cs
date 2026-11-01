@@ -216,7 +216,7 @@ internal static class Program
 
         private static string DefaultOutDir()
         {
-            // hľadá iniss-tools-docs v niektorom nadradenom priečinku (D:\INISSTools\iniss-tools-docs)
+            // hľadá iniss-tools-docs v niektorom nadradenom priečinku (INISSTools\iniss-tools-docs)
             for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir is not null; dir = dir.Parent)
             {
                 var docs = Path.Combine(dir.FullName, "iniss-tools-docs");
