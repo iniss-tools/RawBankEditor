@@ -12,17 +12,21 @@ public partial class FAddEditGroup : Form
 {
     private readonly IEnumerable<FyzGroup> _groups;
     private readonly FyzGroup? _group;
+    private readonly bool _nameIsKey;
     private bool _autoChangeNameAndPath = true;
 
     /// <param name="groups">Skupiny jazyka - kluc, nazov a cesta musia byt voci nim jedinecne.</param>
     /// <param name="group">Upravovana skupina, pri pridani <see langword="null" />.</param>
-    public FAddEditGroup(IEnumerable<FyzGroup> groups, FyzGroup? group = null)
+    /// <param name="nameIsKey">Banka INISS2 - nazov skupiny sa neuklada, je to vzdy kluc.</param>
+    public FAddEditGroup(IEnumerable<FyzGroup> groups, FyzGroup? group = null, bool nameIsKey = false)
     {
         InitializeComponent();
         this.ApplyThemeAndFonts();
 
         _groups = groups;
         _group = group;
+        _nameIsKey = nameIsKey;
+        tbName.ReadOnly = nameIsKey;
 
         if (group == null)
         {
@@ -65,6 +69,9 @@ public partial class FAddEditGroup : Form
 
     private void TbKey_TextChanged(object sender, EventArgs e)
     {
+        if (_nameIsKey)
+            tbName.Text = tbKey.Text.Trim();
+
         if (!_autoChangeNameAndPath)
             return;
 

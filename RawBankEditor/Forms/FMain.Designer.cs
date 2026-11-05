@@ -84,6 +84,8 @@ namespace RawBankEditor.Forms
             this.tsmimSepImportExport = new System.Windows.Forms.ToolStripSeparator();
             this.tsmimImportSounds = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimExportIniss2 = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimDefaultLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimCheckRecordings = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmimAppSettings = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -237,6 +239,8 @@ namespace RawBankEditor.Forms
             this.tsmiSepImportExport = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiImportSounds = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmiExportIniss2 = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmiDefaultLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmiCheckRecordings = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbAppSettings = new ToolsCore.Icons.IconToolStripButton();
             this.tsbInfoApp = new ToolsCore.Icons.IconToolStripButton();
@@ -520,12 +524,14 @@ namespace RawBankEditor.Forms
             this.tsmimAddLanguage,
             this.tsmimEditLanguage,
             this.tsmimDeleteLanguage,
+            this.tsmimDefaultLanguage,
             this.toolStripSeparator6,
             this.tsmimConvertLangToEwa,
             this.tsmimConvertLangToWav,
             this.tsmimSepImportExport,
             this.tsmimImportSounds,
-            this.tsmimExportIniss2});
+            this.tsmimExportIniss2,
+            this.tsmimCheckRecordings});
             this.tsmimLangsSettings.Enabled = false;
             this.tsmimLangsSettings.Name = "tsmimLangsSettings";
             this.tsmimLangsSettings.IconName = "local-language";
@@ -589,6 +595,22 @@ namespace RawBankEditor.Forms
             this.tsmimExportIniss2.Name = "tsmimExportIniss2";
             this.tsmimExportIniss2.IconName = "export";
             resources.ApplyResources(this.tsmimExportIniss2, "tsmimExportIniss2");
+            // 
+            // tsmimDefaultLanguage
+            // 
+            this.tsmimDefaultLanguage.Enabled = false;
+            this.tsmimDefaultLanguage.Name = "tsmimDefaultLanguage";
+            this.tsmimDefaultLanguage.IconName = "checkmark";
+            this.tsmimDefaultLanguage.Visible = false;
+            resources.ApplyResources(this.tsmimDefaultLanguage, "tsmimDefaultLanguage");
+            // 
+            // tsmimCheckRecordings
+            // 
+            this.tsmimCheckRecordings.Enabled = false;
+            this.tsmimCheckRecordings.Name = "tsmimCheckRecordings";
+            this.tsmimCheckRecordings.IconName = "document-search";
+            this.tsmimCheckRecordings.Visible = false;
+            resources.ApplyResources(this.tsmimCheckRecordings, "tsmimCheckRecordings");
             // 
             // toolStripSeparator8
             // 
@@ -1929,12 +1951,14 @@ namespace RawBankEditor.Forms
             this.tsmiAddLanguage,
             this.tsmiEditLanguage,
             this.tsmiDeleteLanguage,
+            this.tsmiDefaultLanguage,
             this.toolStripSeparator5,
             this.tsmiConvertLangToEwa,
             this.tsmiConvertLangToWav,
             this.tsmiSepImportExport,
             this.tsmiImportSounds,
-            this.tsmiExportIniss2});
+            this.tsmiExportIniss2,
+            this.tsmiCheckRecordings});
             this.tsbLangsSettings.Enabled = false;
             this.tsbLangsSettings.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.tsbLangsSettings.Name = "tsbLangsSettings";
@@ -1999,6 +2023,22 @@ namespace RawBankEditor.Forms
             this.tsmiExportIniss2.Name = "tsmiExportIniss2";
             this.tsmiExportIniss2.IconName = "export";
             resources.ApplyResources(this.tsmiExportIniss2, "tsmiExportIniss2");
+            // 
+            // tsmiDefaultLanguage
+            // 
+            this.tsmiDefaultLanguage.Enabled = false;
+            this.tsmiDefaultLanguage.Name = "tsmiDefaultLanguage";
+            this.tsmiDefaultLanguage.IconName = "checkmark";
+            this.tsmiDefaultLanguage.Visible = false;
+            resources.ApplyResources(this.tsmiDefaultLanguage, "tsmiDefaultLanguage");
+            // 
+            // tsmiCheckRecordings
+            // 
+            this.tsmiCheckRecordings.Enabled = false;
+            this.tsmiCheckRecordings.Name = "tsmiCheckRecordings";
+            this.tsmiCheckRecordings.IconName = "document-search";
+            this.tsmiCheckRecordings.Visible = false;
+            resources.ApplyResources(this.tsmiCheckRecordings, "tsmiCheckRecordings");
             // 
             // toolStripSeparator7
             // 
@@ -2372,12 +2412,16 @@ namespace RawBankEditor.Forms
         private ToolStripSeparator tsmimSepImportExport;
         private IconToolStripMenuItem tsmimImportSounds;
         private IconToolStripMenuItem tsmimExportIniss2;
+        private IconToolStripMenuItem tsmimDefaultLanguage;
+        private IconToolStripMenuItem tsmimCheckRecordings;
         private ToolStripSeparator toolStripSeparator5;
         private IconToolStripMenuItem tsmiConvertLangToEwa;
         private IconToolStripMenuItem tsmiConvertLangToWav;
         private ToolStripSeparator tsmiSepImportExport;
         private IconToolStripMenuItem tsmiImportSounds;
         private IconToolStripMenuItem tsmiExportIniss2;
+        private IconToolStripMenuItem tsmiDefaultLanguage;
+        private IconToolStripMenuItem tsmiCheckRecordings;
         private IconToolStripMenuItem tsmimConvertSoundsToEwa;
         private IconToolStripMenuItem tsmimConvertSoundsToWav;
         private IconToolStripMenuItem cmiMoveSounds;

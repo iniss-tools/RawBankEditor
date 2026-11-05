@@ -1639,6 +1639,87 @@ namespace RawBankEditor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Predvolený jazyk.
+        /// </summary>
+        internal static string Action_DefaultLanguage {
+            get {
+                return ResourceManager.GetString("Action_DefaultLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Údaje nahrávok.
+        /// </summary>
+        internal static string Action_RecordingData {
+            get {
+                return ResourceManager.GetString("Action_RecordingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banka s viacerými jazykmi musí mať práve jeden predvolený ja....
+        /// </summary>
+        internal static string LanguageRules_DefaultRequired {
+            get {
+                return ResourceManager.GetString("LanguageRules_DefaultRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontrolujem nahrávky....
+        /// </summary>
+        internal static string CheckRecordings_Status {
+            get {
+                return ResourceManager.GetString("CheckRecordings_Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nahrávky sa nepodarilo skontrolovať. {0}.
+        /// </summary>
+        internal static string CheckRecordings_Failed {
+            get {
+                return ResourceManager.GetString("CheckRecordings_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Všetky nahrávky zodpovedajú údajom v banke ({0} zvukov)..
+        /// </summary>
+        internal static string CheckRecordings_Ok {
+            get {
+                return ResourceManager.GetString("CheckRecordings_Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} z {1} zvukov má nahrávku, ktorá nezodpovedá údajom v ban....
+        /// </summary>
+        internal static string CheckRecordings_Found {
+            get {
+                return ResourceManager.GetString("CheckRecordings_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nahrávka zvuku {0} nezodpovedá údajom v banke.
+        /// </summary>
+        internal static string Msg_RecordingChanged {
+            get {
+                return ResourceManager.GetString("Msg_RecordingChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktualizovať MD5 a dĺžku zvuku {0}.
+        /// </summary>
+        internal static string Msg_UpdateRecordingData {
+            get {
+                return ResourceManager.GetString("Msg_UpdateRecordingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Úprava zvuku nahrávok.
         /// </summary>
         internal static string Action_AdjustSounds {

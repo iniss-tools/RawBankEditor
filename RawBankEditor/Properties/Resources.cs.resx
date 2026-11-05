@@ -717,6 +717,36 @@ Původní soubory jsou ve složce:
 
 INISS2 potřebuje právě jeden výchozí jazyk. Při exportu ostatních jazyků odpovězte Ne.</value>
   </data>
+  <data name="Action_DefaultLanguage" xml:space="preserve">
+    <value>Výchozí jazyk</value>
+  </data>
+  <data name="Action_RecordingData" xml:space="preserve">
+    <value>Údaje nahrávek</value>
+  </data>
+  <data name="LanguageRules_DefaultRequired" xml:space="preserve">
+    <value>Banka s více jazyky musí mít právě jeden výchozí jazyk. Nastavíte jej v nabídce Nastavení jazyků.</value>
+  </data>
+  <data name="CheckRecordings_Status" xml:space="preserve">
+    <value>Kontroluji nahrávky...</value>
+  </data>
+  <data name="CheckRecordings_Failed" xml:space="preserve">
+    <value>Nahrávky se nepodařilo zkontrolovat.
+{0}</value>
+  </data>
+  <data name="CheckRecordings_Ok" xml:space="preserve">
+    <value>Všechny nahrávky odpovídají údajům v bance ({0} zvuků).</value>
+  </data>
+  <data name="CheckRecordings_Found" xml:space="preserve">
+    <value>{0} z {1} zvuků má nahrávku, která neodpovídá údajům v bance.
+
+Aktualizovat MD5 a délku všech? Při odpovědi Ne zůstanou v seznamu chyb.</value>
+  </data>
+  <data name="Msg_RecordingChanged" xml:space="preserve">
+    <value>Nahrávka zvuku {0} neodpovídá údajům v bance</value>
+  </data>
+  <data name="Msg_UpdateRecordingData" xml:space="preserve">
+    <value>Aktualizovat MD5 a délku zvuku {0}</value>
+  </data>
   <data name="Action_AdjustSounds" xml:space="preserve">
     <value>Úprava zvuku nahrávek</value>
   </data>

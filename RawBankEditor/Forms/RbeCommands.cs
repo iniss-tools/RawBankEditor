@@ -50,6 +50,8 @@ internal static class RbeCommands
     public static CommandInfo ConvertLanguageToWav => Fixed(nameof(ConvertLanguageToWav));
     public static CommandInfo ImportSounds => Fixed(nameof(ImportSounds));
     public static CommandInfo ExportIniss2 => Fixed(nameof(ExportIniss2));
+    public static CommandInfo SetDefaultLanguage => Fixed(nameof(SetDefaultLanguage));
+    public static CommandInfo CheckRecordings => Fixed(nameof(CheckRecordings));
     public static CommandInfo AddGroup => Fixed(nameof(AddGroup), Resources.Cmd_Group_Groups);
     public static CommandInfo EditGroup => Fixed(nameof(EditGroup), Resources.Cmd_Group_Groups);
     public static CommandInfo DeleteGroup => Fixed(nameof(DeleteGroup), Resources.Cmd_Group_Groups);
@@ -75,7 +77,7 @@ internal static class RbeCommands
         Open, Save, SaveAll, Undo, Redo, AddSound, DeleteSounds, MoveSounds, RewriteMode, WrapTextSoundCol,
         GoBack, GoForward, Search, AddLanguage, EditLanguage, DeleteLanguage, AppSettings, HighlightProblem, ResolveProblem,
         AdjustSounds, GenerateSounds, GenerateGroup, GenerateLanguage, GenerateMissing, ChangeVoice, IsolateSounds, TranscribeSounds, VoiceProfile, Voices, Prosody, Pronunciation, PlaySequence, StopPlayback,
-        ConvertSoundsToEwa, ConvertSoundsToWav, ConvertLanguageToEwa, ConvertLanguageToWav, ImportSounds, ExportIniss2,
+        ConvertSoundsToEwa, ConvertSoundsToWav, ConvertLanguageToEwa, ConvertLanguageToWav, ImportSounds, ExportIniss2, SetDefaultLanguage, CheckRecordings,
         AddGroup, EditGroup, DeleteGroup, ConvertGroupToEwa, ConvertGroupToWav, OpenInExplorer, PlayFile, RenameFile, DeleteFile,
         ConvertFilesToEwa, ConvertFilesToWav, GenerateMissingFromErrors, InfoApp, Updates, CheckUpdates, ShowLogs
     ];

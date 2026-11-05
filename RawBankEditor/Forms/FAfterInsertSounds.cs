@@ -11,6 +11,7 @@ public partial class FAfterInsertSounds : Form
 {
     // hlavne okno - do jeho historie ide akcia pridania zvukov
     private readonly FMain _main;
+    private readonly bool _nameIsKey;
 
     private FAfterInsertSounds(FMain main, FyzSound sound)
     {
@@ -21,10 +22,28 @@ public partial class FAfterInsertSounds : Form
         NewSounds = [sound];
         fyzSoundBindingSource.DataSource = NewSounds;
 
+        // banka INISS2 nazov zvuku neuklada, je to vzdy kluc
+        _nameIsKey = LanguageRules.NameIsKey(sound.Language);
+        cSoundName.ReadOnly = _nameIsKey;
+
         // kluc a nazov sa kontroluju priebezne - rovnake pravidla ako v okne Pridat zvuk
         NewSounds.ListChanged += (_, _) => BeginInvoke(ShowProblems);
-        dgvFilesSounds.CellEndEdit += (_, _) => ShowProblems();
+        dgvFilesSounds.CellEndEdit += (_, _) =>
+        {
+            SyncNamesWithKeys();
+            ShowProblems();
+        };
         Shown += (_, _) => ShowProblems();
+    }
+
+    private void SyncNamesWithKeys()
+    {
+        if (!_nameIsKey)
+            return;
+
+        foreach (var sound in NewSounds)
+            sound.Name = sound.Key;
+        dgvFilesSounds.Invalidate();
     }
 
     /// <summary>

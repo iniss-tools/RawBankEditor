@@ -218,6 +218,13 @@ partial class FMain
 
         public PropertyType Type { get; set; }
 
+        // v banke INISS2 je nazov zvuku vzdy jeho kluc
+        private void SyncNameWithKey()
+        {
+            if (LanguageRules.NameIsKey(Sound.Language))
+                Sound.Name = Sound.Key;
+        }
+
         public override void Undo()
         {
             Form.SelectGroup(Sound.Group);
@@ -229,6 +236,7 @@ partial class FMain
                     break;
                 case PropertyType.Key:
                     Sound.Key = OldValue;
+                    SyncNameWithKey();
                     break;
                 case PropertyType.FileName:
                     Sound.FileName = OldValue;
@@ -260,6 +268,7 @@ partial class FMain
                     break;
                 case PropertyType.Key:
                     Sound.Key = NewValue;
+                    SyncNameWithKey();
                     break;
                 case PropertyType.FileName:
                     Sound.FileName = NewValue;

@@ -66,7 +66,12 @@ public partial class FMain
         Add(RbeCommands.ConvertLanguageToWav, () => ConvertCurrentLanguage(false), () => LanguageReady && CurrentLanguage != null,
             tsmimConvertLangToWav, tsmiConvertLangToWav);
         Add(RbeCommands.ImportSounds, DoImportSounds, () => LanguageReady && CurrentLanguage != null, tsmimImportSounds, tsmiImportSounds);
-        Add(RbeCommands.ExportIniss2, DoExportIniss2, () => LanguageReady && CurrentLanguage != null, tsmimExportIniss2, tsmiExportIniss2);
+        // banka INISS2 uz FyzBank.xml ma - export je len pre banku INISS 3.39
+        Add(RbeCommands.ExportIniss2, DoExportIniss2, () => LanguageReady && CurrentLanguage != null && !IsIniss2, tsmimExportIniss2, tsmiExportIniss2);
+        Add(RbeCommands.SetDefaultLanguage, DoSetDefaultLanguage, () => IsIniss2 && CurrentLanguage is { IsBasic: false }, tsmimDefaultLanguage,
+            tsmiDefaultLanguage);
+        Add(RbeCommands.CheckRecordings, DoCheckRecordings, () => LanguageReady && IsIniss2 && CurrentLanguage != null && !_checkingRecordings,
+            tsmimCheckRecordings, tsmiCheckRecordings);
 
         Add(RbeCommands.AddGroup, DoAddGroup, ready, tsbAddGroup, cmiAddGroup);
         Add(RbeCommands.EditGroup, DoEditGroup, ready, tsbEditGroup, cmiEditGroup);

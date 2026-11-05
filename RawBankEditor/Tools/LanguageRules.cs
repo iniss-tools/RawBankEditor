@@ -1,6 +1,9 @@
+using System.Xml;
 using RawBankEditor.Properties;
+using RawBankEditor.Services;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss.Tools;
+using ToolsCore.Iniss2.RawBank;
 
 namespace RawBankEditor.Tools;
 
@@ -68,16 +71,37 @@ public static class LanguageRules
     public static string FolderName(string relativePath) => relativePath.TrimEnd('\\');
 
     /// <summary>
-    /// Cesta k suboru so zvukmi jazyka (FYZZVUK.DAT).
+    /// Jazyky lezia v tom istom priecinku banky.
+    /// </summary>
+    public static bool SameFolder(FyzLanguage a, FyzLanguage b) =>
+        string.Equals(FolderName(a.RelativePath), FolderName(b.RelativePath), StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Jazyk banky INISS2 - nazvy skupin a zvukov sa neukladaju, nazov je vzdy kluc.
+    /// </summary>
+    public static bool NameIsKey(FyzLanguage language) => string.Equals(language.FileDefName, FyzBankXmlWriter.FileName, StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Server INISS2 banku s viacerymi jazykmi bez predvoleneho jazyka nenacita.
+    /// </summary>
+    /// <returns>Text chyby alebo <see langword="null" />, ak je predvoleny jazyk v poriadku.</returns>
+    public static string? DefaultLanguageProblem(IReadOnlyCollection<FyzLanguage> languages) =>
+        languages.Count > 1 && languages.Count(l => l.IsBasic) != 1 ? Resources.LanguageRules_DefaultRequired : null;
+
+    /// <summary>
+    /// Cesta k suboru so zvukmi jazyka (FYZZVUK.DAT, v INISS2 FyzBank.xml).
     /// </summary>
     public static string SoundsFile(string pathToBank, FyzLanguage language)
         => PathUtils.CombinePath(pathToBank, language.RelativePath, language.FileDefName)!;
 
     /// <summary>
-    /// Zisti, ci sa skupiny a zvuky jazyka v pamati lisia od jeho suboru FYZZVUK.DAT. Nenacitany jazyk
+    /// Zisti, ci sa skupiny a zvuky jazyka v pamati lisia od jeho suboru so zvukmi. Nenacitany jazyk
     /// (<see cref="FyzLanguage.Groups" /> je <see langword="null" />) sa nelisi; jazyk bez suboru sa lisi, len ak ma skupiny.
     /// </summary>
-    public static bool SoundsDiffer(string pathToBank, FyzLanguage language)
+    /// <param name="pathToBank">priecinok banky</param>
+    /// <param name="language">jazyk</param>
+    /// <param name="store">sposob ulozenia banky; predvolene INISS 3.39</param>
+    public static bool SoundsDiffer(string pathToBank, FyzLanguage language, IBankStore? store = null)
     {
         if (language.Groups is null)
             return false;
@@ -88,9 +112,9 @@ public static class LanguageRules
         var saved = new FyzLanguage(language.Key, language.Name, language.FileDefName, language.RelativePath);
         try
         {
-            RawBankParser.ReadFyzZvukFile(pathToBank, saved);
+            (store ?? BankDatStore.Instance).ReadSounds(pathToBank, saved);
         }
-        catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or XmlException)
         {
             return true;
         }
@@ -99,16 +123,21 @@ public static class LanguageRules
     }
 
     /// <summary>
-    /// Zisti, ci sa zoznam jazykov v pamati lisi od suboru FYZBANK.DAT.
+    /// Zisti, ci sa zoznam jazykov v pamati lisi od banky na disku.
     /// </summary>
-    public static bool BankDiffers(string pathToBank, IReadOnlyList<FyzLanguage> languages)
+    /// <param name="pathToBank">priecinok banky</param>
+    /// <param name="languages">jazyky v pamati</param>
+    /// <param name="store">sposob ulozenia banky; predvolene INISS 3.39</param>
+    public static bool BankDiffers(string pathToBank, IReadOnlyList<FyzLanguage> languages, IBankStore? store = null)
     {
+        store ??= BankDatStore.Instance;
+
         List<FyzLanguage> saved;
         try
         {
-            saved = RawBankParser.ReadFyzBankFile(pathToBank, out _);
+            saved = store.ReadLanguages(pathToBank);
         }
-        catch (Exception e) when (e is IOException or UnauthorizedAccessException)
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or XmlException)
         {
             return true;
         }
@@ -116,18 +145,23 @@ public static class LanguageRules
         if (saved.Count != languages.Count)
             return true;
 
+        // INISS2 zoznam jazykov nema - z disku pridu zoradene podla priecinkov
+        var current = store.IsIniss2 ? languages.OrderBy(l => FolderName(l.RelativePath), StringComparer.OrdinalIgnoreCase).ToList() : languages;
         for (var i = 0; i < saved.Count; i++)
         {
             var a = saved[i];
-            var b = languages[i];
-            if (a.Key != b.Key || a.Name != b.Name || a.RelativePath != b.RelativePath || a.FileDefName != b.FileDefName)
+            var b = current[i];
+            if (a.Key != b.Key || a.Name != b.Name || a.RelativePath != b.RelativePath || a.FileDefName != b.FileDefName || a.IsBasic != b.IsBasic)
                 return true;
         }
 
         return false;
     }
 
-    private static bool SameGroups(IList<FyzGroup> a, IList<FyzGroup> b)
+    /// <summary>
+    /// Skupiny a zvuky jazykov su rovnake (nazvy, cesty, dlzky a MD5 nahravok).
+    /// </summary>
+    public static bool SameGroups(IList<FyzGroup> a, IList<FyzGroup> b)
     {
         if (a.Count != b.Count)
             return false;
@@ -143,7 +177,7 @@ public static class LanguageRules
             {
                 var sa = ga.Sounds[j];
                 var sb = gb.Sounds[j];
-                if (sa.Key != sb.Key || sa.Name != sb.Name || sa.Text != sb.Text || sa.Duration != sb.Duration
+                if (sa.Key != sb.Key || sa.Name != sb.Name || sa.Text != sb.Text || sa.Duration != sb.Duration || sa.Md5 != sb.Md5
                     || StoredPath(sa) != StoredPath(sb))
                     return false;
             }

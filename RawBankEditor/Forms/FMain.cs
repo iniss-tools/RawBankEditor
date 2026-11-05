@@ -305,6 +305,7 @@ public partial class FMain : ExForm
             _dialogs.ShowWarning(string.Format(CultureInfo.CurrentCulture, Resources.FMain_JournalLeftovers, ListOf(leftovers)));
         dgvErrors.DataSource = null;
         Text = @$"{Application.ProductName} - {_bank.Project!.AbsPathToINISS}";
+        ApplyBankKind();
 
         _langAlreadySet = true;
         tscboxLanguages.ComboBox.DataSource = _bank.Project!.Languages;
@@ -573,9 +574,12 @@ public partial class FMain : ExForm
         progress.Report(new ProgressStatus(Resources.FMain_Progress_FileSystem, 0));
         var root = RawBankExplorer.ExploreFileSystem(project.AbsPathToBank);
 
-        // zoznam zvukov jazyka z FYZZVUK.DAT
+        // zoznam zvukov jazyka zo suboru jazyka
         if (readFile)
-            RawBankParser.ReadFyzZvukFile(project.AbsPathToBank, lang, progress);
+        {
+            project.Store.ReadSounds(project.AbsPathToBank, lang, progress);
+            project.Store.RememberRecordings(project.AbsPathToBank, lang);
+        }
 
         // spojenie suborov so zoznamom zvukov
         progress.Report(new ProgressStatus(Resources.FMain_Progress_Merging, 0));
@@ -626,6 +630,7 @@ public partial class FMain : ExForm
             return;
         }
 
+        AddRecordingMessages(CurrentLanguage!);
         _messages.Clear();
         foreach (var msg in _bank.Project!.Messages[CurrentLanguage!])
             _messages.Add(msg);
@@ -1108,7 +1113,12 @@ public partial class FMain : ExForm
         if (form.ShowDialog(this) != DialogResult.OK || !ConfirmLeaveLanguage())
             return;
 
-        var lang = new FyzLanguage(form.LanguageKey, form.LanguageName, form.LanguageRelativePath) { Groups = [] };
+        var lang = new FyzLanguage(form.LanguageKey, form.LanguageName, project.Store.LanguageFileName, form.LanguageRelativePath)
+        {
+            Groups = [],
+            // v banke INISS2 je prvy jazyk predvoleny, dalsie len na ziadost
+            IsBasic = project.Store.IsIniss2 && project.Languages.Count == 0
+        };
         var directory = Path.TrimEndingDirectorySeparator(lang.GetAbsPath(project.AbsPathToBank));
         string? createdDirectory = null;
         try
@@ -1823,7 +1833,8 @@ public partial class FMain : ExForm
         if (s == _cellOldValue)
             return;
 
-        var action = new EditSoundAction(this, (FyzSound)dgvSounds.Rows[e.RowIndex].DataBoundItem!);
+        var sound = (FyzSound)dgvSounds.Rows[e.RowIndex].DataBoundItem!;
+        var action = new EditSoundAction(this, sound);
         action.Type = dgvSounds.Columns[e.ColumnIndex].Name switch
         {
             nameof(cSoundKey) => PropertyType.Key,
@@ -1836,6 +1847,8 @@ public partial class FMain : ExForm
 
         action.OldValue = _cellOldValue;
         action.NewValue = s;
+        if (action.Type == PropertyType.Key && LanguageRules.NameIsKey(sound.Language))
+            sound.Name = sound.Key;
 
         RegisterNewAction(action);
         CheckProjectState();
@@ -2159,12 +2172,20 @@ public partial class FMain : ExForm
     {
         timerToCheck.Stop();
         timerToCheck.Enabled = false;
+        RefreshMessages();
+    }
 
+    /// <summary>
+    /// Znovu zostavi zoznam chyb otvoreneho jazyka.
+    /// </summary>
+    private void RefreshMessages()
+    {
         // jazyk sa nenacital (chyba pri nacitani) - nie je co porovnavat
         if (CurrentLanguage is null || _bank.Project?.Messages.ContainsKey(CurrentLanguage) != true)
             return;
 
         RawBankExplorer.MergeFilesAndData(Root, CurrentLanguage, _bank.Project.Messages, _bank.PathToBank, true);
+        AddRecordingMessages(CurrentLanguage);
 
         _messages.Clear();
         try

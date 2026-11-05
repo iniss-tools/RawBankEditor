@@ -4659,6 +4659,30 @@
   <data name="&gt;&gt;tsmimExportIniss2.Type" xml:space="preserve">
     <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="tsmimDefaultLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimDefaultLanguage.Text" xml:space="preserve">
+    <value>&amp;Nastaviť ako predvolený jazyk</value>
+  </data>
+  <data name="&gt;&gt;tsmimDefaultLanguage.Name" xml:space="preserve">
+    <value>tsmimDefaultLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmimDefaultLanguage.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmimCheckRecordings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmimCheckRecordings.Text" xml:space="preserve">
+    <value>S&amp;kontrolovať nahrávky...</value>
+  </data>
+  <data name="&gt;&gt;tsmimCheckRecordings.Name" xml:space="preserve">
+    <value>tsmimCheckRecordings</value>
+  </data>
+  <data name="&gt;&gt;tsmimCheckRecordings.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 6</value>
   </data>
@@ -6283,6 +6307,30 @@
     <value>tsmiExportIniss2</value>
   </data>
   <data name="&gt;&gt;tsmiExportIniss2.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmiDefaultLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiDefaultLanguage.Text" xml:space="preserve">
+    <value>Nastaviť ako predvolený jazyk</value>
+  </data>
+  <data name="&gt;&gt;tsmiDefaultLanguage.Name" xml:space="preserve">
+    <value>tsmiDefaultLanguage</value>
+  </data>
+  <data name="&gt;&gt;tsmiDefaultLanguage.Type" xml:space="preserve">
+    <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="tsmiCheckRecordings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>264, 22</value>
+  </data>
+  <data name="tsmiCheckRecordings.Text" xml:space="preserve">
+    <value>Skontrolovať nahrávky...</value>
+  </data>
+  <data name="&gt;&gt;tsmiCheckRecordings.Name" xml:space="preserve">
+    <value>tsmiCheckRecordings</value>
+  </data>
+  <data name="&gt;&gt;tsmiCheckRecordings.Type" xml:space="preserve">
     <value>ToolsCore.Icons.IconToolStripMenuItem, ToolsCore, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">

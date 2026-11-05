@@ -204,6 +204,12 @@
   <data name="tsmimExportIniss2.Text" xml:space="preserve">
     <value>E&amp;xportovat jazyk pro INISS2...</value>
   </data>
+  <data name="tsmimDefaultLanguage.Text" xml:space="preserve">
+    <value>&amp;Nastavit jako výchozí jazyk</value>
+  </data>
+  <data name="tsmimCheckRecordings.Text" xml:space="preserve">
+    <value>&amp;Zkontrolovat nahrávky...</value>
+  </data>
   <data name="tsmimAppSettings.Text" xml:space="preserve">
     <value>Nastavení &amp;programu</value>
   </data>
@@ -437,6 +443,12 @@
   </data>
   <data name="tsmiExportIniss2.Text" xml:space="preserve">
     <value>Exportovat jazyk pro INISS2...</value>
+  </data>
+  <data name="tsmiDefaultLanguage.Text" xml:space="preserve">
+    <value>Nastavit jako výchozí jazyk</value>
+  </data>
+  <data name="tsmiCheckRecordings.Text" xml:space="preserve">
+    <value>Zkontrolovat nahrávky...</value>
   </data>
   <data name="tsbAppSettings.Text" xml:space="preserve">
     <value>Nastavení programu</value>

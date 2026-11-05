@@ -721,6 +721,36 @@ Odstrániť aj priečinok skupiny s nahrávkami? Do koša sa presunie pri ulože
 
 INISS2 potrebuje práve jeden predvolený jazyk. Pri exporte ostatných jazykov odpovedzte Nie.</value>
   </data>
+  <data name="Action_DefaultLanguage" xml:space="preserve">
+    <value>Predvolený jazyk</value>
+  </data>
+  <data name="Action_RecordingData" xml:space="preserve">
+    <value>Údaje nahrávok</value>
+  </data>
+  <data name="LanguageRules_DefaultRequired" xml:space="preserve">
+    <value>Banka s viacerými jazykmi musí mať práve jeden predvolený jazyk. Nastavíte ho v ponuke Nastavenia jazykov.</value>
+  </data>
+  <data name="CheckRecordings_Status" xml:space="preserve">
+    <value>Kontrolujem nahrávky...</value>
+  </data>
+  <data name="CheckRecordings_Failed" xml:space="preserve">
+    <value>Nahrávky sa nepodarilo skontrolovať.
+{0}</value>
+  </data>
+  <data name="CheckRecordings_Ok" xml:space="preserve">
+    <value>Všetky nahrávky zodpovedajú údajom v banke ({0} zvukov).</value>
+  </data>
+  <data name="CheckRecordings_Found" xml:space="preserve">
+    <value>{0} z {1} zvukov má nahrávku, ktorá nezodpovedá údajom v banke.
+
+Aktualizovať MD5 a dĺžku všetkých? Pri odpovedi Nie ostanú v zozname chýb.</value>
+  </data>
+  <data name="Msg_RecordingChanged" xml:space="preserve">
+    <value>Nahrávka zvuku {0} nezodpovedá údajom v banke</value>
+  </data>
+  <data name="Msg_UpdateRecordingData" xml:space="preserve">
+    <value>Aktualizovať MD5 a dĺžku zvuku {0}</value>
+  </data>
   <data name="Action_AdjustSounds" xml:space="preserve">
     <value>Úprava zvuku nahrávok</value>
   </data>

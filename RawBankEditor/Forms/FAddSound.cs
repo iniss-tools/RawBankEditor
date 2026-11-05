@@ -11,6 +11,7 @@ public partial class FAddSound : Form
 {
     private bool _autoChangeNameAndFile = true;
     private readonly string _pathToBank;
+    private readonly bool _nameIsKey;
 
     public FyzSound Sound { get; private set; } = null!;
     private FyzGroup Group { get; }
@@ -32,6 +33,10 @@ public partial class FAddSound : Form
 
         Group = group ?? throw new ArgumentNullException(nameof(group));
         File = file;
+
+        // banka INISS2 nazov zvuku neuklada, je to vzdy kluc
+        _nameIsKey = LanguageRules.NameIsKey(group.Language);
+        tbName.ReadOnly = _nameIsKey;
 
         if (file is not null)
         {
@@ -118,6 +123,9 @@ public partial class FAddSound : Form
 
     private void TbKey_TextChanged(object sender, EventArgs e)
     {
+        if (_nameIsKey)
+            tbName.Text = tbKey.Text;
+
         if (!_autoChangeNameAndFile)
             return;
 

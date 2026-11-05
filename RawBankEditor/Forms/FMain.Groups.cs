@@ -12,7 +12,7 @@ partial class FMain
     private void DoAddGroup()
     {
         var language = CurrentLanguage!;
-        var form = new FAddEditGroup(language.Groups);
+        var form = new FAddEditGroup(language.Groups, nameIsKey: LanguageRules.NameIsKey(language));
         if (form.ShowDialog(this) != DialogResult.OK)
             return;
 
@@ -40,7 +40,7 @@ partial class FMain
             return;
 
         var group = (FyzGroup)dgvGroups.SelectedRows[0].DataBoundItem!;
-        var form = new FAddEditGroup(group.Language.Groups, group);
+        var form = new FAddEditGroup(group.Language.Groups, group, LanguageRules.NameIsKey(group.Language));
         if (form.ShowDialog(this) != DialogResult.OK)
             return;
 

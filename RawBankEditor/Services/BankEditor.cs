@@ -128,12 +128,12 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
     /// <summary>
     /// Zoznam jazykov sa lisi od ulozeneho FYZBANK.DAT.
     /// </summary>
-    public bool LanguageListChanged() => LanguageRules.BankDiffers(PathToBank, Project!.Languages);
+    public bool LanguageListChanged() => LanguageRules.BankDiffers(PathToBank, Project!.Languages, Project.Store);
 
     /// <summary>
-    /// Zoznam zvukov jazyka sa lisi od jeho ulozeneho FYZZVUK.DAT.
+    /// Zoznam zvukov jazyka sa lisi od jeho ulozeneho suboru so zvukmi.
     /// </summary>
-    public bool SoundsChanged(FyzLanguage language) => LanguageRules.SoundsDiffer(PathToBank, language);
+    public bool SoundsChanged(FyzLanguage language) => LanguageRules.SoundsDiffer(PathToBank, language, Project!.Store);
 
     /// <summary>
     /// Zapise FYZBANK.DAT a FYZZVUK.DAT otvoreneho jazyka (alebo vsetkych nacitanych jazykov) a novych jazykov, aby
@@ -144,6 +144,10 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
     public BankSaveResult Save(bool allLanguages, FyzLanguage? loadedLanguage)
     {
         var project = Project ?? throw new InvalidOperationException("Banka nie je otvorena.");
+        var store = project.Store;
+
+        if (store.IsIniss2 && LanguageRules.DefaultLanguageProblem(project.Languages) is { } problem)
+            return BankSaveResult.Failed(problem);
 
         // nenacitany jazyk (aj po chybe nacitania) sa nezapisuje - na disku ostava jeho subor
         var languages = project.Languages
@@ -162,8 +166,7 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
         try
         {
             transaction = new FileTransaction(
-                languages.Select(lang => RawBankParser.FyzZvukFile(project.AbsPathToBank, lang))
-                    .Prepend(RawBankParser.FyzBankFile(project.AbsPathToBank))
+                store.FilesToSave(project.AbsPathToBank, project.Languages, languages)
                     .Concat(origins.SelectMany(o => new[]
                     {
                         BankAiFolder.FileOf(project.AbsPathToINISS, o.Key.Key), BankAiFolder.FileOf(project.AbsPathToINISS, o.Value.LoadedKey)
@@ -177,16 +180,20 @@ internal sealed class BankEditor(AppSession<RawBankEditorConfig, RawBankEditorSt
 
         try
         {
-            RawBankParser.WriteFyzBankFile(project.AbsPathToBank, project.Languages.ToList());
+            store.WriteLanguages(project.AbsPathToBank, project.Languages);
 
             foreach (var lang in languages)
             {
                 Directory.CreateDirectory(lang.GetAbsPath(project.AbsPathToBank));
-                RawBankParser.WriteFyzZvukFile(project.AbsPathToBank, lang);
+                store.WriteSounds(project.AbsPathToBank, lang);
             }
 
             foreach (var (lang, records) in origins)
                 BankAiFolder.SaveRecords(project.AbsPathToINISS, lang.Key, records.LoadedKey, records.OriginsForSave(lang), records.TextsForSave(lang));
+
+            // jazyk odstraneny len zo zoznamu: subor jazyka ide do Kosa pri potvrdeni zurnalu, nahravky ostavaju
+            foreach (var file in store.RemovedLanguageFiles(project.AbsPathToBank, project.Languages))
+                Journal.Delete(file, null);
         }
         catch (Exception exception)
         {
