@@ -1,3 +1,5 @@
+using RawBankEditor.Speech.Piper;
+
 namespace RawBankEditor.Speech;
 
 /// <summary>

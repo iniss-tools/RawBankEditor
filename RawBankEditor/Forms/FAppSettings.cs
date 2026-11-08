@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using ExControls;
 using RawBankEditor.Properties;
 using RawBankEditor.Speech;
+using RawBankEditor.Speech.Piper;
 using RawBankEditor.XML;
 using ToolsCore;
 using ToolsCore.Commands;

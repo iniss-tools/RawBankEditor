@@ -38,18 +38,3 @@ public partial class FScope : Form
 
     private void BOK_Click(object? sender, EventArgs e) => DialogResult = DialogResult.OK;
 }
-
-/// <summary>
-/// Ktore nahravky spracovat.
-/// </summary>
-public enum SoundScope
-{
-    /// <summary>Vybrane zvuky.</summary>
-    Selected,
-
-    /// <summary>Otvorena skupina.</summary>
-    Group,
-
-    /// <summary>Cely jazyk.</summary>
-    Language
-}

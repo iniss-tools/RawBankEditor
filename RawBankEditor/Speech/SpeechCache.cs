@@ -2,7 +2,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using RawBankEditor.Tools;
 using Serilog;
-using ToolsCore.Iniss.Tools;
 
 namespace RawBankEditor.Speech;
 

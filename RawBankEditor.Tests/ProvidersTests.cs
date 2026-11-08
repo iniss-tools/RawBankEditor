@@ -2,6 +2,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Xml.Linq;
 using RawBankEditor.Speech;
+using RawBankEditor.Speech.Piper;
 using RawBankEditor.Tools;
 
 namespace RawBankEditor.Tests;
