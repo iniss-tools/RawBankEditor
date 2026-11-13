@@ -11,6 +11,13 @@ Pravidlá desktopových programov (WinForms, texty v `Resources`, ručné `*.Des
 - Ukladanie banky je transakčné (`ToolsCore.Iniss/Tools/FileTransaction`) – nové súbory banky patria do zoznamu v `BankEditor.Save`. Kódovanie EWA↔WAV len cez `EwaCodec` (ToolsCore.Iniss).
 - Súbory banky sa čítajú a zapisujú len cez `RawBankProject.Store` (`Services/IBankStore`): `BankDatStore` pre 3.39, `BankXmlStore` pre INISS2. Vlastnosti INISS2 sú vo `Forms/FMain.Iniss2.cs`: názov skupiny a zvuku sa rovná kľúču (`LanguageRules.NameIsKey`, stĺpec a polia názvu sú len na čítanie, pri uložení sa názvy zjednotia), pri viacerých jazykoch je povinný práve jeden predvolený (`IsBasic`, `LanguageRules.DefaultLanguageProblem`). `FyzBank.xml` sa bez zmeny neprepisuje (jeho MD5 ide ústredni AK Signal), MD5 zvuku sa pri uložení prepočíta len pri nahrávke zmenenej od načítania jazyka; starší nesúlad ukáže až príkaz Skontrolovať nahrávky (`Tools/RecordingCheck`, správa `RecordingChanged`) a sám sa neopraví – server hodnotu neoveruje.
 - `Speech/` – syntéza a prepis reči (ElevenLabs, Azure, Piper): HTTP cez `SpeechHttp` (opakovanie pri 429/5xx, chyby ako `SpeechException`, log bez kľúčov, tiel a dotazu URL), Piper ako proces (`PiperClient`, hlasy `PiperVoiceCatalog`), vyrovnávacia pamäť `SpeechCache`, údaje jazyka v `<INISS>\.rbe-ai` (`BankAiFolder`: hlas, intonácia, výslovnosť, pôvod nahrávok). Kľúče služieb sú v nastaveniach šifrované DPAPI (`UserSecret`) a nikdy sa nelogujú.
+- Hlavné okno má ukotviteľné panely ExControls `ExDockManager` (`Forms/FMain.Docking.cs`, spoločné časti
+  `ToolsCore.Tools.AppDock`): návrh okna má časti v `SplitContainer`och s nadpismi, za behu idú panely nástrojov
+  a tabuľky do panelov `Groups`, `Explorer` (vľavo pod sebou) a `Errors` (dole), zoznam zvukov do `Document`
+  a `splitContainer1` s nadpismi a tlačidlom zbalenia sa zahodí. Kľúče panelov sú v uloženom rozložení
+  (`ConfigBase.DockLayout`, ukladá sa pri `FormClosed`) – nemeniť; panely sa pridávajú pred `ApplyThemeAndFonts`,
+  rozloženie sa obnoví až po ňom. Konštruktor `FMain` zapisuje config.xml pri zmene zalamovania textu – testy okna
+  nastavujú `WrapSoundText = false`.
 - Príkazy hlavného okna cez katalóg `RbeCommands` (ID = názov prvku skratky v config.xml, nemeniť).
 
 ## Príkazy

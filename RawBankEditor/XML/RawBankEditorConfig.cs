@@ -12,22 +12,8 @@ namespace RawBankEditor.XML;
 public record RawBankEditorConfig() : ConfigBase
 {
 
-
-    [XmlElement("ShowErrorsWindow")]
-    [DefaultValue(true)]
-    public bool ShowErrorsWindow { get; set; } = true;
-
-    [XmlElement("LeftPanelWidth")]
-    [DefaultValue(-1)]
-    public int LeftPanelWidth { get; set; } = -1;
-
-    [XmlElement("GroupPanelWidth")]
-    [DefaultValue(-1)]
-    public int GroupPanelWidth { get; set; } = -1;
-
-    [XmlElement("ErrorPanelWidth")]
-    [DefaultValue(-1)]
-    public int ErrorPanelWidth { get; set; } = -1;
+    // rozlozenie panelov hlavneho okna je v ConfigBase.DockLayout (predtym ShowErrorsWindow a sirky panelov - starsi
+    // config.xml ich obsahuje, XmlSerializer nezname prvky vynecha)
 
     [XmlElement("AutoRecalculateSoundDuration")]
     [DefaultValue(true)]
@@ -62,10 +48,6 @@ public record RawBankEditorConfig() : ConfigBase
 
     protected RawBankEditorConfig(RawBankEditorConfig original) : base(original)
     {
-        ShowErrorsWindow = original.ShowErrorsWindow;
-        LeftPanelWidth = original.LeftPanelWidth;
-        GroupPanelWidth = original.GroupPanelWidth;
-        ErrorPanelWidth = original.ErrorPanelWidth;
         AutoRecalculateSoundDuration = original.AutoRecalculateSoundDuration;
         AutoInsertSoundData = original.AutoInsertSoundData;
         ShowAfterInsertSoundDialog = original.ShowAfterInsertSoundDialog;

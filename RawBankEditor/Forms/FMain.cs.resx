@@ -555,4 +555,13 @@
   <data name="tsmimShowLogs.Text" xml:space="preserve">
     <value>Otevřít složku s logy</value>
   </data>
+  <data name="tsmimShowGroups.Text" xml:space="preserve">
+    <value>&amp;Skupiny zvuků</value>
+  </data>
+  <data name="tsmimShowExplorer.Text" xml:space="preserve">
+    <value>&amp;Průzkumník souborů</value>
+  </data>
+  <data name="tsmimResetLayout.Text" xml:space="preserve">
+    <value>&amp;Obnovit rozložení okna</value>
+  </data>
 </root>

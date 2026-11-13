@@ -1262,4 +1262,25 @@ Text: {3}</value>
   <data name="Cmd_Group_Errors" xml:space="preserve">
     <value>Zoznam chýb</value>
   </data>
+  <data name="Panel_Groups" xml:space="preserve">
+    <value>Skupiny zvukov</value>
+  </data>
+  <data name="Panel_Explorer" xml:space="preserve">
+    <value>Prieskumník súborov</value>
+  </data>
+  <data name="Panel_Errors" xml:space="preserve">
+    <value>Zoznam chýb</value>
+  </data>
+  <data name="Cmd_ShowGroups" xml:space="preserve">
+    <value>Zobraziť panel Skupiny zvukov</value>
+  </data>
+  <data name="Cmd_ShowExplorer" xml:space="preserve">
+    <value>Zobraziť panel Prieskumník súborov</value>
+  </data>
+  <data name="Cmd_ShowErrors" xml:space="preserve">
+    <value>Zobraziť panel Zoznam chýb</value>
+  </data>
+  <data name="Cmd_ResetLayout" xml:space="preserve">
+    <value>Obnoviť rozloženie okna</value>
+  </data>
 </root>

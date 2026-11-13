@@ -143,11 +143,8 @@ internal static class Program
     /// </summary>
     public static FMain OpenMain(string installDir, Action<FLangChoose> chooseLanguage)
     {
-        // FMain si šírky panelov pri posune deliča ukladá do konfigurácie - každá téma začína s predvolenými
-        Session.Config.LeftPanelWidth = -1;
-        Session.Config.GroupPanelWidth = -1;
-        Session.Config.ErrorPanelWidth = -1;
-        Session.Config.ShowErrorsWindow = true;
+        // FMain si rozloženie panelov ukladá pri zatvorení do konfigurácie - každá téma začína s predvoleným
+        Session.Config.DockLayout = null;
 
         // každá téma otvára banku v novej službe – ako nový beh programu
         Bank = new BankEditor(Session);
@@ -164,13 +161,6 @@ internal static class Program
         main.Size = new Size(1400, 800);
         Pump.Events();
 
-        // deliče napevno: všetky skupiny bez posuvníka, rovnako vysoký zoznam chýb v oboch témach
-        SplitContainer Split(string name) => (SplitContainer)main.GetType().GetField(name, Any)!.GetValue(main)!;
-        Split("splitContainer1").SplitterDistance = 380;
-        Split("splitContainer2").SplitterDistance = 290;
-        var errors = Split("splitSoundsErrors");
-        errors.SplitterDistance = errors.Height - 200;
-        Pump.Events();
 
         using (new ModalWatcher(form =>
                {

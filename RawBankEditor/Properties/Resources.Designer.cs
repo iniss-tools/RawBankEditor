@@ -3230,5 +3230,68 @@ namespace RawBankEditor.Properties {
                 return ResourceManager.GetString("Cmd_Group_Errors", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skupiny zvukov.
+        /// </summary>
+        internal static string Panel_Groups {
+            get {
+                return ResourceManager.GetString("Panel_Groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prieskumník súborov.
+        /// </summary>
+        internal static string Panel_Explorer {
+            get {
+                return ResourceManager.GetString("Panel_Explorer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zoznam chýb.
+        /// </summary>
+        internal static string Panel_Errors {
+            get {
+                return ResourceManager.GetString("Panel_Errors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zobraziť panel Skupiny zvukov.
+        /// </summary>
+        internal static string Cmd_ShowGroups {
+            get {
+                return ResourceManager.GetString("Cmd_ShowGroups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zobraziť panel Prieskumník súborov.
+        /// </summary>
+        internal static string Cmd_ShowExplorer {
+            get {
+                return ResourceManager.GetString("Cmd_ShowExplorer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zobraziť panel Zoznam chýb.
+        /// </summary>
+        internal static string Cmd_ShowErrors {
+            get {
+                return ResourceManager.GetString("Cmd_ShowErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obnoviť rozloženie okna.
+        /// </summary>
+        internal static string Cmd_ResetLayout {
+            get {
+                return ResourceManager.GetString("Cmd_ResetLayout", resourceCulture);
+            }
+        }
     }
 }

@@ -90,6 +90,7 @@ public partial class FMain : ExForm
         _bank = bank;
         _dialogs = dialogs;
         InitializeComponent();
+        InitDocking();
 
         _languagesIndex = toolStripMain.Items.IndexOf(tscboxLanguages);
         ApplyToolbar();
@@ -100,7 +101,8 @@ public partial class FMain : ExForm
 
         menuStripMain.Renderer = new ToolStripProfessionalRenderer(new FormUtils.LightColorTable());
         this.ApplyThemeAndFonts();
-        
+        AppDock.Restore(_dock, _bank.Config.DockLayout);
+
         _messages.ListChanged += Messages_ListChanged;
 
         CreateCommands();
@@ -186,36 +188,6 @@ public partial class FMain : ExForm
     {
         base.OnLoad(e);
         AppUpdates.CheckOnStartup(this, _bank.Config);
-
-        var configsDir = ToolsCore.AppPaths.ConfigDir;
-        
-        tsmimShowErrors.Checked = _bank.Config.ShowErrorsWindow;
-        splitSoundsErrors.Panel2.VisibleChanged += (_, _) =>
-        {
-            _bank.Config.ShowErrorsWindow = !splitSoundsErrors.Panel2Collapsed;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
-        };
-
-        if (_bank.Config.LeftPanelWidth != -1) splitContainer1.SplitterDistance = _bank.Config.LeftPanelWidth;
-        splitContainer1.SplitterMoved += (_, _) =>
-        {
-            _bank.Config.LeftPanelWidth = splitContainer1.SplitterDistance;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
-        };
-
-        if (_bank.Config.GroupPanelWidth != -1) splitContainer2.SplitterDistance = _bank.Config.GroupPanelWidth;
-        splitContainer2.SplitterMoved += (_, _) =>
-        {
-            _bank.Config.GroupPanelWidth = splitContainer2.SplitterDistance;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
-        };
-
-        if (_bank.Config.ErrorPanelWidth != -1) splitSoundsErrors.SplitterDistance = splitSoundsErrors.Width - _bank.Config.ErrorPanelWidth;
-        splitSoundsErrors.SplitterMoved += (_, _) =>
-        {
-            _bank.Config.ErrorPanelWidth = splitSoundsErrors.Width - splitSoundsErrors.SplitterDistance;
-            XmlSerialization.WriteData(PathUtils.CombinePath(configsDir, ToolsCore.FileConsts.FileConfig)!, _bank.Config);
-        };
 
         AppRegistry.RegisterJumpList();
 
@@ -1453,11 +1425,11 @@ public partial class FMain : ExForm
 
     #endregion //SelectionManagement
 
-    private void mmErrors_Click(object sender, EventArgs e) => splitSoundsErrors.Panel2Collapsed = true;
+    // tlacidlo zbalenia z navrhu okna - za behu ho nahradi tlacidlo zahlavia panela (InitDocking ho zahodi)
+    private void mmErrors_Click(object sender, EventArgs e) => _dock.HidePanel(_errorsPanel);
 
-    private void tssbErrors_Click(object sender, EventArgs e) => splitSoundsErrors.Panel2Collapsed = !splitSoundsErrors.Panel2Collapsed;
-
-    private void TsmimShowErrors_CheckedChanged(object sender, EventArgs e) => splitSoundsErrors.Panel2Collapsed = !tsmimShowErrors.Checked;
+    // pocet chyb v stavovom riadku zobrazi zoznam chyb (aj skryty alebo zbaleny k okraju)
+    private void tssbErrors_Click(object sender, EventArgs e) => _dock.ShowPanel(_errorsPanel);
 
     private void FMain_FormClosing(object sender, FormClosingEventArgs e)
     {

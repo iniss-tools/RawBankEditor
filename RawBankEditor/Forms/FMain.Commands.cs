@@ -55,6 +55,7 @@ public partial class FMain
         Add(RbeCommands.GoBack, DoGoBack, () => moveManager.CanBackward, tsmimGoBack, tsbGoBack);
         Add(RbeCommands.GoForward, DoGoForward, () => moveManager.CanForward, tsmimGoForward, tsbGoForward);
         Add(RbeCommands.Search, DoSearch, ready, tsmimSearch, tsbSearch);
+        CreateViewCommands();
 
         Add(RbeCommands.AddLanguage, DoAddLanguage, () => ProjectOpen, tsmimAddLanguage, tsmiAddLanguage);
         Add(RbeCommands.EditLanguage, DoEditLanguage, () => ProjectOpen && CurrentLanguage != null, tsmimEditLanguage, tsmiEditLanguage);

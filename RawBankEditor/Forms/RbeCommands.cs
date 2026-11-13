@@ -22,6 +22,10 @@ internal static class RbeCommands
     public static CommandInfo GoBack => new("GoBack", Resources.Cmd_GoBack, Shortcut.AltLeftArrow);
     public static CommandInfo GoForward => new("GoForward", Resources.Cmd_GoForward, Shortcut.AltRightArrow);
     public static CommandInfo Search => new("Search", Resources.Cmd_Search, Shortcut.CtrlF);
+    public static CommandInfo ShowGroups => new("ShowGroups", Resources.Cmd_ShowGroups, Shortcut.None);
+    public static CommandInfo ShowExplorer => new("ShowExplorer", Resources.Cmd_ShowExplorer, Shortcut.None);
+    public static CommandInfo ShowErrors => new("ShowErrors", Resources.Cmd_ShowErrors, Shortcut.None);
+    public static CommandInfo ResetLayout => new("ResetLayout", Resources.Cmd_ResetLayout, Shortcut.None);
     public static CommandInfo AddLanguage => new("AddLang", Resources.Cmd_AddLanguage, Shortcut.None);
     public static CommandInfo EditLanguage => new("EditLang", Resources.Cmd_EditLanguage, Shortcut.None);
     public static CommandInfo DeleteLanguage => new("DeleteLang", Resources.Cmd_DeleteLanguage, Shortcut.None);
@@ -75,7 +79,7 @@ internal static class RbeCommands
     public static IReadOnlyList<CommandInfo> All =>
     [
         Open, Save, SaveAll, Undo, Redo, AddSound, DeleteSounds, MoveSounds, RewriteMode, WrapTextSoundCol,
-        GoBack, GoForward, Search, AddLanguage, EditLanguage, DeleteLanguage, AppSettings, HighlightProblem, ResolveProblem,
+        GoBack, GoForward, Search, ShowGroups, ShowExplorer, ShowErrors, ResetLayout, AddLanguage, EditLanguage, DeleteLanguage, AppSettings, HighlightProblem, ResolveProblem,
         AdjustSounds, GenerateSounds, GenerateGroup, GenerateLanguage, GenerateMissing, ChangeVoice, IsolateSounds, TranscribeSounds, VoiceProfile, Voices, Prosody, Pronunciation, PlaySequence, StopPlayback,
         ConvertSoundsToEwa, ConvertSoundsToWav, ConvertLanguageToEwa, ConvertLanguageToWav, ImportSounds, ExportIniss2, SetDefaultLanguage, CheckRecordings,
         AddGroup, EditGroup, DeleteGroup, ConvertGroupToEwa, ConvertGroupToWav, OpenInExplorer, PlayFile, RenameFile, DeleteFile,

@@ -72,7 +72,11 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmimSearch = new ToolsCore.Icons.IconToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmimShowGroups = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tsmimShowExplorer = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimShowErrors = new ToolsCore.Icons.IconToolStripMenuItem();
+            this.tssShowLayout = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmimResetLayout = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTools = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmimLangsSettings = new ToolsCore.Icons.IconToolStripMenuItem();
             this.tsmimAddLanguage = new ToolsCore.Icons.IconToolStripMenuItem();
@@ -464,7 +468,11 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator18,
             this.tsmimSearch,
             this.toolStripSeparator3,
-            this.tsmimShowErrors});
+            this.tsmimShowGroups,
+            this.tsmimShowExplorer,
+            this.tsmimShowErrors,
+            this.tssShowLayout,
+            this.tsmimResetLayout});
             this.tsmiShow.Name = "tsmiShow";
             resources.ApplyResources(this.tsmiShow, "tsmiShow");
             // 
@@ -499,15 +507,33 @@ namespace RawBankEditor.Forms
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
+            // tsmimShowGroups
+            // 
+            this.tsmimShowGroups.Name = "tsmimShowGroups";
+            this.tsmimShowGroups.IconName = "folder";
+            resources.ApplyResources(this.tsmimShowGroups, "tsmimShowGroups");
+            // 
+            // tsmimShowExplorer
+            // 
+            this.tsmimShowExplorer.Name = "tsmimShowExplorer";
+            this.tsmimShowExplorer.IconName = "folder-open";
+            resources.ApplyResources(this.tsmimShowExplorer, "tsmimShowExplorer");
+            // 
             // tsmimShowErrors
             // 
-            this.tsmimShowErrors.Checked = true;
-            this.tsmimShowErrors.CheckOnClick = true;
-            this.tsmimShowErrors.CheckState = System.Windows.Forms.CheckState.Checked;
             this.tsmimShowErrors.Name = "tsmimShowErrors";
             this.tsmimShowErrors.IconName = "status-error";
             resources.ApplyResources(this.tsmimShowErrors, "tsmimShowErrors");
-            this.tsmimShowErrors.CheckedChanged += new System.EventHandler(this.TsmimShowErrors_CheckedChanged);
+            // 
+            // tssShowLayout
+            // 
+            this.tssShowLayout.Name = "tssShowLayout";
+            resources.ApplyResources(this.tssShowLayout, "tssShowLayout");
+            // 
+            // tsmimResetLayout
+            // 
+            this.tsmimResetLayout.Name = "tsmimResetLayout";
+            resources.ApplyResources(this.tsmimResetLayout, "tsmimResetLayout");
             // 
             // tsmiTools
             // 
@@ -2406,7 +2432,11 @@ namespace RawBankEditor.Forms
         private IconToolStripMenuItem tsmiEditLanguage;
         private IconToolStripMenuItem tsmiDeleteLanguage;
         private ToolStripSeparator toolStripSeparator3;
+        private IconToolStripMenuItem tsmimShowGroups;
+        private IconToolStripMenuItem tsmimShowExplorer;
         private IconToolStripMenuItem tsmimShowErrors;
+        private System.Windows.Forms.ToolStripSeparator tssShowLayout;
+        private System.Windows.Forms.ToolStripMenuItem tsmimResetLayout;
         private IconToolStripMenuItem tsmimConvertLangToEwa;
         private IconToolStripMenuItem tsmimConvertLangToWav;
         private ToolStripSeparator tsmimSepImportExport;
