@@ -175,7 +175,7 @@ public partial class FAppSettings : FAppSettingsBase
             bAzureVerify.Enabled = true;
     }
 
-    private void BPiperBrowse_Click(object? sender, EventArgs e)
+    private async void BPiperBrowse_Click(object? sender, EventArgs e)
     {
         using var dialog = new OpenFileDialog
         {
@@ -183,14 +183,14 @@ public partial class FAppSettings : FAppSettingsBase
             FileName = tbPiperPath.Text.Trim(),
             CheckFileExists = true
         };
-        if (dialog.ShowDialog(this) == DialogResult.OK)
+        if (await dialog.ShowDialogAsync(this) == DialogResult.OK && !IsDisposed)
             tbPiperPath.Text = dialog.FileName;
     }
 
-    private void BPiperVoicesBrowse_Click(object? sender, EventArgs e)
+    private async void BPiperVoicesBrowse_Click(object? sender, EventArgs e)
     {
         using var dialog = new FolderBrowserDialog { SelectedPath = PiperVoicesPath, ShowNewFolderButton = true };
-        if (dialog.ShowDialog(this) == DialogResult.OK)
+        if (await dialog.ShowDialogAsync(this) == DialogResult.OK && !IsDisposed)
             tbPiperVoices.Text = string.Equals(dialog.SelectedPath, PiperVoices.DefaultFolder, StringComparison.OrdinalIgnoreCase) ? "" : dialog.SelectedPath;
     }
 

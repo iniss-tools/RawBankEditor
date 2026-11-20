@@ -59,9 +59,9 @@ public partial class FImportSounds : Form
         LoadText(Clipboard.GetText());
     }
 
-    private void BFile_Click(object sender, EventArgs e)
+    private async void BFile_Click(object sender, EventArgs e)
     {
-        if (ofdTable.ShowDialog(this) == DialogResult.OK)
+        if (await ofdTable.ShowDialogAsync(this) == DialogResult.OK && !IsDisposed)
             LoadFile(ofdTable.FileName);
     }
 

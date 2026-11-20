@@ -505,10 +505,10 @@ public partial class FMain : ExForm
         OpenProject(menuItem.Text!);
     }
 
-    private void DoOpenDir()
+    private async void DoOpenDir()
     {
-        var dialog = new FolderBrowserDialog { Description = Resources.FMain_Vyberte_priecinok_s_INISS };
-        if (dialog.ShowDialog(this) == DialogResult.Cancel)
+        using var dialog = new FolderBrowserDialog { Description = Resources.FMain_Vyberte_priecinok_s_INISS };
+        if (await dialog.ShowDialogAsync(this) != DialogResult.OK || IsDisposed)
             return;
 
         OpenProject(dialog.SelectedPath);

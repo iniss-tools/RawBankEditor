@@ -5,6 +5,7 @@ using RawBankEditor.Tools;
 using Serilog;
 using ToolsCore.Iniss.Entities;
 using ToolsCore.Iniss2.RawBank;
+using ToolsCore.Tools;
 
 namespace RawBankEditor.Forms;
 
@@ -118,7 +119,7 @@ partial class FMain
             dialog.Filter = Resources.Export_Filter;
             dialog.FileName = FyzBankXmlWriter.FileName;
             dialog.InitialDirectory = language.GetAbsPath(_bank.PathToBank);
-            if (dialog.ShowDialog(this) != DialogResult.OK)
+            if (await dialog.ShowDialogAsync(this) != DialogResult.OK || IsDisposed)
                 return;
             file = dialog.FileName;
         }
