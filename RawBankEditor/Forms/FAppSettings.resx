@@ -4117,7 +4117,7 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="exGroupBox2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>False</value>
   </data>
   <data name="exGroupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 6</value>
