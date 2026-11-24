@@ -7005,4 +7005,28 @@
   <data name="&gt;&gt;tsmimShowLogs.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tsmimReportBug.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="tsmimReportBug.Text" xml:space="preserve">
+    <value>&amp;Nahlásiť chybu...</value>
+  </data>
+  <data name="&gt;&gt;tsmimReportBug.Name" xml:space="preserve">
+    <value>tsmimReportBug</value>
+  </data>
+  <data name="&gt;&gt;tsmimReportBug.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmimSuggestFeature.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 22</value>
+  </data>
+  <data name="tsmimSuggestFeature.Text" xml:space="preserve">
+    <value>Navrhnúť &amp;funkciu...</value>
+  </data>
+  <data name="&gt;&gt;tsmimSuggestFeature.Name" xml:space="preserve">
+    <value>tsmimSuggestFeature</value>
+  </data>
+  <data name="&gt;&gt;tsmimSuggestFeature.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

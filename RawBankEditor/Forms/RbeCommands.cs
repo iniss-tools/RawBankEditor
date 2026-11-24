@@ -71,6 +71,8 @@ internal static class RbeCommands
     public static CommandInfo Updates => Fixed(nameof(Updates));
     public static CommandInfo CheckUpdates => Fixed(nameof(CheckUpdates));
     public static CommandInfo ShowLogs => Fixed(nameof(ShowLogs));
+    public static CommandInfo ReportBug => Fixed(nameof(ReportBug));
+    public static CommandInfo SuggestFeature => Fixed(nameof(SuggestFeature));
     public static CommandInfo GenerateMissingFromErrors => Fixed(nameof(GenerateMissingFromErrors), Resources.Cmd_Group_Errors);
 
     /// <summary>
@@ -83,7 +85,7 @@ internal static class RbeCommands
         AdjustSounds, GenerateSounds, GenerateGroup, GenerateLanguage, GenerateMissing, ChangeVoice, IsolateSounds, TranscribeSounds, VoiceProfile, Voices, Prosody, Pronunciation, PlaySequence, StopPlayback,
         ConvertSoundsToEwa, ConvertSoundsToWav, ConvertLanguageToEwa, ConvertLanguageToWav, ImportSounds, ExportIniss2, SetDefaultLanguage, CheckRecordings,
         AddGroup, EditGroup, DeleteGroup, ConvertGroupToEwa, ConvertGroupToWav, OpenInExplorer, PlayFile, RenameFile, DeleteFile,
-        ConvertFilesToEwa, ConvertFilesToWav, GenerateMissingFromErrors, InfoApp, Updates, CheckUpdates, ShowLogs
+        ConvertFilesToEwa, ConvertFilesToWav, GenerateMissingFromErrors, InfoApp, Updates, CheckUpdates, ShowLogs, ReportBug, SuggestFeature
     ];
 
     // text = identifikator: v strome skratiek sa ukaze text polozky, na ktoru je prikaz naviazany

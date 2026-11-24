@@ -555,6 +555,12 @@
   <data name="tsmimShowLogs.Text" xml:space="preserve">
     <value>Otevřít složku s logy</value>
   </data>
+  <data name="tsmimReportBug.Text" xml:space="preserve">
+    <value>&amp;Nahlásit chybu...</value>
+  </data>
+  <data name="tsmimSuggestFeature.Text" xml:space="preserve">
+    <value>Navrhnout &amp;funkci...</value>
+  </data>
   <data name="tsmimShowGroups.Text" xml:space="preserve">
     <value>&amp;Skupiny zvuků</value>
   </data>
